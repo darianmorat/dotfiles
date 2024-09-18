@@ -1,4 +1,3 @@
-# DOTFILES
 Complete configuration GruvDark based, same bindings for vscode, nvim, wezterm:
 
 ### Vscode:
