@@ -11,7 +11,7 @@ Complete configuration for GlazeWM, VSCode, WezTerm, Neovim... Aim for a simple,
 <img src="images/Screenshot 2024-09-18 120003.png" alt="">
 
 ### WezTerm:
-<img src="images/Screenshot 2024-09-18 120305.png" alt="">
+<img src="images/Screenshot 2024-09-20 120034.png" alt="">
 
 ### Neovim:
 <img src="images/Screenshot 2024-09-18 120333.png" alt="">
