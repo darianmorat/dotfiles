@@ -1,8 +1,8 @@
 Complete configuration for GlazeWM, VSCode, WezTerm, Neovim... Aim for a simple, minimalistic look with no distractions and key bindings optimized for usability and efficiency.
 
 ### GlazeWM:
-<img src="images/Screenshot 2024-09-07 133321.png" alt="">
-<!-- <img src="" alt="">  # GlazeWM using multiple windows -->
+<img src="images/glazewm.png" alt="">
+<img src="images/glazewm-apps.png" alt="">  
 
 ### VSCode:
 <img src="images/Screenshot 2024-09-18 100000.png" alt="">
