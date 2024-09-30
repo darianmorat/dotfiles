@@ -2,19 +2,19 @@ Complete configuration for GlazeWM, VSCode, WezTerm, Neovim... Aim for a simple,
 
 ### GlazeWM:
 <img src="images/glazewm.png" alt="">
-<img src="images/glazewm-apps.png" alt="">  
+<img src="images/glazewm2.png" alt="">  
 
 ### VSCode:
-<img src="images/Screenshot 2024-09-18 100000.png" alt="">
-<img src="images/Screenshot 2024-09-18 100001.png" alt="">
-<img src="images/Screenshot 2024-09-18 100002.png" alt="">
-<img src="images/Screenshot 2024-09-18 120003.png" alt="">
+<img src="images/vscode1.png" alt="">
+<img src="images/vscode2.png" alt="">
+<img src="images/vscode3.png" alt="">
+<img src="images/vscode4.png" alt="">
 
 ### WezTerm:
-<img src="images/Screenshot 2024-09-20 120034.png" alt="">
+<img src="images/wezterm.png" alt="">
 
 ### Neovim:
-<img src="images/Screenshot 2024-09-18 120333.png" alt="">
-<img src="images/Screenshot 2024-09-18 120418.png" alt="">
-<img src="images/Screenshot 2024-09-18 122117.png" alt="">
-<img src="images/Screenshot 2024-09-18 123114.png" alt="">
+<img src="images/nvim1.png" alt="">
+<img src="images/nvim2.png" alt="">
+<img src="images/nvim3.png" alt="">
+<img src="images/nvim4.png" alt="">
