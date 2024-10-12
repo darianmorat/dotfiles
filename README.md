@@ -1,5 +1,9 @@
 Complete configuration for GlazeWM, WezTerm, VSCode and Neovim... Aim for a simple, minimalistic look with no distractions and keybindings optimized for usability and efficiency.
 
+### Install:
+>homebrew, nvim, zsh4, p10k, tmux, vifm, lazygit <br>
+>fzf, ripgrep, bat, zoxide, eza, trash-cli, empty-trash-cli
+
 ### GlazeWM - WezTerm:
 <img src="images/glazewm1.png" alt="">
 <img src="images/glazewm2.png" alt="">  
