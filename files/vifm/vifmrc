@@ -1,0 +1,35 @@
+set dirsize=nitems
+set nowrap
+set confirm-=delete
+set dotdirs=
+set millerview
+set milleroptions=lsize:0,csize:1,rsize:0,rpreview:all
+only
+set vicmd=code
+set trash
+set trashdir=$HOME/.local/share/Trash/vifm
+set timefmt=%m-%d-%y\ %H:%M
+set scrolloff=3
+set statusline=" %A %-7g %= %18d "
+colorscheme gruvdark
+fileviewer *[^/] bat --color always --wrap never --pager never --theme TwoDark %c -p
+
+# " Remaps
+nnoremap <space> <Nop>
+nnoremap <C-o> <Nop>
+
+nnoremap <C-j> :q<cr>
+nnoremap s :shell<cr>
+nnoremap q :q<cr>
+nnoremap x q
+nnoremap w :!nvim %f<cr>
+
+nnoremap md :mk<space>
+nnoremap mf :touch<space>
+nnoremap b :bmgo<space>
+nnoremap mb :bmark<space>
+
+nnoremap <space>fj :history<cr>
+nnoremap o :histprev<cr>
+nnoremap i :histnext<cr>
+nnoremap ciw cw

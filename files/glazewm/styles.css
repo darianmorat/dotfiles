@@ -1,0 +1,94 @@
+@import 'https://www.nerdfonts.com/assets/css/webfont.css';
+
+i {
+   color: rgb(115 130 175 / 95%);
+}
+
+body {
+   color: rgb(255 255 255 / 90%);
+   font-family: Segoe UI;
+   font-size: 13px;
+}
+
+html,
+body,
+#root {
+   height: 100%;
+}
+
+#root {
+   background: #1b1b1b;
+}
+
+.app {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   align-items: center;
+   height: 100%;
+   padding: 4px 4px;
+}
+
+.left,
+.center,
+.right {
+   display: flex;
+   align-items: center;
+}
+
+.center {
+   justify-self: center;
+}
+
+.right {
+   justify-self: end;
+}
+
+.date,
+.network,
+.memory,
+.cpu {
+   margin-right: 12px;
+}
+
+.workspaces {
+   display: flex;
+   align-items: center;
+   margin-right: 7px;
+}
+
+.workspace {
+   background: transparent;
+   padding: 4px 8px;
+   color: rgb(255 255 255 / 90%);
+   border: none;
+   cursor: pointer;
+
+   &.displayed {
+      background: #00000033;
+   }
+
+   &.focused,
+   &:hover {
+      background: #ffffff15;
+   }
+}
+
+.battery {
+   background: #ffffff15;
+   padding: 4px 8px;
+   color: rgb(255 255 255 / 90%);
+   border: none;
+}
+
+.tiling-direction {
+   margin-right: 5px;
+}
+
+.binding-mode,
+.tiling-direction {
+   background: transparent;
+   color: rgb(255 255 255 / 90%);
+   padding: 4px 8px;
+   border: 0;
+   cursor: pointer;
+}

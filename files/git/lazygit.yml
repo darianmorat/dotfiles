@@ -1,0 +1,25 @@
+gui: 
+ authorColors:
+    'darianmorat': 'blue'
+    '*': 'blue'    
+  border: single
+  showBottomLine: false
+  showPanelJumps: false
+  commandLogSize: 1
+  theme:
+    activeBorderColor:
+      - white
+      - bold
+    selectedLineBgColor:
+      - "#444444"
+
+git:
+  paging:
+    pager: ""
+    externalDiffCommand: ""
+  commitPrefix:
+    pattern: " " 
+    replace: " "    
+  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
+  # branchLogCmd: git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+
