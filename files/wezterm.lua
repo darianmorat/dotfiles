@@ -138,4 +138,3 @@ config.keys = {
 -- end)
 
 return config
-

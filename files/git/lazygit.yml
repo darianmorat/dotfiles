@@ -21,5 +21,3 @@ git:
     pattern: " " 
     replace: " "    
   branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
-  # branchLogCmd: git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
-

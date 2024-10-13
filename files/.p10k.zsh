@@ -1,4 +1,4 @@
- typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+  typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     example # ~/
 
   function prompt_example() {

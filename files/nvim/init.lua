@@ -320,7 +320,7 @@ require("harpoon").setup({
 set_api("n", "<leader>fk", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", p_opts)
 set_api("n", "<c-m>", ":lua require('harpoon.mark').add_file()<CR>", p_opts)
 set_api("n", "<c-o>", ":lua require('harpoon.ui').nav_next()<CR>", p_opts)
-set_api("n", "<c-i>", ":lua require('harpoon.ui').nav_prev()<CR>", p_opts) -- Not working
+set_api("n", "<tab>", ":lua require('harpoon.ui').nav_prev()<CR>", p_opts) -- Tab refers <c-i>
 
 set_api("n", "<leader>1", ":lua require('harpoon.ui').nav_file(1)<CR>", p_opts)
 set_api("n", "<leader>2", ":lua require('harpoon.ui').nav_file(2)<CR>", p_opts)
@@ -444,7 +444,7 @@ cmp.setup({
 
 -- AUTO-COMMANDS
 vim.cmd("command BufOnly silent! execute '%bd|e#|bd#'") -- Close all buffers except current
-vim.cmd("autocmd CursorHold * echon ''") -- Clear command line - uses 'updatetime' value
+vim.cmd("autocmd CursorHold * echon ''") -- Clear command line - uses 'updatetime' value - FIND WAY TO TOGGLE IT 
 vim.cmd("highlight incsearch guibg=#5c5c5e guifg=#e6e3de") -- Set search highlight when using
 
 -- Yank highlighting

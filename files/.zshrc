@@ -9,7 +9,6 @@ z4h bindkey z4h-forward-word Ctrl+Alt+F
 # find way to send vifm directly. Bash: bind -x '"\C-o":"vifm"'
 bindkey -s '^O' '^Utmux rename-window vifm; vifm .^J'
 
-
 # Aliases
 alias dow="cd /mnt/d/DarianToledo/Downloads"
 alias doc="cd /mnt/d/DarianToledo/Documents"
@@ -29,4 +28,4 @@ alias lst="ls --tree --level=2"
 
 alias clear=z4h-clear-screen-soft-bottom
 eval "$(zoxide init zsh)"
-# export PATH="$HOME/bin:$PATH" # ~/bin/color_test / if needed
+# export PATH="$HOME/bin:$PATH" # ~/bin/color_test / if needed 
