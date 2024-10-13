@@ -33,6 +33,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.pumheight = 8
 
+
 -- REMAPS
 -- Normal mode
 set("n", "<C-d>", "<C-d>zz")
@@ -123,6 +124,7 @@ require("lazy").setup(plugins)
 -- -------------------------------------------------------------------------------------------
 -- GRUVDARK THEME
 -- -------------------------------------------------------------------------------------------
+
 require('onedark').setup({
    style = 'warmer', code_style = { comments = 'none' },
    colors = {
