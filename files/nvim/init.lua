@@ -35,7 +35,6 @@ vim.opt.pumheight = 8
 
 
 -- REMAPS
--- Normal mode
 set("n", "<C-d>", "<C-d>zz")
 set("n", "<C-u>", "<C-u>zz")
 set("n", "n", "nzz")
@@ -58,7 +57,6 @@ set("n", "<C-k>", ":FloatermNew lazygit<CR>")
 set("n", "<C-j>", ":FloatermNew vifm<CR>")
 set("n", "<C-h>", "<C-6>")
 
--- Visual mode
 set("v", "K", ":m '<-2<CR>gv=gv")
 set("v", "J", ":m '>+1<CR>gv=gv")
 
@@ -128,18 +126,18 @@ require("lazy").setup(plugins)
 require('onedark').setup({
    style = 'warmer', code_style = { comments = 'none' },
    colors = {
-      fg = '#CDC5B8', blue = '#5b98c9',
-      red = '#DB6A6A', yellow = '#D19F66',
-      green = '#76B568', cyan = '#CDC5B8',
-      purple = '#CD60B9', aqua = '#4DB0BD',
-      orange = '#D19F66',
+      fg = '#CDC5B8', blue = '#5b98c9', red = '#DB6A6A',
+      yellow = '#D19F66', green = '#76B568', cyan = '#CDC5B8',
+      purple = '#CD60B9', aqua = '#4DB0BD', orange = '#D19F66',
    },
-   highlights ={
+   highlights = {
+      Folded = { fg = '#CDC5B8', bg = '#282828' },
       FloatBorder = { fg = '#CDC5B8', bg = '#1E1E1E' }, -- Harpoon UI
       NormalFloat = { fg = '#CDC5B8', bg = '#1E1E1E' }, -- Harpoon UI
-
       Normal = { bg= '#1E1E1E' }, CursorLine = { bg = '#303030' },
       Visual = { bg = '#353535' }, TelescopeSelection = { bg = '#303030'},
+      TSParameter = { fg = '$fg' }, TSParameterReference = { fg = '$fg' }, 
+
       ['@operator'] = { fg = '$blue' },
       ['@punctuation'] = { fg = '$fg' },
       ['@punctuation.bracket'] = { fg = '$fg' },
@@ -159,15 +157,12 @@ require('onedark').setup({
       ['@tag.delimiter'] = {fg = '$red'},
       ['@tag.attribute'] = {fg = '#9266DA'},
       ["@markup.heading"] = {fg = '$fg', fmt = 'none'},
-
       ["@property.css"] = { fg = '$blue' },  
       ["@string.css"] = { fg = '$yellow' },  
       ["@tag.css"] = { fg = '$red' },  
       ["@type.css"] = { fg = '$red' },  
       ["@operator.css"] = { fg = '$red' },  
       ["@attribute.css"] = { fg = '$red' },  
-
-      TSParameter = { fg = '$fg' }, TSParameterReference = { fg = '$fg' }, 
    }
 }) require('onedark').load()
 
@@ -337,6 +332,9 @@ set("n", "<leader>4", function() harpoon:list():select(4) end)
 require'nvim-treesitter.configs'.setup({
    ensure_installed = {'vim', 'lua', 'javascript', 'typescript', 'tsx', 'html', 'css', 'json', 'markdown'},
    sync_install = false,
+   indent = {
+      enable = true
+   },
    highlight = {
       enable = true,  
       additional_vim_regex_highlighting = false
@@ -450,7 +448,7 @@ cmp.setup({
 -- AUTO-COMMANDS
 vim.cmd("command BufOnly silent! execute '%bd|e#|bd#'") -- Close all buffers except current
 vim.cmd("autocmd CursorHold * echon ''") -- Clear command line - uses 'updatetime' value - FIND WAY TO TOGGLE IT 
-vim.cmd("highlight incsearch guibg=#5c5c5e guifg=#e6e3de") -- Set search highlight when using
+vim.cmd("highlight incsearch guibg=#5c5c5e guifg=#e6e3de") -- Set bg color for search / ?
 
 -- Yank highlighting
 vim.cmd("autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup='YankHighlight', timeout=190}")
