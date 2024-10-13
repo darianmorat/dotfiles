@@ -199,12 +199,12 @@ require('lualine').setup({
       section_separators = { left = '', right = ''}
    },
    sections = {
-      lualine_a = {'mode'},
-      lualine_b = {'branch', 'filename', 'diff'},
-      lualine_c = {},
-      lualine_x = {},
-      lualine_y = {'selectioncount', 'diagnostics', dynamic_location, 'fileformat', 'encoding'},
-      lualine_z = {'progress'}
+      lualine_a = { 'mode' },
+      lualine_b = { 'branch', { 'filename', path = 0 } },
+      lualine_c = { { 'diff', colored = false } },
+      lualine_x = { 'selectioncount', { 'diagnostics', colored = false } },
+      lualine_y = { 'fileformat', 'encoding', 'progress' },
+      lualine_z = { dynamic_location }
    }
 })
 
