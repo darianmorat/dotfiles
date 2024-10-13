@@ -73,20 +73,20 @@ local plugins = {
 	{ "folke/zen-mode.nvim" },
 	{ "voldikss/vim-floaterm" },
 	{ "numToStr/Comment.nvim" },
-	{ "kylechui/nvim-surround" },
-	{ "jake-stewart/multicursor.nvim" },
+	{ "kylechui/nvim-surround", version = "*", event = "VeryLazy" },
+	{ "jake-stewart/multicursor.nvim", branch = "1.0" },
 
 	{ "ggandor/leap.nvim" },
-	{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },
 	{ "nvim-lua/plenary.nvim" },
-	{ "ThePrimeagen/harpoon" },
+	{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },
+	{ "ThePrimeagen/harpoon", branch = "harpoon2" },
 
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{ "nvim-treesitter/nvim-treesitter-refactor" },
-	{ "windwp/nvim-autopairs" },
+	{ "windwp/nvim-autopairs", event = "InsertEnter" },
 	{ "windwp/nvim-ts-autotag" },
 	{ "lewis6991/gitsigns.nvim" },
-	{ "lukas-reineke/indent-blankline.nvim" },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
 
 	{ "VonHeikemen/lsp-zero.nvim", branch = "v4.x" },
 	{ "williamboman/mason.nvim" },
@@ -135,6 +135,9 @@ require('onedark').setup({
       orange = '#D19F66',
    },
    highlights ={
+      FloatBorder = { fg = '#CDC5B8', bg = '#1E1E1E' }, -- Harpoon UI
+      NormalFloat = { fg = '#CDC5B8', bg = '#1E1E1E' }, -- Harpoon UI
+
       Normal = { bg= '#1E1E1E' }, CursorLine = { bg = '#303030' },
       Visual = { bg = '#353535' }, TelescopeSelection = { bg = '#303030'},
       ['@operator'] = { fg = '$blue' },
@@ -315,19 +318,19 @@ set('n', '<leader>ej', function() builtin.diagnostics({ bufnr = 0 }) end)
 
 
 -- HARPOON
-require("harpoon").setup({ 
-   border_chars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" } -- Not working
-})
+local harpoon = require("harpoon")
+local toggle_opts = { border = "single", title_pos = "center", ui_width_ratio = 0.50 }
+harpoon:setup({})
 
-set_api("n", "<leader>fk", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", p_opts)
-set_api("n", "<c-m>", ":lua require('harpoon.mark').add_file()<CR>", p_opts)
-set_api("n", "<c-o>", ":lua require('harpoon.ui').nav_next()<CR>", p_opts)
-set_api("n", "<tab>", ":lua require('harpoon.ui').nav_prev()<CR>", p_opts) -- Tab refers <c-i>
+set("n", "<c-m>", function() harpoon:list():add() end)
+set("n", "<leader>fk", function() harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts) end)
+set("n", "<tab>", function() harpoon:list():prev() end) -- Tab refers <c-i>
+set("n", "<c-o>", function() harpoon:list():next() end)
 
-set_api("n", "<leader>1", ":lua require('harpoon.ui').nav_file(1)<CR>", p_opts)
-set_api("n", "<leader>2", ":lua require('harpoon.ui').nav_file(2)<CR>", p_opts)
-set_api("n", "<leader>3", ":lua require('harpoon.ui').nav_file(3)<CR>", p_opts)
-set_api("n", "<leader>4", ":lua require('harpoon.ui').nav_file(4)<CR>", p_opts)
+set("n", "<leader>1", function() harpoon:list():select(1) end)
+set("n", "<leader>2", function() harpoon:list():select(2) end)
+set("n", "<leader>3", function() harpoon:list():select(3) end)
+set("n", "<leader>4", function() harpoon:list():select(4) end)
 
 
 -- TREESIETER
