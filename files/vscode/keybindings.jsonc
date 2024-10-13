@@ -15,7 +15,7 @@
    },
    {
       "key": "ctrl+k n",
-      "command": "notifications.showList",
+      "command": "notifications.showList"
    },
    {
       "key": "ctrl+k n",
@@ -74,10 +74,10 @@
       "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups"
    },
    {
-      "command": "runCommands",
       "key": "ctrl+h",
+      "command": "runCommands",
       "args": { "commands": [ "workbench.action.focusNextGroup", "workbench.action.maximizeEditorHideSidebar" ] },
-      "when": "!terminalFocus",
+      "when": "!terminalFocus"
    },
 
    // TERMINAL
