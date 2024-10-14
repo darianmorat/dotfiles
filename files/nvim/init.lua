@@ -1,7 +1,6 @@
 -- -------------------------------------------------------------------------------------------
--- MAIN CONFIG
+-- MAIN CONFIG - Double or single quotes PENDING CHANGE
 -- -------------------------------------------------------------------------------------------
--- Double or single quotes... Pending change
 
 -- ALIASES
 local set = vim.keymap.set
