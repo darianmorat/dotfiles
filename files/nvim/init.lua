@@ -68,10 +68,10 @@ set("v", "J", ":m '>+1<CR>gv=gv")
 local plugins = {
 	{ "navarasu/onedark.nvim" },
 	{ "nvim-lualine/lualine.nvim" },
-   { "miversen33/sunglasses.nvim", event = "UIEnter" },
 	{ "folke/zen-mode.nvim" },
 	{ "voldikss/vim-floaterm" },
 	{ "numToStr/Comment.nvim" },
+   { "miversen33/sunglasses.nvim", event = "UIEnter" },
 	{ "kylechui/nvim-surround", version = "*", event = "VeryLazy" },
 	{ "jake-stewart/multicursor.nvim", branch = "1.0" },
 
