@@ -97,6 +97,8 @@ local plugins = {
 	{ "hrsh7th/cmp-path" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "rafamadriz/friendly-snippets" },
+
+   {"miversen33/sunglasses.nvim", event = "UIEnter"},
 }
 
 
@@ -137,7 +139,9 @@ require('onedark').setup({
       Normal = { bg= '#1E1E1E' }, CursorLine = { bg = '#303030' },
       Visual = { bg = '#353535' }, TelescopeSelection = { bg = '#303030'},
       TSParameter = { fg = '$fg' }, TSParameterReference = { fg = '$fg' }, 
+      LineNr = { fg = '#555555' },
 
+      ['@comment'] = { fg = '#555555' },
       ['@operator'] = { fg = '$blue' },
       ['@punctuation'] = { fg = '$fg' },
       ['@punctuation.bracket'] = { fg = '$fg' },
@@ -167,17 +171,20 @@ require('onedark').setup({
 }) require('onedark').load()
 
 vim.cmd("highlight Comment gui=NONE")
+vim.cmd("highlight IblIndent guifg=#2f2f2f")
+vim.cmd("highlight EndOfBuffer guibg=NONE guifg=#2f2f2f ctermbg=NONE")
 vim.cmd("highlight SignColumn ctermbg=NONE guibg=NONE")
-vim.cmd("highlight EndOfBuffer guibg=NONE ctermbg=NONE")
-vim.cmd("highlight ColorColumn ctermbg=237 guibg=#222222")
+vim.cmd("highlight ColorColumn guibg=#222222")
 
 local onedark = require'lualine.themes.onedark'
-onedark.normal.a.bg = '#292929' onedark.normal.b.bg = '#292929'
-onedark.normal.c.bg = '#292929' onedark.normal.a.fg = '#CDC5B8'
+onedark.normal.a.bg = '#292929' onedark.normal.a.fg = '#CDC5B8'
 onedark.insert.a.bg = '#292929' onedark.insert.a.fg = '#CDC5B8'
 onedark.visual.a.bg = '#292929' onedark.visual.a.fg = '#CDC5B8'
 onedark.command.a.bg = '#292929' onedark.command.a.fg = '#CDC5B8'
-onedark.inactive.c.bg = '#292929'
+
+onedark.normal.b.bg = '#292929' onedark.normal.b.fg = '#CDC5B8'
+onedark.normal.c.bg = '#292929' onedark.normal.c.fg = '#CDC5B8'
+onedark.inactive.c.bg = '#292929' onedark.inactive.c.fg = '#555555'
 
 
 -- -------------------------------------------------------------------------------------------
@@ -442,6 +449,13 @@ cmp.setup({
       end)
    }),
    formatting = lsp_zero.cmp_format({details = false})
+})
+
+
+-- SUNGLASSES
+require("sunglasses").setup({
+   filter_type = "NOSYNTAX",
+   filter_percent = .75
 })
 
 
