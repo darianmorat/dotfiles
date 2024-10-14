@@ -1,5 +1,5 @@
 -- -------------------------------------------------------------------------------------------
--- MAIN CONFIG - Double or single quotes PENDING CHANGE
+-- MAIN CONFIG
 -- -------------------------------------------------------------------------------------------
 
 -- ALIASES
@@ -68,7 +68,7 @@ set("v", "J", ":m '>+1<CR>gv=gv")
 local plugins = {
 	{ "navarasu/onedark.nvim" },
 	{ "nvim-lualine/lualine.nvim" },
-	{ "miversen33/sunglasses.nvim" },
+   { "TaDaa/vimade" },
 	{ "folke/zen-mode.nvim" },
 	{ "voldikss/vim-floaterm" },
 	{ "numToStr/Comment.nvim" },
@@ -76,6 +76,7 @@ local plugins = {
 	{ "jake-stewart/multicursor.nvim", branch = "1.0" },
 
 	{ "ggandor/leap.nvim" },
+   { "jinh0/eyeliner.nvim" },
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },
 	{ "ThePrimeagen/harpoon", branch = "harpoon2" },
@@ -124,50 +125,51 @@ require("lazy").setup(plugins)
 -- GRUVDARK THEME
 -- -------------------------------------------------------------------------------------------
 
-require('onedark').setup({
-   style = 'warmer', code_style = { comments = 'none' },
+require("onedark").setup({
+   style = "warmer", code_style = { comments = "none" },
    colors = {
-      fg = '#CDC5B8', blue = '#5b98c9', red = '#DB6A6A',
-      yellow = '#D19F66', green = '#76B568', cyan = '#CDC5B8',
-      purple = '#CD60B9', aqua = '#4DB0BD', orange = '#D19F66',
+      black = "#1B1B1B", grey = "#646464",
+      fg = "#CDC5B8", blue = "#5b98c9", red = "#DB6A6A",
+      yellow = "#D19F66", green = "#76B568", cyan = "#CDC5B8",
+      purple = "#CD60B9", aqua = "#4DB0BD", orange = "#D19F66",
    },
    highlights = {
-      Folded = { fg = '#CDC5B8', bg = '#282828' },
-      FloatBorder = { fg = '#CDC5B8', bg = '#1E1E1E' }, -- Harpoon UI
-      NormalFloat = { fg = '#CDC5B8', bg = '#1E1E1E' }, -- Harpoon UI
-      Normal = { bg= '#1E1E1E' }, CursorLine = { bg = '#303030' },
-      Visual = { bg = '#353535' }, TelescopeSelection = { bg = '#303030'},
-      TSParameter = { fg = '$fg' }, TSParameterReference = { fg = '$fg' }, 
-      LineNr = { fg = '#555555' },
+      Folded = { fg = "#CDC5B8", bg = "#282828" },
+      FloatBorder = { fg = "#CDC5B8", bg = "#1E1E1E" }, -- Harpoon UI
+      NormalFloat = { fg = "#CDC5B8", bg = "#1E1E1E" }, -- Harpoon UI
+      Normal = { bg= "#1E1E1E" }, CursorLine = { bg = "#303030" },
+      Visual = { bg = "#353535" }, TelescopeSelection = { bg = "#303030"},
+      TSParameter = { fg = "$fg" }, TSParameterReference = { fg = "$fg" }, 
+      LineNr = { fg = "#555555" },
 
-      ['@comment'] = { fg = '#555555' },
-      ['@operator'] = { fg = '$blue' },
-      ['@punctuation'] = { fg = '$fg' },
-      ['@punctuation.bracket'] = { fg = '$fg' },
-      ['@variable'] = {fg = '$fg'},
-      ['@variable.member'] = {fg = '$fg'},
-      ['@variable.parameter'] = {fg = '$fg'},
-      ['@lsp.type.typeParameter'] = {fg = '$fg'},
-      ['@lsp.type.parameter'] = {fg = '$fg'},
-      ['@function'] = {fg = '$red'},
-      ['@function.method'] = {fg = '$red'},
-      ['@constructor'] = {fg = '$blue'},
-      ['@keyword'] = {fg = '$blue'},
-      ['@variable.builtin'] = {fg = '$yellow'},
-      ['@type'] = {fg = '$aqua'},
-      ['@type.builtin'] = {fg = '$aqua'},
-      ['@tag'] = {fg = '$red'},
-      ['@tag.delimiter'] = {fg = '$red'},
-      ['@tag.attribute'] = {fg = '#9266DA'},
-      ["@markup.heading"] = {fg = '$fg', fmt = 'none'},
-      ["@property.css"] = { fg = '$blue' },  
-      ["@string.css"] = { fg = '$yellow' },  
-      ["@tag.css"] = { fg = '$red' },  
-      ["@type.css"] = { fg = '$red' },  
-      ["@operator.css"] = { fg = '$red' },  
-      ["@attribute.css"] = { fg = '$red' },  
+      ["@comment"] = { fg = '#555555' },
+      ["@operator"] = { fg = '$blue' },
+      ["@punctuation"] = { fg = '$fg' },
+      ["@punctuation.bracket"] = { fg = '$fg' },
+      ["@variable"] = {fg = '$fg'},
+      ["@variable.member"] = {fg = "$fg"},
+      ["@variable.parameter"] = {fg = "$fg"},
+      ["@lsp.type.typeParameter"] = {fg = "$fg"},
+      ["@lsp.type.parameter"] = {fg = "$fg"},
+      ["@function"] = {fg = "$red"},
+      ["@function.method"] = {fg = "$red"},
+      ["@constructor"] = {fg = "$blue"},
+      ["@keyword"] = {fg = "$blue"},
+      ["@variable.builtin"] = {fg = "$yellow"},
+      ["@type"] = {fg = "$aqua"},
+      ["@type.builtin"] = {fg = "$aqua"},
+      ["@tag"] = {fg = "$red"},
+      ["@tag.delimiter"] = {fg = "$red"},
+      ["@tag.attribute"] = {fg = "#9266DA"},
+      ["@markup.heading"] = {fg = "$fg", fmt = "none"},
+      ["@property.css"] = { fg = "$blue" },  
+      ["@string.css"] = { fg = "$yellow" },  
+      ["@tag.css"] = { fg = "$red" },  
+      ["@type.css"] = { fg = "$red" },  
+      ["@operator.css"] = { fg = "$red" },  
+      ["@attribute.css"] = { fg = "$red" },  
    }
-}) require('onedark').load()
+}) require("onedark").load()
 
 vim.cmd("highlight Comment gui=NONE")
 vim.cmd("highlight IblIndent guifg=#2f2f2f")
@@ -175,15 +177,15 @@ vim.cmd("highlight EndOfBuffer guibg=NONE guifg=#2f2f2f ctermbg=NONE")
 vim.cmd("highlight SignColumn ctermbg=NONE guibg=NONE")
 vim.cmd("highlight ColorColumn guibg=#222222")
 
-local onedark = require'lualine.themes.onedark'
-onedark.normal.a.bg = '#292929' onedark.normal.a.fg = '#CDC5B8'
-onedark.insert.a.bg = '#292929' onedark.insert.a.fg = '#CDC5B8'
-onedark.visual.a.bg = '#292929' onedark.visual.a.fg = '#CDC5B8'
-onedark.command.a.bg = '#292929' onedark.command.a.fg = '#CDC5B8'
+local onedark = require"lualine.themes.onedark"
+onedark.normal.a.bg = "#292929" onedark.normal.a.fg = "#CDC5B8"
+onedark.insert.a.bg = "#292929" onedark.insert.a.fg = "#CDC5B8"
+onedark.visual.a.bg = "#292929" onedark.visual.a.fg = "#CDC5B8"
+onedark.command.a.bg = "#292929" onedark.command.a.fg = "#CDC5B8"
 
-onedark.normal.b.bg = '#292929' onedark.normal.b.fg = '#CDC5B8'
-onedark.normal.c.bg = '#292929' onedark.normal.c.fg = '#CDC5B8'
-onedark.inactive.c.bg = '#292929' onedark.inactive.c.fg = '#555555'
+onedark.normal.b.bg = "#292929" onedark.normal.b.fg = "#CDC5B8"
+onedark.normal.c.bg = "#292929" onedark.normal.c.fg = "#CDC5B8"
+onedark.inactive.c.bg = "#292929" onedark.inactive.c.fg = "#555555"
 
 
 -- -------------------------------------------------------------------------------------------
@@ -192,48 +194,47 @@ onedark.inactive.c.bg = '#292929' onedark.inactive.c.fg = '#555555'
 
 -- LUALINE
 local function dynamic_location()
-   local line = vim.fn.line('.')
-   local column = vim.fn.col('.')
-   return string.format('%d:%d', line, column)
+   local line = vim.fn.line(".")
+   local column = vim.fn.col(".")
+   return string.format("%d:%d", line, column)
 end
 
-require('lualine').setup({
+require("lualine").setup({
    options = {
       icons_enabled = false,
       theme = onedark,
-      component_separators = { left = '', right = ''},
-      section_separators = { left = '', right = ''}
+      component_separators = { left = "", right = ""},
+      section_separators = { left = "", right = ""}
    },
    sections = {
-      lualine_a = { 'mode' },
-      lualine_b = { 'branch', { 'filename', path = 0 } },
-      lualine_c = { { 'diff', colored = false } },
-      lualine_x = { 'selectioncount', { 'diagnostics', colored = false } },
-      lualine_y = { 'fileformat', 'encoding', 'progress' },
+      lualine_a = { "mode" },
+      lualine_b = { "branch", { "filename", path = 0 } },
+      lualine_c = { { "diff", colored = false } },
+      lualine_x = { "selectioncount", { "diagnostics", colored = false } },
+      lualine_y = { "fileformat", "encoding", "progress" },
       lualine_z = { dynamic_location }
    }
 })
 
 
--- SUNGLASSES
-require('sunglasses').setup({
-   filter_type = 'NOSYNTAX',
-   filter_percent = .75
+-- VIMADE
+require("vimade").setup({
+   fadelevel = 0.3
 })
 
 
 -- ZEN-MODE
-require('zen-mode').setup({
+require("zen-mode").setup({
    window = {
       backdrop = 0.94,
       width = 130,
       height = 1,
       options = {
-         signcolumn = 'yes',
+         signcolumn = "yes",
          number = true,
          relativenumber = true,
          cursorline = false,
-         foldcolumn = '0',
+         foldcolumn = "0",
          list = false
       }
    }
@@ -241,58 +242,69 @@ require('zen-mode').setup({
 
 
 -- FLOATERM
-vim.g.floaterm_title = ''
+vim.g.floaterm_title = ""
 vim.g.floaterm_height = 0.95
 vim.g.floaterm_width = 0.6
-vim.g.floaterm_position = 'top'
-vim.g.floaterm_opener = 'edit'
+vim.g.floaterm_position = "top"
+vim.g.floaterm_opener = "edit"
 vim.cmd("highlight FloatermBorder guibg=#1e1e1e guifg=NONE")
 
 
 -- COMMENT
-require('Comment').setup({})
+require("Comment").setup({})
 
-set('n', '<leader>cc', 'gcc', p_opt)
-set('n', '<leader>cb', 'gbc', p_opt)
-set('n', '<leader>ca', 'gcA', p_opt)
-set('n', '<leader>co', 'gco', p_opt)
-set('n', '<leader>cO', 'gcO', p_opt)
+set("n", "<leader>cc", "gcc", p_opt)
+set("n", "<leader>cb", "gbc", p_opt)
+set("n", "<leader>ca", "gcA", p_opt)
+set("n", "<leader>co", "gco", p_opt)
+set("n", "<leader>cO", "gcO", p_opt)
 
-set('v', '<leader>c', 'gc', p_opt)
-set('v', '<leader>b', 'gb', p_opt)
+set("v", "<leader>c", "gc", p_opt)
+set("v", "<leader>b", "gb", p_opt)
 
 
 -- SURROUND
-require('nvim-surround').setup({})
+require("nvim-surround").setup({})
 
 
 -- MULTICURSOR
-local mc = require('multicursor-nvim')
+local mc = require("multicursor-nvim")
 mc.setup({})
 
-set({'n', 'v'}, "<c-l>", mc.matchAllAddCursors)
-set({'n'}, '<c-n>', 'viw')
-set({'v'}, '<c-n>', '')
-set({'v'}, 'n', function() mc.matchAddCursor(1) end)
-set({'v'}, 'N', function() mc.matchAddCursor(-1) end)
+set({"n", "v"}, "<c-l>", mc.matchAllAddCursors)
+set({"n"}, "<c-n>", "viw")
+set({"v"}, "<c-n>", "")
+set({"v"}, "n", function() mc.matchAddCursor(1) end)
+set({"v"}, "N", function() mc.matchAddCursor(-1) end)
 set({"v"}, "u", mc.deleteCursor)
 
-set('n', '<esc>', function()
+set("n", "<esc>", function()
    if not mc.cursorsEnabled() then mc.enableCursors()
    elseif mc.hasCursors() then mc.clearCursors() else end
 end)
 
 
 -- LEAP
-require('leap')
-set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
-set_hl(0, 'LeapLabelPrimary', { fg = '#e6e3de', bg = '#5c5c5e' })
+require("leap")
+set({"n", "x", "o"}, "s", "<Plug>(leap)")
+set_hl(0, "LeapLabelPrimary", { fg = "#e1dcd6", bg = "#4c4c4d" })
+
+
+-- EYELINER
+require"eyeliner".setup {
+  highlight_on_key = true,
+  match = "[0-9a-zA-Z]",
+  dim = true
+}
+
+set_hl(0, "EyelinerPrimary", { fg="#e1dcd6" })
+set_hl(0, "EyelinerSecondary", { fg="#df5a5a" })
 
 
 -- TELESCOPE
-require('telescope').setup({
+require("telescope").setup({
    defaults = {
-      layout_strategy = 'vertical',
+      layout_strategy = "vertical",
       layout_config = {
          preview_cutoff = 0,
          width = 0.6,
@@ -304,25 +316,25 @@ require('telescope').setup({
          preview = { 1, 1, 1, 1 }
       },
       borderchars = {
-         results = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-         preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-         prompt  = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }
+         results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+         preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+         prompt  = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
       },
       file_ignore_patterns = { 
-         'node_modules' 
+         "node_modules" 
       }
    }
 })
 
-local builtin = require('telescope.builtin')
-set('n', '<leader>ff', function() builtin.find_files({ previewer = false }) end)
-set('n', '<leader>fg', function() builtin.live_grep() end)
-set('n', '<leader>fo', function() builtin.resume() end)
-set('n', '<leader>fj', function() builtin.buffers({ previewer = false, sort_lastused = true }) end)
-set('n', '<leader>fr', function() builtin.lsp_references() end)
-set('n', '<leader>fw', function() builtin.grep_string({ search = vim.fn.expand('<cword>') }) end)
-set('n', '<leader>fW', function() builtin.grep_string({ search = vim.fn.expand('<cWORD>') }) end)
-set('n', '<leader>ej', function() builtin.diagnostics({ bufnr = 0 }) end)
+local builtin = require("telescope.builtin")
+set("n", "<leader>ff", function() builtin.find_files({ previewer = false }) end)
+set("n", "<leader>fg", function() builtin.live_grep() end)
+set("n", "<leader>fo", function() builtin.resume() end)
+set("n", "<leader>fj", function() builtin.buffers({ previewer = false, sort_lastused = true }) end)
+set("n", "<leader>fr", function() builtin.lsp_references() end)
+set("n", "<leader>fw", function() builtin.grep_string({ search = vim.fn.expand("<cword>") }) end)
+set("n", "<leader>fW", function() builtin.grep_string({ search = vim.fn.expand("<cWORD>") }) end)
+set("n", "<leader>ej", function() builtin.diagnostics({ bufnr = 0 }) end)
 
 
 -- HARPOON
@@ -342,8 +354,8 @@ set("n", "<leader>4", function() harpoon:list():select(4) end)
 
 
 -- TREESIETER
-require'nvim-treesitter.configs'.setup({
-   ensure_installed = {'vim', 'lua', 'javascript', 'typescript', 'tsx', 'html', 'css', 'json', 'markdown'},
+require"nvim-treesitter.configs".setup({
+   ensure_installed = {"vim", "lua", "javascript", "typescript", "tsx", "html", "css", "json", "markdown"},
    sync_install = false,
    indent = {
       enable = true
@@ -356,7 +368,7 @@ require'nvim-treesitter.configs'.setup({
 
 
 -- TREESIETER REFACTOR
-require'nvim-treesitter.configs'.setup({
+require"nvim-treesitter.configs".setup({
    refactor = {
       highlight_definitions = {
          enable = true,
@@ -373,23 +385,23 @@ require'nvim-treesitter.configs'.setup({
 
 
 -- AUTOPAIRS
-require('nvim-autopairs').setup({})
+require("nvim-autopairs").setup({})
 
 
 -- AUTOTAG
-require('nvim-ts-autotag').setup({})
+require("nvim-ts-autotag").setup({})
 
 
 -- GITSIGNS
-require('gitsigns').setup({})
-set_api('n', '<leader>gi', '<cmd>lua require("gitsigns").preview_hunk_inline()<CR>', p_opts)
-set_api('n', '<leader>gj', '<cmd>lua require("gitsigns").next_hunk()<CR>', p_opts)
-set_api('n', '<leader>gk', '<cmd>lua require("gitsigns").prev_hunk()<CR>', p_opts)
+require("gitsigns").setup({})
+set_api("n", "<leader>gi", "<cmd>lua require('gitsigns').preview_hunk_inline()<CR>", p_opts)
+set_api("n", "<leader>gj", "<cmd>lua require('gitsigns').next_hunk()<CR>", p_opts)
+set_api("n", "<leader>gk", "<cmd>lua require('gitsigns').prev_hunk()<CR>", p_opts)
 
 
 -- LINE INDENTATION
-require('ibl').setup({
-   indent = { char = '|' },
+require("ibl").setup({
+   indent = { char = "|" },
    scope = { 
       enabled = true,
       show_start = false,
@@ -399,18 +411,18 @@ require('ibl').setup({
 
 
 -- LSP-ZERO
-local lsp_zero = require('lsp-zero')
+local lsp_zero = require("lsp-zero")
 local lsp_attach = function(client, bufnr)
    local b_opts = {buffer = bufnr}
-   set('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>', b_opts)
-   set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', b_opts)
-   set('n', '<leader>ef', '<cmd>lua vim.lsp.buf.code_action()<cr>', b_opts)
+   set("n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", b_opts)
+   set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", b_opts)
+   set("n", "<leader>ef", "<cmd>lua vim.lsp.buf.code_action()<cr>", b_opts)
 end
 
 lsp_zero.extend_lspconfig({
    sign_text = true,
    lsp_attach = lsp_attach,
-   capabilities = require('cmp_nvim_lsp').default_capabilities()
+   capabilities = require("cmp_nvim_lsp").default_capabilities()
 })
 
 
@@ -418,39 +430,39 @@ lsp_zero.extend_lspconfig({
 -- [css-lsp] [emmet-language-server] [eslint-lsp] [html-lsp]
 -- [json-lsp] [marksman] [prettierd] [stylelint] [typescript-language-server]
 
-require('mason').setup({})
-require('mason-lspconfig').setup({
+require("mason").setup({})
+require("mason-lspconfig").setup({
    handlers = {
       function(server_name)
-         require('lspconfig')[server_name].setup({})
+         require("lspconfig")[server_name].setup({})
       end
    }
 })
 
 
 -- CMP
-local cmp = require('cmp')
+local cmp = require("cmp")
 local cmp_action = lsp_zero.cmp_action()
-require('luasnip.loaders.from_vscode').lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
-   completion = { completeopt = 'menu,menuone,noinsert' }, -- Select first suggestion
+   completion = { completeopt = "menu,menuone,noinsert" }, -- Select first suggestion
    sources = { 
    -- Mimic vscode suggestions
-      {name = 'nvim_lsp'},
-      {name = 'buffer', keyword_length = 2},
-      {name = 'luasnip', keyword_length = 2},
-      {name = 'path'}
+      {name = "nvim_lsp"},
+      {name = "buffer", keyword_length = 2},
+      {name = "luasnip", keyword_length = 2},
+      {name = "path"}
    },
    snippet = {
       expand = function(args)
-         require('luasnip').lsp_expand(args.body)
+         require("luasnip").lsp_expand(args.body)
       end
    },
    view = { docs = { auto_open = false } }, -- Docs closed by default
    mapping = cmp.mapping.preset.insert({ 
-      ['<Enter>'] = cmp.mapping.confirm({ select = true }),
-      ['<C-Space>'] = cmp.mapping(function() -- Double press due TMUX (same vscode)
+      ["<Enter>"] = cmp.mapping.confirm({ select = true }),
+      ["<C-Space>"] = cmp.mapping(function() -- Double press due TMUX (same vscode)
          if cmp.visible_docs() then cmp.close_docs() else cmp.open_docs() end
       end)
    }),
