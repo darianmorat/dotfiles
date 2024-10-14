@@ -1,6 +1,7 @@
 -- -------------------------------------------------------------------------------------------
 -- MAIN CONFIG
 -- -------------------------------------------------------------------------------------------
+-- Double or single quotes... Pending change
 
 -- ALIASES
 local set = vim.keymap.set
@@ -68,6 +69,7 @@ set("v", "J", ":m '>+1<CR>gv=gv")
 local plugins = {
 	{ "navarasu/onedark.nvim" },
 	{ "nvim-lualine/lualine.nvim" },
+   { "miversen33/sunglasses.nvim", event = "UIEnter" },
 	{ "folke/zen-mode.nvim" },
 	{ "voldikss/vim-floaterm" },
 	{ "numToStr/Comment.nvim" },
@@ -97,8 +99,6 @@ local plugins = {
 	{ "hrsh7th/cmp-path" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "rafamadriz/friendly-snippets" },
-
-   {"miversen33/sunglasses.nvim", event = "UIEnter"},
 }
 
 
@@ -213,6 +213,13 @@ require('lualine').setup({
       lualine_y = { 'fileformat', 'encoding', 'progress' },
       lualine_z = { dynamic_location }
    }
+})
+
+
+-- SUNGLASSES
+require('sunglasses').setup({
+   filter_type = 'NOSYNTAX',
+   filter_percent = .75
 })
 
 
@@ -449,13 +456,6 @@ cmp.setup({
       end)
    }),
    formatting = lsp_zero.cmp_format({details = false})
-})
-
-
--- SUNGLASSES
-require("sunglasses").setup({
-   filter_type = "NOSYNTAX",
-   filter_percent = .75
 })
 
 
