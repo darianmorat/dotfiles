@@ -65,6 +65,7 @@ set("v", "J", ":m '>+1<CR>gv=gv")
 local plugins = {
 	{ "navarasu/onedark.nvim" },
 	{ "nvim-lualine/lualine.nvim" },
+
    { "TaDaa/vimade" },
 	{ "folke/zen-mode.nvim" },
 	{ "voldikss/vim-floaterm" },
@@ -73,6 +74,7 @@ local plugins = {
 	{ "jake-stewart/multicursor.nvim", branch = "1.0" },
 
 	{ "ggandor/leap.nvim" },
+
    { "jinh0/eyeliner.nvim" },
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },
