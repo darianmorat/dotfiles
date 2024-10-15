@@ -50,8 +50,8 @@ set("n", "<leader><leader>d", ":bd!<CR>")
 set("n", "<leader><leader>b", ":BufOnly<CR>")
 set("n", "<leader><leader>q", ":q<CR>")
 
-set("n", "<C-k>", ":FloatermNew lazygit<CR>")
-set("n", "<C-j>", ":FloatermNew vifm<CR>")
+set("n", "<C-k>", ":Lazygit<CR>")
+set("n", "<C-j>", ":Vifm<CR>")
 set("n", "<C-h>", "<C-6>")
 
 set("v", "K", ":m '<-2<CR>gv=gv")
@@ -217,9 +217,17 @@ require("lualine").setup({
       lualine_b = { "branch", { "filename", path = 0 } },
       lualine_c = { { "diff", colored = false } },
       lualine_x = { "selectioncount", { "diagnostics", colored = false } },
-      lualine_y = { "fileformat", "encoding", "progress" },
+      lualine_y = { "encoding", "progress" },
       lualine_z = { dynamic_location }
-   }
+   },
+   inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {'filename'},
+      lualine_x = {'location'},
+      lualine_y = {},
+      lualine_z = {}
+  },
 })
 
 
@@ -253,7 +261,10 @@ vim.g.floaterm_height = 0.95
 vim.g.floaterm_width = 0.6
 vim.g.floaterm_position = "top"
 vim.g.floaterm_opener = "edit"
+
 vim.cmd("highlight FloatermBorder guibg=#1e1e1e guifg=NONE")
+vim.cmd("command! Vifm FloatermNew vifm")
+vim.cmd("command! Lazygit FloatermNew lazygit")
 
 
 -- COMMENT
