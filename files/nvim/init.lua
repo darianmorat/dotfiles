@@ -64,14 +64,16 @@ set("v", "J", ":m '>+1<CR>gv=gv")
 
 local plugins = {
 	{ "navarasu/onedark.nvim" },
-	{ "nvim-lualine/lualine.nvim" }, { "TaDaa/vimade" },
+	{ "nvim-lualine/lualine.nvim" },
+   { "TaDaa/vimade" },
 	{ "folke/zen-mode.nvim" },
 	{ "voldikss/vim-floaterm" },
 	{ "numToStr/Comment.nvim" },
 	{ "kylechui/nvim-surround", version = "*", event = "VeryLazy" },
 	{ "jake-stewart/multicursor.nvim", branch = "1.0" },
 
-	{ "ggandor/leap.nvim" }, { "jinh0/eyeliner.nvim" },
+	{ "ggandor/leap.nvim" },
+   { "jinh0/eyeliner.nvim" },
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },
 	{ "ThePrimeagen/harpoon", branch = "harpoon2" },
