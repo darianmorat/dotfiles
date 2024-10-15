@@ -4,11 +4,8 @@
 
 -- ALIASES
 local set = vim.keymap.set
-local set_hl = vim.api.nvim_set_hl
 local set_api = vim.api.nvim_set_keymap
-
-local p_opts = { silent=true, noremap=true }
-local p_opt = { remap=true }
+local set_hl = vim.api.nvim_set_hl
 
 
 -- SETTINGS
@@ -126,50 +123,58 @@ require("lazy").setup(plugins)
 -- -------------------------------------------------------------------------------------------
 
 require("onedark").setup({
-   style = "warmer", code_style = { comments = "none" },
+   style = "warmer",
+   code_style = {
+      comments = "none"
+   },
    colors = {
-      black = "#1B1B1B", grey = "#646464",
-      fg = "#CDC5B8", blue = "#5b98c9", red = "#DB6A6A",
-      yellow = "#D19F66", green = "#76B568", cyan = "#CDC5B8",
-      purple = "#CD60B9", aqua = "#4DB0BD", orange = "#D19F66",
+      fg     = "#CDC5B8",    black = "#1B1B1B",    grey  = "#646464",
+      blue   = "#5b98c9",    red   = "#DB6A6A",    orange = "#D19F66",
+      yellow = "#D19F66",    green = "#76B568",    cyan = "#CDC5B8",
+      purple = "#CD60B9",    aqua  = "#4DB0BD",
    },
    highlights = {
-      Folded = { fg = "#CDC5B8", bg = "#282828" },
-      FloatBorder = { fg = "#CDC5B8", bg = "#1E1E1E" }, -- Harpoon UI
-      NormalFloat = { fg = "#CDC5B8", bg = "#1E1E1E" }, -- Harpoon UI
-      Normal = { bg= "#1E1E1E" }, CursorLine = { bg = "#303030" },
-      Visual = { bg = "#353535" }, TelescopeSelection = { bg = "#303030"},
-      TSParameter = { fg = "$fg" }, TSParameterReference = { fg = "$fg" }, 
-      LineNr = { fg = "#555555" },
+      Folded                      = { fg = "#CDC5B8", bg = "#282828" },
+      FloatBorder                 = { fg = "#CDC5B8", bg = "#1E1E1E" }, -- Harpoon UI
+      NormalFloat                 = { fg = "#CDC5B8", bg = "#1E1E1E" }, -- Harpoon UI
+      Normal                      = { bg= "#1E1E1E" },
+      CursorLine                  = { bg = "#303030" },
+      Visual                      = { bg = "#353535" },
+      TelescopeSelection          = { bg = "#303030"},
+      TSParameter                 = { fg = "$fg" },
+      TSParameterReference        = { fg = "$fg" }, 
+      LineNr                      = { fg = "#555555" },
 
-      ["@comment"] = { fg = '#555555' },
-      ["@operator"] = { fg = '$blue' },
-      ["@punctuation"] = { fg = '$fg' },
-      ["@punctuation.bracket"] = { fg = '$fg' },
-      ["@variable"] = {fg = '$fg'},
-      ["@variable.member"] = {fg = "$fg"},
-      ["@variable.parameter"] = {fg = "$fg"},
-      ["@lsp.type.typeParameter"] = {fg = "$fg"},
-      ["@lsp.type.parameter"] = {fg = "$fg"},
-      ["@function"] = {fg = "$red"},
-      ["@function.method"] = {fg = "$red"},
-      ["@constructor"] = {fg = "$blue"},
-      ["@keyword"] = {fg = "$blue"},
-      ["@variable.builtin"] = {fg = "$yellow"},
-      ["@type"] = {fg = "$aqua"},
-      ["@type.builtin"] = {fg = "$aqua"},
-      ["@tag"] = {fg = "$red"},
-      ["@tag.delimiter"] = {fg = "$red"},
-      ["@tag.attribute"] = {fg = "#9266DA"},
-      ["@markup.heading"] = {fg = "$fg", fmt = "none"},
-      ["@property.css"] = { fg = "$blue" },  
-      ["@string.css"] = { fg = "$yellow" },  
-      ["@tag.css"] = { fg = "$red" },  
-      ["@type.css"] = { fg = "$red" },  
-      ["@operator.css"] = { fg = "$red" },  
-      ["@attribute.css"] = { fg = "$red" },  
+      ["@comment"]                = { fg = '#555555' },
+      ["@operator"]               = { fg = '$blue' },
+      ["@punctuation"]            = { fg = '$fg' },
+      ["@punctuation.bracket"]    = { fg = '$fg' },
+      ["@variable"]               = { fg = '$fg' },
+      ["@variable.member"]        = { fg = "$fg" },
+      ["@variable.parameter"]     = { fg = "$fg" },
+      ["@lsp.type.typeParameter"] = { fg = "$fg" },
+      ["@lsp.type.parameter"]     = { fg = "$fg" },
+      ["@function"]               = { fg = "$red" },
+      ["@function.method"]        = { fg = "$red" },
+      ["@constructor"]            = { fg = "$blue" },
+      ["@keyword"]                = { fg = "$blue" },
+      ["@variable.builtin"]       = { fg = "$yellow" }, 
+      ["@type"]                   = { fg = "$aqua" },
+      ["@type.builtin"]           = { fg = "$aqua" },
+      ["@tag"]                    = { fg = "$red" },
+      ["@tag.delimiter"]          = { fg = "$red" },
+      ["@tag.attribute"]          = { fg = "#9266DA" },
+      ["@markup.heading"]         = { fg = "$fg", fmt = "none" },
+      ["@property.css"]           = { fg = "$blue" },  
+      ["@string.css"]             = { fg = "$yellow" },  
+      ["@tag.css"]                = { fg = "$red" },  
+      ["@type.css"]               = { fg = "$red" },  
+      ["@operator.css"]           = { fg = "$red" },  
+      ["@attribute.css"]          = { fg = "$red" },  
    }
-}) require("onedark").load()
+})
+
+require("onedark").load()
 
 vim.cmd("highlight Comment gui=NONE")
 vim.cmd("highlight IblIndent guifg=#2f2f2f")
@@ -178,14 +183,15 @@ vim.cmd("highlight SignColumn ctermbg=NONE guibg=NONE")
 vim.cmd("highlight ColorColumn guibg=#222222")
 
 local onedark = require"lualine.themes.onedark"
-onedark.normal.a.bg = "#292929" onedark.normal.a.fg = "#CDC5B8"
-onedark.insert.a.bg = "#292929" onedark.insert.a.fg = "#CDC5B8"
-onedark.visual.a.bg = "#292929" onedark.visual.a.fg = "#CDC5B8"
-onedark.command.a.bg = "#292929" onedark.command.a.fg = "#CDC5B8"
 
-onedark.normal.b.bg = "#292929" onedark.normal.b.fg = "#CDC5B8"
-onedark.normal.c.bg = "#292929" onedark.normal.c.fg = "#CDC5B8"
-onedark.inactive.c.bg = "#292929" onedark.inactive.c.fg = "#555555"
+onedark.normal.a.bg   = "#292929"    onedark.normal.a.fg   = "#CDC5B8"
+onedark.insert.a.bg   = "#292929"    onedark.insert.a.fg   = "#CDC5B8"
+onedark.visual.a.bg   = "#292929"    onedark.visual.a.fg   = "#CDC5B8"
+onedark.command.a.bg  = "#292929"    onedark.command.a.fg  = "#CDC5B8"
+
+onedark.normal.b.bg   = "#292929"    onedark.normal.b.fg   = "#CDC5B8"
+onedark.normal.c.bg   = "#292929"    onedark.normal.c.fg   = "#CDC5B8"
+onedark.inactive.c.bg = "#292929"    onedark.inactive.c.fg = "#555555"
 
 
 -- -------------------------------------------------------------------------------------------
@@ -253,14 +259,14 @@ vim.cmd("highlight FloatermBorder guibg=#1e1e1e guifg=NONE")
 -- COMMENT
 require("Comment").setup({})
 
-set("n", "<leader>cc", "gcc", p_opt)
-set("n", "<leader>cb", "gbc", p_opt)
-set("n", "<leader>ca", "gcA", p_opt)
-set("n", "<leader>co", "gco", p_opt)
-set("n", "<leader>cO", "gcO", p_opt)
+set("n", "<leader>cc", "gcc", { remap=true })
+set("n", "<leader>cb", "gbc", { remap=true })
+set("n", "<leader>ca", "gcA", { remap=true })
+set("n", "<leader>co", "gco", { remap=true })
+set("n", "<leader>cO", "gcO", { remap=true })
 
-set("v", "<leader>c", "gc", p_opt)
-set("v", "<leader>b", "gb", p_opt)
+set("v", "<leader>c", "gc", { remap=true })
+set("v", "<leader>b", "gb", { remap=true })
 
 
 -- SURROUND
@@ -339,7 +345,12 @@ set("n", "<leader>ej", function() builtin.diagnostics({ bufnr = 0 }) end)
 
 -- HARPOON
 local harpoon = require("harpoon")
-local toggle_opts = { border = "single", title_pos = "center", ui_width_ratio = 0.50 }
+local toggle_opts = {
+   border = "single",
+   title_pos = "center",
+   ui_width_ratio = 0.50
+}
+
 harpoon:setup({})
 
 set("n", "<c-m>", function() harpoon:list():add() end)
@@ -393,10 +404,34 @@ require("nvim-ts-autotag").setup({})
 
 
 -- GITSIGNS
-require("gitsigns").setup({})
-set_api("n", "<leader>gi", "<cmd>lua require('gitsigns').preview_hunk_inline()<CR>", p_opts)
-set_api("n", "<leader>gj", "<cmd>lua require('gitsigns').next_hunk()<CR>", p_opts)
-set_api("n", "<leader>gk", "<cmd>lua require('gitsigns').prev_hunk()<CR>", p_opts)
+require("gitsigns").setup({
+   on_attach = function(bufnr)
+      local gitsigns = require('gitsigns')
+
+      local function map(mode, l, r, opts)
+         opts = opts or {}
+         opts.buffer = bufnr
+         vim.keymap.set(mode, l, r, opts)
+      end
+
+      map("n", "<leader><leader>gi", gitsigns.diffthis)
+      map("n", "<leader>gi", function() gitsigns.diffthis("~") end)
+
+      map("n", "<leader>gj", gitsigns.next_hunk)
+      map("n", "<leader>gk", gitsigns.prev_hunk)
+      map("n", "<leader>gg", gitsigns.preview_hunk)
+
+      map("n", "<leader>gs", gitsigns.stage_hunk)
+      map("n", "<leader>gr", gitsigns.reset_hunk)
+      map("v", "<leader>gs", function() gitsigns.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end)
+      map("v", "<leader>gr", function() gitsigns.reset_hunk {vim.fn.line("."), vim.fn.line("v")} end)
+      map("n", "<leader>gu", gitsigns.undo_stage_hunk)
+
+      map("n", "<leader>gb", function() gitsigns.blame_line{full=true} end)
+      map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
+      map("n", "<leader>tr", gitsigns.toggle_deleted)
+   end
+})
 
 
 -- LINE INDENTATION
