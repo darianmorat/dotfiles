@@ -38,9 +38,9 @@
 ### Preview config:
 
 <img src="images/glazewm1.png" alt="">
-<img src="images/glazewm2.png" alt="">  
 
 ##
+<img src="images/glazewm2.png" alt="">  
 <img src="images/wezterm1.png" alt="">
 
 ##
