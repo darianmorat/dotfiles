@@ -37,15 +37,8 @@
 
 ### Preview config:
 
-<img src="images/glazewm1.png" alt="">
-
-##
-<img src="images/glazewm2.png" alt="">  
-<img src="images/wezterm1.png" alt="">
-
-##
-<img src="images/nvim0.png" alt="">
-<img src="images/vscode0.png" alt="">
+<img src="images/glazewm.png" alt="">  
+<img src="images/wezterm.png" alt="">
 
 ##
 <img src="images/nvim1.png" alt="">
