@@ -76,11 +76,9 @@
       { "before": ["leader", "e", "j"], "commands": ["editor.action.marker.next"] },
       { "before": ["leader", "e", "k"], "commands": ["editor.action.marker.prev"] },
       
+      { "before": ["leader", "g", "i"], "commands": ["git.openChange"] },
       { "before": ["leader", "g", "j"], "commands": ["workbench.action.compareEditor.nextChange", "editor.action.dirtydiff.next"] },
       { "before": ["leader", "g", "k"], "commands": ["workbench.action.compareEditor.previousChange", "editor.action.dirtydiff.previous"] },
-      { "before": ["leader", "g", "g"], "commands": ["git.openChange"] },
-      { "before": ["leader", "g", "s"], "commands": ["toggle.diff.renderSideBySide"] },
-      { "before": ["leader", "g", "c"], "commands": ["diffEditor.toggleCollapseUnchangedRegions"] },
 
       { "before": ["leader", "f", "f"], "commands": ["find-it-faster.findFiles"] },
       { "before": ["leader", "f", "g"], "commands": ["find-it-faster.findWithinFiles"] },
@@ -91,8 +89,8 @@
       { "before": ["leader", "f", "W"], "after": ["y", "i", "W"], "commands": ["find-it-faster.findWithinFiles", "workbench.action.terminal.paste"] },
 
       { "before": ["c-m"], "commands": ["vscode-harpoon.addEditor"] },
-      { "before": ["leader", "f", "m"], "commands": ["vscode-harpoon.editEditors"] },
       { "before": ["leader", "f", "k"], "commands": ["vscode-harpoon.editorQuickPick"] },
+      { "before": ["leader", "f", "m"], "commands": ["vscode-harpoon.editEditors"] },
       { "before": ["leader", "1"], "commands": ["vscode-harpoon.gotoEditor1"] },
       { "before": ["leader", "2"], "commands": ["vscode-harpoon.gotoEditor2"] },
       { "before": ["leader", "3"], "commands": ["vscode-harpoon.gotoEditor3"] },
@@ -113,9 +111,9 @@
 
       { "before": ["leader", "c"], "commands": ["editor.action.commentLine", "extension.vim_escape"] },
       { "before": ["leader", "b"], "commands": ["editor.action.blockComment", "extension.vim_escape"] },
-      
-      { "before": ["leader", "r"], "commands": ["git.revertSelectedRanges"] },
-      { "before": ["leader", "s"], "commands": ["git.stageSelectedRanges"] }
+
+      { "before": ["leader", "g", "s"], "commands": ["git.stageSelectedRanges"] },
+      { "before": ["leader", "g", "r"], "commands": ["git.revertSelectedRanges"] }
    ],
 
    // =====================
@@ -213,14 +211,15 @@
       "scrollbarSlider.background":"#00000000"
    },
 
+   "diffEditor.ignoreTrimWhitespace": false,
+   "diffEditor.hideUnchangedRegions.enabled": true,
+   "diffEditor.renderSideBySide": true,
+
    "update.mode": "none",
    "update.enableWindowsBackgroundUpdates": false,
    "git.openRepositoryInParentFolders": "always",
    "editor.accessibilitySupport": "off",
    "remote.autoForwardPortsSource": "hybrid",
    "typescript.disableAutomaticTypeAcquisition": true,
-
-   "cSpell.enabled": false,
-   "diffEditor.ignoreTrimWhitespace": false,
-   "diffEditor.renderSideBySide": true
+   "cSpell.enabled": false
 }
