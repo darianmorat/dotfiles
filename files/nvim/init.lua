@@ -24,11 +24,12 @@ vim.opt.scrolloff = 6
 vim.opt.colorcolumn = "95"
 vim.opt.wrap = false
 vim.opt.signcolumn = "yes"
-vim.opt.updatetime = 200
+vim.opt.updatetime = 150
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.pumheight = 8
+vim.opt.swapfile = false
 
 
 -- REMAPS
@@ -128,16 +129,16 @@ require("onedark").setup({
       comments = "none"
    },
    colors = {
-      fg     = "#CDC5B8",    black = "#1B1B1B",    grey  = "#646464",
+      fg     = "#CDC5B8",    black = "#1B1B1B",    grey   = "#646464",
       blue   = "#5b98c9",    red   = "#DB6A6A",    orange = "#D19F66",
-      yellow = "#D19F66",    green = "#76B568",    cyan = "#CDC5B8",
+      yellow = "#D19F66",    green = "#76B568",    cyan   = "#CDC5B8",
       purple = "#CD60B9",    aqua  = "#4DB0BD",
    },
    highlights = {
       Folded                      = { fg = "#CDC5B8", bg = "#282828" },
       FloatBorder                 = { fg = "#CDC5B8", bg = "#1E1E1E" }, -- Harpoon UI
       NormalFloat                 = { fg = "#CDC5B8", bg = "#1E1E1E" }, -- Harpoon UI
-      Normal                      = { bg= "#1E1E1E" },
+      Normal                      = { bg = "#1E1E1E" },
       CursorLine                  = { bg = "#303030" },
       Visual                      = { bg = "#353535" },
       TelescopeSelection          = { bg = "#303030"},
@@ -145,11 +146,11 @@ require("onedark").setup({
       TSParameterReference        = { fg = "$fg" }, 
       LineNr                      = { fg = "#555555" },
 
-      ["@comment"]                = { fg = '#555555' },
-      ["@operator"]               = { fg = '$blue' },
-      ["@punctuation"]            = { fg = '$fg' },
-      ["@punctuation.bracket"]    = { fg = '$fg' },
-      ["@variable"]               = { fg = '$fg' },
+      ["@comment"]                = { fg = "#555555" },
+      ["@operator"]               = { fg = "$blue" },
+      ["@punctuation"]            = { fg = "$fg" },
+      ["@punctuation.bracket"]    = { fg = "$fg" },
+      ["@variable"]               = { fg = "$fg" },
       ["@variable.member"]        = { fg = "$fg" },
       ["@variable.parameter"]     = { fg = "$fg" },
       ["@lsp.type.typeParameter"] = { fg = "$fg" },
@@ -223,8 +224,8 @@ require("lualine").setup({
    inactive_sections = {
       lualine_a = {},
       lualine_b = {},
-      lualine_c = {'filename'},
-      lualine_x = {'location'},
+      lualine_c = { "filename" },
+      lualine_x = { "location" },
       lualine_y = {},
       lualine_z = {}
   },
