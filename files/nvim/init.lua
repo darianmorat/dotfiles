@@ -265,7 +265,7 @@ vim.g.floaterm_opener = "edit"
 
 vim.cmd("highlight FloatermBorder guibg=#1e1e1e guifg=NONE")
 vim.cmd("command! Vifm FloatermNew vifm")
-vim.cmd("command! Lazygit FloatermNew lazygit")
+vim.cmd("command! Lazygit FloatermNew --width=0.75 lazygit")
 
 
 -- COMMENT
