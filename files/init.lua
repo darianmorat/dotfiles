@@ -419,8 +419,19 @@ require("gitsigns").setup({
          vim.keymap.set(mode, l, r, opts)
       end
 
+      -- Fix 'quit' when using .diffthis
+      local function smart_quit()
+         if vim.wo.diff then 
+            vim.cmd("wincmd p | q") 
+         else 
+            vim.cmd(":bd") 
+         end
+      end
+
+      -- Actions
       map("n", "<leader><leader>gi", gitsigns.diffthis)
       map("n", "<leader>gi", function() gitsigns.diffthis("~") end)
+      map("n", "<leader>q", smart_quit)
 
       map("n", "<leader>gj", gitsigns.next_hunk)
       map("n", "<leader>gk", gitsigns.prev_hunk)
