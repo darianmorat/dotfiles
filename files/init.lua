@@ -328,15 +328,8 @@ require("telescope").setup({
          width = 0.6,
          preview_height = 0.6
       },
-      border = {
-         prompt  = { 1, 1, 1, 1 },
-         results = { 1, 1, 1, 1 },
-         preview = { 1, 1, 1, 1 }
-      },
       borderchars = {
-         results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-         preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-         prompt  = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+         "─", "│", "─", "│", "┌", "┐", "┘", "└"
       },
       file_ignore_patterns = { 
          "node_modules" 
