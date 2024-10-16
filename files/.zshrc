@@ -7,7 +7,7 @@ z4h bindkey z4h-backward-word Ctrl+Alt+B
 z4h bindkey z4h-forward-word Ctrl+Alt+F
 
 # find way to send vifm directly. Bash: bind -x '"\C-o":"vifm"'
-bindkey -s '^O' '^Utmux rename-window vifm; vifm .^J'
+bindkey -s '^O' '^Uvifm^J'
 
 # Aliases
 alias dow="cd /mnt/d/DarianToledo/Downloads"
@@ -17,6 +17,8 @@ alias rm="trash"
 # `$rm` cli: Trash/files/
 # `dd` vifm: Trash/vifm/
 # `$empty-trash` cli: Trash/
+
+alias vifm="vifm ."
 
 alias s="tmux"
 alias sa="tmux a"
