@@ -413,14 +413,18 @@ set("n", "<leader>4", function() harpoon:list():select(4) end)
 
 -- TREESIETER
 require"nvim-treesitter.configs".setup({
-   ensure_installed = {"vim", "lua", "javascript", "typescript", "tsx", "html", "css", "json", "markdown"},
+   ensure_installed = {
+      "lua", "javascript", "typescript", "tsx", "html", "css", "json", "markdown"
+   },
    sync_install = false,
    indent = {
       enable = true
    },
    highlight = {
       enable = true,  
-      additional_vim_regex_highlighting = { 'markdown' },
+      additional_vim_regex_highlighting = {
+         "markdown" 
+      },
    }
 })
 
@@ -494,7 +498,9 @@ require("gitsigns").setup({
 
 -- LINE INDENTATION
 require("ibl").setup({
-   indent = { char = "|" },
+   indent = { 
+      char = "|" 
+   },
    scope = { 
       enabled = true,
       show_start = false,
@@ -539,7 +545,9 @@ local cmp_action = lsp_zero.cmp_action()
 require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
-   completion = { completeopt = "menu,menuone,noinsert" }, -- Select first suggestion
+   completion = { 
+      completeopt = "menu,menuone,noinsert"  -- Select first suggestion
+   },
    sources = { 
    -- Mimic vscode suggestions
       {name = "nvim_lsp"},
