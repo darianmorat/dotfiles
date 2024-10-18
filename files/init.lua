@@ -55,6 +55,9 @@ set("n", "<C-k>", ":Lazygit<CR>")
 set("n", "<C-j>", ":Vifm<CR>")
 set("n", "<C-h>", "<C-6>")
 
+set("n", "<leader>ml", ":Lazy load markdown-preview.nvim | :Lazy<CR>")
+set("n", "<leader>mp", ":MarkdownPreviewToggle<CR>")
+
 set("v", "K", ":m '<-2<CR>gv=gv")
 set("v", "J", ":m '>+1<CR>gv=gv")
 
@@ -97,6 +100,12 @@ local plugins = {
    { "hrsh7th/cmp-path" },
    { "saadparwaiz1/cmp_luasnip" },
    { "rafamadriz/friendly-snippets" },
+
+   {
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      build = function() vim.fn["mkdp#util#install"]() end
+   },
 }
 
 
