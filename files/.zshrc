@@ -19,6 +19,7 @@ alias rm="trash"
 # `$empty-trash` cli: Trash/
 
 alias vifm="vifm ."
+alias vim="nvim"
 
 alias s="tmux"
 alias sa="tmux a"
