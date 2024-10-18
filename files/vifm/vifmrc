@@ -38,7 +38,7 @@ nnoremap x q
 nnoremap md :mk<space>
 nnoremap mf :touch<space>
 
-nnoremap <c-m> :bmark<space>
+nnoremap b :bmark<space>
 nnoremap <space>ff :bmgo<space>
 nnoremap <space>fk :bmarks<cr>
 
