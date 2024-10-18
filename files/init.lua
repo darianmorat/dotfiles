@@ -133,10 +133,6 @@ require("lazy").setup(plugins)
 -- -------------------------------------------------------------------------------------------
 
 require("onedark").setup({
-   style = "warmer",
-   code_style = {
-      comments = "none"
-   },
    colors = {
       fg         = "#CDC5B8",
       cyan       = "#CDC5B8",
@@ -150,11 +146,16 @@ require("onedark").setup({
       aqua       = "#00aa9c",
       grey       = "#646464",
       lightGrey  = "#8D8A85",
+      
+      bg2 = "#313131",
+      bg1 = "#2F2F2F",
+      bg_blue = "#5b98c9",
    },
    highlights = {
       Folded                         = { fg = "#CDC5B8", bg = "#282828" },
       FloatBorder                    = { fg = "#CDC5B8", bg = "#1E1E1E" }, -- Harpoon, lazy, mason UI
       NormalFloat                    = { fg = "#CDC5B8", bg = "#1E1E1E" }, -- ^ Avoid lazy & mason or any other
+      Search                         = { fg = "#CDC5B8", bg = "#2d4151" }, 
       Normal                         = { bg = "#1E1E1E" },
       CursorLine                     = { bg = "#303030" },
       Visual                         = { bg = "#353535" },
@@ -162,6 +163,11 @@ require("onedark").setup({
       TSParameter                    = { fg = "$fg" },
       TSParameterReference           = { fg = "$fg" }, 
       LineNr                         = { fg = "#555555" },
+      ColorColumn                    = { bg = "#222222" },
+      EndOfBuffer                    = { bg = "#1E1E1E" },
+      SignColumn                     = { bg = "#1E1E1E" },
+      IblIndent                      = { fg = "#2F2F2F" },
+      WinSeparator                   = { fg = "#2F2F2F" },
 
       -- General
       ["@none"]                      = { fg = "NONE" },
@@ -230,22 +236,16 @@ require("onedark").setup({
 
 require("onedark").load()
 
-vim.cmd("highlight Comment gui=NONE")
-vim.cmd("highlight IblIndent guifg=#2f2f2f")
-vim.cmd("highlight EndOfBuffer guibg=NONE guifg=#2f2f2f ctermbg=NONE")
-vim.cmd("highlight SignColumn ctermbg=NONE guibg=NONE")
-vim.cmd("highlight ColorColumn guibg=#222222")
+local custom = require"lualine.themes.onedark"
 
-local onedark = require"lualine.themes.onedark"
-
-onedark.normal.a.bg   = "#292929"    onedark.normal.a.fg   = "#CDC5B8"
-onedark.insert.a.bg   = "#292929"    onedark.insert.a.fg   = "#CDC5B8"
-onedark.visual.a.bg   = "#292929"    onedark.visual.a.fg   = "#CDC5B8"
-onedark.command.a.bg  = "#292929"    onedark.command.a.fg  = "#CDC5B8"
-
-onedark.normal.b.bg   = "#292929"    onedark.normal.b.fg   = "#CDC5B8"
-onedark.normal.c.bg   = "#292929"    onedark.normal.c.fg   = "#CDC5B8"
-onedark.inactive.c.bg = "#292929"    onedark.inactive.c.fg = "#555555"
+custom.normal.a.bg   = "#292929"    custom.normal.a.fg   = "#CDC5B8"
+custom.insert.a.bg   = "#292929"    custom.insert.a.fg   = "#CDC5B8"
+custom.visual.a.bg   = "#292929"    custom.visual.a.fg   = "#CDC5B8"
+custom.command.a.bg  = "#292929"    custom.command.a.fg  = "#CDC5B8"
+custom.replace.a.bg  = "#292929"    custom.replace.a.fg  = "#CDC5B8"
+custom.normal.b.bg   = "#292929"    custom.normal.b.fg   = "#CDC5B8"
+custom.normal.c.bg   = "#292929"    custom.normal.c.fg   = "#CDC5B8"
+custom.inactive.c.bg = "#292929"    custom.inactive.c.fg = "#555555"
 
 
 -- -------------------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ end
 require("lualine").setup({
    options = {
       icons_enabled = false,
-      theme = onedark,
+      theme = custom,
       component_separators = { left = "", right = ""},
       section_separators = { left = "", right = ""}
    },
