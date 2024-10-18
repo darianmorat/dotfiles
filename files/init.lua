@@ -208,12 +208,14 @@ require("onedark").setup({
       ["@lsp.type.parameter"]        = { fg = "$fg" },
       ["@variable.builtin"]          = { fg = "$orange" }, 
       ["@string"]                    = { fg = "$green" },
+      ["@tag.javascript"]            = { fg = "$aqua" },
 
-      ["@markup.heading.1.javascript"]                    = { fg = "$fg", fmt = "none" },
-      ["@keyword.conditional.ternary.javascript"]         = { fg = "$blue" },
-      ["@lsp.typemod.property.declaration.javascript"]    = { fg = "$fg" },
-      ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange"},
-      ["@lsp.typemod.variable.defaultLibrary.javascript"] = { fg = "$orange"},
+      ["@markup.heading.1.javascript"]                         = { fg = "$fg", fmt = "none" },
+      ["@keyword.conditional.ternary.javascript"]              = { fg = "$blue" },
+      ["@lsp.typemod.property.declaration.javascript"]         = { fg = "$fg" },
+      ["@lsp.typemod.property.defaultLibrary.javascript"]      = { fg = "$orange"},
+      ["@lsp.typemod.variable.defaultLibrary.javascript"]      = { fg = "$orange"},
+      ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = { fg = "$orange"},
    }
 })
 
