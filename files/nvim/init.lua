@@ -69,7 +69,7 @@ set("v", "J", ":m '>+1<CR>gv=gv")
 -- -------------------------------------------------------------------------------------------
 
 local plugins = {
--- { "darianmorat/gruvdark-theme.nvim" },
+-- { "darianmorat/gruvdark-theme.nvim" }, -- Pending
    { "nvim-lualine/lualine.nvim" },
    { "TaDaa/vimade" },
    { "folke/zen-mode.nvim" },
@@ -103,10 +103,9 @@ local plugins = {
    { "saadparwaiz1/cmp_luasnip" },
    { "rafamadriz/friendly-snippets" },
 
-   {
-      "iamcco/markdown-preview.nvim",
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      build = function() vim.fn["mkdp#util#install"]() end
+   { "iamcco/markdown-preview.nvim", -- Not loaded by default 
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" }, 
+      build = function() vim.fn["mkdp#util#install"]() end 
    },
 }
 
@@ -141,14 +140,14 @@ require("lazy").setup(plugins)
 -- LUALINE
 local custom = require"lualine.themes.onedark"
 
-custom.normal.a.bg   = "#292929"
-custom.insert.a.bg   = "#292929"
-custom.visual.a.bg   = "#292929"
-custom.command.a.bg  = "#292929"
-custom.replace.a.bg  = "#292929"
-custom.normal.b.bg   = "#292929"
-custom.normal.c.bg   = "#292929"
-custom.inactive.c.bg = "#292929"
+custom.normal.a.bg   = "#2B2B2B"
+custom.insert.a.bg   = "#2B2B2B"
+custom.visual.a.bg   = "#2B2B2B"
+custom.command.a.bg  = "#2B2B2B"
+custom.replace.a.bg  = "#2B2B2B"
+custom.normal.b.bg   = "#2B2B2B"
+custom.normal.c.bg   = "#2B2B2B"
+custom.inactive.c.bg = "#2B2B2B"
 
 custom.normal.a.fg   = "#CDC5B8"
 custom.insert.a.fg   = "#CDC5B8"
