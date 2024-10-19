@@ -22,7 +22,7 @@ local gruvdark = {
                purple     = "#CD60B9",
                yellow     = "#00aa9c",
                aqua       = "#00aa9c",
-               grey       = "#646464",
+               grey       = "#595959",
                lightGrey  = "#8D8A85",
 
                bg2 = "#313131",
@@ -37,7 +37,7 @@ local gruvdark = {
                Normal                         = { bg = "#1E1E1E" },
                CursorLine                     = { bg = "#303030" },
                TelescopeSelection             = { bg = "#303030"},
-               Visual                         = { bg = "#353535" },
+               Visual                         = { bg = "#2C2C2C" },
                TSParameter                    = { fg = "$fg" },
                TSParameterReference           = { fg = "$fg" }, 
                LineNr                         = { fg = "#555555" },
