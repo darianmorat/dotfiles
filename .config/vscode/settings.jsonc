@@ -1,0 +1,260 @@
+{
+   // ===================
+   // THEME CONFIGURATION
+   // ===================
+
+   // Light-themes
+   // ------------
+   // "vim.highlightedyank.color": "#2f2f2f25",
+   // "vim.highlightedyank.textColor": "#000000",
+   // "editor.fontWeight": "600",
+   // "editor.rulers": [{ "column": 95, "color": "#2b2b2b21" }],
+
+   // Dark-themes
+   // -----------
+   "vim.highlightedyank.color": "#3e3f4074",
+   "vim.highlightedyank.textColor": "#e6e3de",
+   "editor.fontWeight": "400",
+   "editor.rulers": [{ "column": 95, "color": "#2b2b2b" }],
+
+   // =================
+   // VIM CONFIGURATION
+   // =================
+
+   "vim.leader": " ",
+   "vim.useSystemClipboard": true,
+   "vim.ignorecase": true,
+   "vim.smartcase": true,
+   "vim.searchMatchTextColor": "#e6e3de",
+   "vim.cursorStylePerMode.insert": "block",
+   "vim.foldfix": false,
+   "vim.surround": true,
+   "extensions.experimental.affinity": { "vscodevim.vim": 1 },
+   "vim.highlightedyank.enable": true,
+   "vim.highlightedyank.duration": 190,
+
+   "vim.normalModeKeyBindingsNonRecursive": [
+      { "before": ["d", "i", "e"], "after": [] },
+      { "before": ["c", "i", "e"], "after": [] },
+      { "before": ["U"], "commands": [] },
+      { "before": ["u"], "commands": ["undo"] },
+      { "before": ["c-r"], "commands": ["redo"] },
+      { "before": ["g", "f"], "commands": ["editor.action.openLink"] },
+      { "before": ["=", "="], "commands": ["editor.action.reindentselectedlines"] },
+
+      { "before": ["c-d"], "after": ["c-d", "z", "z"] },
+      { "before": ["c-u"], "after": ["c-u", "z", "z"] },
+      { "before": ["n"], "after": ["n", "z", "z"] },
+      { "before": ["N"], "after": ["N", "z", "z"] },
+
+      { "before": ["K"], "after": ["m", "`", "i", "enter", "esc", "`", "`"] },
+      { "before": ["J"], "after": ["m", "`", "J", "`", "`"] },
+
+      { "before": ["s"], "commands": ["findThenJump2.initiate"] },
+      { "before": ["leader", "a"], "after": ["A"] },
+      { "before": ["leader", "i"], "after": ["I"] },
+      { "before": ["leader", "z"], "commands": ["workbench.action.toggleZenMode"] },
+
+      { "before": ["leader", "w"], "commands": [":w"] },
+      { "before": ["leader", "q"], "commands": [":q"] },
+      { "before": ["leader", "leader", "d"], "commands": [":q!"] },
+      { "before": ["leader", "leader", "b"], "commands": [":tabonly"] },
+
+      { "before": ["leader", "9"], "commands": ["workbench.action.moveEditorToPreviousGroup"] },
+      { "before": ["leader", "0"], "commands": ["workbench.action.moveEditorToNextGroup"] },
+
+      { "before": ["leader", "c", "c"], "commands": ["editor.action.commentLine"] },
+      { "before": ["leader", "c", "b"], "commands": ["editor.action.blockComment"] },
+      { "before": ["leader", "c", "a"], "after": ["A", "Space"], "commands": ["editor.action.blockComment"] },
+      { "before": ["leader", "c", "o"], "after": ["o"], "commands": ["editor.action.commentLine"] },
+      { "before": ["leader", "c", "O"], "after": ["O"], "commands": ["editor.action.commentLine"] },
+
+      { "before": ["c-l"], "commands": ["editor.action.selectHighlights"] },
+      { "before": ["c-n"], "commands": ["editor.action.addSelectionToNextFindMatch"] },
+
+      { "before": ["leader", "e", "f"], "commands": ["editor.action.quickFix"] },
+      { "before": ["leader", "e", "j"], "commands": ["editor.action.marker.next"] },
+      { "before": ["leader", "e", "k"], "commands": ["editor.action.marker.prev"] },
+      
+      { "before": ["leader", "g", "i"], "commands": ["git.openChange"] },
+      { "before": ["leader", "g", "j"], "commands": ["workbench.action.compareEditor.nextChange", "editor.action.dirtydiff.next"] },
+      { "before": ["leader", "g", "k"], "commands": ["workbench.action.compareEditor.previousChange", "editor.action.dirtydiff.previous"] },
+
+      { "before": ["leader", "f", "f"], "commands": ["find-it-faster.findFiles"] },
+      { "before": ["leader", "f", "g"], "commands": ["find-it-faster.findWithinFiles"] },
+      { "before": ["leader", "f", "o"], "commands": ["find-it-faster.resumeSearch"] },
+      { "before": ["leader", "f", "j"], "commands": ["workbench.action.showEditorsInGroup"] },
+      { "before": ["leader", "f", "r"], "commands": ["editor.action.goToReferences"] },
+      { "before": ["leader", "f", "w"], "after": ["y", "i", "w"], "commands": ["find-it-faster.findWithinFiles", "workbench.action.terminal.paste"] },
+      { "before": ["leader", "f", "W"], "after": ["y", "i", "W"], "commands": ["find-it-faster.findWithinFiles", "workbench.action.terminal.paste"] },
+
+      { "before": ["c-m"], "commands": ["vscode-harpoon.addEditor"] },
+      { "before": ["leader", "f", "k"], "commands": ["vscode-harpoon.editorQuickPick"] },
+      { "before": ["leader", "f", "m"], "commands": ["vscode-harpoon.editEditors"] },
+      { "before": ["leader", "1"], "commands": ["vscode-harpoon.gotoEditor1"] },
+      { "before": ["leader", "2"], "commands": ["vscode-harpoon.gotoEditor2"] },
+      { "before": ["leader", "3"], "commands": ["vscode-harpoon.gotoEditor3"] },
+      { "before": ["leader", "4"], "commands": ["vscode-harpoon.gotoEditor4"] }
+   ],
+
+   "vim.visualModeKeyBindings": [
+      { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+      { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+
+      { "before": ["s"], "after": [""], "commands": ["findThenJump2.initiateWithSelection"] },
+
+      { "before": ["c-l"], "commands": ["editor.action.selectHighlights"] },
+      { "before": ["c-n"], "commands": [] },
+      { "before": ["n"], "commands": ["editor.action.addSelectionToNextFindMatch"] },
+      { "before": ["N"], "commands": ["editor.action.addSelectionToPreviousFindMatch"] },
+      { "before": ["u"], "commands": ["cursorUndo"] },
+
+      { "before": ["leader", "c"], "commands": ["editor.action.commentLine", "extension.vim_escape"] },
+      { "before": ["leader", "b"], "commands": ["editor.action.blockComment", "extension.vim_escape"] },
+
+      { "before": ["leader", "g", "s"], "commands": ["git.stageSelectedRanges"] },
+      { "before": ["leader", "g", "r"], "commands": ["git.revertSelectedRanges"] }
+   ],
+
+   // =====================
+   // GENERAL CONFIGURATION
+   // =====================
+
+   "apc.electron": { "frame": false },
+   "apc.header": { "height": 34 },
+   "apc.statusBar": { "height": 31, "fontSize": 12 },
+
+   "window.titleBarStyle": "native",
+   "workbench.editor.revealIfOpen": true,
+   "workbench.settings.editor": "json",
+   "workbench.startupEditor": "none",
+   "window.zoomLevel": 0.5,
+
+   "workbench.colorTheme": "GruvDark",
+   "workbench.iconTheme": null,
+   "workbench.editor.showTabs": "single",
+   "editor.renderLineHighlight": "none",
+   "editor.renderWhitespace": "none",
+   "editor.bracketPairColorization.enabled": false,
+   "editor.roundedSelection": false,
+   "editor.cursorSurroundingLines": 6,
+   "editor.lineNumbers": "relative",
+   "editor.fontSize": 17,
+   "terminal.integrated.fontSize": 17,
+   "editor.fontFamily": "JetBrains Mono NL Slashed",
+   "terminal.integrated.fontFamily": "JetBrains Mono NL Slashed",
+   "editor.cursorBlinking": "solid",
+   "terminal.integrated.cursorBlinking": false,
+
+   "editor.suggestSelection": "first",
+   "editor.acceptSuggestionOnCommitCharacter": false,
+   "editor.suggest.localityBonus": true,
+   "editor.suggest.insertMode": "insert",
+   "editor.quickSuggestions": { "other": "on", "comments": "off", "strings": "off" },
+
+   "prettier.singleQuote": true,
+   "prettier.tabWidth": 3,
+   "editor.tabSize": 3,
+   "prettier.printWidth": 80,
+   "editor.detectIndentation": false,
+   "editor.defaultFormatter": "esbenp.prettier-vscode",
+   "[html]": { "editor.defaultFormatter": "vscode.html-language-features" },
+   "[css]": { "editor.defaultFormatter": "vscode.css-language-features" },
+
+   "window.commandCenter": false,
+   "workbench.layoutControl.enabled": false,
+   "editor.minimap.enabled": false,
+   "breadcrumbs.enabled": false,
+   "workbench.activityBar.location": "hidden",
+   "editor.scrollbar.vertical": "hidden",
+   "editor.scrollbar.horizontal": "hidden",
+   "editor.stickyScroll.enabled": false,
+   "editor.lightbulb.enabled": "off",
+
+   "zenMode.fullScreen": false,
+   "zenMode.hideLineNumbers": false,
+   "zenMode.silentNotifications": false,
+   "zenMode.showTabs": "none",
+
+   "errorLens.messageEnabled": true,
+   "errorLens.messageBackgroundMode": "message",
+   "errorLens.messageTemplate": " $message ‎",
+   "errorLens.gutterIconsEnabled": true,
+   "errorLens.borderRadius": "0",
+   "errorLens.gutterIconSet": "square",
+
+   "editor.scrollbar.verticalScrollbarSize": 10,
+   "scm.diffDecorationsGutterWidth": 3,
+   "scm.diffDecorations": "gutter",
+   "scm.diffDecorationsGutterPattern": { "added": false, "modified": false },
+
+   "workbench.panel.defaultLocation": "right",
+   "terminal.integrated.tabs.enabled": false,
+   "terminal.integrated.fontWeightBold": "normal",
+   "terminal.integrated.allowChords": false,
+   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+   "find-it-faster.general.batTheme": "base16",
+   "find-it-faster.findFiles.showPreview": false,
+   "find-it-faster.findWithinFiles.previewWindowConfig": "top,75%,border-sharp,+{2}+3/2,~2",
+   "find-it-faster.findWithinFiles.previewCommand": "bat --color=always --style=header,grid --highlight-line {2} {1} | tail -n +2 | head -n -1",
+
+   "search.exclude": {
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "**/*.code-search": true
+   },
+
+   "workbench.colorCustomizations": {
+      "findThenJump2.textDecorationForeground": "#e6e3de",
+      "findThenJump2.textDecorationBackground": "#5c5c5e",
+      "statusBarItem.remoteBackground": "#00000000",
+      "scrollbarSlider.background":"#00000000",
+      "editor.background":"#1e1e1e",
+      "editorGutter.background":"#1e1e1e"
+   },
+
+   "editor.tokenColorCustomizations": {
+      "[GruvDark]": {
+
+         // THINK OF THIS:
+         // blue = functions, varibles, if/else     
+         // pink = return, import, export, new
+
+         "textMateRules": [
+            {
+               "scope": [
+                  "storage.type.function.js",
+                  "storage.type.class.js",
+                  "storage.type.function.js.jsx",
+                  "keyword.control.default.js.jsx",
+                  "keyword.control.lua",
+                  "keyword.operator.lua"
+               ],
+               "settings": {
+                  "foreground": "#5B98C9"
+               }
+            },
+            {
+               "scope": [
+                  "entity.name.type.class"
+               ],
+               "settings": {
+                  "foreground": "#00aa9c"
+               }
+            }
+         ]
+      }
+   },
+
+   "diffEditor.ignoreTrimWhitespace": false,
+   "diffEditor.hideUnchangedRegions.enabled": true,
+   "diffEditor.renderSideBySide": true,
+
+   "update.mode": "none",
+   "update.enableWindowsBackgroundUpdates": false,
+   "git.openRepositoryInParentFolders": "always",
+   "editor.accessibilitySupport": "off",
+   "remote.autoForwardPortsSource": "hybrid",
+   "typescript.disableAutomaticTypeAcquisition": true,
+   "cSpell.enabled": false
+}
