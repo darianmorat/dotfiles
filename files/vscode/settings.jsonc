@@ -208,7 +208,42 @@
       "findThenJump2.textDecorationForeground": "#e6e3de",
       "findThenJump2.textDecorationBackground": "#5c5c5e",
       "statusBarItem.remoteBackground": "#00000000",
-      "scrollbarSlider.background":"#00000000"
+      "scrollbarSlider.background":"#00000000",
+      "editor.background":"#1e1e1e",
+      "editorGutter.background":"#1e1e1e"
+   },
+
+   "editor.tokenColorCustomizations": {
+      "[GruvDark]": {
+
+         // THINK OF THIS:
+         // blue = functions, varibles, if/else     
+         // pink = return, import, export, new
+
+         "textMateRules": [
+            {
+               "scope": [
+                  "storage.type.function.js",
+                  "storage.type.class.js",
+                  "storage.type.function.js.jsx",
+                  "keyword.control.default.js.jsx",
+                  "keyword.control.lua",
+                  "keyword.operator.lua"
+               ],
+               "settings": {
+                  "foreground": "#5B98C9"
+               }
+            },
+            {
+               "scope": [
+                  "entity.name.type.class"
+               ],
+               "settings": {
+                  "foreground": "#00aa9c"
+               }
+            }
+         ]
+      }
    },
 
    "diffEditor.ignoreTrimWhitespace": false,
