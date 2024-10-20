@@ -34,27 +34,3 @@
 12  prettier code
 13  vscode harpoon
 ```
-
-### Preview config:
-
-<img src="images/glazewm.png" alt="">  
-<img src="images/wezterm.png" alt="">
-
-##
-<img src="images/nvim1.png" alt="">
-<img src="images/vscode1.png" alt="">
-
-##
-<img src="images/nvim2.png" alt="">
-<img src="images/vscode2.png" alt="">
-
-##
-<img src="images/nvim3.png" alt="">
-<img src="images/vscode3.png" alt="">
-
-##
-<img src="images/nvim4.png" alt="">
-<img src="images/vscode4.png" alt="">
-
-##
-<img src="images/nvim5.png" alt="">
