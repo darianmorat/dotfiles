@@ -1,9 +1,11 @@
 >Complete dev configuration aim for a simple, minimalistic look with no distractions and keybindings optimized for usability and efficiency.
 
+![nvim screenshot](./images/neovim.png)
+
 ### Install terminal:
 ```
 01  homebrew
-02  nvim
+02  neovim
 03  zsh4
 04  p10k
 05  tmux
