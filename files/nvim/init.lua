@@ -14,15 +14,19 @@ vim.opt.syntax = "on"
 vim.opt.showmode = false
 vim.opt.showcmd = false
 vim.opt.guicursor = "a:block"
+vim.opt.cursorline = false
 vim.opt.relativenumber = true
 vim.opt.number = true
+
 vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.expandtab = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.scrolloff = 6
+vim.opt.sidescrolloff = 6
 vim.opt.colorcolumn = "95"
 vim.opt.wrap = false
+
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 150
 vim.opt.hlsearch = false
@@ -30,6 +34,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.pumheight = 8
 vim.opt.swapfile = false
+vim.g.markdown_recommended_style = 0
 
 
 -- REMAPS
@@ -56,6 +61,7 @@ set("n", "<C-j>", ":Vifm<CR>")
 set("n", "<C-h>", "<C-6>")
 
 set("n", "<leader>ti", ":IBLToggle<CR>")
+set("n", "<leader>tn", ":set relativenumber!<CR>")
 
 set("n", "<leader>ml", ":Lazy load markdown-preview.nvim | :Lazy<CR>")
 set("n", "<leader>mp", ":MarkdownPreviewToggle<CR>")
@@ -63,13 +69,15 @@ set("n", "<leader>mp", ":MarkdownPreviewToggle<CR>")
 set("v", "K", ":m '<-2<CR>gv=gv")
 set("v", "J", ":m '>+1<CR>gv=gv")
 
+set("v", "<", "<gv")
+set("v", ">", ">gv")
+
 
 -- -------------------------------------------------------------------------------------------
 -- PLUGIN LIST
 -- -------------------------------------------------------------------------------------------
 
 local plugins = {
--- { "darianmorat/gruvdark-theme.nvim" }, -- Pending
    { "nvim-lualine/lualine.nvim" },
    { "TaDaa/vimade" },
    { "folke/zen-mode.nvim" },
@@ -106,11 +114,11 @@ local plugins = {
    { "iamcco/markdown-preview.nvim", -- Not loaded by default 
       cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" }, 
       build = function() vim.fn["mkdp#util#install"]() end 
-   },
+   }
 }
 
-local gruvdark = require("gruvdark") -- Load theme using gruvdark colors 
-vim.list_extend(plugins,gruvdark) -- Merge theme to main plugin list
+local colors = require("colors") -- Load colors - gruvdark reference
+vim.list_extend(plugins,colors) -- Merge colors to main plugin list
 
 
 -- -------------------------------------------------------------------------------------------
@@ -125,17 +133,26 @@ if not vim.loop.fs_stat(lazypath) then
       "--filter=blob:none",
       "https://github.com/folke/lazy.nvim.git",
       "--branch=stable",
-      lazypath,
+      lazypath
    })
 end
 
 vim.opt.rtp:prepend(lazypath)
-require("lazy").setup(plugins)
+require("lazy").setup(plugins, {
+   ui = {
+      border = "single"
+   }
+})
 
 
 -- -------------------------------------------------------------------------------------------
 -- PLUGIN CONFIG
 -- -------------------------------------------------------------------------------------------
+
+-- COLORS
+vim.cmd("colorscheme onedark") -- Default
+set("n", "<leader>cs", ":Telescope colorscheme<CR>")
+
 
 -- LUALINE
 local custom = require"lualine.themes.onedark"
@@ -187,7 +204,7 @@ require("lualine").setup({
       lualine_x = { "location" },
       lualine_y = {},
       lualine_z = {}
-  },
+  }
 })
 
 
@@ -279,6 +296,7 @@ set_hl(0, "EyelinerSecondary", { fg="#df5a5a" })
 
 
 -- TELESCOPE
+local tb = require("telescope.builtin")
 require("telescope").setup({
    defaults = {
       layout_strategy = "vertical",
@@ -296,42 +314,42 @@ require("telescope").setup({
    }
 })
 
-local builtin = require("telescope.builtin")
-set("n", "<leader>ff", function() builtin.find_files({ previewer = false }) end)
-set("n", "<leader>fg", function() builtin.live_grep() end)
-set("n", "<leader>fo", function() builtin.resume() end)
-set("n", "<leader>fj", function() builtin.buffers({ previewer = false, sort_lastused = true }) end)
-set("n", "<leader>fr", function() builtin.lsp_references() end)
-set("n", "<leader>fw", function() builtin.grep_string({ search = vim.fn.expand("<cword>") }) end)
-set("n", "<leader>fW", function() builtin.grep_string({ search = vim.fn.expand("<cWORD>") }) end)
-set("n", "<leader>ej", function() builtin.diagnostics({ bufnr = 0 }) end)
+set("n", "<leader>ff", function() tb.find_files({ previewer=false }) end)
+set("n", "<leader>fg", function() tb.live_grep() end)
+set("n", "<leader>fo", function() tb.resume() end)
+set("n", "<leader>fj", function() tb.buffers({ previewer=false,sort_lastused=true }) end)
+set("n", "<leader>fr", function() tb.lsp_references() end)
+set("n", "<leader>fw", function() tb.grep_string({ search=vim.fn.expand("<cword>") }) end)
+set("n", "<leader>fW", function() tb.grep_string({ search=vim.fn.expand("<cWORD>") }) end)
+set("n", "<leader>ej", function() tb.diagnostics({ bufnr=0 }) end)
 
 
 -- HARPOON
-local harpoon = require("harpoon")
+local hp = require("harpoon")
 local toggle_opts = {
    border = "single",
    title_pos = "center",
    ui_width_ratio = 0.50
 }
 
-harpoon:setup({})
+hp:setup({})
 
-set("n", "<c-m>", function() harpoon:list():add() end)
-set("n", "<leader>fk", function() harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts) end)
-set("n", "<tab>", function() harpoon:list():prev() end) -- Tab refers <c-i>
-set("n", "<c-o>", function() harpoon:list():next() end)
+set("n", "<c-m>", function() hp:list():add() end)
+set("n", "<leader>fk", function() hp.ui:toggle_quick_menu(hp:list(), toggle_opts) end)
+set("n", "<tab>", function() hp:list():prev() end) -- Tab refers <c-i>
+set("n", "<c-o>", function() hp:list():next() end)
 
-set("n", "<leader>1", function() harpoon:list():select(1) end)
-set("n", "<leader>2", function() harpoon:list():select(2) end)
-set("n", "<leader>3", function() harpoon:list():select(3) end)
-set("n", "<leader>4", function() harpoon:list():select(4) end)
+set("n", "<leader>1", function() hp:list():select(1) end)
+set("n", "<leader>2", function() hp:list():select(2) end)
+set("n", "<leader>3", function() hp:list():select(3) end)
+set("n", "<leader>4", function() hp:list():select(4) end)
 
 
 -- TREESIETER
 require"nvim-treesitter.configs".setup({
    ensure_installed = {
-      "lua", "javascript", "typescript", "tsx", "html", "css", "json", "markdown"
+      "lua", "javascript", "typescript", "tsx", "regex", "html", "css", "python",
+      "json", "jsonc", "diff", "xml", "markdown", "markdown_inline", "yaml", "query"
    },
    sync_install = false,
    indent = {
@@ -341,7 +359,7 @@ require"nvim-treesitter.configs".setup({
       enable = true,  
       additional_vim_regex_highlighting = {
          "markdown" 
-      },
+      }
    }
 })
 
@@ -374,7 +392,8 @@ require("nvim-ts-autotag").setup({})
 -- GITSIGNS
 require("gitsigns").setup({
    on_attach = function(bufnr)
-      local gitsigns = require("gitsigns")
+      local gs = require("gitsigns")
+      local ln = vim.fn.line
 
       local function map(mode, l, r, opts)
          opts = opts or {}
@@ -392,23 +411,23 @@ require("gitsigns").setup({
       end
 
       -- Actions
-      map("n", "<leader><leader>gi", gitsigns.diffthis)
-      map("n", "<leader>gi", function() gitsigns.diffthis("~") end)
+      map("n", "<leader><leader>gi", gs.diffthis)
+      map("n", "<leader>gi", function() gs.diffthis("~") end)
       map("n", "<leader>q", smart_quit)
 
-      map("n", "<leader>gj", gitsigns.next_hunk)
-      map("n", "<leader>gk", gitsigns.prev_hunk)
-      map("n", "<leader>gg", gitsigns.preview_hunk)
+      map("n", "<leader>gj", gs.next_hunk)
+      map("n", "<leader>gk", gs.prev_hunk)
+      map("n", "<leader>gg", gs.preview_hunk)
 
-      map("n", "<leader>gs", gitsigns.stage_hunk)
-      map("n", "<leader>gr", gitsigns.reset_hunk)
-      map("v", "<leader>gs", function() gitsigns.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end)
-      map("v", "<leader>gr", function() gitsigns.reset_hunk {vim.fn.line("."), vim.fn.line("v")} end)
-      map("n", "<leader>gu", gitsigns.undo_stage_hunk)
+      map("n", "<leader>gs", gs.stage_hunk)
+      map("n", "<leader>gr", gs.reset_hunk)
+      map("v", "<leader>gs", function() gs.stage_hunk{ ln("."), ln("v") } end)
+      map("v", "<leader>gr", function() gs.reset_hunk{ ln("."), ln("v") } end)
+      map("n", "<leader>gu", gs.undo_stage_hunk)
 
-      map("n", "<leader>gb", function() gitsigns.blame_line{full=true} end)
-      map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-      map("n", "<leader>tr", gitsigns.toggle_deleted)
+      map("n", "<leader>gb", function() gs.blame_line{ full=true } end)
+      map("n", "<leader>tb", gs.toggle_current_line_blame)
+      map("n", "<leader>tr", gs.toggle_deleted)
    end
 })
 
@@ -417,7 +436,7 @@ require("gitsigns").setup({
 require("ibl").setup({
    indent = {
       char = "|", -- "│"
-      tab_char = "|", -- "│"
+      tab_char = "|" -- "│"
    },
    scope = { 
       enabled = true,
@@ -447,7 +466,11 @@ lsp_zero.extend_lspconfig({
 -- [css-lsp] [emmet-language-server] [eslint-lsp] [html-lsp]
 -- [json-lsp] [marksman] [prettierd] [stylelint] [typescript-language-server]
 
-require("mason").setup({})
+require("mason").setup({
+   ui = {
+      border = "single"
+   }
+})
 require("mason-lspconfig").setup({
    handlers = {
       function(server_name)
@@ -490,13 +513,8 @@ cmp.setup({
 
 
 -- AUTO-COMMANDS
-vim.cmd("command BufOnly silent! execute '%bd|e#|bd#'") -- Close all buffers except current
-vim.cmd("autocmd CursorHold * echon ''") -- Clear command line - uses 'updatetime' value - FIND WAY TO TOGGLE IT 
-vim.cmd("highlight incsearch guibg=#5c5c5e guifg=#e6e3de") -- Set bg color for search / ?
-
--- Yank highlighting
-vim.cmd("autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup='YankHighlight', timeout=190}")
-vim.cmd("highlight YankHighlight guibg=#2b2b2b guifg=#e6e3de")
+vim.cmd("command BufOnly silent! execute '%bd|e#|bd#'") -- Close all others buffers
+vim.cmd("autocmd CursorHold * echon ''") -- Clear command line, use updatetime
 
 -- No auto-comment when using motions like 'o'
 vim.cmd("autocmd BufEnter * set formatoptions-=cro")
@@ -505,3 +523,12 @@ vim.cmd("autocmd BufEnter * setlocal formatoptions-=cro")
 -- Rename tmux window
 vim.cmd([[autocmd VimEnter * silent !tmux rename-window "nvim"]])
 vim.cmd([[autocmd VimLeave * silent !tmux rename-window "tmux"]])
+
+-- Yank highlighting
+vim.cmd("highlight YankHighlight guibg=#2b2b2b guifg=#e6e3de")
+local yank = vim.highlight.on_yank
+
+vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", { group = "YankHighlight",
+   callback = function() yank({ higroup = "YankHighlight", timeout = 190 }) end
+})
