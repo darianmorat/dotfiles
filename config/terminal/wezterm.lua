@@ -105,6 +105,9 @@ config.keys = {
 
    -- Nvim toogle docs 
    { key = 'Space', mods = 'LEADER|CTRL', action = act.SendKey { key = 'z', mods = 'CTRL' } },
+
+   -- Show current tabs
+   { key = 's', mods = 'LEADER', action = wezterm.action.ShowTabNavigator },
 }
 
 -- Status-bar
