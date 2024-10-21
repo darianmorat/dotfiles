@@ -3,57 +3,14 @@
 
 [core]
    editor = nvim
-   pager = delta 
 
-[delta]
-    features = gruvdark
+[color]
+   status = auto
+   diff = auto
+   branch = auto
+   interactive = auto
+   grep = auto
+   ui = auto
 
-[delta "gruvdark"]
-    dark = true
-    syntax-theme = base16
-    side-by-side = true
-    # File
-    file-style = white bold
-    file-decoration-style = "#777777" ul
-    file-added-label = [+]
-    file-copied-label = [==]
-    file-modified-label = [*]
-    file-removed-label = [-]
-    file-renamed-label = [->]
-    hunk-header-style = omit
-    # Line numbers
-    line-numbers = true
-    line-numbers-left-style = "#84786A"
-    line-numbers-right-style = "#84786A"
-    line-numbers-minus-style = "#A02A11"
-    line-numbers-plus-style = "#479B36"
-    line-numbers-zero-style = "#84786A"
-    line-numbers-left-format = " {nm:>3} │"
-    line-numbers-right-format = " {np:>3} │"
-    # Diff contents
-    plus-style = syntax "#003a0310"
-    plus-emph-style = black green
-    minus-style = syntax "#67000010"
-    minus-emph-style = black red
-    line-numbers-minus-style = brightred
-    line-numbers-plus-style = brightgreen
-    line-numbers-left-style = "#3e3e43"
-    line-numbers-right-style = "#3e3e43"
-    line-numbers-zero-style = "#57575f"
-    zero-style = syntax
-    whitespace-error-style = black bold
-    # Commit hash / blame
-    commit-decoration-style = normal box # ?
-    commit-style = "#ffffff" bold # ?
-    blame-code-style = syntax
-    blame-format = "{author:>18} ({commit:>8}) {timestamp:<13} " # ?
-    blame-palette = "#161617" "#1b1b1d" "#2a2a2d" "#3e3e43"
-    # Merge conflicts
-    merge-conflict-begin-symbol = ⌃
-    merge-conflict-end-symbol = ⌄
-    merge-conflict-ours-diff-header-style = yellow bold
-    merge-conflict-theirs-diff-header-style = yellow bold
-    merge-conflict-ours-diff-header-decoration-style = "#3e3e43" box # ?
-    #merge-conflict-ours-diff-header-decoration-style = ''
-    merge-conflict-theirs-diff-header-decoration-style = "#3e3e43" box # ?
-    #merge-conflict-theirs-diff-header-decoration-style = ''
+[github]
+   user = darianmorat
