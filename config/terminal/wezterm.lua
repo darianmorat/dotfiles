@@ -91,6 +91,8 @@ config.keys = {
    { key = '2', mods = 'LEADER', action = wezterm.action.ActivateTab(2) },
    { key = '3', mods = 'LEADER', action = wezterm.action.ActivateTab(3) },
 
+   { key = 's', mods = 'LEADER', action = wezterm.action.ShowTabNavigator },
+
    { key = 'l', mods = 'LEADER', action = wezterm.action.ActivateLastTab },
    { key = 'l', mods = 'LEADER|CTRL', action = wezterm.action.ActivateLastTab },
 
@@ -105,9 +107,6 @@ config.keys = {
 
    -- Nvim toogle docs 
    { key = 'Space', mods = 'LEADER|CTRL', action = act.SendKey { key = 'z', mods = 'CTRL' } },
-
-   -- Show current tabs
-   { key = 's', mods = 'LEADER', action = wezterm.action.ShowTabNavigator },
 }
 
 -- Status-bar
