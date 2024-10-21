@@ -1,16 +1,13 @@
 ![nvim screenshot](./images/neovim.png)
 
----
-### AutoHotKey Setup:
+## AutoHotKey Setup:
 - [autohotkey](https://github.com/AutoHotkey/AutoHotkey) - custom bindings (v1.1)
 
----
-### GlazeWM setup:
+## GlazeWM setup:
 - [glazewm](https://github.com/glzr-io/glazewm) - tiling window manager (v3.3.0)
 - [zebar](https://github.com/glzr-io/zebar) - custom taskbar (v2.2.2)
 
----
-### Terminal Setup: 
+## Terminal Setup: 
 - [wezterm](https://github.com/wez/wezterm) - terminal emulator (nightly)
 - [homebrew](https://github.com/Homebrew/brew) - package manager
 - Shell ➜
@@ -29,8 +26,7 @@
    - [vifm](https://github.com/vifm/vifm) - vim-like file manager
    - [lazygit](https://github.com/jesseduffield/lazygit) - git management
 
----
-### VSCode Setup: 
+## VSCode Setup: 
 - [VSCode](https://github.com/microsoft/vscode) - code editor (v1.91.1)
 - Extensions ➜
    - [apc customize ui](https://github.com/drcika/apc-extension) - ui customization
