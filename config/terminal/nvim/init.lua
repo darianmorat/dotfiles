@@ -63,8 +63,8 @@ set("n", "<C-h>", "<C-6>")
 set("n", "<leader>ti", ":IBLToggle<CR>")
 set("n", "<leader>tn", ":set relativenumber!<CR>")
 
-set("n", "<leader>ml", ":Lazy load markdown-preview.nvim | :Lazy<CR>")
-set("n", "<leader>mp", ":MarkdownPreviewToggle<CR>")
+set("n", "<leader>tm", ":MarkdownPreviewToggle<CR>")
+set("n", "<leader><leader>m", ":Lazy load markdown-preview.nvim | :Lazy<CR>")
 
 set("v", "K", ":m '<-2<CR>gv=gv")
 set("v", "J", ":m '>+1<CR>gv=gv")
@@ -150,8 +150,9 @@ require("lazy").setup(plugins, {
 -- -------------------------------------------------------------------------------------------
 
 -- COLORS
-vim.cmd("colorscheme onedark") -- Default
+vim.cmd("colorscheme onedark") -- Default theme
 set("n", "<leader>cs", ":Telescope colorscheme<CR>")
+set("n", "<leader>ch", ":Telescope highlights<CR>")
 
 
 -- LUALINE
@@ -176,10 +177,36 @@ custom.normal.c.fg   = "#CDC5B8"
 
 custom.inactive.c.fg = "#555555"
 
-local function dynamic_location()
+function harpoon()
+  local hp_list = require("harpoon"):list()
+  local total_marks = hp_list:length()
+
+  if total_marks == 0 then
+    return ""
+  end
+
+  local full_name = vim.api.nvim_buf_get_name(0)
+  local buffer_name = vim.fn.expand("%")
+  local output = { "M:" }
+
+  for index = 1, math.min(total_marks, 4) do
+    local mark = hp_list.items[index].value
+    if mark == buffer_name or mark == full_name then
+      table.insert(output, "*")
+    else table.insert(output, index) end
+  end
+
+  return table.concat(output, "")
+end
+
+function dynamic_location()
    local line = vim.fn.line(".")
    local column = vim.fn.col(".")
    return string.format("%d:%d", line, column)
+end
+
+function custom_text()
+   return "NEOVIM"
 end
 
 require("lualine").setup({
@@ -194,8 +221,8 @@ require("lualine").setup({
       lualine_b = { "branch", { "filename", path = 0 } },
       lualine_c = { { "diff", colored = false } },
       lualine_x = { "selectioncount", { "diagnostics", colored = false } },
-      lualine_y = { "encoding", "progress" },
-      lualine_z = { dynamic_location }
+      lualine_y = { harpoon, "progress" }, -- Dinamic_progress: use 2 digits 08%
+      lualine_z = { dynamic_location, custom_text}
    },
    inactive_sections = {
       lualine_a = {},
@@ -217,13 +244,13 @@ require("vimade").setup({
 -- ZEN-MODE
 require("zen-mode").setup({
    window = {
-      backdrop = 0.94,
-      width = 130,
+      backdrop = 0.90,
+      width = 125,
       height = 1,
       options = {
          signcolumn = "yes",
-         number = true,
          relativenumber = true,
+         number = true,
          cursorline = false,
          foldcolumn = "0",
          list = false
@@ -239,7 +266,6 @@ vim.g.floaterm_width = 0.6
 vim.g.floaterm_position = "top"
 vim.g.floaterm_opener = "edit"
 
-vim.cmd("highlight FloatermBorder guibg=#1e1e1e guifg=NONE")
 vim.cmd("command! Vifm FloatermNew vifm")
 vim.cmd("command! Lazygit FloatermNew --width=0.75 lazygit")
 
@@ -274,7 +300,8 @@ set({"v"}, "u", mc.deleteCursor)
 
 set("n", "<esc>", function()
    if not mc.cursorsEnabled() then mc.enableCursors()
-   elseif mc.hasCursors() then mc.clearCursors() else end
+   elseif mc.hasCursors() then mc.clearCursors() 
+   else --[[ <esc> ]] end
 end)
 
 
@@ -403,11 +430,8 @@ require("gitsigns").setup({
 
       -- Fix 'quit' when using .diffthis
       local function smart_quit()
-         if vim.wo.diff then 
-            vim.cmd("wincmd p | q") 
-         else 
-            vim.cmd(":bd") 
-         end
+         if vim.wo.diff then vim.cmd("wincmd p | q") 
+         else vim.cmd(":bd") end
       end
 
       -- Actions
@@ -421,8 +445,8 @@ require("gitsigns").setup({
 
       map("n", "<leader>gs", gs.stage_hunk)
       map("n", "<leader>gr", gs.reset_hunk)
-      map("v", "<leader>gs", function() gs.stage_hunk{ ln("."), ln("v") } end)
-      map("v", "<leader>gr", function() gs.reset_hunk{ ln("."), ln("v") } end)
+      map("v", "<leader>gs", function() gs.stage_hunk{ ln("."),ln("v") } end)
+      map("v", "<leader>gr", function() gs.reset_hunk{ ln("."),ln("v") } end)
       map("n", "<leader>gu", gs.undo_stage_hunk)
 
       map("n", "<leader>gb", function() gs.blame_line{ full=true } end)
@@ -504,8 +528,9 @@ cmp.setup({
    view = { docs = { auto_open = false } }, -- Docs closed by default
    mapping = cmp.mapping.preset.insert({ 
       ["<Enter>"] = cmp.mapping.confirm({ select = true }),
-      ["<C-Space>"] = cmp.mapping(function() -- Double press due TMUX (same vscode)
-         if cmp.visible_docs() then cmp.close_docs() else cmp.open_docs() end
+      ["<C-z>"] = cmp.mapping(function() -- C-Space x2, WezTerm binding
+         if cmp.visible_docs() then cmp.close_docs() 
+         else cmp.open_docs() end
       end)
    }),
    formatting = lsp_zero.cmp_format({details = false})
@@ -519,10 +544,6 @@ vim.cmd("autocmd CursorHold * echon ''") -- Clear command line, use updatetime
 -- No auto-comment when using motions like 'o'
 vim.cmd("autocmd BufEnter * set formatoptions-=cro")
 vim.cmd("autocmd BufEnter * setlocal formatoptions-=cro")
-
--- Rename tmux window
-vim.cmd([[autocmd VimEnter * silent !tmux rename-window "nvim"]])
-vim.cmd([[autocmd VimLeave * silent !tmux rename-window "tmux"]])
 
 -- Yank highlighting
 vim.cmd("highlight YankHighlight guibg=#2b2b2b guifg=#e6e3de")
