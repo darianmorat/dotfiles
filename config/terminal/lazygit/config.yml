@@ -20,3 +20,11 @@ git:
   commitPrefix:
     pattern: " " 
     replace: " "    
+
+customCommands:
+  - key: "w"
+    command: "git cz"
+    description: "commit with commitizen"
+    context: "files"
+    loadingText: "opening commitizen commit tool"
+    subprocess: true
