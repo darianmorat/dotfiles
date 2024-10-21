@@ -18,12 +18,10 @@ alias rm="trash"
 # `dd` vifm: Trash/vifm/
 # `$empty-trash` cli: Trash/
 
+alias lg="lazygit"
+
 alias vifm="vifm ."
 alias vim="nvim"
-
-alias s="tmux"
-alias sa="tmux a"
-alias lg="lazygit"
 
 alias ls="eza --color=always --long --git --no-filesize --no-time --no-user --no-permissions -F"
 alias lsl="eza --color=always --long --git --no-filesize --no-time --no-user --no-permissions -F --grid"
