@@ -3,7 +3,7 @@
 -- -------------------------------------------------------------------------------------------
 -- Use :Inspect to check groups
 -- darianmorat/gruvdark-theme.nvim -- Pending with variations
--- Fix vscode colors
+-- Fix vscode colors -- to mach this ones
 
 return {
    { 
@@ -41,23 +41,28 @@ return {
       "navarasu/onedark.nvim",
       config = function()
          require("onedark").setup({
+            code_style = {
+               comments = 'none'
+            },
 
             -- -----------------------
             -- GRUVDARK
             -- -----------------------
             colors = {
                fg         = "#CDC5B8",
-               cyan       = "#CDC5B8",
                black      = "#1B1B1B",
                blue       = "#5b98c9",
                red        = "#DB6A6A",
                green      = "#76B568",
-               orange     = "#D19F66",
                purple     = "#CD60B9",
-               yellow     = "#00aa9c",
-               aqua       = "#00aa9c",
                grey       = "#595959",
                lightGrey  = "#8D8A85",
+
+               aqua       = "#00aa9c",
+               cyan       = "#00aa9c",
+
+               orange     = "#D19F66",
+               yellow     = "#D19F66",
 
                bg2 = "#313131",
                bg1 = "#2F2F2F",
@@ -67,14 +72,11 @@ return {
                -- Interface
                Normal                         = { fg = "$fg", bg = "#1E1E1E" },
                Folded                         = { fg = "$fg", bg = "#282828" },
-               FloatBorder                    = { fg = "$fg", bg = "#1E1E1E" },
-               NormalFloat                    = { fg = "$fg", bg = "#1E1E1E" },
+
                Search                         = { fg = "$fg", bg = "#283946" },
-               IncSearch                      = { fg = "#e6e3de", bg="#5c5c5e" },  
+               IncSearch                      = { fg = "$black", bg="$red", fmt="bold" },  
+
                CursorLine                     = { bg = "#303030" },
-               TelescopeSelection             = { bg = "#303030"},
-               TelescopeSelectionCaret        = { fg = "$fg"},
-               TelescopeMatching              = { fg = "$green"},
                Visual                         = { bg = "#2C2C2C" },
                TSParameter                    = { fg = "$fg" },
                TSParameterReference           = { fg = "$fg" }, 
@@ -84,6 +86,23 @@ return {
                SignColumn                     = { bg = "#1E1E1E" },
                IblIndent                      = { fg = "#2F2F2F" },
                WinSeparator                   = { fg = "#2F2F2F" },
+
+               TelescopeSelection             = { bg = "#303030"},
+               TelescopeSelectionCaret        = { fg = "$fg"},
+               TelescopeMatching              = { fg = "$green"},
+               TelescopePromptBorder          = { fg = "$fg"},
+               TelescopeResultsBorder          = { fg = "$fg"},
+               TelescopePreviewBorder          = { fg = "$fg"},
+               
+               FloatBorder                    = { fg = "$fg", bg = "#1E1E1E" },
+               NormalFloat                    = { fg = "$fg", bg = "#1E1E1E" },
+               FloatTitle                     = { fg = "$red"},
+               FloatermBorder                 = { fg = "NONE", bg = "#1E1E1E" },
+
+               CmpItemAbbrMatch               = { fg = "$green" },
+               CmpItemAbbrMatchFuzzy          = { fg = "$green", fmt = "none" },
+               CmpItemKindText                = { fg = "$lightGrey" },
+               CmpItemMenu                    = { fg = "$lightGrey" },
 
                -- General
                ["@none"]                        = { fg = "NONE" },
@@ -104,7 +123,10 @@ return {
                ["@variable.builtin"]            = { fg = "$orange" },
                ["@string"]                      = { fg = "$green" },
                ["@lsp.type.namespace"]          = { fg = "$aqua" },
-               
+               ["@constructor"]                 = { fg = "$aqua" },
+               ["@variable.member"]             = { fg = "$fg" },
+               ["@lsp.type.class.javascript"]   = { fg = "$aqua" },
+
                -- Symbols
                ["@comment"]                     = { fg = "#555555" },
                ["@operator"]                    = { fg = "$blue" },
@@ -139,6 +161,8 @@ return {
                ["@constructor.lua"]             = { fg = "$fg" },
                ["@keyword.operator.lua"]        = { fg = "$blue" },
                ["@module.builtin.lua"]          = { fg = "$aqua" },
+               ["@property.lua"]             = { fg = "$fg" },
+               
                
                -- Json
                ["@property.json"]               = { fg = "$red" },
