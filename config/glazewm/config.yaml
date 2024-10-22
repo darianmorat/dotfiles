@@ -21,14 +21,14 @@ general:
 
 gaps:
   # Gap between adjacent windows.
-  inner_gap: '9px'
+  inner_gap: '-1px'
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: '9px'
-    right: '9px'
-    bottom: '41px'
-    left: '9px'
+    top: '0px'
+    right: '0px'
+    bottom: '26px'
+    left: '0px'
 
 window_effects:
   # Visual effects to apply to the focused window.
@@ -36,7 +36,7 @@ window_effects:
   focused_window:
     border:
       enabled: true
-      color: '#1e1e1e'
+      color: '#1E1E1E'
     corner_style:
       enabled: true
       style: 'square'
@@ -47,7 +47,7 @@ window_effects:
   other_windows:
     border:
       enabled: true
-      color: '#1e1e1e'
+      color: '#1E1E1E'
     corner_style:
       enabled: true
       style: 'square'
@@ -106,8 +106,9 @@ window_rules:
 
   - commands: ['set-fullscreen']
     match:
-      - window_process: { equals: 'Code' } 
+      - window_process: { equals: 'chrome' } 
       - window_process: { equals: 'wezterm-gui' } 
+      - window_process: { equals: 'Code' } 
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
@@ -127,10 +128,10 @@ binding_modes:
 
   # When enabled, all keybindings are disabled except for alt+shift+p which
   # returns to default keybindings.
-  - name: 'pause'
-    keybindings:
-      - commands: ['wm-disable-binding-mode --name pause']
-        bindings: ['alt+shift+p']
+  # - name: 'pause'
+  #   keybindings:
+  #     - commands: ['wm-disable-binding-mode --name pause']
+  #       bindings: ['alt+shift+p']
 
 keybindings:
   # Shift focus in a given direction.
@@ -170,8 +171,8 @@ keybindings:
   #  bindings: ['alt+r']
 
   # Disables all keybindings until alt+shift+p is pressed again.
-  - commands: ['wm-enable-binding-mode --name pause']
-    bindings: ['alt+shift+p']
+  # - commands: ['wm-enable-binding-mode --name pause']
+  #   bindings: ['alt+shift+p']
 
   # Change tiling direction. This determines where new tiling windows will
   # be inserted.
@@ -187,8 +188,8 @@ keybindings:
     bindings: ['alt+ctrl+c']
 
   # Change the focused window to be tiling.
-  - commands: ['toggle-tiling']
-    bindings: ['alt+shift+c']
+  # - commands: ['toggle-tiling']
+  #   bindings: ['alt+shift+c']
 
   # Change the focused window to be fullscreen.
   - commands: ['toggle-fullscreen']
@@ -240,16 +241,16 @@ keybindings:
     bindings: ['alt+3']
   - commands: ['focus --workspace 4']
     bindings: ['alt+4']
-  - commands: ['focus --workspace 5']
-    bindings: ['alt+5']
-  - commands: ['focus --workspace 6']
-    bindings: ['alt+6']
-  - commands: ['focus --workspace 7']
-    bindings: ['alt+7']
-  #- commands: ['focus --workspace 8']
-  #  bindings: ['alt+8']
-  #- commands: ['focus --workspace 9']
-  #  bindings: ['alt+9']
+  # - commands: ['focus --workspace 5']
+  #   bindings: ['alt+5']
+  # - commands: ['focus --workspace 6']
+  #   bindings: ['alt+6']
+  # - commands: ['focus --workspace 7']
+  #   bindings: ['alt+7']
+  # - commands: ['focus --workspace 8']
+  #   bindings: ['alt+8']
+  # - commands: ['focus --workspace 9']
+  #   bindings: ['alt+9']
 
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
@@ -271,13 +272,13 @@ keybindings:
     bindings: ['alt+ctrl+3']
   - commands: ['move --workspace 4', 'focus --workspace 4']
     bindings: ['alt+ctrl+4']
-  - commands: ['move --workspace 5', 'focus --workspace 5']
-    bindings: ['alt+ctrl+5']
-  - commands: ['move --workspace 6', 'focus --workspace 6']
-    bindings: ['alt+ctrl+6']
-  - commands: ['move --workspace 7', 'focus --workspace 7']
-    bindings: ['alt+ctrl+7']
-  #- commands: ['move --workspace 8', 'focus --workspace 8']
-  #  bindings: ['alt+ctrl+8']
-  #- commands: ['move --workspace 9', 'focus --workspace 9']
-  #  bindings: ['alt+ctrl+9']
+  # - commands: ['move --workspace 5', 'focus --workspace 5']
+  #   bindings: ['alt+ctrl+5']
+  # - commands: ['move --workspace 6', 'focus --workspace 6']
+  #   bindings: ['alt+ctrl+6']
+  # - commands: ['move --workspace 7', 'focus --workspace 7']
+  #   bindings: ['alt+ctrl+7']
+  # - commands: ['move --workspace 8', 'focus --workspace 8']
+  #   bindings: ['alt+ctrl+8']
+  # - commands: ['move --workspace 9', 'focus --workspace 9']
+  #   bindings: ['alt+ctrl+9']

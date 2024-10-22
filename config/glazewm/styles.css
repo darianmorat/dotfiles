@@ -7,7 +7,7 @@ i {
 body {
    color: rgb(255 255 255 / 90%);
    font-family: Segoe UI;
-   font-size: 13px;
+   font-size: 14px;
 }
 
 html,
@@ -17,7 +17,8 @@ body,
 }
 
 #root {
-   background: #1b1b1b;
+   padding: 2px 8px 0px 6px;
+   background: #131313;
 }
 
 .app {
@@ -25,7 +26,6 @@ body,
    grid-template-columns: 1fr 1fr 1fr;
    align-items: center;
    height: 100%;
-   padding: 4px 4px;
 }
 
 .left,
@@ -34,11 +34,9 @@ body,
    display: flex;
    align-items: center;
 }
-
 .center {
    justify-self: center;
 }
-
 .right {
    justify-self: end;
 }
@@ -46,19 +44,35 @@ body,
 .date,
 .network,
 .memory,
-.cpu {
-   margin-right: 12px;
+.cpu,
+.workspaces,
+.workspace,
+.tiling-direction,
+.battery {
+   border: 1px solid #131313;
+}
+
+.date,
+.cpu,
+.network {
+   margin-right: 13px;
+}
+.workspaces {
+   margin-right: 7px;
+}
+
+.tiling-direction {
+   margin-right: 7px;
 }
 
 .workspaces {
    display: flex;
    align-items: center;
-   margin-right: 7px;
+   gap: 4px;
 }
 
 .workspace {
    background: transparent;
-   padding: 4px 8px;
    color: rgb(255 255 255 / 90%);
    border: none;
    cursor: pointer;
@@ -69,18 +83,14 @@ body,
 
    &.focused,
    &:hover {
-      background: #ffffff15;
+      background: #131313;
    }
 }
 
 .battery {
-   background: #ffffff15;
-   padding: 4px 8px;
+   background: #131313;
    color: rgb(255 255 255 / 90%);
-   border: none;
-}
-
-.tiling-direction {
+   padding: 0;
    margin-right: 5px;
 }
 
@@ -88,7 +98,5 @@ body,
 .tiling-direction {
    background: transparent;
    color: rgb(255 255 255 / 90%);
-   padding: 4px 8px;
-   border: 0;
    cursor: pointer;
 }

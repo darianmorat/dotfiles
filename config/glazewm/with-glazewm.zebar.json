@@ -10,9 +10,9 @@
       {
          "anchor": "bottom_left",
          "offsetX": "0px",
-         "offsetY": "-32px",
+         "offsetY": "-26px",
          "width": "100%",
-         "height": "32px",
+         "height": "26px",
          "monitorSelection": {
             "type": "all"
          }
