@@ -6,7 +6,6 @@ if wezterm.config_builder then config = wezterm.config_builder() end
 config.default_domain = 'WSL:Ubuntu'
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
-config.color_scheme = 'Dark+'
 config.font = wezterm.font 'JetBrains Mono NL Slashed'
 config.font_size = 14.0
 config.scrollback_lines = 1000
@@ -29,20 +28,21 @@ config.foreground_text_hsb = {
 -- Colors
 -- Follows GruvDark palette
 config.colors = {
-   tab_bar = {
-      background = '#313131', 
-   },
-
    foreground = '#CDC5B8',
    background = '#1E1E1E',
-   cursor_bg = '#c6c5c5',
+   cursor_bg = '#C6C5C5',
    cursor_fg = '#1E1E1E',
-   cursor_border = '#c6c5c5',
+   cursor_border = '#C6C5C5',
+
+   split = '#4F4F4F',
 
    selection_fg = '#1E1E1E',
    selection_bg = '#A9A9A9',
    scrollbar_thumb = '#4F4F4F',
-   split = '#4F4F4F',
+
+   tab_bar = {
+      background = '#313131', 
+   },
 
    ansi = {
       '#4F4F4F', -- black
@@ -51,7 +51,7 @@ config.colors = {
       '#D19F66', -- yellow
       '#5B98C9', -- blue
       '#CD60B9', -- purple
-      '#4DB0BD', -- cyan
+      '#00AA9C', -- cyan
       '#CDC5B8', -- white
    },
    brights = {
@@ -61,7 +61,7 @@ config.colors = {
       '#D19F66', -- brightYellow
       '#5B98C9', -- brightBlue
       '#CD60B9', -- brightPurple
-      '#4DB0BD', -- brightCyan
+      '#00AA9C', -- brightCyan
       '#CDC5B8', -- brightWhite
    },
 
@@ -70,6 +70,7 @@ config.colors = {
    copy_mode_active_highlight_fg = { Color = '#CDC5B8' },
    copy_mode_inactive_highlight_bg = { Color = '#76B568' },
    copy_mode_inactive_highlight_fg = { Color = '#CDC5B8' },
+
    quick_select_label_bg = { Color = '#D19F66' },
    quick_select_label_fg = { Color = '#CDC5B8' },
    quick_select_match_bg = { Color = '#5B98C9' },
@@ -82,28 +83,28 @@ config.leader = { key = 'Space', mods = 'CTRL' }
 
 config.keys = {
    -- Better copy-paste
-   { key = 'v', mods = 'CTRL', action = wezterm.action{ PasteFrom="Clipboard" } },
-   { key = 'c', mods = 'CTRL', action = wezterm.action{ CopyTo="Clipboard" } },
+   { key = 'v', mods = 'CTRL', action = act{ PasteFrom="Clipboard" } },
+   { key = 'c', mods = 'CTRL', action = act{ CopyTo="Clipboard" } },
 
    -- Tmux bindings
-   { key = '0', mods = 'LEADER', action = wezterm.action.ActivateTab(0) },
-   { key = '1', mods = 'LEADER', action = wezterm.action.ActivateTab(1) },
-   { key = '2', mods = 'LEADER', action = wezterm.action.ActivateTab(2) },
-   { key = '3', mods = 'LEADER', action = wezterm.action.ActivateTab(3) },
+   { key = '0', mods = 'LEADER', action = act.ActivateTab(0) },
+   { key = '1', mods = 'LEADER', action = act.ActivateTab(1) },
+   { key = '2', mods = 'LEADER', action = act.ActivateTab(2) },
+   { key = '3', mods = 'LEADER', action = act.ActivateTab(3) },
 
-   { key = 's', mods = 'LEADER', action = wezterm.action.ShowTabNavigator },
+   { key = 's', mods = 'LEADER', action = act.ShowTabNavigator },
 
-   { key = 'l', mods = 'LEADER', action = wezterm.action.ActivateLastTab },
-   { key = 'l', mods = 'LEADER|CTRL', action = wezterm.action.ActivateLastTab },
+   { key = 'l', mods = 'LEADER', action = act.ActivateLastTab },
+   { key = 'l', mods = 'LEADER|CTRL', action = act.ActivateLastTab },
 
-   { key = 'n', mods = 'LEADER', action = wezterm.action.ActivateTabRelative(1) },
-   { key = 'n', mods = 'LEADER|CTRL', action = wezterm.action.ActivateTabRelative(1) },
+   { key = 'n', mods = 'LEADER', action = act.ActivateTabRelative(1) },
+   { key = 'n', mods = 'LEADER|CTRL', action = act.ActivateTabRelative(1) },
 
-   { key = 'p', mods = 'LEADER', action = wezterm.action.ActivateTabRelative(-1) },
-   { key = 'p', mods = 'LEADER|CTRL', action = wezterm.action.ActivateTabRelative(-1) },
+   { key = 'p', mods = 'LEADER', action = act.ActivateTabRelative(-1) },
+   { key = 'p', mods = 'LEADER|CTRL', action = act.ActivateTabRelative(-1) },
 
-   { key = 'c', mods = 'LEADER', action = wezterm.action{SpawnTab="CurrentPaneDomain"} },
-   { key = 'd', mods = 'LEADER', action = wezterm.action{CloseCurrentTab={confirm=true}} },
+   { key = 'c', mods = 'LEADER', action = act{SpawnTab="CurrentPaneDomain"} },
+   { key = 'd', mods = 'LEADER', action = act{CloseCurrentTab={confirm=true}} },
 
    -- Nvim toogle docs 
    { key = 'Space', mods = 'LEADER|CTRL', action = act.SendKey { key = 'z', mods = 'CTRL' } },
