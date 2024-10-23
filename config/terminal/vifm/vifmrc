@@ -42,6 +42,10 @@ nnoremap b :bmark<space>
 nnoremap <space>ff :bmgo<space>
 nnoremap <space>fk :bmarks<cr>
 
+nnoremap <space>t :tree!<cr>
+nnoremap <space>2t :tree depth=2<cr>
+nnoremap w zx
+
 nnoremap <space>fj :history<cr>
 nnoremap o :histprev<cr>
 nnoremap i :histnext<cr>
