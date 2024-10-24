@@ -2,12 +2,6 @@
 -- MAIN CONFIG
 -- -------------------------------------------------------------------------------------------
 
--- ALIASES
-local set = vim.keymap.set
-local set_api = vim.api.nvim_set_keymap
-local set_hl = vim.api.nvim_set_hl
-
-
 -- SETTINGS
 vim.g.mapleader = " "
 vim.opt.syntax = "on"
@@ -38,6 +32,8 @@ vim.g.markdown_recommended_style = 0
 
 
 -- REMAPS
+local set = vim.keymap.set
+
 set("n", "<C-d>", "<C-d>zz")
 set("n", "<C-u>", "<C-u>zz")
 set("n", "n", "nzz")
@@ -177,7 +173,7 @@ custom.normal.c.fg   = "#CDC5B8"
 
 custom.inactive.c.fg = "#555555"
 
-function harpoon()
+function harpoon_marks()
   local hp_list = require("harpoon"):list()
   local total_marks = hp_list:length()
 
@@ -221,7 +217,7 @@ require("lualine").setup({
       lualine_b = { "branch", { "filename", path = 0 } },
       lualine_c = { { "diff", colored = false } },
       lualine_x = { "selectioncount", { "diagnostics", colored = false } },
-      lualine_y = { harpoon, "progress" }, -- Dinamic_progress: use 2 digits 08%
+      lualine_y = { harpoon_marks, "progress" }, -- Dinamic_progress: use 2 digits 08%
       lualine_z = { dynamic_location, custom_text}
    },
    inactive_sections = {
@@ -306,20 +302,16 @@ end)
 
 
 -- LEAP
-require("leap")
+require("leap").setup({})
 set({"n", "x", "o"}, "s", "<Plug>(leap)")
-set_hl(0, "LeapLabelPrimary", { fg = "#e1dcd6", bg = "#4c4c4d" })
 
 
 -- EYELINER
-require"eyeliner".setup {
+require("eyeliner").setup({
   highlight_on_key = true,
   match = "[0-9a-zA-Z]",
   dim = true
-}
-
-set_hl(0, "EyelinerPrimary", { fg="#e1dcd6" })
-set_hl(0, "EyelinerSecondary", { fg="#df5a5a" })
+})
 
 
 -- TELESCOPE
