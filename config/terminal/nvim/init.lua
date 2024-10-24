@@ -316,6 +316,8 @@ require("eyeliner").setup({
 
 -- TELESCOPE
 local tb = require("telescope.builtin")
+local actions = require("telescope.actions")
+
 require("telescope").setup({
    defaults = {
       layout_strategy = "vertical",
@@ -329,6 +331,11 @@ require("telescope").setup({
       },
       file_ignore_patterns = { 
          "node_modules" 
+      },
+      mappings = {
+         i = {
+            [ "<esc>" ] = actions.close
+         }
       }
    }
 })
