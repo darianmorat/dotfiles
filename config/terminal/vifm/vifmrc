@@ -54,10 +54,8 @@ command! FZFHistory : execute "normal! :history\r:write ~/test\rq"
 \| endif
 
 command! FZFGlobal : set noquickview
-\| let $FZF_PICK = term("rg --files --null --follow --glob '!*.git' --glob '!.*' ~/dev ~/.config/nvim | xargs -0 dirname | sort -u | grep -v '^\\.$' | sed 's#^/home/darianmorat/dev/##' | sed 's#^/home/darianmorat/.config/##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
-\| if $FZF_PICK == 'nvim' || $FZF_PICK == 'nvim/lua'
-\|      execute 'cd ~/.config/'.fnameescape($FZF_PICK)
-\| elseif $FZF_PICK != 'nvim' || $FZF_PICK != 'nvim/lua'
+\| let $FZF_PICK = term("rg --files --null --follow --glob '!*.git' --glob '!.*' ~/dev | xargs -0 dirname | sort -u | grep -v '^\\.$' | sed 's#^/home/darianmorat/dev/##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
+\| if $FZF_PICK != ''
 \|      execute 'cd ~/dev/'.fnameescape($FZF_PICK)
 \| endif
 
@@ -78,15 +76,24 @@ nnoremap mf :touch<space>
 nnoremap ciw cw
 
 nnoremap <space>t :tree!<cr>
-nnoremap <space>2t :tree depth=2<cr>
+nnoremap <space><space>t :tree depth=2<cr>
 nnoremap zi zx
 
 nnoremap b :SetBookmark<cr>
-nnoremap <space>fb :bmarks<cr>
-" nnoremap <space>fb :FZFMarks<cr>
+nnoremap <space>fk :bmarks<cr>
+" nnoremap <space>fk :FZFMarks<cr>
+
+nnoremap m1 :bmark 1<cr>
+nnoremap m2 :bmark 2<cr>
+nnoremap m3 :bmark 3<cr>
+nnoremap m4 :bmark 4<cr>
+nnoremap <space>1 :bmgo 1<cr>
+nnoremap <space>2 :bmgo 2<cr>
+nnoremap <space>3 :bmgo 3<cr>
+nnoremap <space>4 :bmgo 4<cr>
 
 nnoremap <space>ff :FZFFiles<cr>
-nnoremap <space>fk :FZFDirectories<cr>
+nnoremap <space>fd :FZFDirectories<cr>
 nnoremap <space>fg :RGFiles<cr>
 nnoremap <space>fj :FZFHistory<cr>
 nnoremap <space>fi :FZFGlobal<cr>
