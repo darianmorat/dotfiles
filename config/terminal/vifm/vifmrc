@@ -1,13 +1,13 @@
-" ============= "
-" Settings
-" ============= "
+" ------------------------------------------------------------------------------
+" MAIN SETTINGS
+" ------------------------------------------------------------------------------
 
 set dirsize=nitems
 set nowrap
 set confirm-=delete
 set dotdirs=
 set millerview
-set milleroptions=lsize:0,csize:1,rsize:0,rpreview:all
+set milleroptions=lsize:0,csize:1,rsize:1,rpreview:dirs
 only
 
 set vicmd=nvim
@@ -23,10 +23,47 @@ set statusline=" %A %-7g %= %18d "
 colorscheme gruvdark
 fileviewer *[^/] bat --color always --wrap never --pager never --theme TwoDark %c -p
 
+" ------------------------------------------------------------------------------
+" COMMANDS
+" ------------------------------------------------------------------------------
 
-" ============= "
-" Remaps
-" ============= "
+command! SetBookmark :execute 'bmark "' . system('echo "${PWD##*/}"') . '"' | echo system('echo Bookmark created: "${PWD##*/}"')
+
+command! FZFFiles : set noquickview
+\| let $FZF_PICK = term("rg --files --smart-case . | sed 's|^./||' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
+\| if $FZF_PICK != ''
+\|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
+\| endif
+
+command! FZFDirectories : set noquickview
+\| let $FZF_PICK = term("rg --files --null | xargs -0 dirname | sort -u | grep -v '^\\.$' | grep -v '\\.git' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
+\| if $FZF_PICK != ''
+\|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
+\| endif
+
+command! RGFiles : set noquickview
+\| let $FZF_PICK = term("rg --column --line-number --color=always --colors 'path:fg:red' --colors 'line:fg:white' --colors 'match:fg:white' --smart-case . | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
+\| if $FZF_PICK != ''
+\|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
+\| endif
+
+command! FZFHistory : execute "normal! :history\r:write ~/test\rq" 
+\| let $FZF_PICK = system("fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse < ~/test 2>/dev/tty")
+\| if $FZF_PICK != ''
+\|     execute 'cd '.fnameescape($FZF_PICK)
+\| endif
+
+command! FZFGlobal : set noquickview
+\| let $FZF_PICK = term("rg --files --null --follow --glob '!*.git' --glob '!.*' ~/dev ~/.config/nvim | xargs -0 dirname | sort -u | grep -v '^\\.$' | sed 's#^/home/darianmorat/dev/##' | sed 's#^/home/darianmorat/.config/##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
+\| if $FZF_PICK == 'nvim' || $FZF_PICK == 'nvim/lua'
+\|      execute 'cd ~/.config/'.fnameescape($FZF_PICK)
+\| elseif $FZF_PICK != 'nvim' || $FZF_PICK != 'nvim/lua'
+\|      execute 'cd ~/dev/'.fnameescape($FZF_PICK)
+\| endif
+
+" ------------------------------------------------------------------------------
+" KEYMAPS
+" ------------------------------------------------------------------------------
 
 nnoremap <space> <Nop>
 nnoremap <c-o> <Nop>
@@ -34,19 +71,26 @@ nnoremap <c-o> <Nop>
 nnoremap s :shell<cr>
 nnoremap q :q<cr>
 nnoremap x q
+nnoremap w :!nvim<cr>
 
 nnoremap md :mk<space>
 nnoremap mf :touch<space>
-
-nnoremap b :bmark<space>
-nnoremap <space>ff :bmgo<space>
-nnoremap <space>fk :bmarks<cr>
+nnoremap ciw cw
 
 nnoremap <space>t :tree!<cr>
 nnoremap <space>2t :tree depth=2<cr>
-nnoremap w zx
+nnoremap zi zx
 
-nnoremap <space>fj :history<cr>
+nnoremap b :SetBookmark<cr>
+nnoremap <space>fb :bmarks<cr>
+" nnoremap <space>fb :FZFMarks<cr>
+
+nnoremap <space>ff :FZFFiles<cr>
+nnoremap <space>fk :FZFDirectories<cr>
+nnoremap <space>fg :RGFiles<cr>
+nnoremap <space>fj :FZFHistory<cr>
+nnoremap <space>fi :FZFGlobal<cr>
+
+nnoremap <space>fh :history<cr>
 nnoremap o :histprev<cr>
 nnoremap i :histnext<cr>
-nnoremap ciw cw
