@@ -27,7 +27,7 @@ gaps:
   outer_gap:
     top: '0px'
     right: '0px'
-    bottom: '26px'
+    bottom: '31px'
     left: '0px'
 
 window_effects:
@@ -106,7 +106,6 @@ window_rules:
 
   - commands: ['set-fullscreen']
     match:
-      - window_process: { equals: 'chrome' } 
       - window_process: { equals: 'wezterm-gui' } 
       - window_process: { equals: 'Code' } 
 
