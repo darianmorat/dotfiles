@@ -6,7 +6,8 @@ zstyle ':z4h:autosuggestions' forward-char 'accept' # Accepts 1char 'partial-acc
 z4h bindkey z4h-backward-word Ctrl+Alt+B
 z4h bindkey z4h-forward-word Ctrl+Alt+F
 
-# find way to send vifm directly. Bash: bind -x '"\C-o":"vifm"'
+# find way to send vifm directly. 
+# In bash: bind -x '"\C-o":"vifm"'
 bindkey -s '^O' '^Uvifm^J'
 
 # Aliases
