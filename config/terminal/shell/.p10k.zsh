@@ -5,7 +5,7 @@
     p10k segment -f 4 -i '~/'
 
   typeset -g POWERLEVEL9K_SHOW_RULER=true
-  typeset -g POWERLEVEL9K_RULER_CHAR='.'        
+  typeset -g POWERLEVEL9K_RULER_CHAR=' '
   typeset -g POWERLEVEL9K_RULER_FOREGROUND=0
   
   # Default prompt symbol.
