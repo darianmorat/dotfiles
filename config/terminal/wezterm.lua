@@ -7,9 +7,9 @@ config.default_domain = 'WSL:Ubuntu'
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
 config.font = wezterm.font 'JetBrains Mono NL Slashed'
-config.font_size = 14.0
-config.scrollback_lines = 1000
-config.animation_fps = 0
+config.font_size = 14.5
+config.scrollback_lines = 500
+config.animation_fps = 1
 config.cursor_blink_rate = 0
 
 -- Window 
