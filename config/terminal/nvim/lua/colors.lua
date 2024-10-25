@@ -6,6 +6,12 @@
 -- Fix vscode colors -- to mach this ones
 
 return {
+   {
+      "Mofiqul/vscode.nvim",
+      config = function()
+         require("vscode").setup({})
+      end
+   },
    { 
       "sainnhe/gruvbox-material",
       config = function()
@@ -172,8 +178,7 @@ return {
                ["@constructor.lua"]             = { fg = "$fg" },
                ["@keyword.operator.lua"]        = { fg = "$blue" },
                ["@module.builtin.lua"]          = { fg = "$aqua" },
-               ["@property.lua"]             = { fg = "$fg" },
-               
+               ["@property.lua"]                = { fg = "$fg" },
                
                -- Json
                ["@property.json"]               = { fg = "$red" },
@@ -194,9 +199,11 @@ return {
 
                -- Javascript
                ["@tag.javascript"]               = { fg = "$aqua" },
+               ["@tag.attribute.javascript"]     = { fg = "#9266DA" },
                ["@type.javascript"]              = { fg = "$fg" },  
                ["@constant.javascript"]          = { fg = "$fg" },  
 
+               ["@markup.raw.javascript"]                               = { fg = "$fg" },
                ["@markup.heading.1.javascript"]                         = { fg = "$fg", fmt = "none" },
                ["@lsp.typemod.property.declaration.javascript"]         = { fg = "$fg" },
                ["@lsp.typemod.property.defaultLibrary.javascript"]      = { fg = "$orange"},
