@@ -59,6 +59,26 @@ command! FZFGlobal : set noquickview
 \|      execute 'cd ~/dev/'.fnameescape($FZF_PICK)
 \| endif
 
+\| let $toggle = 0
+command! FilterTree :
+\| if $toggle != 1
+\|    execute 'filter /^node_modules\/$|^\.git\/$/' | tree
+\|    let $toggle = 1
+\| elseif $toggle == 1
+\|    execute 'filter' | tree!
+\|    let $toggle = 0
+\| endif
+
+\| let $toggle2 = 0
+command! FilterTreeTwo :
+\| if $toggle2 != 1
+\|    execute 'filter /^node_modules\/$|^\.git\/$/' | tree depth=2
+\|    let $toggle2 = 1
+\| elseif $toggle2 == 1
+\|    execute 'tree'
+\|    let $toggle2 = 0
+\| endif
+
 " ------------------------------------------------------------------------------
 " KEYMAPS
 " ------------------------------------------------------------------------------
@@ -75,8 +95,8 @@ nnoremap md :mk<space>
 nnoremap mf :touch<space>
 nnoremap ciw cw
 
-nnoremap <space>t :tree!<cr>
-nnoremap <space><space>t :tree depth=2<cr>
+nnoremap <space>t :FilterTree<cr>
+nnoremap <space><space>t :FilterTreeTwo<cr>
 nnoremap zi zx
 
 nnoremap b :SetBookmark<cr>
