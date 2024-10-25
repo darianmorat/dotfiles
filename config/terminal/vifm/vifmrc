@@ -62,22 +62,20 @@ command! FZFGlobal : set noquickview
 \| let $toggle = 0
 command! FilterTree :
 \| if $toggle != 1
-\|    execute 'filter /^node_modules\/$|^\.git\/$/' | tree
-\|    let $toggle = 1
-\| elseif $toggle == 1
+\|    filter {node_modules/,.git/} | tree
+\| else
 \|    execute 'filter' | tree!
-\|    let $toggle = 0
 \| endif
+\| let $toggle = !$toggle
 
 \| let $toggle2 = 0
 command! FilterTreeTwo :
 \| if $toggle2 != 1
-\|    execute 'filter /^node_modules\/$|^\.git\/$/' | tree depth=2
-\|    let $toggle2 = 1
-\| elseif $toggle2 == 1
-\|    execute 'tree'
-\|    let $toggle2 = 0
+\|    filter {node_modules/,.git/} | tree depth=2
+\| else
+\|    filter {node_modules/,.git/} | tree
 \| endif
+\| let $toggle2 = !$toggle2
 
 " ------------------------------------------------------------------------------
 " KEYMAPS
@@ -98,6 +96,7 @@ nnoremap ciw cw
 nnoremap <space>t :FilterTree<cr>
 nnoremap <space><space>t :FilterTreeTwo<cr>
 nnoremap zi zx
+nnoremap <space>c :filter<cr>
 
 nnoremap b :SetBookmark<cr>
 nnoremap <space>fk :bmarks<cr>
