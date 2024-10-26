@@ -8,12 +8,14 @@
 return {
    {
       "Mofiqul/vscode.nvim",
+      enabled = false,
       config = function()
          require("vscode").setup({})
       end
    },
    { 
       "sainnhe/gruvbox-material",
+      enabled = false,
       config = function()
          local group = vim.api.nvim_create_augroup("custom_highlights_gruvboxmaterial", { clear=true })
 
@@ -84,11 +86,17 @@ return {
             highlights = {
                -- Interface
                Normal                         = { fg = "$fg", bg = "#1E1E1E" },
-               Folded                         = { fg = "$fg", bg = "#282828" },
+               NormalFloat                    = { fg = "$fg", bg = "#1E1E1E" },
+               FloatBorder                    = { fg = "$fg", bg = "#1E1E1E" },
+               SignColumn                     = { bg = "#1E1E1E" },
+
+               FloatTitle                     = { fg = "$red"},
+               FloatermBorder                 = { fg = "NONE", bg = "#1E1E1E" },
 
                Search                         = { fg = "$fg", bg = "#283946" },
                IncSearch                      = { fg = "$black", bg="$red", fmt="bold" },  
 
+               Folded                         = { fg = "$fg", bg = "#282828" },
                CursorLine                     = { bg = "#303030" },
                Visual                         = { bg = "#2C2C2C" },
                TSParameter                    = { fg = "$fg" },
@@ -96,7 +104,6 @@ return {
                LineNr                         = { fg = "#555555" },
                ColorColumn                    = { bg = "#222222" },
                EndOfBuffer                    = { bg = "NONE" },
-               SignColumn                     = { bg = "#1E1E1E" },
                IblIndent                      = { fg = "#2F2F2F" },
                WinSeparator                   = { fg = "#2F2F2F" },
 
@@ -107,14 +114,9 @@ return {
                TelescopeResultsBorder         = { fg = "$fg"},
                TelescopePreviewBorder         = { fg = "$fg"},
                
-               -- LeapLabelPrimary               = { fg = "#e1dcd6", bg = "#4c4c4d" },
+               LeapLabelPrimary               = { fg = "#e1dcd6", bg = "#4c4c4d" },
                EyelinerPrimary                = { fg = "#e1dcd6" },
                EyelinerSecondary              = { fg = "#df5a5a" },
-
-               FloatBorder                    = { fg = "$fg", bg = "#1E1E1E" },
-               NormalFloat                    = { fg = "$fg", bg = "#1E1E1E" },
-               FloatTitle                     = { fg = "$red"},
-               FloatermBorder                 = { fg = "NONE", bg = "#1E1E1E" },
 
                CmpItemAbbrMatch               = { fg = "$green" },
                CmpItemAbbrMatchFuzzy          = { fg = "$green", fmt = "none" },
