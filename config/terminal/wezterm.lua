@@ -15,8 +15,8 @@ config.cursor_blink_rate = 0
 -- Window 
 config.window_padding = {
    left = 2, 
-   right = 0,
-   top = 2,
+   right = 2,
+   top = 7,
    bottom = 0,
 }
 
@@ -109,6 +109,24 @@ config.keys = {
    -- Nvim toogle docs 
    { key = 'Space', mods = 'LEADER|CTRL', action = act.SendKey { key = 'z', mods = 'CTRL' } },
 }
+
+-- Visual
+-- config.background = {
+--    {
+--       source = {
+--          File = 'd:/apps/wezterm/images/32.jpg',
+--       },
+--       opacity = 1.0,
+--    },
+--    {
+--       source = {
+--          Color = "#202020",
+--       },
+--       width = "400",
+--       height = "1080",
+--       opacity = 0.94,
+--    }
+-- }
 
 -- Status-bar
 -- config.tab_bar_at_bottom = true
