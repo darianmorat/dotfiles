@@ -4,9 +4,9 @@
 
 -- SETTINGS
 vim.g.mapleader = " "
-vim.opt.syntax = "on"
 vim.opt.showmode = false
 vim.opt.showcmd = false
+vim.opt.cmdheight = 1
 vim.opt.guicursor = "a:block"
 vim.opt.cursorline = false
 vim.opt.relativenumber = true
@@ -22,7 +22,7 @@ vim.opt.colorcolumn = "95"
 vim.opt.wrap = false
 
 vim.opt.signcolumn = "yes"
-vim.opt.updatetime = 150
+vim.opt.updatetime = 120
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -94,6 +94,7 @@ local plugins = {
    { "windwp/nvim-ts-autotag" },
    { "lewis6991/gitsigns.nvim" },
    { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
+   { "echasnovski/mini.indentscope", version = "*" },
 
    { "VonHeikemen/lsp-zero.nvim", branch = "v4.x" },
    { "williamboman/mason.nvim" },
@@ -218,7 +219,7 @@ require("lualine").setup({
       lualine_c = { { "diff", colored = false } },
       lualine_x = { "selectioncount", { "diagnostics", colored = false } },
       lualine_y = { harpoon_marks, "progress" }, -- Dinamic_progress: use 2 digits 08%
-      lualine_z = { dynamic_location, custom_text}
+      lualine_z = { dynamic_location, custom_text }
    },
    inactive_sections = {
       lualine_a = {},
@@ -227,7 +228,7 @@ require("lualine").setup({
       lualine_x = { "location" },
       lualine_y = {},
       lualine_z = {}
-  }
+   }
 })
 
 
@@ -458,13 +459,25 @@ require("gitsigns").setup({
 -- LINE INDENTATION
 require("ibl").setup({
    indent = {
-      char = "|", -- "│"
-      tab_char = "|" -- "│"
+      char = "╎", -- │╎|
+      tab_char = "╎"
    },
-   scope = { 
-      enabled = true,
+   scope = {
+      enabled = false,
       show_start = false,
       show_end = false
+   }
+})
+
+
+-- SCOPE INDENTATION
+require("mini.indentscope").setup({
+   symbol = '╎', -- │╎|
+   draw = {
+      delay = 10,
+      animation = function()
+         return 10
+      end
    }
 })
 
@@ -513,7 +526,6 @@ cmp.setup({
       completeopt = "menu,menuone,noinsert"  -- Select first suggestion
    },
    sources = { 
-   -- Mimic vscode suggestions
       {name = "nvim_lsp"},
       {name = "buffer", keyword_length = 2},
       {name = "luasnip", keyword_length = 2},
@@ -524,7 +536,9 @@ cmp.setup({
          require("luasnip").lsp_expand(args.body)
       end
    },
-   view = { docs = { auto_open = false } }, -- Docs closed by default
+   view = {
+      docs = { auto_open = false }
+   },
    mapping = cmp.mapping.preset.insert({ 
       ["<Enter>"] = cmp.mapping.confirm({ select = true }),
       ["<C-z>"] = cmp.mapping(function() -- C-Space x2, WezTerm binding
