@@ -7,27 +7,30 @@ vim.g.mapleader = " "
 vim.opt.showmode = false
 vim.opt.showcmd = false
 vim.opt.cmdheight = 1
+vim.opt.pumheight = 8
 vim.opt.guicursor = "a:block"
 vim.opt.cursorline = false
 vim.opt.relativenumber = true
 vim.opt.number = true
+vim.opt.termguicolors = true
 
 vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.expandtab = true
-vim.opt.clipboard = "unnamedplus"
+vim.opt.smartindent = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.opt.scrolloff = 6
 vim.opt.sidescrolloff = 6
 vim.opt.colorcolumn = "95"
-vim.opt.wrap = false
-
 vim.opt.signcolumn = "yes"
+
 vim.opt.updatetime = 120
 vim.opt.hlsearch = false
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.pumheight = 8
+vim.opt.wrap = false
 vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.clipboard = "unnamedplus"
 vim.g.markdown_recommended_style = 0
 
 
@@ -147,7 +150,7 @@ require("lazy").setup(plugins, {
 -- -------------------------------------------------------------------------------------------
 
 -- COLORS
-vim.cmd("colorscheme onedark") -- Default theme
+vim.cmd("colorscheme onedark")
 set("n", "<leader>cs", ":Telescope colorscheme<CR>")
 set("n", "<leader>ch", ":Telescope highlights<CR>")
 
@@ -375,8 +378,9 @@ set("n", "<leader>4", function() hp:list():select(4) end)
 -- TREESIETER
 require"nvim-treesitter.configs".setup({
    ensure_installed = {
-      "lua", "javascript", "typescript", "tsx", "regex", "html", "css", "python",
-      "json", "jsonc", "diff", "xml", "markdown", "markdown_inline", "yaml", "query"
+      "lua", "javascript", "typescript", "tsx", "python",
+      "regex", "xml", "html", "css", "json", "jsonc", 
+      "diff", "markdown", "markdown_inline", "yaml", "query"
    },
    sync_install = false,
    indent = {
@@ -472,7 +476,7 @@ require("ibl").setup({
 
 -- SCOPE INDENTATION
 require("mini.indentscope").setup({
-   symbol = '╎', -- │╎|
+   symbol = "╎", -- │╎|
    draw = {
       delay = 10,
       animation = function()
@@ -523,9 +527,11 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
    completion = { 
-      completeopt = "menu,menuone,noinsert"  -- Select first suggestion
+   -- Select first menu suggestion
+      completeopt = "menu,menuone,noinsert"  
    },
    sources = { 
+   -- Suggestions order: vscode-like
       {name = "nvim_lsp"},
       {name = "buffer", keyword_length = 2},
       {name = "luasnip", keyword_length = 2},
