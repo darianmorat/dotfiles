@@ -28,6 +28,9 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 120
 vim.opt.hlsearch = false
 vim.opt.wrap = false
+vim.opt.spell = true
+vim.opt.spelllang = "en_us"
+vim.opt.spelloptions="camel"
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
@@ -221,7 +224,7 @@ require("lualine").setup({
       lualine_b = { "branch", { "filename", path = 0 } },
       lualine_c = { { "diff", colored = false } },
       lualine_x = { "selectioncount", { "diagnostics", colored = false } },
-      lualine_y = { harpoon_marks, "progress" }, -- Dinamic_progress: use 2 digits 08%
+      lualine_y = { harpoon_marks, "progress" }, -- Dynamic_progress: use 2 digits 08%
       lualine_z = { dynamic_location, custom_text }
    },
    inactive_sections = {
@@ -375,7 +378,7 @@ set("n", "<leader>3", function() hp:list():select(3) end)
 set("n", "<leader>4", function() hp:list():select(4) end)
 
 
--- TREESIETER
+-- TREESITTER
 require"nvim-treesitter.configs".setup({
    ensure_installed = {
       "lua", "javascript", "typescript", "tsx", "python",
@@ -395,7 +398,7 @@ require"nvim-treesitter.configs".setup({
 })
 
 
--- TREESIETER REFACTOR
+-- TREESITTER REFACTOR
 require"nvim-treesitter.configs".setup({
    refactor = {
       highlight_definitions = {
@@ -483,6 +486,20 @@ require("mini.indentscope").setup({
          return 10
       end
    }
+})
+
+-- Ignore these file-types
+vim.api.nvim_create_autocmd({ "FileType" }, {
+   callback = function()
+      local ignore_filetypes = {
+         "help",
+         "lazy",
+         "mason"
+      }
+      if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+         vim.b.miniindentscope_disable = true
+      end
+   end
 })
 
 
