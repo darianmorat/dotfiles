@@ -193,11 +193,11 @@ AdjustScreenBrightness(step) {
 ; ===== CENTER =====
 ; ==================
 
-!Enter::
-SysGet Mon,MonitorWorkArea
-WinGetPos ,,,wW,wH,A
-WinMove A,,(MonRight-wW)/2,(MonBottom-wH)/2-16
-Return
+; !Enter::
+; SysGet Mon,MonitorWorkArea
+; WinGetPos ,,,wW,wH,A
+; WinMove A,,(MonRight-wW)/2,(MonBottom-wH)/2-16
+; Return
 
 ; ==================
 ; ==== MODIFIER ====
