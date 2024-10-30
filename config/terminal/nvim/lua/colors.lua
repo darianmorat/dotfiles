@@ -103,7 +103,7 @@ return {
                TSParameterReference           = { fg = "$fg" }, 
                LineNr                         = { fg = "#555555" },
                ColorColumn                    = { bg = "#222222" },
-               EndOfBuffer                    = { bg = "NONE" },
+               EndOfBuffer                    = { fg = "#303030", bg = "NONE" },
                IblIndent                      = { fg = "#2F2F2F" },
                WinSeparator                   = { fg = "#2F2F2F" },
 
