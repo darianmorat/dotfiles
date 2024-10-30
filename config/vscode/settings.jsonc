@@ -121,14 +121,12 @@
    // =====================
 
    "apc.electron": { "frame": false },
-   "apc.header": { "height": 34 },
-   "apc.statusBar": { "height": 31, "fontSize": 12 },
+   "apc.statusBar": { "height": 30, "fontSize": 12 },
 
    "window.titleBarStyle": "native",
    "workbench.editor.revealIfOpen": true,
    "workbench.settings.editor": "json",
    "workbench.startupEditor": "none",
-   "window.zoomLevel": 0.5,
 
    "workbench.colorTheme": "GruvDark",
    "workbench.iconTheme": null,
@@ -139,8 +137,8 @@
    "editor.roundedSelection": false,
    "editor.cursorSurroundingLines": 6,
    "editor.lineNumbers": "relative",
-   "editor.fontSize": 17,
-   "terminal.integrated.fontSize": 17,
+   "editor.fontSize": 15,
+   "terminal.integrated.fontSize": 15,
    "editor.fontFamily": "JetBrains Mono NL Slashed",
    "terminal.integrated.fontFamily": "JetBrains Mono NL Slashed",
    "editor.cursorBlinking": "solid",
@@ -210,25 +208,24 @@
       "statusBarItem.remoteBackground": "#00000000",
       "scrollbarSlider.background":"#00000000",
 
-      "editor.background":"#1e1e1e",
-      "editorGutter.background":"#1e1e1e",
-      // top: current tab background to 1b1b1b?
+      "[GruvDark]": {
+         "editor.background":"#1e1e1e",
+         "editorGutter.background":"#1e1e1e",
 
-      "statusBar.background":"#1b1b1b",
-      "sideBar.background":"#1b1b1b",
-      "sideBarSectionHeader.background":"#1b1b1b",
-      "panel.background":"#1b1b1b",
-      "terminal.background":"#1b1b1b"
-      
+         "editorGroupHeader.noTabsBackground":"#1b1b1b",
+         "statusBar.background":"#1b1b1b",
+         "sideBar.background":"#1b1b1b",
+         "sideBarSectionHeader.background":"#1b1b1b",
+         "panel.background":"#1b1b1b",
+         "terminal.background":"#1b1b1b",
+
+         "editor.selectionBackground":"#2c2c2c", 
+         "editor.inactiveSelectionBackground":"#2c2c2c"
+      }
    },
 
    "editor.tokenColorCustomizations": {
       "[GruvDark]": {
-
-         // THINK OF THIS:
-         // blue = functions, varibles, if/else     
-         // pink = return, import, export, new
-
          "textMateRules": [
             {
                "scope": [
