@@ -10,7 +10,7 @@ if wezterm.config_builder then config = wezterm.config_builder() end
 config.default_domain = "WSL:Ubuntu"
 config.window_decorations = "RESIZE"
 config.font = wezterm.font "JetBrains Mono NL Slashed"
-config.font_size = 14.5
+config.font_size = 11.5
 config.scrollback_lines = 500
 config.animation_fps = 1
 config.cursor_blink_rate = 0
@@ -18,7 +18,7 @@ config.cursor_blink_rate = 0
 config.window_padding = {
    left = 2, 
    right = 2,
-   top = 7,
+   top = 6,
    bottom = 0,
 }
 
