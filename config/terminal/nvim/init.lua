@@ -25,7 +25,7 @@ vim.opt.sidescrolloff = 6
 vim.opt.colorcolumn = "95"
 vim.opt.signcolumn = "yes"
 
-vim.opt.updatetime = 120
+vim.opt.updatetime = 100
 vim.opt.hlsearch = false
 vim.opt.wrap = false
 vim.opt.spell = true
@@ -89,7 +89,6 @@ local plugins = {
    { "jake-stewart/multicursor.nvim", branch = "1.0" },
 
    { "ggandor/leap.nvim" },
-   { "jinh0/eyeliner.nvim" },
    { "nvim-lua/plenary.nvim" },
    { "nvim-telescope/telescope.nvim", tag = "0.1.8" },
    { "ThePrimeagen/harpoon", branch = "harpoon2" },
@@ -311,14 +310,6 @@ end)
 -- LEAP
 require("leap").setup({})
 set({"n", "x", "o"}, "s", "<Plug>(leap)")
-
-
--- EYELINER
-require("eyeliner").setup({
-  highlight_on_key = true,
-  match = "[0-9a-zA-Z]",
-  dim = true
-})
 
 
 -- TELESCOPE
