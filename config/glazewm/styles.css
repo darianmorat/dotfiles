@@ -7,7 +7,7 @@ i {
 body {
    color: rgb(255 255 255 / 90%);
    font-family: Segoe UI;
-   font-size: 14px;
+   font-size: 12px;
 }
 
 html,
@@ -17,7 +17,7 @@ body,
 }
 
 #root {
-   padding: 0 8px 0 6px;
+   padding: 0 6px 0 4px;
    background: #131313;
 }
 
@@ -55,20 +55,17 @@ body,
 .date,
 .cpu,
 .network {
-   margin-right: 13px;
+   margin-right: 10px;
 }
+.tiling-direction,
 .workspaces {
-   margin-right: 7px;
-}
-
-.tiling-direction {
-   margin-right: 7px;
+   margin-right: 5px;
 }
 
 .workspaces {
    display: flex;
    align-items: center;
-   gap: 4px;
+   gap: 0px;
 }
 
 .workspace {
