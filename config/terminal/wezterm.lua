@@ -80,6 +80,10 @@ config.keys = {
 
    -- Nvim toggle docs 
    { key = "Space", mods = "LEADER|CTRL", action = act.SendKey {key="z",mods="CTRL"} },
+
+   -- Disable defaults
+   { key = 'Enter', mods = 'ALT', action = wezterm.action.DisableDefaultAssignment, },
+   { key = 'Tab', mods = 'CTRL', action = wezterm.action.DisableDefaultAssignment, }
 }
 
 -- -------------------------------------------------------------------------------------------
