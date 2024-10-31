@@ -28,7 +28,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 100
 vim.opt.hlsearch = false
 vim.opt.wrap = false
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelllang = "en_us"
 vim.opt.spelloptions="camel"
 vim.opt.swapfile = false
@@ -40,8 +40,21 @@ vim.g.markdown_recommended_style = 0
 -- REMAPS
 local set = vim.keymap.set
 
+local function smart_quit() -- Fix quit in diff
+   if vim.wo.diff then vim.cmd("wincmd p | q") 
+   else vim.cmd(":q") end
+end
+
+set("n", "<leader>q", smart_quit)
+set("n", "<leader>w", ":w<CR>")
+set("n", "<leader>d", ":bd<CR>")
+
+set("n", "<leader><leader>d", ":bd!<CR>")
+set("n", "<leader><leader>b", ":BufOnly<CR>")
+
 set("n", "<C-d>", "<C-d>zz")
 set("n", "<C-u>", "<C-u>zz")
+
 set("n", "n", "nzz")
 set("n", "N", "Nzz")
 
@@ -52,18 +65,14 @@ set("n", "<leader>a", "A")
 set("n", "<leader>i", "I")
 set("n", "<leader>z", ":ZenMode<CR>")
 
-set("n", "<leader>w", ":w<CR>")
-set("n", "<leader>q", ":bd<CR>")
-set("n", "<leader><leader>d", ":bd!<CR>")
-set("n", "<leader><leader>b", ":BufOnly<CR>")
-set("n", "<leader><leader>q", ":q<CR>")
-
 set("n", "<C-k>", ":Lazygit<CR>")
 set("n", "<C-j>", ":Vifm<CR>")
 set("n", "<C-h>", "<C-6>")
 
 set("n", "<leader>ti", ":IBLToggle<CR>")
 set("n", "<leader>tn", ":set relativenumber!<CR>")
+set("n", "<leader>ts", ":set spell!<CR>")
+set("n", "<leader>tw", ":set wrap!<CR>")
 
 set("n", "<leader>tm", ":MarkdownPreviewToggle<CR>")
 set("n", "<leader><leader>m", ":Lazy load markdown-preview.nvim | :Lazy<CR>")
@@ -119,7 +128,7 @@ local plugins = {
    }
 }
 
-local colors = require("colors") -- Load colors - gruvdark reference
+local colors = require("colors") -- Load colors - GruvDark reference
 vim.list_extend(plugins,colors) -- Merge colors to main plugin list
 
 
@@ -426,16 +435,9 @@ require("gitsigns").setup({
          vim.keymap.set(mode, l, r, opts)
       end
 
-      -- Fix 'quit' when using .diffthis
-      local function smart_quit()
-         if vim.wo.diff then vim.cmd("wincmd p | q") 
-         else vim.cmd(":bd") end
-      end
-
       -- Actions
       map("n", "<leader><leader>gi", gs.diffthis)
       map("n", "<leader>gi", function() gs.diffthis("~") end)
-      map("n", "<leader>q", smart_quit)
 
       map("n", "<leader>gj", gs.next_hunk)
       map("n", "<leader>gk", gs.prev_hunk)
@@ -479,7 +481,7 @@ require("mini.indentscope").setup({
    }
 })
 
--- Ignore these file-types
+-- Ignore these filetypes
 vim.api.nvim_create_autocmd({ "FileType" }, {
    callback = function()
       local ignore_filetypes = {
@@ -539,7 +541,7 @@ cmp.setup({
       completeopt = "menu,menuone,noinsert"  
    },
    sources = { 
-   -- Suggestions order: vscode-like
+   -- Suggestions order: VSCode-like
       {name = "nvim_lsp"},
       {name = "buffer", keyword_length = 2},
       {name = "luasnip", keyword_length = 2},
