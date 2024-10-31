@@ -78,7 +78,7 @@ config.keys = {
       )}
    },
 
-   -- Nvim toogle docs 
+   -- Nvim toggle docs 
    { key = "Space", mods = "LEADER|CTRL", action = act.SendKey {key="z",mods="CTRL"} },
 }
 
