@@ -187,8 +187,8 @@ keybindings:
     bindings: ['alt+ctrl+c']
 
   # Change the focused window to be tiling.
-  # - commands: ['toggle-tiling']
-  #   bindings: ['alt+shift+c']
+  - commands: ['toggle-tiling']
+    bindings: ['alt+shift+c']
 
   # Change the focused window to be fullscreen.
   - commands: ['toggle-fullscreen']
