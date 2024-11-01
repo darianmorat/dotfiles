@@ -214,7 +214,7 @@ function dynamic_progress()
    local total_lines = vim.fn.line("$")
    local progress_percentage = math.floor((current_line / total_lines) * 100)
 
-   if progress_percentage == 0 then
+   if current_line == 1 then
       return "Top"
    elseif progress_percentage == 100 then
       return "Bot"
