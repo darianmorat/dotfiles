@@ -54,7 +54,7 @@ command! FZFHistory : execute "normal! :history\r:write ~/test\rq"
 \| endif
 
 command! FZFGlobal : set noquickview
-\| let $FZF_PICK = term("rg --files --null --follow --glob '!*.git' --glob '!.*' ~/dev | xargs -0 dirname | sort -u | sed 's#^/home/darianmorat/dev/##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
+\| let $FZF_PICK = term("rg --files --null --follow --glob '!*.git' --glob '!.*' --glob '!**/node_modules/**' ~/dev | xargs -0 dirname | sort -u | sed 's#^/home/darianmorat/dev/##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
 \| if $FZF_PICK != ''
 \|      execute 'cd ~/dev/'.fnameescape($FZF_PICK)
 \| endif
@@ -77,6 +77,9 @@ command! FilterTreeTwo :
 \| endif
 \| let $toggle2 = !$toggle2
 
+command! NewFile :execute 'touch ' . input('Create file: ')
+command! NewFolder :execute 'mkdir ' . input('Create folder: ')
+
 " ------------------------------------------------------------------------------
 " KEYMAPS
 " ------------------------------------------------------------------------------
@@ -89,10 +92,10 @@ nnoremap q :q<cr>
 nnoremap x q
 nnoremap w :!nvim<cr>
 
-nnoremap md :mk<space>
-nnoremap mf :touch<space>
-nnoremap ciw :rename<cr>
-vnoremap ciw :rename<cr>
+nnoremap a :NewFolder<cr>
+nnoremap f :NewFile<cr>
+nnoremap r :rename<cr>
+vnoremap r :rename<cr>
 
 nnoremap <space>t :FilterTree<cr>
 nnoremap <space><space>t :FilterTreeTwo<cr>
