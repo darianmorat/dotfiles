@@ -470,9 +470,9 @@ require("ibl").setup({
 require("mini.indentscope").setup({
    symbol = "╎", -- │╎|
    draw = {
-      delay = 10,
+      delay = 0,
       animation = function()
-         return 10
+         return 0
       end
    }
 })
