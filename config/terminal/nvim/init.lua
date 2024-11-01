@@ -91,7 +91,6 @@ set("v", ">", ">gv")
 local plugins = {
    { "nvim-lualine/lualine.nvim" },
    { "TaDaa/vimade" },
-   { "folke/zen-mode.nvim" },
    { "voldikss/vim-floaterm" },
    { "numToStr/Comment.nvim" },
    { "kylechui/nvim-surround", version = "*", event = "VeryLazy" },
@@ -189,30 +188,45 @@ custom.normal.c.fg   = "#CDC5B8"
 custom.inactive.c.fg = "#555555"
 
 function harpoon_marks()
-  local hp_list = require("harpoon"):list()
-  local total_marks = hp_list:length()
+   local hp_list = require("harpoon"):list()
+   local total_marks = hp_list:length()
 
-  if total_marks == 0 then
-    return ""
-  end
+   if total_marks == 0 then
+      return ""
+   end
 
-  local full_name = vim.api.nvim_buf_get_name(0)
-  local buffer_name = vim.fn.expand("%")
-  local output = { "M:" }
+   local full_name = vim.api.nvim_buf_get_name(0)
+   local buffer_name = vim.fn.expand("%")
+   local output = { "M:" }
 
-  for index = 1, math.min(total_marks, 4) do
-    local mark = hp_list.items[index].value
-    if mark == buffer_name or mark == full_name then
-      table.insert(output, "*")
-    else table.insert(output, index) end
-  end
+   for index = 1, math.min(total_marks, 4) do
+      local mark = hp_list.items[index].value
+      if mark == buffer_name or mark == full_name then
+         table.insert(output, "*")
+      else table.insert(output, index) end
+   end
 
-  return table.concat(output, "")
+   return table.concat(output, "")
+end
+
+function dynamic_progress()
+   local current_line = vim.fn.line(".")
+   local total_lines = vim.fn.line("$")
+   local progress_percentage = math.floor((current_line / total_lines) * 100)
+
+   if progress_percentage == 0 then
+      return "Top"
+   elseif progress_percentage == 100 then
+      return "Bot"
+   else
+      return string.format("%02d", progress_percentage).. "%%"
+   end
 end
 
 function dynamic_location()
    local line = vim.fn.line(".")
    local column = vim.fn.col(".")
+
    return string.format("%d:%d", line, column)
 end
 
@@ -232,7 +246,7 @@ require("lualine").setup({
       lualine_b = { "branch", { "filename", path = 0 } },
       lualine_c = { { "diff", colored = false } },
       lualine_x = { "selectioncount", { "diagnostics", colored = false } },
-      lualine_y = { harpoon_marks, "progress" }, -- Dynamic_progress: use 2 digits 08%
+      lualine_y = { harpoon_marks, dynamic_progress },
       lualine_z = { dynamic_location, custom_text }
    },
    inactive_sections = {
@@ -249,24 +263,6 @@ require("lualine").setup({
 -- VIMADE
 require("vimade").setup({
    fadelevel = 0.3
-})
-
-
--- ZEN-MODE
-require("zen-mode").setup({
-   window = {
-      backdrop = 0.90,
-      width = 125,
-      height = 1,
-      options = {
-         signcolumn = "yes",
-         relativenumber = true,
-         number = true,
-         cursorline = false,
-         foldcolumn = "0",
-         list = false
-      }
-   }
 })
 
 
@@ -513,8 +509,8 @@ lsp_zero.extend_lspconfig({
 
 
 -- MASON: 9
--- [css-lsp] [emmet-language-server] [eslint-lsp] [html-lsp]
--- [json-lsp] [marksman] [prettierd] [stylelint] [typescript-language-server]
+-- [css-lsp] [eslint-lsp] [html-lsp] [json-lsp] [marksman] [prettierd]
+-- [stylelint] [tailwindcss-language-server] [typescript-language-server]
 
 require("mason").setup({
    ui = {
