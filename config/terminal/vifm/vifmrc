@@ -27,34 +27,28 @@ fileviewer *[^/] bat --color always --wrap never --pager never --theme TwoDark %
 " COMMANDS
 " ------------------------------------------------------------------------------
 
-command! SetBookmark :execute 'bmark "' . system('echo "${PWD##*/}"') . '"' | echo system('echo Bookmark created: "${PWD##*/}"')
+command! SetBookmark : execute 'bmark "' . system('echo "${PWD##*/}"') . '"' | echo system('echo Bookmark created: "${PWD##*/}"')
 
-command! FZFFiles : set noquickview
-\| let $FZF_PICK = term("rg --files --smart-case . | sed 's|^./||' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
+command! FZFFiles :
+\| let $FZF_PICK = term("rg --files --smart-case . --glob '!**/node_modules/**' | sed 's#^./##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse")
 \| if $FZF_PICK != ''
-\|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
+\|     execute 'goto '.fnameescape($FZF_PICK)
 \| endif
 
-command! FZFDirectories : set noquickview
-\| let $FZF_PICK = term("rg --files --null | xargs -0 dirname | sort -u | grep -v '^\\.$' | grep -v '\\.git' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
-\| if $FZF_PICK != ''
-\|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
-\| endif
-
-command! RGFiles : set noquickview
-\| let $FZF_PICK = term("rg --column --line-number --color=always --colors 'path:fg:red' --colors 'line:fg:white' --colors 'match:fg:white' --smart-case . | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
-\| if $FZF_PICK != ''
-\|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
-\| endif
-
-command! FZFHistory : execute "normal! :history\r:write ~/test\rq" 
-\| let $FZF_PICK = system("fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse < ~/test 2>/dev/tty")
+command! FZFDirectories :
+\| let $FZF_PICK = term("rg --files --null --glob '!.*' --glob '!**/node_modules/**' | xargs -0 dirname | sort -u | grep -v '^\\.$' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse")
 \| if $FZF_PICK != ''
 \|     execute 'cd '.fnameescape($FZF_PICK)
 \| endif
 
-command! FZFGlobal : set noquickview
-\| let $FZF_PICK = term("rg --files --null --follow --glob '!*.git' --glob '!.*' --glob '!**/node_modules/**' ~/dev | xargs -0 dirname | sort -u | sed 's#^/home/darianmorat/dev/##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse 2>/dev/tty | cut -f1 -d:")
+command! FZFHistory : execute "normal! :history\r:write ~/history_list\rq" 
+\| let $FZF_PICK = system("fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse < ~/history_list")
+\| if $FZF_PICK != ''
+\|     execute 'cd '.fnameescape($FZF_PICK)
+\| endif
+
+command! FZFGlobal :
+\| let $FZF_PICK = term("rg --files --null --glob '!.*' --glob '!**/node_modules/**' ~/dev | xargs -0 dirname | sort -u | sed 's#^/home/darianmorat/dev/##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse")
 \| if $FZF_PICK != ''
 \|      execute 'cd ~/dev/'.fnameescape($FZF_PICK)
 \| endif
@@ -106,21 +100,10 @@ nnoremap b :SetBookmark<cr>
 nnoremap <space>fk :bmarks<cr>
 " nnoremap <space>fk :FZFMarks<cr>
 
-nnoremap m1 :bmark 1<cr>
-nnoremap m2 :bmark 2<cr>
-nnoremap m3 :bmark 3<cr>
-nnoremap m4 :bmark 4<cr>
-nnoremap <space>1 :bmgo 1<cr>
-nnoremap <space>2 :bmgo 2<cr>
-nnoremap <space>3 :bmgo 3<cr>
-nnoremap <space>4 :bmgo 4<cr>
-
 nnoremap <space>ff :FZFFiles<cr>
 nnoremap <space>fd :FZFDirectories<cr>
-nnoremap <space>fg :RGFiles<cr>
 nnoremap <space>fj :FZFHistory<cr>
 nnoremap <space>fi :FZFGlobal<cr>
 
-nnoremap <space>fh :history<cr>
 nnoremap o :histprev<cr>
 nnoremap i :histnext<cr>
