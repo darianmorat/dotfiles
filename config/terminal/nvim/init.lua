@@ -4,37 +4,49 @@
 
 -- SETTINGS
 vim.g.mapleader = " "
+vim.opt.termguicolors = true
+vim.opt.hlsearch = false
+vim.opt.wrap = false
+
 vim.opt.showmode = false
 vim.opt.showcmd = false
 vim.opt.cmdheight = 1
 vim.opt.pumheight = 8
+
+vim.opt.mouse = ""
+vim.opt.updatetime = 100
+vim.opt.ruler = false
+
 vim.opt.guicursor = "a:block"
 vim.opt.cursorline = false
-vim.opt.relativenumber = true
 vim.opt.number = true
-vim.opt.termguicolors = true
+vim.opt.relativenumber = true
 
 vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.expandtab = true
-vim.opt.smartindent = true
+vim.opt.softtabstop = 4
+
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.smartindent = true
+
 vim.opt.scrolloff = 6
 vim.opt.sidescrolloff = 6
 vim.opt.colorcolumn = "95"
 vim.opt.signcolumn = "yes"
 
-vim.opt.updatetime = 100
-vim.opt.hlsearch = false
-vim.opt.wrap = false
 vim.opt.spell = false
 vim.opt.spelllang = "en_us"
 vim.opt.spelloptions="camel"
+
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.clipboard = "unnamedplus"
 vim.g.markdown_recommended_style = 0
+
+vim.schedule(function()
+   vim.opt.clipboard = "unnamedplus"
+end)
 
 
 -- REMAPS
@@ -46,11 +58,11 @@ local function smart_quit() -- Fix quit in diff
 end
 
 set("n", "<leader>q", smart_quit)
-set("n", "<leader>w", ":w<CR>")
-set("n", "<leader>d", ":bd<CR>")
+set("n", "<leader>w", "<cmd>w<cr>")
+set("n", "<leader>d", "<cmd>bd<cr>")
 
-set("n", "<leader><leader>d", ":bd!<CR>")
-set("n", "<leader><leader>b", ":BufOnly<CR>")
+set("n", "<leader><leader>d", "<cmd>bd!<cr>")
+set("n", "<leader><leader>b", "<cmd>BufOnly<cr>")
 
 set("n", "<C-d>", "<C-d>zz")
 set("n", "<C-u>", "<C-u>zz")
@@ -58,27 +70,31 @@ set("n", "<C-u>", "<C-u>zz")
 set("n", "n", "nzz")
 set("n", "N", "Nzz")
 
-set("n", "K", "m`i<CR><Esc>``")
+set("n", "K", "m`i<cr><Esc>``")
 set("n", "J", "m`J``")
 
+set("n", "<C-h>", "<C-6>")
+set("n", "=ap", "m`=ap``")
 set("n", "<leader>a", "A")
 set("n", "<leader>i", "I")
-set("n", "<leader>z", ":ZenMode<CR>")
 
-set("n", "<C-k>", ":Lazygit<CR>")
-set("n", "<C-j>", ":Vifm<CR>")
-set("n", "<C-h>", "<C-6>")
+set("n", "<leader>e", "<cmd>FloatermNew vifm<cr>")
+set("n", "<leader>lg", "<cmd>FloatermNew --width=0.75 lazygit<cr>")
 
-set("n", "<leader>ti", ":IBLToggle<CR>")
-set("n", "<leader>tn", ":set relativenumber!<CR>")
-set("n", "<leader>ts", ":set spell!<CR>")
-set("n", "<leader>tw", ":set wrap!<CR>")
+set("n", "<leader>tI", "<cmd>IBLToggle<cr>")
+set("n", "<leader>ti", "m`<cmd>ToggleIndent<CR>|<cmd>IBLToggle<cr>``")
 
-set("n", "<leader>tm", ":MarkdownPreviewToggle<CR>")
-set("n", "<leader><leader>m", ":Lazy load markdown-preview.nvim | :Lazy<CR>")
+set("n", "<leader>ts", "<cmd>set spell!<cr>")
+set("n", "<leader>tn", "<cmd>set relativenumber!<cr>")
+set("n", "<leader>tw", "<cmd>set wrap!<cr>")
 
-set("v", "K", ":m '<-2<CR>gv=gv")
-set("v", "J", ":m '>+1<CR>gv=gv")
+set("n", "<leader>tm", "<cmd>MarkdownPreviewToggle<cr>")
+set("n", "<leader><leader>tm", "<cmd>Lazy load markdown-preview.nvim<cr>|<cmd>Lazy<cr>")
+
+set("n", "<leader>r", "<cmd>LspRestart<cr>")
+
+set("v", "K", ":m '<-2<cr>gv=gv")
+set("v", "J", ":m '>+1<cr>gv=gv")
 
 set("v", "<", "<gv")
 set("v", ">", ">gv")
@@ -89,41 +105,57 @@ set("v", ">", ">gv")
 -- -------------------------------------------------------------------------------------------
 
 local plugins = {
+   { "dstein64/vim-startuptime", cmd = "StartupTime",
+      init = function()
+         vim.g.startuptime_tries = 10
+      end
+   },
+
    { "nvim-lualine/lualine.nvim" },
-   { "TaDaa/vimade" },
-   { "voldikss/vim-floaterm" },
-   { "numToStr/Comment.nvim" },
+   { "voldikss/vim-floaterm", cmd = "FloatermNew" },
+   { "numToStr/Comment.nvim", event = "VeryLazy" },
    { "kylechui/nvim-surround", version = "*", event = "VeryLazy" },
-   { "jake-stewart/multicursor.nvim", branch = "1.0" },
+   { "jake-stewart/multicursor.nvim", branch = "1.0", event = "VeryLazy" },
 
-   { "ggandor/leap.nvim" },
-   { "nvim-lua/plenary.nvim" },
-   { "nvim-telescope/telescope.nvim", tag = "0.1.8" },
-   { "ThePrimeagen/harpoon", branch = "harpoon2" },
+   { "nvim-lua/plenary.nvim", lazy = true },
+   { "nvim-telescope/telescope.nvim", tag = "0.1.8", cmd = "Telescope" },
+   { "ThePrimeagen/harpoon", branch = "harpoon2", lazy = true },
+   { "ggandor/leap.nvim", lazy = true },
 
-   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-   { "nvim-treesitter/nvim-treesitter-refactor" },
-   { "windwp/nvim-autopairs", event = "InsertEnter" },
-   { "windwp/nvim-ts-autotag" },
-   { "lewis6991/gitsigns.nvim" },
-   { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
-   { "echasnovski/mini.indentscope", version = "*" },
+   { "lewis6991/gitsigns.nvim", event = "VeryLazy" },
+   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = "BufReadPre",
+      dependencies = {
+         { "nvim-treesitter/nvim-treesitter-refactor" },
+         { "windwp/nvim-ts-autotag", event = { "InsertEnter" } },
+         { "windwp/nvim-autopairs", event = { "InsertEnter" } },
+         { "lukas-reineke/indent-blankline.nvim", main = "ibl", event = "VeryLazy" },
+         { "echasnovski/mini.indentscope", version = "*", event = "VeryLazy" },
+      } 
+   },
 
-   { "VonHeikemen/lsp-zero.nvim", branch = "v4.x" },
-   { "williamboman/mason.nvim" },
-   { "williamboman/mason-lspconfig.nvim" },
-   { "neovim/nvim-lspconfig" },
-   { "L3MON4D3/LuaSnip" },
-   { "hrsh7th/nvim-cmp" },
-   { "hrsh7th/cmp-nvim-lsp" },
-   { "hrsh7th/cmp-buffer" },
-   { "hrsh7th/cmp-path" },
-   { "saadparwaiz1/cmp_luasnip" },
-   { "rafamadriz/friendly-snippets" },
+   { "neovim/nvim-lspconfig", lazy = true,
+      dependencies = {
+         { "williamboman/mason.nvim" },
+         { "williamboman/mason-lspconfig.nvim" },
+      }
+   },
 
-   { "iamcco/markdown-preview.nvim", -- Not loaded by default 
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" }, 
-      build = function() vim.fn["mkdp#util#install"]() end 
+   { "hrsh7th/nvim-cmp", event = "InsertEnter",
+      dependencies = {
+         { "L3MON4D3/LuaSnip", dependencies = {
+               "rafamadriz/friendly-snippets"
+            }
+         },
+         { "saadparwaiz1/cmp_luasnip" },
+         { "hrsh7th/cmp-buffer" },
+         { "hrsh7th/cmp-path" },
+         { "hrsh7th/cmp-nvim-lsp" }
+      } 
+   },
+
+   { "iamcco/markdown-preview.nvim", cmd = { -- :Lazy build markdown-preview.nvim
+         "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" 
+      }
    }
 }
 
@@ -161,8 +193,8 @@ require("lazy").setup(plugins, {
 
 -- COLORS
 vim.cmd("colorscheme onedark")
-set("n", "<leader>cs", ":Telescope colorscheme<CR>")
-set("n", "<leader>ch", ":Telescope highlights<CR>")
+set("n", "<leader>cs", "<cmd>Telescope colorscheme<cr>")
+set("n", "<leader>ch", "<cmd>Telescope highlights<cr>")
 
 
 -- LUALINE
@@ -238,8 +270,8 @@ require("lualine").setup({
    options = {
       icons_enabled = false,
       theme = custom,
-      component_separators = { left = "", right = ""},
-      section_separators = { left = "", right = ""}
+      component_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" }
    },
    sections = {
       lualine_a = { "mode" },
@@ -260,12 +292,6 @@ require("lualine").setup({
 })
 
 
--- VIMADE
-require("vimade").setup({
-   fadelevel = 0.3
-})
-
-
 -- FLOATERM
 vim.g.floaterm_title = ""
 vim.g.floaterm_height = 0.95
@@ -273,21 +299,18 @@ vim.g.floaterm_width = 0.6
 vim.g.floaterm_position = "top"
 vim.g.floaterm_opener = "edit"
 
-vim.cmd("command! Vifm FloatermNew vifm")
-vim.cmd("command! Lazygit FloatermNew --width=0.75 lazygit")
-
 
 -- COMMENT
 require("Comment").setup({})
 
-set("n", "<leader>cc", "gcc", { remap=true })
-set("n", "<leader>cb", "gbc", { remap=true })
-set("n", "<leader>ca", "gcA", { remap=true })
-set("n", "<leader>co", "gco", { remap=true })
-set("n", "<leader>cO", "gcO", { remap=true })
+set("n", "<leader>cc", "gcc", { remap = true })
+set("n", "<leader>cb", "gbc", { remap = true })
+set("n", "<leader>ca", "gcA", { remap = true })
+set("n", "<leader>co", "gco", { remap = true })
+set("n", "<leader>cO", "gcO", { remap = true })
 
-set("v", "<leader>c", "gc", { remap=true })
-set("v", "<leader>b", "gb", { remap=true })
+set("v", "<leader>c", "gc", { remap = true })
+set("v", "<leader>b", "gb", { remap = true })
 
 
 -- SURROUND
@@ -343,14 +366,15 @@ require("telescope").setup({
    }
 })
 
-set("n", "<leader>ff", function() tb.find_files({ previewer=false }) end)
+set("n", "<leader>ff", function() tb.find_files({ previewer = false }) end)
 set("n", "<leader>fg", function() tb.live_grep() end)
 set("n", "<leader>fo", function() tb.resume() end)
-set("n", "<leader>fj", function() tb.buffers({ previewer=false,sort_lastused=true }) end)
+set("n", "<leader>fj", function() tb.buffers({ previewer = false }) end)
+set("n", "<leader>fw", function() tb.grep_string({ search = vim.fn.expand("<cword>") }) end)
+set("n", "<leader>fW", function() tb.grep_string({ search = vim.fn.expand("<cWORD>") }) end)
+
 set("n", "<leader>fr", function() tb.lsp_references() end)
-set("n", "<leader>fw", function() tb.grep_string({ search=vim.fn.expand("<cword>") }) end)
-set("n", "<leader>fW", function() tb.grep_string({ search=vim.fn.expand("<cWORD>") }) end)
-set("n", "<leader>ej", function() tb.diagnostics({ bufnr=0 }) end)
+set("n", "<leader>fd", function() tb.diagnostics({ bufnr = 0 }) end)
 
 
 -- HARPOON
@@ -358,14 +382,14 @@ local hp = require("harpoon")
 local toggle_opts = {
    border = "single",
    title_pos = "center",
-   ui_width_ratio = 0.50
+   ui_width_ratio = 0.60
 }
 
 hp:setup({})
 
 set("n", "<c-m>", function() hp:list():add() end)
 set("n", "<leader>fk", function() hp.ui:toggle_quick_menu(hp:list(), toggle_opts) end)
-set("n", "<tab>", function() hp:list():prev() end) -- Tab refers <c-i>
+set("n", "<tab>", function() hp:list():prev() end) -- Refers to <c-i>
 set("n", "<c-o>", function() hp:list():next() end)
 
 set("n", "<leader>1", function() hp:list():select(1) end)
@@ -377,9 +401,8 @@ set("n", "<leader>4", function() hp:list():select(4) end)
 -- TREESITTER
 require"nvim-treesitter.configs".setup({
    ensure_installed = {
-      "lua", "javascript", "typescript", "tsx", "python",
-      "regex", "xml", "html", "css", "json", "jsonc", 
-      "diff", "markdown", "markdown_inline", "yaml", "query"
+      "lua", "javascript", "typescript", "tsx", "html", "css",
+      "json", "jsonc", "diff", "markdown", "markdown_inline", "yaml", "query"
    },
    sync_install = false,
    indent = {
@@ -404,7 +427,7 @@ require"nvim-treesitter.configs".setup({
       smart_rename = {
          enable = true,
          keymaps = {
-           smart_rename = "<leader>er"
+           smart_rename = "<leader>sr"
          }
       }
    }
@@ -441,11 +464,11 @@ require("gitsigns").setup({
 
       map("n", "<leader>gs", gs.stage_hunk)
       map("n", "<leader>gr", gs.reset_hunk)
-      map("v", "<leader>gs", function() gs.stage_hunk{ ln("."),ln("v") } end)
-      map("v", "<leader>gr", function() gs.reset_hunk{ ln("."),ln("v") } end)
+      map("v", "<leader>gs", function() gs.stage_hunk{ ln("."), ln("v") } end)
+      map("v", "<leader>gr", function() gs.reset_hunk{ ln("."), ln("v") } end)
       map("n", "<leader>gu", gs.undo_stage_hunk)
 
-      map("n", "<leader>gb", function() gs.blame_line{ full=true } end)
+      map("n", "<leader>gb", function() gs.blame_line{ full = true } end)
       map("n", "<leader>tb", gs.toggle_current_line_blame)
       map("n", "<leader>tr", gs.toggle_deleted)
    end
@@ -477,40 +500,23 @@ require("mini.indentscope").setup({
    }
 })
 
--- Ignore these filetypes
-vim.api.nvim_create_autocmd({ "FileType" }, {
-   callback = function()
-      local ignore_filetypes = {
-         "help",
-         "lazy",
-         "mason"
-      }
-      if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
-         vim.b.miniindentscope_disable = true
-      end
-   end
-})
 
+-- LSP
+local lspconfig = require("lspconfig")
+local cmp_lsp = require("cmp_nvim_lsp")
+local capabilities = cmp_lsp.default_capabilities()
 
--- LSP-ZERO
-local lsp_zero = require("lsp-zero")
 local lsp_attach = function(client, bufnr)
-   local b_opts = {buffer = bufnr}
+   local b_opts = { buffer = bufnr }
    set("n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", b_opts)
    set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", b_opts)
-   set("n", "<leader>ef", "<cmd>lua vim.lsp.buf.code_action()<cr>", b_opts)
+   set("n", "<leader>xx", "<cmd>lua vim.lsp.buf.code_action()<cr>", b_opts)
 end
 
-lsp_zero.extend_lspconfig({
-   sign_text = true,
-   lsp_attach = lsp_attach,
-   capabilities = require("cmp_nvim_lsp").default_capabilities()
-})
 
-
--- MASON: 9
--- [css-lsp] [eslint-lsp] [html-lsp] [json-lsp] [marksman] [prettierd]
--- [stylelint] [tailwindcss-language-server] [typescript-language-server]
+-- MASON: 8
+-- [css-lsp] [eslint-lsp] [html-lsp] [json-lsp] [marksman]
+-- [prettierd] [stylelint] [typescript-language-server]
 
 require("mason").setup({
    ui = {
@@ -520,7 +526,10 @@ require("mason").setup({
 require("mason-lspconfig").setup({
    handlers = {
       function(server_name)
-         require("lspconfig")[server_name].setup({})
+         require("lspconfig")[server_name].setup({
+            capabilities = capabilities,
+            on_attach = lsp_attach
+         })
       end
    }
 })
@@ -528,20 +537,19 @@ require("mason-lspconfig").setup({
 
 -- CMP
 local cmp = require("cmp")
-local cmp_action = lsp_zero.cmp_action()
 require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
    completion = { 
    -- Select first menu suggestion
-      completeopt = "menu,menuone,noinsert"  
+      completeopt = "menu, menuone, noinsert"  
    },
    sources = { 
    -- Suggestions order: VSCode-like
-      {name = "nvim_lsp"},
-      {name = "buffer", keyword_length = 2},
-      {name = "luasnip", keyword_length = 2},
-      {name = "path"}
+      { name = "nvim_lsp" },
+      { name = "path" },
+      { name = "buffer", keyword_length = 2 },
+      { name = "luasnip", keyword_length = 2 },
    },
    snippet = {
       expand = function(args)
@@ -557,8 +565,7 @@ cmp.setup({
          if cmp.visible_docs() then cmp.close_docs() 
          else cmp.open_docs() end
       end)
-   }),
-   formatting = lsp_zero.cmp_format({details = false})
+   })
 })
 
 
@@ -577,4 +584,21 @@ local yank = vim.highlight.on_yank
 vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", { group = "YankHighlight",
    callback = function() yank({ higroup = "YankHighlight", timeout = 190 }) end
+})
+
+-- Indentation CMDs
+vim.cmd("command! ToggleIndent lua ToggleIndent()")
+function ToggleIndent() -- Toogle Scope-Lines Indentation
+   vim.g.miniindentscope_disable = not vim.g.miniindentscope_disable
+end
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+   callback = function()
+      local ignore_filetypes = {
+         "help", "lazy", "mason" -- Disable Scope Indentation
+      }
+      if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+         vim.b.miniindentscope_disable = true
+      end
+   end
 })
