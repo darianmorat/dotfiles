@@ -144,14 +144,14 @@ config.foreground_text_hsb = {
 config.colors = {
    foreground = "#CDC5B8",
    background = "#1E1E1E",
-   cursor_bg = "#C6C5C5",
    cursor_fg = "#1E1E1E",
+   cursor_bg = "#C6C5C5",
    cursor_border = "#C6C5C5",
 
-   split = "#4F4F4F",
+   selection_fg = "#CDC5B8",
+   selection_bg = "#303030",
 
-   selection_fg = "#1E1E1E",
-   selection_bg = "#A9A9A9",
+   split = "#4F4F4F",
    scrollbar_thumb = "#4F4F4F",
 
    tab_bar = {
