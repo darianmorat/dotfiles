@@ -6,54 +6,43 @@
 -- Fix vscode colors -- to mach this ones
 
 return {
-   {
-      "Mofiqul/vscode.nvim",
-      enabled = false,
+   { "Mofiqul/vscode.nvim", enabled = false,
       config = function()
          require("vscode").setup({})
       end
    },
-   { 
-      "sainnhe/gruvbox-material",
-      enabled = false,
+   { "sainnhe/gruvbox-material", enabled = false,
       config = function()
-         local group = vim.api.nvim_create_augroup("custom_highlights_gruvboxmaterial", { clear=true })
-
-         vim.g.gruvbox_material_foreground = "material" -- material, mix, original
-
-         vim.api.nvim_create_autocmd("ColorScheme", {
-            group = group,
-            pattern = "gruvbox-material",
-            callback = function()
-               vim.api.nvim_set_hl(0, "Normal", { bg = "#1E1E1E" })
-               vim.api.nvim_set_hl(0, "NormalNC", { bg = "#1E1E1E" })
-               vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1E1E1E" })
-               vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#1E1E1E" })
-               vim.api.nvim_set_hl(0, "Folded", { bg = "#282828" })
-               vim.api.nvim_set_hl(0, "Search", { bg = "#283946" })
-               vim.api.nvim_set_hl(0, "CursorLine", { bg = "#303030" })
-               vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = "#e1dcd6", bg = "#303030" })
-
-               -- vim.api.nvim_set_hl(0, "LeapLabelPrimary", { fg = "#151515", bg = "#fe6a62" })
-               vim.api.nvim_set_hl(0, "EyelinerPrimary", { fg = "#e5d4b7" })
-               vim.api.nvim_set_hl(0, "EyelinerSecondary", { fg = "#fe6a62" })
-               vim.api.nvim_set_hl(0, "EyelinerDimmed", { fg = "#585858" })
-               
-
-               vim.api.nvim_set_hl(0, "Visual", { bg = "#2C2C2C" })
-               vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555" })
-               vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" })
-               vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "#2F2F2F", bg = "NONE" })
-               vim.api.nvim_set_hl(0, "SignColumn", { bg = "#1E1E1E" })
-               vim.api.nvim_set_hl(0, "IblIndent", { fg = "#2F2F2F" })
-               vim.api.nvim_set_hl(0, "@comment", { fg = "#585858" })
-            end
-         })
+         -- local group = vim.api.nvim_create_augroup("custom_highlights_gruvboxmaterial", { clear=true })
+         --
+         -- vim.g.gruvbox_material_foreground = "material" -- material, mix, original
+         --
+         -- vim.api.nvim_create_autocmd("ColorScheme", {
+         --    group = group,
+         --    pattern = "gruvbox-material",
+         --    callback = function()
+         --       vim.api.nvim_set_hl(0, "Normal", { bg = "#1E1E1E" })
+         --       vim.api.nvim_set_hl(0, "NormalNC", { bg = "#1E1E1E" })
+         --       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1E1E1E" })
+         --       vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#1E1E1E" })
+         --       vim.api.nvim_set_hl(0, "Folded", { bg = "#282828" })
+         --       vim.api.nvim_set_hl(0, "Search", { bg = "#283946" })
+         --       vim.api.nvim_set_hl(0, "CursorLine", { bg = "#303030" })
+         --       vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = "#E1DCD6", bg = "#303030" })
+         --       -- vim.api.nvim_set_hl(0, "LeapLabelPrimary", { fg = "#151515", bg = "#FE6A62" })
+         --
+         --       vim.api.nvim_set_hl(0, "Visual", { bg = "#2C2C2C" })
+         --       vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555" })
+         --       vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" })
+         --       vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "#2F2F2F", bg = "NONE" })
+         --       vim.api.nvim_set_hl(0, "SignColumn", { bg = "#1E1E1E" })
+         --       vim.api.nvim_set_hl(0, "IblIndent", { fg = "#2F2F2F" })
+         --       vim.api.nvim_set_hl(0, "@comment", { fg = "#585858" })
+         --    end
+         -- })
       end
    },
-
-   {
-      "navarasu/onedark.nvim",
+   { "navarasu/onedark.nvim",
       config = function()
          require("onedark").setup({
             code_style = {
@@ -80,7 +69,7 @@ return {
                yellow     = "#D19F66",
 
                bg2 = "#313131",
-               bg1 = "#2F2F2F",
+               bg1 = "#303030",
                bg_blue = "#5b98c9",
             },
             highlights = {
@@ -95,6 +84,7 @@ return {
 
                Search                         = { fg = "$fg", bg = "#283946" },
                IncSearch                      = { fg = "$black", bg="$red", fmt="bold" },  
+               MatchParen                     = { bg = "#343434" },
 
                Folded                         = { fg = "$fg", bg = "#282828" },
                CursorLine                     = { bg = "#303030" },
@@ -107,21 +97,19 @@ return {
                IblIndent                      = { fg = "#2F2F2F" },
                WinSeparator                   = { fg = "#2F2F2F" },
 
-               TelescopeSelection             = { fg = "#e1dcd6", bg = "#303030"},
-               TelescopeSelectionCaret        = { fg = "$fg"},
-               TelescopeMatching              = { fg = "$green"},
-               TelescopePromptBorder          = { fg = "$fg"},
-               TelescopeResultsBorder         = { fg = "$fg"},
-               TelescopePreviewBorder         = { fg = "$fg"},
-               
-               LeapLabelPrimary               = { fg = "#e1dcd6", bg = "#4c4c4d" },
-               EyelinerPrimary                = { fg = "#e1dcd6" },
-               EyelinerSecondary              = { fg = "#df5a5a" },
+               TelescopeSelection             = { fg = "#E1DCD6", bg = "#303030"},
+               TelescopeSelectionCaret        = { fg = "$fg" },
+               TelescopeMatching              = { fg = "$green" },
+               TelescopePromptBorder          = { fg = "$fg" },
+               TelescopeResultsBorder         = { fg = "$fg" },
+               TelescopePreviewBorder         = { fg = "$fg" },
+               LeapLabelPrimary               = { fg = "#E1DCD6", bg = "#4C4C4D" },
 
                CmpItemAbbrMatch               = { fg = "$green" },
                CmpItemAbbrMatchFuzzy          = { fg = "$green", fmt = "none" },
                CmpItemKindText                = { fg = "$lightGrey" },
                CmpItemMenu                    = { fg = "$lightGrey" },
+               PmenuSel                       = { fg = "#E1DCD6", bg = "#444444" },
 
                -- General
                ["@none"]                        = { fg = "NONE" },
@@ -197,21 +185,21 @@ return {
                ["@markup.raw.block.markdown"]   = { fg = "$red" },
 
                -- Typescript
-               ["@keyword.directive.typescript"] = { fg = "$green"},
+               ["@keyword.directive.typescript"]   = { fg = "$green" },
 
                -- Javascript
-               ["@tag.javascript"]               = { fg = "$aqua" },
-               ["@tag.attribute.javascript"]     = { fg = "#9266DA" },
-               ["@type.javascript"]              = { fg = "$fg" },  
-               ["@constant.javascript"]          = { fg = "$fg" },  
+               ["@tag.javascript"]                 = { fg = "$aqua" },
+               ["@tag.attribute.javascript"]       = { fg = "#9266DA" },
+               ["@type.javascript"]                = { fg = "$fg" },  
+               ["@constant.javascript"]            = { fg = "$fg" },  
 
                ["@markup.raw.javascript"]                               = { fg = "$fg" },
                ["@markup.heading.1.javascript"]                         = { fg = "$fg", fmt = "none" },
                ["@lsp.typemod.property.declaration.javascript"]         = { fg = "$fg" },
-               ["@lsp.typemod.property.defaultLibrary.javascript"]      = { fg = "$orange"},
-               ["@lsp.typemod.variable.defaultLibrary.javascript"]      = { fg = "$orange"},
-               ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = { fg = "$orange"},
-               ["@lsp.typemod.function.defaultLibrary"]                 = { fg = "$red"},
+               ["@lsp.typemod.property.defaultLibrary.javascript"]      = { fg = "$orange" },
+               ["@lsp.typemod.variable.defaultLibrary.javascript"]      = { fg = "$orange" },
+               ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = { fg = "$orange" },
+               ["@lsp.typemod.function.defaultLibrary"]                 = { fg = "$red" },
             }
 
             -- -----------------------
