@@ -79,6 +79,8 @@ return {
                FloatBorder                    = { fg = "$fg", bg = "#1E1E1E" },
                SignColumn                     = { bg = "#1E1E1E" },
 
+               MsgArea                        = { fg = "$fg", bg = "#2b2b2b" },
+
                FloatTitle                     = { fg = "$red"},
                FloatermBorder                 = { fg = "NONE", bg = "#1E1E1E" },
 
