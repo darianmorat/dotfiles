@@ -10,7 +10,7 @@ vim.opt.wrap = false
 
 vim.opt.showmode = false
 vim.opt.showcmd = false
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 0
 vim.opt.pumheight = 8
 
 vim.opt.mouse = ""
@@ -42,6 +42,7 @@ vim.opt.spelloptions="camel"
 
 vim.opt.swapfile = false
 vim.opt.backup = false
+vim.opt.undofile = true
 vim.g.markdown_recommended_style = 0
 
 vim.schedule(function()
@@ -51,6 +52,7 @@ end)
 
 -- REMAPS
 local set = vim.keymap.set
+local silent = { silent = true }
 
 local function smart_quit() -- Fix quit in diff
    if vim.wo.diff then vim.cmd("wincmd p | q") 
@@ -58,18 +60,15 @@ local function smart_quit() -- Fix quit in diff
 end
 
 set("n", "<leader>q", smart_quit)
-set("n", "<leader>w", "<cmd>w<cr>")
+set("n", "<leader>w", ":silent w<cr>", silent)
 set("n", "<leader>d", "<cmd>bd<cr>")
-
 set("n", "<leader><leader>d", "<cmd>bd!<cr>")
 set("n", "<leader><leader>b", "<cmd>BufOnly<cr>")
 
 set("n", "<C-d>", "<C-d>zz")
 set("n", "<C-u>", "<C-u>zz")
-
 set("n", "n", "nzz")
 set("n", "N", "Nzz")
-
 set("n", "K", "m`i<cr><Esc>``")
 set("n", "J", "m`J``")
 
@@ -82,22 +81,21 @@ set("n", "<leader>e", "<cmd>FloatermNew vifm<cr>")
 set("n", "<leader>lg", "<cmd>FloatermNew --width=0.75 lazygit<cr>")
 
 set("n", "<leader>tI", "<cmd>IBLToggle<cr>")
-set("n", "<leader>ti", "m`<cmd>ToggleIndent<CR>|<cmd>IBLToggle<cr>``")
-
+set("n", "<leader>ti", "m`<cmd>ToggleScope<CR> | <cmd>IBLToggle<cr>``")
 set("n", "<leader>ts", "<cmd>set spell!<cr>")
 set("n", "<leader>tn", "<cmd>set relativenumber!<cr>")
 set("n", "<leader>tw", "<cmd>set wrap!<cr>")
+set("n", "<leader>tu", "<cmd>UndotreeToggle<cr> | <cmd>UndotreeFocus<cr> ")
 
 set("n", "<leader>tm", "<cmd>MarkdownPreviewToggle<cr>")
-set("n", "<leader><leader>tm", "<cmd>Lazy load markdown-preview.nvim<cr>|<cmd>Lazy<cr>")
+set("n", "<leader><leader>tm", "<cmd>Lazy load markdown-preview.nvim<cr> | <cmd>Lazy<cr>")
 
 set("n", "<leader>r", "<cmd>LspRestart<cr>")
 
-set("v", "K", ":m '<-2<cr>gv=gv")
-set("v", "J", ":m '>+1<cr>gv=gv")
-
 set("v", "<", "<gv")
 set("v", ">", ">gv")
+set("v", "K", ":m '<-2<cr>gv=gv")
+set("v", "J", ":m '>+1<cr>gv=gv")
 
 
 -- -------------------------------------------------------------------------------------------
@@ -107,20 +105,29 @@ set("v", ">", ">gv")
 local plugins = {
    { "dstein64/vim-startuptime", cmd = "StartupTime",
       init = function()
-         vim.g.startuptime_tries = 10
+         vim.g.startuptime_tries = 20
       end
    },
+   
+   -- In first install use :Lazy build markdown-preview.nvim
+   { "iamcco/markdown-preview.nvim", cmd = { "MarkdownPreviewToggle" } },
 
-   { "nvim-lualine/lualine.nvim" },
+   { "nvim-lualine/lualine.nvim", lazy = true },
+   { "TaDaa/vimade", lazy = true },
+
    { "voldikss/vim-floaterm", cmd = "FloatermNew" },
    { "numToStr/Comment.nvim", event = "VeryLazy" },
    { "kylechui/nvim-surround", version = "*", event = "VeryLazy" },
    { "jake-stewart/multicursor.nvim", branch = "1.0", event = "VeryLazy" },
+   { "mbbill/undotree", cmd = "UndotreeToggle" },
 
-   { "nvim-lua/plenary.nvim", lazy = true },
-   { "nvim-telescope/telescope.nvim", tag = "0.1.8", cmd = "Telescope" },
-   { "ThePrimeagen/harpoon", branch = "harpoon2", lazy = true },
    { "ggandor/leap.nvim", lazy = true },
+   { "nvim-telescope/telescope.nvim", tag = "0.1.8", cmd = "Telescope",
+      dependencies = { { "nvim-lua/plenary.nvim", lazy = true } }
+   },
+   { "ThePrimeagen/harpoon", branch = "harpoon2", event = "VeryLazy",
+      dependencies = { { "nvim-lua/plenary.nvim", lazy = true } }
+   },
 
    { "lewis6991/gitsigns.nvim", event = "VeryLazy" },
    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = "BufReadPre",
@@ -146,21 +153,16 @@ local plugins = {
                "rafamadriz/friendly-snippets"
             }
          },
-         { "saadparwaiz1/cmp_luasnip" },
-         { "hrsh7th/cmp-buffer" },
+         { "hrsh7th/cmp-nvim-lsp" },
          { "hrsh7th/cmp-path" },
-         { "hrsh7th/cmp-nvim-lsp" }
+         { "hrsh7th/cmp-buffer" },
+         { "saadparwaiz1/cmp_luasnip" }
       } 
-   },
-
-   { "iamcco/markdown-preview.nvim", cmd = { -- :Lazy build markdown-preview.nvim
-         "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" 
-      }
    }
 }
 
-local colors = require("colors") -- Load colors - GruvDark reference
-vim.list_extend(plugins,colors) -- Merge colors to main plugin list
+local themes = require("themes") -- Load themes - GruvDark reference
+vim.list_extend(plugins,themes) -- Merge themes to main plugin list
 
 
 -- -------------------------------------------------------------------------------------------
@@ -263,7 +265,7 @@ function dynamic_location()
 end
 
 function custom_text()
-   return "NEOVIM"
+   return "×"
 end
 
 require("lualine").setup({
@@ -274,20 +276,31 @@ require("lualine").setup({
       section_separators = { left = "", right = "" }
    },
    sections = {
-      lualine_a = { "mode" },
-      lualine_b = { "branch", { "filename", path = 0 } },
+      lualine_a = { "mode", custom_text },
+      lualine_b = { "branch", { "filename", path = 0, symbols = { modified = '-[[+]]'} } },
       lualine_c = { { "diff", colored = false } },
       lualine_x = { "selectioncount", { "diagnostics", colored = false } },
-      lualine_y = { harpoon_marks, dynamic_progress },
-      lualine_z = { dynamic_location, custom_text }
+      lualine_y = { harpoon_marks, dynamic_progress, dynamic_location },
+      lualine_z = { custom_text, 'hostname' }
    },
    inactive_sections = {
-      lualine_a = {},
-      lualine_b = {},
       lualine_c = { "filename" },
-      lualine_x = { "location" },
-      lualine_y = {},
-      lualine_z = {}
+      lualine_x = { "location" }
+   }
+})
+
+
+-- VIMADE
+require("vimade").setup({
+   fadelevel = 0.3,
+   blocklist = {
+      only_behind_float_windows = function (win, current)
+         if (win.win_config.relative == '') and 
+            (current and current.win_config.relative ~= '') then
+            return false
+         end
+         return true
+      end
    }
 })
 
@@ -333,6 +346,12 @@ set("n", "<esc>", function()
    elseif mc.hasCursors() then mc.clearCursors() 
    else --[[ <esc> ]] end
 end)
+
+
+-- UNDOTREE
+vim.g.undotree_WindowLayout = 3
+vim.g.undotree_SplitWidth = 50
+vim.g.undotree_ShortIndicators = 0
 
 
 -- LEAP
@@ -398,6 +417,38 @@ set("n", "<leader>3", function() hp:list():select(3) end)
 set("n", "<leader>4", function() hp:list():select(4) end)
 
 
+-- GITSIGNS
+require("gitsigns").setup({
+   on_attach = function(bufnr)
+      local gs = require("gitsigns")
+      local ln = vim.fn.line
+
+      local function map(mode, l, r, opts)
+         opts = opts or {}
+         opts.buffer = bufnr
+         vim.keymap.set(mode, l, r, opts)
+      end
+
+      map("n", "<leader><leader>gi", gs.diffthis)
+      map("n", "<leader>gi", function() gs.diffthis("~") end)
+
+      map("n", "<leader>gj", gs.next_hunk)
+      map("n", "<leader>gk", gs.prev_hunk)
+      map("n", "<leader>gg", gs.preview_hunk)
+
+      map("n", "<leader>gs", gs.stage_hunk)
+      map("n", "<leader>gr", gs.reset_hunk)
+      map("v", "<leader>gs", function() gs.stage_hunk{ ln("."), ln("v") } end)
+      map("v", "<leader>gr", function() gs.reset_hunk{ ln("."), ln("v") } end)
+      map("n", "<leader>gu", gs.undo_stage_hunk)
+
+      map("n", "<leader>gb", function() gs.blame_line{ full = true } end)
+      map("n", "<leader>tb", gs.toggle_current_line_blame)
+      map("n", "<leader>tr", gs.toggle_deleted)
+   end
+})
+
+
 -- TREESITTER
 require"nvim-treesitter.configs".setup({
    ensure_installed = {
@@ -434,45 +485,12 @@ require"nvim-treesitter.configs".setup({
 })
 
 
--- AUTOPAIRS
-require("nvim-autopairs").setup({})
-
-
 -- AUTOTAG
 require("nvim-ts-autotag").setup({})
 
 
--- GITSIGNS
-require("gitsigns").setup({
-   on_attach = function(bufnr)
-      local gs = require("gitsigns")
-      local ln = vim.fn.line
-
-      local function map(mode, l, r, opts)
-         opts = opts or {}
-         opts.buffer = bufnr
-         vim.keymap.set(mode, l, r, opts)
-      end
-
-      -- Actions
-      map("n", "<leader><leader>gi", gs.diffthis)
-      map("n", "<leader>gi", function() gs.diffthis("~") end)
-
-      map("n", "<leader>gj", gs.next_hunk)
-      map("n", "<leader>gk", gs.prev_hunk)
-      map("n", "<leader>gg", gs.preview_hunk)
-
-      map("n", "<leader>gs", gs.stage_hunk)
-      map("n", "<leader>gr", gs.reset_hunk)
-      map("v", "<leader>gs", function() gs.stage_hunk{ ln("."), ln("v") } end)
-      map("v", "<leader>gr", function() gs.reset_hunk{ ln("."), ln("v") } end)
-      map("n", "<leader>gu", gs.undo_stage_hunk)
-
-      map("n", "<leader>gb", function() gs.blame_line{ full = true } end)
-      map("n", "<leader>tb", gs.toggle_current_line_blame)
-      map("n", "<leader>tr", gs.toggle_deleted)
-   end
-})
+-- AUTOPAIRS
+require("nvim-autopairs").setup({})
 
 
 -- LINE INDENTATION
@@ -541,11 +559,9 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
    completion = { 
-   -- Select first menu suggestion
       completeopt = "menu, menuone, noinsert"  
    },
    sources = { 
-   -- Suggestions order: VSCode-like
       { name = "nvim_lsp" },
       { name = "path" },
       { name = "buffer", keyword_length = 2 },
@@ -569,13 +585,9 @@ cmp.setup({
 })
 
 
--- AUTO-COMMANDS
+-- COMMANDS
 vim.cmd("command BufOnly silent! execute '%bd|e#|bd#'") -- Close all others buffers
-vim.cmd("autocmd CursorHold * echon ''") -- Clear command line, use updatetime
-
--- No auto-comment when using motions like 'o'
-vim.cmd("autocmd BufEnter * set formatoptions-=cro")
-vim.cmd("autocmd BufEnter * setlocal formatoptions-=cro")
+vim.cmd("autocmd BufNewFile,BufRead * setlocal formatoptions-=cro") -- No auto-comments
 
 -- Yank highlighting
 vim.cmd("highlight YankHighlight guibg=#2b2b2b guifg=#e6e3de")
@@ -587,15 +599,19 @@ vim.api.nvim_create_autocmd("TextYankPost", { group = "YankHighlight",
 })
 
 -- Indentation CMDs
-vim.cmd("command! ToggleIndent lua ToggleIndent()")
-function ToggleIndent() -- Toogle Scope-Lines Indentation
+vim.cmd("command! ToggleScope lua ToggleScope()")
+function ToggleScope()
    vim.g.miniindentscope_disable = not vim.g.miniindentscope_disable
 end
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
+require("ibl").overwrite { -- Disable Line Indentation
+   exclude = { filetypes = { "help", "undotree" } }
+}
+
+vim.api.nvim_create_autocmd({ "FileType" }, { -- Disable Scope Indentation
    callback = function()
       local ignore_filetypes = {
-         "help", "lazy", "mason" -- Disable Scope Indentation
+         "help", "lazy", "mason", "undotree", "startuptime" 
       }
       if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
          vim.b.miniindentscope_disable = true
