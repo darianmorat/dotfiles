@@ -14,7 +14,7 @@ vim.opt.cmdheight = 0
 vim.opt.pumheight = 8
 
 vim.opt.mouse = ""
-vim.opt.updatetime = 100
+vim.opt.updatetime = 50
 vim.opt.ruler = false
 
 vim.opt.guicursor = "a:block"
@@ -65,10 +65,11 @@ set("n", "<leader>d", "<cmd>bd<cr>")
 set("n", "<leader><leader>d", "<cmd>bd!<cr>")
 set("n", "<leader><leader>b", "<cmd>BufOnly<cr>")
 
-set("n", "<C-d>", "<C-d>zz")
-set("n", "<C-u>", "<C-u>zz")
 set("n", "n", "nzz")
 set("n", "N", "Nzz")
+set("n", "<C-d>", "<C-d>zz")
+set("n", "<C-u>", "<C-u>zz")
+
 set("n", "K", "m`i<cr><Esc>``")
 set("n", "J", "m`J``")
 
@@ -104,9 +105,7 @@ set("v", "J", ":m '>+1<cr>gv=gv")
 
 local plugins = {
    { "dstein64/vim-startuptime", cmd = "StartupTime",
-      init = function()
-         vim.g.startuptime_tries = 20
-      end
+      init = function() vim.g.startuptime_tries = 20 end
    },
    
    -- In first install use :Lazy build markdown-preview.nvim
@@ -114,7 +113,6 @@ local plugins = {
 
    { "nvim-lualine/lualine.nvim", lazy = true },
    { "TaDaa/vimade", lazy = true },
-
    { "voldikss/vim-floaterm", cmd = "FloatermNew" },
    { "numToStr/Comment.nvim", event = "VeryLazy" },
    { "kylechui/nvim-surround", version = "*", event = "VeryLazy" },
@@ -130,15 +128,11 @@ local plugins = {
    },
 
    { "lewis6991/gitsigns.nvim", event = "VeryLazy" },
-   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = "BufReadPre",
-      dependencies = {
-         { "nvim-treesitter/nvim-treesitter-refactor" },
-         { "windwp/nvim-ts-autotag", event = { "InsertEnter" } },
-         { "windwp/nvim-autopairs", event = { "InsertEnter" } },
-         { "lukas-reineke/indent-blankline.nvim", main = "ibl", event = "VeryLazy" },
-         { "echasnovski/mini.indentscope", version = "*", event = "VeryLazy" },
-      } 
-   },
+   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = "BufReadPre" },
+   { "windwp/nvim-ts-autotag", event = { "InsertEnter" } },
+   { "windwp/nvim-autopairs", event = { "InsertEnter" } },
+   { "lukas-reineke/indent-blankline.nvim", main = "ibl", event = "VeryLazy" },
+   { "echasnovski/mini.indentscope", version = "*", event = "VeryLazy" },
 
    { "neovim/nvim-lspconfig", lazy = true,
       dependencies = {
@@ -183,9 +177,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(plugins, {
-   ui = {
-      border = "single"
-   }
+   ui = { border = "single" }
 })
 
 
@@ -225,9 +217,7 @@ function harpoon_marks()
    local hp_list = require("harpoon"):list()
    local total_marks = hp_list:length()
 
-   if total_marks == 0 then
-      return ""
-   end
+   if total_marks == 0 then return "" end
 
    local full_name = vim.api.nvim_buf_get_name(0)
    local buffer_name = vim.fn.expand("%")
@@ -248,10 +238,8 @@ function dynamic_progress()
    local total_lines = vim.fn.line("$")
    local progress_percentage = math.floor((current_line / total_lines) * 100)
 
-   if current_line == 1 then
-      return "Top"
-   elseif progress_percentage == 100 then
-      return "Bot"
+   if current_line == 1 then return "Top"
+   elseif progress_percentage == 100 then return "Bot"
    else
       return string.format("%02d", progress_percentage).. "%%"
    end
@@ -277,11 +265,11 @@ require("lualine").setup({
    },
    sections = {
       lualine_a = { "mode", custom_text },
-      lualine_b = { "branch", { "filename", path = 0, symbols = { modified = '-[[+]]'} } },
+      lualine_b = { "branch", { "filename", path = 0, symbols = { modified = "-[[+]]" } } },
       lualine_c = { { "diff", colored = false } },
       lualine_x = { "selectioncount", { "diagnostics", colored = false } },
       lualine_y = { harpoon_marks, dynamic_progress, dynamic_location },
-      lualine_z = { custom_text, 'hostname' }
+      lualine_z = { custom_text, "hostname" }
    },
    inactive_sections = {
       lualine_c = { "filename" },
@@ -295,10 +283,9 @@ require("vimade").setup({
    fadelevel = 0.3,
    blocklist = {
       only_behind_float_windows = function (win, current)
-         if (win.win_config.relative == '') and 
-            (current and current.win_config.relative ~= '') then
-            return false
-         end
+         if (win.win_config.relative == "") and 
+            (current and current.win_config.relative ~= "") then
+            return false end
          return true
       end
    }
@@ -350,8 +337,9 @@ end)
 
 -- UNDOTREE
 vim.g.undotree_WindowLayout = 3
-vim.g.undotree_SplitWidth = 50
+vim.g.undotree_SplitWidth = 38
 vim.g.undotree_ShortIndicators = 0
+vim.g.undotree_DiffAutoOpen = 0
 
 
 -- LEAP
@@ -468,23 +456,6 @@ require"nvim-treesitter.configs".setup({
 })
 
 
--- TREESITTER REFACTOR
-require"nvim-treesitter.configs".setup({
-   refactor = {
-      highlight_definitions = {
-         enable = true,
-         clear_on_cursor_move = true
-      },
-      smart_rename = {
-         enable = true,
-         keymaps = {
-           smart_rename = "<leader>sr"
-         }
-      }
-   }
-})
-
-
 -- AUTOTAG
 require("nvim-ts-autotag").setup({})
 
@@ -525,10 +496,11 @@ local cmp_lsp = require("cmp_nvim_lsp")
 local capabilities = cmp_lsp.default_capabilities()
 
 local lsp_attach = function(client, bufnr)
-   local b_opts = { buffer = bufnr }
-   set("n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", b_opts)
-   set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", b_opts)
-   set("n", "<leader>xx", "<cmd>lua vim.lsp.buf.code_action()<cr>", b_opts)
+   local opts = { buffer = bufnr }
+   set("n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+   set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+   set("n", "<leader>xx", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+   set("n", "<leader>sr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end
 
 
@@ -537,9 +509,7 @@ end
 -- [prettierd] [stylelint] [typescript-language-server]
 
 require("mason").setup({
-   ui = {
-      border = "single"
-   }
+   ui = { border = "single" }
 })
 require("mason-lspconfig").setup({
    handlers = {
