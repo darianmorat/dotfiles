@@ -186,6 +186,9 @@ return {
                ["@label.markdown"]              = { fg = "$red" },
                ["@markup.raw.block.markdown"]   = { fg = "$red" },
 
+               ["@markup.heading.1.html"]       = { fg = "$orange" },
+               ["@markup.heading.html"]         = { fg = "$orange" },
+
                -- Typescript
                ["@keyword.directive.typescript"]   = { fg = "$green" },
 
@@ -195,13 +198,14 @@ return {
                ["@type.javascript"]                = { fg = "$fg" },  
                ["@constant.javascript"]            = { fg = "$fg" },  
 
-               ["@markup.raw.javascript"]                               = { fg = "$fg" },
-               ["@markup.heading.1.javascript"]                         = { fg = "$fg", fmt = "none" },
                ["@lsp.typemod.property.declaration.javascript"]         = { fg = "$fg" },
                ["@lsp.typemod.property.defaultLibrary.javascript"]      = { fg = "$orange" },
                ["@lsp.typemod.variable.defaultLibrary.javascript"]      = { fg = "$orange" },
                ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = { fg = "$orange" },
                ["@lsp.typemod.function.defaultLibrary"]                 = { fg = "$red" },
+
+               ["@markup.raw.javascript"]                               = { fg = "$fg" },
+               ["@markup.heading.1.javascript"]                         = { fg = "$orange", fmt = "none" },
             }
 
             -- -----------------------
