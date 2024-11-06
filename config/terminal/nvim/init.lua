@@ -543,6 +543,7 @@ require("mason-lspconfig").setup({
 -- CMP
 local cmp = require("cmp")
 require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip").filetype_extend("javascriptreact", { "html" })
 
 cmp.setup({
    completion = { 
@@ -550,9 +551,9 @@ cmp.setup({
    },
    sources = { 
       { name = "nvim_lsp" },
+      { name = "luasnip" },
       { name = "path" },
-      { name = "buffer", keyword_length = 2 },
-      { name = "luasnip", keyword_length = 2 },
+      { name = "buffer" },
    },
    snippet = {
       expand = function(args)
