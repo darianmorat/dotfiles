@@ -25,7 +25,7 @@ vim.opt.relativenumber = true
 vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.expandtab = true
-vim.opt.softtabstop = 4
+vim.opt.softtabstop = 3
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -391,7 +391,6 @@ set("n", "<leader>fd", function() tb.diagnostics({ bufnr = 0 }) end)
 
 
 -- HARPOON
--- Fix: Doesn't close the [No Name] as Telescope
 local hp = require("harpoon")
 local toggle_opts = {
    border = "single",
@@ -403,8 +402,15 @@ hp:setup({})
 
 set("n", "<c-m>", function() hp:list():add() end)
 set("n", "<leader>fk", function() hp.ui:toggle_quick_menu(hp:list(), toggle_opts) end)
+
 set("n", "<tab>", function() hp:list():prev() end) -- Key <c-i>
-set("n", "<c-o>", function() hp:list():next() end)
+-- Fix: Doesn't close the [No Name] buffer as Telescope
+local is_first_run = true 
+set("n", "<c-o>", function() hp:list():next() 
+   if is_first_run then 
+      vim.cmd("bd 1") is_first_run = false
+   end
+end)
 
 set("n", "<leader>1", function() hp:list():select(1) end)
 set("n", "<leader>2", function() hp:list():select(2) end)
