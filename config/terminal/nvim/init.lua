@@ -510,6 +510,10 @@ local lsp_attach = function(client, bufnr)
    set("n", "<leader>sr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+   vim.lsp.handlers.hover, { border = "single" }
+)
+
 
 -- MASON: 8
 -- [css-lsp] [eslint-lsp] [html-lsp] [json-lsp] [marksman]
@@ -551,6 +555,11 @@ cmp.setup({
    },
    view = {
       docs = { auto_open = false }
+   },
+   window = {
+      documentation = {
+         winhighlight = "Normal:MatchParen,FloatBorder:MatchParen",
+      }
    },
    mapping = cmp.mapping.preset.insert({ 
       ["<Enter>"] = cmp.mapping.confirm({ select = true }),
