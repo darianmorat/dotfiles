@@ -114,7 +114,9 @@ local plugins = {
    { "nvim-lualine/lualine.nvim", lazy = true },
    { "TaDaa/vimade", lazy = true },
    { "voldikss/vim-floaterm", cmd = "FloatermNew" },
+
    { "numToStr/Comment.nvim", event = "VeryLazy" },
+   { "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
    { "kylechui/nvim-surround", version = "*", event = "VeryLazy" },
    { "jake-stewart/multicursor.nvim", branch = "1.0", event = "VeryLazy" },
    { "mbbill/undotree", cmd = "UndotreeToggle" },
@@ -301,7 +303,11 @@ vim.g.floaterm_opener = "edit"
 
 
 -- COMMENT
-require("Comment").setup({})
+require("Comment").setup({
+   pre_hook = require(
+      "ts_context_commentstring.integrations.comment_nvim"
+   ).create_pre_hook()
+})
 
 set("n", "<leader>cc", "gcc", { remap = true })
 set("n", "<leader>cb", "gbc", { remap = true })
