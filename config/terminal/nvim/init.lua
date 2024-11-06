@@ -370,6 +370,12 @@ require("telescope").setup({
             [ "<esc>" ] = actions.close
          }
       }
+   },
+   pickers = {
+      buffers = {
+         sort_lastused = true,
+         ignore_current_buffer = true
+      }
    }
 })
 
@@ -385,6 +391,7 @@ set("n", "<leader>fd", function() tb.diagnostics({ bufnr = 0 }) end)
 
 
 -- HARPOON
+-- Fix: Doesn't close the [No Name] as Telescope
 local hp = require("harpoon")
 local toggle_opts = {
    border = "single",
@@ -396,7 +403,7 @@ hp:setup({})
 
 set("n", "<c-m>", function() hp:list():add() end)
 set("n", "<leader>fk", function() hp.ui:toggle_quick_menu(hp:list(), toggle_opts) end)
-set("n", "<tab>", function() hp:list():prev() end) -- Refers to <c-i>
+set("n", "<tab>", function() hp:list():prev() end) -- Key <c-i>
 set("n", "<c-o>", function() hp:list():next() end)
 
 set("n", "<leader>1", function() hp:list():select(1) end)
