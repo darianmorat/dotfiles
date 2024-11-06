@@ -107,8 +107,7 @@ local plugins = {
    { "dstein64/vim-startuptime", cmd = "StartupTime",
       init = function() vim.g.startuptime_tries = 20 end
    },
-   
-   -- In first install use :Lazy build markdown-preview.nvim
+   -- First install :Lazy build markdown-preview.nvim
    { "iamcco/markdown-preview.nvim", cmd = { "MarkdownPreviewToggle" } },
 
    { "nvim-lualine/lualine.nvim", lazy = true },
@@ -125,11 +124,11 @@ local plugins = {
    { "nvim-telescope/telescope.nvim", tag = "0.1.8", cmd = "Telescope",
       dependencies = { { "nvim-lua/plenary.nvim", lazy = true } }
    },
-   { "ThePrimeagen/harpoon", branch = "harpoon2", event = "VeryLazy",
+   { "ThePrimeagen/harpoon", lazy = true, branch = "harpoon2",
       dependencies = { { "nvim-lua/plenary.nvim", lazy = true } }
    },
 
-   { "lewis6991/gitsigns.nvim", event = "VeryLazy" },
+   { "lewis6991/gitsigns.nvim", lazy = true },
    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = "BufReadPre" },
    { "windwp/nvim-ts-autotag", event = { "InsertEnter" } },
    { "windwp/nvim-autopairs", event = { "InsertEnter" } },
@@ -138,22 +137,20 @@ local plugins = {
 
    { "neovim/nvim-lspconfig", lazy = true,
       dependencies = {
-         { "williamboman/mason.nvim" },
-         { "williamboman/mason-lspconfig.nvim" },
+         "williamboman/mason.nvim",
+         "williamboman/mason-lspconfig.nvim"
       }
    },
 
    { "hrsh7th/nvim-cmp", event = "InsertEnter",
       dependencies = {
-         { "L3MON4D3/LuaSnip", dependencies = {
-               "rafamadriz/friendly-snippets"
-            }
-         },
-         { "hrsh7th/cmp-nvim-lsp" },
-         { "hrsh7th/cmp-path" },
-         { "hrsh7th/cmp-buffer" },
-         { "saadparwaiz1/cmp_luasnip" }
-      } 
+         "L3MON4D3/LuaSnip",
+         "rafamadriz/friendly-snippets",
+         "hrsh7th/cmp-nvim-lsp",
+         "saadparwaiz1/cmp_luasnip",
+         "hrsh7th/cmp-path",
+         "hrsh7th/cmp-buffer"
+      }
    }
 }
 
@@ -372,9 +369,7 @@ require("telescope").setup({
          "node_modules" 
       },
       mappings = {
-         i = {
-            [ "<esc>" ] = actions.close
-         }
+         i = { [ "<esc>" ] = actions.close }
       }
    },
    pickers = {
@@ -406,7 +401,7 @@ local toggle_opts = {
 
 hp:setup({})
 
--- Fix: Doesn't close the [No Name] buffer as Telescope
+-- Fix: Doesn't close [No Name] buffer as Telescope
 local is_first_run = true 
 local function handler()
    if is_first_run then vim.cmd("bd 1") is_first_run = false end
@@ -435,7 +430,7 @@ require("gitsigns").setup({
          vim.keymap.set(mode, l, r, opts)
       end
 
-      map("n", "<leader><leader>gi", gs.diffthis)
+      map("n", "<leader><leader>gi", gs.diffthis) -- ?
       map("n", "<leader>gi", function() gs.diffthis("~") end)
 
       map("n", "<leader>gj", gs.next_hunk)
@@ -459,7 +454,8 @@ require("gitsigns").setup({
 require"nvim-treesitter.configs".setup({
    ensure_installed = {
       "lua", "javascript", "typescript", "tsx", "html", "css",
-      "json", "jsonc", "diff", "markdown", "markdown_inline", "yaml", "query"
+      "json", "jsonc", "diff", "markdown", "markdown_inline", "yaml",
+      "query", -- Add more
    },
    sync_install = false,
    indent = {
@@ -551,8 +547,8 @@ require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip").filetype_extend("javascriptreact", { "html" })
 
 cmp.setup({
-   completion = { 
-      completeopt = "menu, menuone, noinsert"  
+   completion = {
+      completeopt = "menu, menuone, noinsert"
    },
    sources = { 
       { name = "nvim_lsp" },
