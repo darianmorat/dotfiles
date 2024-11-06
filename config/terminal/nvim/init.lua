@@ -406,22 +406,21 @@ local toggle_opts = {
 
 hp:setup({})
 
+-- Fix: Doesn't close the [No Name] buffer as Telescope
+local is_first_run = true 
+local function handler()
+   if is_first_run then vim.cmd("bd 1") is_first_run = false end
+end
+
 set("n", "<c-m>", function() hp:list():add() end)
 set("n", "<leader>fk", function() hp.ui:toggle_quick_menu(hp:list(), toggle_opts) end)
 
-set("n", "<tab>", function() hp:list():prev() end) -- Key <c-i>
--- Fix: Doesn't close the [No Name] buffer as Telescope
-local is_first_run = true 
-set("n", "<c-o>", function() hp:list():next() 
-   if is_first_run then 
-      vim.cmd("bd 1") is_first_run = false
-   end
-end)
-
-set("n", "<leader>1", function() hp:list():select(1) end)
-set("n", "<leader>2", function() hp:list():select(2) end)
-set("n", "<leader>3", function() hp:list():select(3) end)
-set("n", "<leader>4", function() hp:list():select(4) end)
+set("n", "<tab>", function() hp:list():prev() handler() end) -- Key <c-i>
+set("n", "<c-o>", function() hp:list():next() handler() end)
+set("n", "<leader>1", function() hp:list():select(1) handler() end)
+set("n", "<leader>2", function() hp:list():select(2) handler() end)
+set("n", "<leader>3", function() hp:list():select(3) handler() end)
+set("n", "<leader>4", function() hp:list():select(4) handler() end)
 
 
 -- GITSIGNS
