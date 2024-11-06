@@ -48,9 +48,9 @@ command! FZFHistory : execute "normal! :history\r:write ~/history_list\rq"
 \| endif
 
 command! FZFGlobal :
-\| let $FZF_PICK = term("rg --files --null --glob '!.*' --glob '!**/node_modules/**' ~/dev | xargs -0 dirname | sort -u | sed 's#^/home/darianmorat/dev/##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse")
+\| let $FZF_PICK = term("find ~/dev ~/work -mindepth 1 -maxdepth 1 -type d | sed 's#^/home/darianmorat/##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse")
 \| if $FZF_PICK != ''
-\|      execute 'cd ~/dev/'.fnameescape($FZF_PICK)
+\|      execute 'cd ~/'.fnameescape($FZF_PICK)
 \| endif
 
 \| let $toggle = 0
