@@ -55,7 +55,7 @@ local set = vim.keymap.set
 local silent = { silent = true }
 
 local function smart_quit() -- Fix quit in diff
-   if vim.wo.diff then vim.cmd("wincmd p | q") 
+   if vim.wo.diff then vim.cmd("wincmd p | q")
    else vim.cmd(":q") end
 end
 
@@ -122,7 +122,10 @@ local plugins = {
 
    { "ggandor/leap.nvim", lazy = true },
    { "nvim-telescope/telescope.nvim", tag = "0.1.8", cmd = "Telescope",
-      dependencies = { { "nvim-lua/plenary.nvim", lazy = true } }
+      dependencies = { 
+         { "nvim-lua/plenary.nvim", lazy = true },
+         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+      }
    },
    { "ThePrimeagen/harpoon", lazy = true, branch = "harpoon2",
       dependencies = { { "nvim-lua/plenary.nvim", lazy = true } }
@@ -365,7 +368,7 @@ require("telescope").setup({
       borderchars = {
          "─", "│", "─", "│", "┌", "┐", "┘", "└"
       },
-      file_ignore_patterns = { 
+      file_ignore_patterns = {
          "node_modules" 
       },
       mappings = {
@@ -377,8 +380,18 @@ require("telescope").setup({
          sort_lastused = true,
          ignore_current_buffer = true
       }
+   },
+   extensions = {
+      fzf = {
+         fuzzy = true,
+         override_generic_sorter = true,
+         override_file_sorter = true,
+         case_mode = "smart_case",
+      }
    }
 })
+
+require('telescope').load_extension('fzf')
 
 set("n", "<leader>ff", function() tb.find_files({ previewer = false }) end)
 set("n", "<leader>fg", function() tb.live_grep() end)
@@ -402,7 +415,7 @@ local toggle_opts = {
 hp:setup({})
 
 -- Fix: Doesn't close [No Name] buffer as Telescope
-local is_first_run = true 
+local is_first_run = true
 local function handler()
    if is_first_run then vim.cmd("bd 1") is_first_run = false end
 end
@@ -462,9 +475,9 @@ require"nvim-treesitter.configs".setup({
       enable = true
    },
    highlight = {
-      enable = true,  
+      enable = true,
       additional_vim_regex_highlighting = {
-         "markdown" 
+         "markdown"
       }
    }
 })
@@ -554,7 +567,7 @@ cmp.setup({
       { name = "nvim_lsp" },
       { name = "luasnip" },
       { name = "path" },
-      { name = "buffer" },
+      { name = "buffer" }
    },
    snippet = {
       expand = function(args)
@@ -572,7 +585,7 @@ cmp.setup({
    mapping = cmp.mapping.preset.insert({ 
       ["<Enter>"] = cmp.mapping.confirm({ select = true }),
       ["<C-z>"] = cmp.mapping(function() -- C-Space x2, WezTerm binding
-         if cmp.visible_docs() then cmp.close_docs() 
+         if cmp.visible_docs() then cmp.close_docs()
          else cmp.open_docs() end
       end)
    })
@@ -605,7 +618,7 @@ require("ibl").overwrite { -- Disable Line Indentation
 vim.api.nvim_create_autocmd({ "FileType" }, { -- Disable Scope Indentation
    callback = function()
       local ignore_filetypes = {
-         "help", "lazy", "mason", "undotree", "startuptime" 
+         "help", "undotree", "lazy", "mason", "startuptime"
       }
       if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
          vim.b.miniindentscope_disable = true
