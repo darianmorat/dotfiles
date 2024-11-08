@@ -79,17 +79,21 @@ return {
                FloatBorder                    = { fg = "$fg", bg = "#1E1E1E" },
                SignColumn                     = { bg = "#1E1E1E" },
 
-               MsgArea                        = { fg = "$fg", bg = "#2b2b2b" },
+               MsgArea                        = { fg = "$fg", bg = "#232323" },
+               StatusLine                     = { fg = "$fg", bg = "#2B2B2B" },
 
                FloatTitle                     = { fg = "$red"},
                FloatermBorder                 = { fg = "NONE", bg = "#1E1E1E" },
-
                Search                         = { fg = "$fg", bg = "#283946" },
                IncSearch                      = { fg = "$black", bg="$red", fmt="bold" },  
                MatchParen                     = { bg = "#343434" },
-
                Folded                         = { fg = "$fg", bg = "#282828" },
-               CursorLine                     = { bg = "#303030" },
+               CursorLine                     = { bg = "#1e1e1e" },
+               CursorLineNr                   = { fg = "#7F7D7A" },
+
+               Cursor                         = { fg = "#1E1E1E", bg = "#CDC5B8", fmt="bold" },
+               Cursor2                        = { fg = "#1E1E1E", bg = "#BF5959" },
+
                Visual                         = { bg = "#2C2C2C" },
                TSParameter                    = { fg = "$fg" },
                TSParameterReference           = { fg = "$fg" }, 
