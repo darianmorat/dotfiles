@@ -136,6 +136,8 @@ config.tab_bar_at_bottom = false
 -- -------------------------------------------------------------------------------------------
 -- COLORS
 -- -------------------------------------------------------------------------------------------
+config.force_reverse_video_cursor = true
+
 config.foreground_text_hsb = {
    saturation = 1.03,
    brightness = 1.2,
