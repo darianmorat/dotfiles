@@ -7,18 +7,17 @@ vim.g.mapleader = " "
 vim.opt.termguicolors = true
 vim.opt.hlsearch = false
 vim.opt.wrap = false
+vim.opt.pumheight = 8
 
+vim.opt.ruler = false
 vim.opt.showmode = false
 vim.opt.showcmd = false
 vim.opt.cmdheight = 0
-vim.opt.pumheight = 8
+vim.opt.laststatus = 0
 
+vim.opt.updatetime = 80
 vim.opt.mouse = ""
-vim.opt.updatetime = 50
-vim.opt.ruler = false
-
-vim.opt.guicursor = "a:block"
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -26,25 +25,23 @@ vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.expandtab = true
 vim.opt.softtabstop = 3
+vim.opt.smartindent = true
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.smartindent = true
+vim.opt.spell = false
+vim.opt.spelllang = "en_us"
+vim.opt.spelloptions="camel"
 
 vim.opt.scrolloff = 6
 vim.opt.sidescrolloff = 6
 vim.opt.colorcolumn = "95"
 vim.opt.signcolumn = "yes"
-
-vim.opt.spell = false
-vim.opt.spelllang = "en_us"
-vim.opt.spelloptions="camel"
+vim.opt.undofile = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undofile = true
 vim.g.markdown_recommended_style = 0
-
 vim.schedule(function()
    vim.opt.clipboard = "unnamedplus"
 end)
@@ -54,7 +51,7 @@ end)
 local set = vim.keymap.set
 local silent = { silent = true }
 
-local function smart_quit() -- Fix quit in diff
+local function smart_quit() -- Fix: quit in diff
    if vim.wo.diff then vim.cmd("wincmd p | q")
    else vim.cmd(":q") end
 end
@@ -75,8 +72,10 @@ set("n", "J", "m`J``")
 
 set("n", "<C-h>", "<C-6>")
 set("n", "=ap", "m`=ap``")
+
 set("n", "<leader>a", "A")
 set("n", "<leader>i", "I")
+set("n", "<leader>p", "<c-g>")
 
 set("n", "<leader>e", "<cmd>FloatermNew vifm<cr>")
 set("n", "<leader>lg", "<cmd>FloatermNew --width=0.75 lazygit<cr>")
@@ -110,10 +109,8 @@ local plugins = {
    -- First install :Lazy build markdown-preview.nvim
    { "iamcco/markdown-preview.nvim", cmd = { "MarkdownPreviewToggle" } },
 
-   { "nvim-lualine/lualine.nvim", lazy = true },
    { "TaDaa/vimade", lazy = true },
    { "voldikss/vim-floaterm", cmd = "FloatermNew" },
-
    { "numToStr/Comment.nvim", event = "VeryLazy" },
    { "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
    { "kylechui/nvim-surround", version = "*", event = "VeryLazy" },
@@ -124,7 +121,7 @@ local plugins = {
    { "nvim-telescope/telescope.nvim", tag = "0.1.8", cmd = "Telescope",
       dependencies = { 
          { "nvim-lua/plenary.nvim", lazy = true },
-         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
       }
    },
    { "ThePrimeagen/harpoon", lazy = true, branch = "harpoon2",
@@ -191,93 +188,6 @@ require("lazy").setup(plugins, {
 vim.cmd("colorscheme onedark")
 set("n", "<leader>cs", "<cmd>Telescope colorscheme<cr>")
 set("n", "<leader>ch", "<cmd>Telescope highlights<cr>")
-
-
--- LUALINE
-local custom = require"lualine.themes.onedark"
-
-custom.normal.a.bg   = "#2B2B2B"
-custom.insert.a.bg   = "#2B2B2B"
-custom.visual.a.bg   = "#2B2B2B"
-custom.command.a.bg  = "#2B2B2B"
-custom.replace.a.bg  = "#2B2B2B"
-custom.normal.b.bg   = "#2B2B2B"
-custom.normal.c.bg   = "#2B2B2B"
-custom.inactive.c.bg = "#2B2B2B"
-
-custom.normal.a.fg   = "#CDC5B8"
-custom.insert.a.fg   = "#CDC5B8"
-custom.visual.a.fg   = "#CDC5B8"
-custom.command.a.fg  = "#CDC5B8"
-custom.replace.a.fg  = "#CDC5B8"
-custom.normal.b.fg   = "#CDC5B8"
-custom.normal.c.fg   = "#CDC5B8"
-
-custom.inactive.c.fg = "#555555"
-
-function harpoon_marks()
-   local hp_list = require("harpoon"):list()
-   local total_marks = hp_list:length()
-
-   if total_marks == 0 then return "" end
-
-   local full_name = vim.api.nvim_buf_get_name(0)
-   local buffer_name = vim.fn.expand("%")
-   local output = { "M:" }
-
-   for index = 1, math.min(total_marks, 4) do
-      local mark = hp_list.items[index].value
-      if mark == buffer_name or mark == full_name then
-         table.insert(output, "*")
-      else table.insert(output, index) end
-   end
-
-   return table.concat(output, "")
-end
-
-function dynamic_progress()
-   local current_line = vim.fn.line(".")
-   local total_lines = vim.fn.line("$")
-   local progress_percentage = math.floor((current_line / total_lines) * 100)
-
-   if current_line == 1 then return "Top"
-   elseif progress_percentage == 100 then return "Bot"
-   else
-      return string.format("%02d", progress_percentage).. "%%"
-   end
-end
-
-function dynamic_location()
-   local line = vim.fn.line(".")
-   local column = vim.fn.col(".")
-
-   return string.format("%d:%d", line, column)
-end
-
-function custom_text()
-   return "×"
-end
-
-require("lualine").setup({
-   options = {
-      icons_enabled = false,
-      theme = custom,
-      component_separators = { left = "", right = "" },
-      section_separators = { left = "", right = "" }
-   },
-   sections = {
-      lualine_a = { "mode", custom_text },
-      lualine_b = { "branch", { "filename", path = 0, symbols = { modified = "-[[+]]" } } },
-      lualine_c = { { "diff", colored = false } },
-      lualine_x = { "selectioncount", { "diagnostics", colored = false } },
-      lualine_y = { harpoon_marks, dynamic_progress, dynamic_location },
-      lualine_z = { custom_text, "hostname" }
-   },
-   inactive_sections = {
-      lualine_c = { "filename" },
-      lualine_x = { "location" }
-   }
-})
 
 
 -- VIMADE
@@ -391,7 +301,7 @@ require("telescope").setup({
    }
 })
 
-require('telescope').load_extension('fzf')
+require("telescope").load_extension("fzf")
 
 set("n", "<leader>ff", function() tb.find_files({ previewer = false }) end)
 set("n", "<leader>fg", function() tb.live_grep() end)
@@ -528,7 +438,14 @@ local lsp_attach = function(client, bufnr)
    set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
    set("n", "<leader>xx", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
    set("n", "<leader>sr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+
+   set("n", "<leader>vj", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
+   set("n", "<leader>vk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
+   set("n", "<leader>vd", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
 end
+
+vim.diagnostic.config({ virtual_text = false })
+vim.diagnostic.config { float = { border = "single" } }
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
    vim.lsp.handlers.hover, { border = "single" }
@@ -593,35 +510,57 @@ cmp.setup({
 
 
 -- COMMANDS
+-- Pending fix: Use the new vim.api lua for CMDs
 vim.cmd("command BufOnly silent! execute '%bd|e#|bd#'") -- Close all others buffers
 vim.cmd("autocmd BufNewFile,BufRead * setlocal formatoptions-=cro") -- No auto-comments
 
 -- Yank highlighting
 vim.cmd("highlight YankHighlight guibg=#2b2b2b guifg=#e6e3de")
 local yank = vim.highlight.on_yank
-
 vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", { group = "YankHighlight",
    callback = function() yank({ higroup = "YankHighlight", timeout = 190 }) end
 })
 
--- Indentation CMDs
+-- Fixes 'cmdheight=0' flickering when using InsertMode
+vim.api.nvim_create_autocmd("ModeChanged", {
+  callback = function()
+    if vim.fn.mode() == "i" then vim.schedule(vim.cmd.redraw) end
+  end
+})
+
+-- Toggle Scope Indentation
 vim.cmd("command! ToggleScope lua ToggleScope()")
 function ToggleScope()
    vim.g.miniindentscope_disable = not vim.g.miniindentscope_disable
 end
 
-require("ibl").overwrite { -- Disable Line Indentation
+-- Disable Line Indentation
+require("ibl").overwrite {
    exclude = { filetypes = { "help", "undotree" } }
 }
 
-vim.api.nvim_create_autocmd({ "FileType" }, { -- Disable Scope Indentation
+-- Disable Scope Indentation
+vim.api.nvim_create_autocmd({ "FileType" }, {
    callback = function()
-      local ignore_filetypes = {
-         "help", "undotree", "lazy", "mason", "startuptime"
-      }
+      local ignore_filetypes = { "help", "undotree", "lazy", "mason", "startuptime" }
       if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
          vim.b.miniindentscope_disable = true
       end
+   end
+})
+
+-- InsertMode indicator
+-- Relay in WezTerm force_reverse_video_cursor setting
+vim.opt.guicursor="n-v-c:block-Cursor,i-ci-ve:block-Cursor2"
+
+-- File changed indicator in editor
+vim.api.nvim_create_autocmd({"TextChangedI", "TextChanged", "BufWritePost"}, {
+   callback = function()
+      if vim.bo.filetype:match("^Telescope") or vim.bo.filetype:match("^harpoon") then
+         return -- Pending fix: find a better way to ignore
+      end
+      local changed = vim.fn.getbufinfo("%")[1].changed
+      vim.cmd("highlight CursorLineNr guifg=" .. (changed == 1 and "#D19F66" or "#7F7D7A"))
    end
 })
