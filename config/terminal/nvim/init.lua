@@ -76,7 +76,7 @@ vim.keymap.set("n", "<leader>a", "A")
 vim.keymap.set("n", "<leader>i", "I")
 vim.keymap.set("n", "<leader>h", "<c-g>")
 
-vim.keymap.set("n", "<leader>e", "<cmd>FloatermNew vifm<cr>")
+vim.keymap.set("n", "<leader>e", "<cmd>FloatermNew --height=0.88 vifm<cr>")
 vim.keymap.set("n", "<leader>lg", "<cmd>FloatermNew --width=0.75 lazygit<cr>")
 
 vim.keymap.set("n", "<leader>tI", "<cmd>IBLToggle<cr>")
@@ -118,9 +118,8 @@ local plugins = {
    { "voldikss/vim-floaterm", cmd = "FloatermNew",
       config = function() 
          vim.g.floaterm_title = ""
-         vim.g.floaterm_height = 0.95
          vim.g.floaterm_width = 0.6
-         vim.g.floaterm_position = "top"
+         vim.g.floaterm_height = 0.99
          vim.g.floaterm_opener = "edit"
       end
    },
@@ -216,6 +215,7 @@ local plugins = {
             layout_config = {
                preview_cutoff = 0,
                width = 0.6,
+               height = 35,
                preview_height = 0.6
             },
             file_ignore_patterns = { "node_modules" },
@@ -272,7 +272,7 @@ local plugins = {
                   title = " Harpoon ",
                   border = "single", 
                   title_pos = "center", 
-                  ui_width_ratio = 0.60 
+                  ui_width_ratio = 0.6 
                }
                harpoon.ui:toggle_quick_menu(harpoon:list(), UI)
                end
