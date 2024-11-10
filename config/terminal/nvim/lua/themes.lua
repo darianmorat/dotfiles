@@ -6,12 +6,14 @@
 -- Fix vscode colors -- to mach this ones
 
 return {
-   { "Mofiqul/vscode.nvim", enabled = false,
+   { "Mofiqul/vscode.nvim", event = "UIEnter",
+      enabled = false,
       config = function()
          require("vscode").setup({})
       end
    },
-   { "sainnhe/gruvbox-material", enabled = false,
+   { "sainnhe/gruvbox-material", event = "UIEnter",
+      enabled = false,
       config = function()
          -- local group = vim.api.nvim_create_augroup("custom_highlights_gruvboxmaterial", { clear=true })
          --
@@ -29,7 +31,6 @@ return {
          --       vim.api.nvim_set_hl(0, "Search", { bg = "#283946" })
          --       vim.api.nvim_set_hl(0, "CursorLine", { bg = "#303030" })
          --       vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = "#E1DCD6", bg = "#303030" })
-         --       -- vim.api.nvim_set_hl(0, "LeapLabelPrimary", { fg = "#151515", bg = "#FE6A62" })
          --
          --       vim.api.nvim_set_hl(0, "Visual", { bg = "#2C2C2C" })
          --       vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555" })
@@ -42,7 +43,8 @@ return {
          -- })
       end
    },
-   { "navarasu/onedark.nvim",
+   { "navarasu/onedark.nvim", event = "UIEnter",
+      enabled = true,
       config = function()
          require("onedark").setup({
             code_style = {
@@ -84,8 +86,12 @@ return {
 
                FloatTitle                     = { fg = "$red"},
                FloatermBorder                 = { fg = "NONE", bg = "#1E1E1E" },
+
                Search                         = { fg = "$fg", bg = "#283946" },
-               IncSearch                      = { fg = "$black", bg="$red", fmt="bold" },  
+               FlashCurrent                   = { fg = "$fg", bg="#283946" },  
+               FlashLabel                     = { fg = "$black", bg="#BF5959", fmt="bold" },
+               IncSearch                      = { fg = "$black", bg="#BF5959", fmt="bold" },
+
                MatchParen                     = { bg = "#343434" },
                Folded                         = { fg = "$fg", bg = "#282828" },
                CursorLine                     = { bg = "#1e1e1e" },
@@ -107,9 +113,9 @@ return {
                TelescopeSelectionCaret        = { fg = "$fg" },
                TelescopeMatching              = { fg = "$green" },
                TelescopePromptBorder          = { fg = "$fg" },
+               TelescopePromptPrefix          = { fg = "$fg" },
                TelescopeResultsBorder         = { fg = "$fg" },
                TelescopePreviewBorder         = { fg = "$fg" },
-               LeapLabelPrimary               = { fg = "#E1DCD6", bg = "#4C4C4D" },
 
                CmpItemAbbrMatch               = { fg = "$green" },
                CmpItemAbbrMatchFuzzy          = { fg = "$green", fmt = "none" },
@@ -125,9 +131,9 @@ return {
                ["@keyword.function"]            = { fg = "$blue" },
                ["@keyword"]                     = { fg = "$blue" },
                ["@keyword.conditional.ternary"] = { fg = "$blue" },
-               ["@keyword.return"]              = { fg = "$purple" },  
+               ["@keyword.return"]              = { fg = "$purple" },
                ["@keyword.conditional"]         = { fg = "$purple" },
-               ["@keyword.repeat"]              = { fg = "$purple" },  
+               ["@keyword.repeat"]              = { fg = "$purple" },
                ["@keyword.import"]              = { fg = "$purple" },
                ["@keyword.export"]              = { fg = "$purple" },
                ["@function"]                    = { fg = "$red" },
