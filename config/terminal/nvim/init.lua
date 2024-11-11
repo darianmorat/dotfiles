@@ -194,7 +194,7 @@ local plugins = {
          { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
       },
       keys = {
-         { "<leader>ff", "<cmd>Telescope find_files previewer=false<cr>"},
+         { "<leader>fi", "<cmd>Telescope find_files previewer=false<cr>"},
          { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
          { "<leader>fo", "<cmd>Telescope resume<cr>" },
          { "<leader>fj", "<cmd>Telescope buffers previewer=false<cr>" },
