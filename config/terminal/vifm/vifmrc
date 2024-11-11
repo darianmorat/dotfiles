@@ -27,20 +27,6 @@ fileviewer *[^/] bat --color always --wrap never --pager never --theme TwoDark %
 " COMMANDS
 " ------------------------------------------------------------------------------
 
-command! SetBookmark : execute 'bmark "' . system('echo "${PWD##*/}"') . '"' | echo system('echo Bookmark created: "${PWD##*/}"')
-
-command! FZFFiles :
-\| let $FZF_PICK = term("rg --files --smart-case . --glob '!**/node_modules/**' | sed 's#^./##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse")
-\| if $FZF_PICK != ''
-\|     execute 'goto '.fnameescape($FZF_PICK)
-\| endif
-
-command! FZFDirectories :
-\| let $FZF_PICK = term("rg --files --null --glob '!.*' --glob '!**/node_modules/**' | xargs -0 dirname | sort -u | grep -v '^\\.$' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse")
-\| if $FZF_PICK != ''
-\|     execute 'cd '.fnameescape($FZF_PICK)
-\| endif
-
 command! FZFHistory : execute "normal! :history\r:write ~/history_list\rq" 
 \| let $FZF_PICK = system("fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse < ~/history_list")
 \| if $FZF_PICK != ''
@@ -74,6 +60,8 @@ command! FilterTreeTwo :
 command! NewFile :execute 'touch ' . input('Create file: ')
 command! NewFolder :execute 'mkdir ' . input('Create folder: ')
 
+command! SetBookmark : execute 'bmark "' . system('echo "${PWD##*/}"') . '"' | echo system('echo Bookmark created: "${PWD##*/}"')
+
 " ------------------------------------------------------------------------------
 " KEYMAPS
 " ------------------------------------------------------------------------------
@@ -100,8 +88,6 @@ nnoremap b :SetBookmark<cr>
 nnoremap <space>fk :bmarks<cr>
 " nnoremap <space>fk :FZFMarks<cr>
 
-nnoremap <space>ff :FZFFiles<cr>
-nnoremap <space>fd :FZFDirectories<cr>
 nnoremap <space>fj :FZFHistory<cr>
 nnoremap <space>fi :FZFGlobal<cr>
 
