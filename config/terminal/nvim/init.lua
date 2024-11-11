@@ -188,8 +188,8 @@ local plugins = {
       }
    },
 
-   { "nvim-telescope/telescope.nvim", tag = "0.1.8", cmd = "Telescope",
-      dependencies = { 
+   { "nvim-telescope/telescope.nvim", tag = "0.1.8",
+      dependencies = {
          { "nvim-lua/plenary.nvim" },
          { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
       },
@@ -295,8 +295,8 @@ local plugins = {
                   vim.keymap.set(mode, l, r, opts)
                end
 
-               map("n", "<leader><leader>gi", gs.diffthis) -- ?
-               map("n", "<leader>gi", function() gs.diffthis("~") end)
+               map("n", "<leader>gi", gs.diffthis)
+               map("n", "<leader>gI", function() gs.diffthis("~") end)
 
                map("n", "<leader>gj", gs.next_hunk)
                map("n", "<leader>gk", gs.prev_hunk)
@@ -457,7 +457,7 @@ local plugins = {
             },
             mapping = cmp.mapping.preset.insert({ 
                ["<Enter>"] = cmp.mapping.confirm({ select = true }),
-               ["<C-z>"] = cmp.mapping(function() -- C-Space x2, WezTerm binding
+               ["<F13>"] = cmp.mapping(function() -- C-Space x2, WezTerm binding
                   if cmp.visible_docs() then cmp.close_docs()
                   else cmp.open_docs() end
                end)
