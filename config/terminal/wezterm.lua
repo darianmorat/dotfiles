@@ -28,8 +28,8 @@ config.window_padding = {
 config.leader = { key = "Space", mods = "CTRL" }
 
 config.keys = {
-   { key = "v", mods = "CTRL", action = act{PasteFrom="Clipboard"} },
-   { key = "c", mods = "CTRL", action = act{CopyTo="Clipboard"} },
+   { key = "v", mods = "CTRL", action = act{ PasteFrom = "Clipboard" } },
+   { key = "c", mods = "CTRL", action = act{ CopyTo = "Clipboard" } },
    { key = "[", mods = "LEADER", action = act.ActivateCopyMode },
 
    -- Tab navigation
@@ -39,15 +39,15 @@ config.keys = {
    { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
    { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
 
-   { key = "c", mods = "LEADER", action = act{SpawnTab="CurrentPaneDomain"} },
-   { key = "d", mods = "LEADER", action = act{CloseCurrentTab={confirm=true}} },
+   { key = "c", mods = "LEADER", action = act{ SpawnTab = "CurrentPaneDomain" } },
+   { key = "d", mods = "LEADER", action = act{ CloseCurrentTab = { confirm = true } } },
 
    { key = "1", mods = "LEADER", action = act.ActivateTab(0) },
    { key = "2", mods = "LEADER", action = act.ActivateTab(1) },
    { key = "3", mods = "LEADER", action = act.ActivateTab(2) },
    { key = "4", mods = "LEADER", action = act.ActivateTab(3) },
 
-   { key = "f", mods = "LEADER", action = act.ShowLauncherArgs {flags="FUZZY|TABS"} },
+   { key = "f", mods = "LEADER", action = act.ShowLauncherArgs { flags = "FUZZY|TABS" } },
    { key = ",", mods = "LEADER", action = act.PromptInputLine {
       description = "Enter new name for tab:",
       action = wezterm.action_callback(
@@ -60,10 +60,10 @@ config.keys = {
    },
 
    -- Workspace navigation
-   { key = "i", mods = "LEADER", action = act.SwitchToWorkspace {name="default"} },
-   { key = "o", mods = "LEADER", action = act.SwitchToWorkspace {name="secondary"} },
+   { key = "i", mods = "LEADER", action = act.SwitchToWorkspace { name = "default" } },
+   { key = "o", mods = "LEADER", action = act.SwitchToWorkspace { name = "secondary" } },
 
-   { key = "w", mods = "LEADER", action = act.ShowLauncherArgs {flags="FUZZY|WORKSPACES"} },
+   { key = "w", mods = "LEADER", action = act.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
    { key = "$", mods = "LEADER|SHIFT", action = act.PromptInputLine {
       description = "Enter new name for session:",
       action = wezterm.action_callback(
@@ -79,7 +79,7 @@ config.keys = {
    },
 
    -- Nvim toggle docs 
-   { key = "Space", mods = "LEADER|CTRL", action = act.SendKey {key="z",mods="CTRL"} },
+   { key = "Space", mods = "LEADER|CTRL", action = act.SendKey { key = "F13" } },
 
    -- Disable defaults
    { key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment, },
