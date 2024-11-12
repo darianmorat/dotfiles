@@ -2,47 +2,11 @@
 -- GRUVDARK THEMES REFERENCE
 -- -------------------------------------------------------------------------------------------
 -- Use :Inspect to check groups
--- darianmorat/gruvdark-theme.nvim -- Pending with variations
--- Fix vscode colors -- to mach this ones
+-- Pending with variations: darianmorat/gruvdark-theme.nvim
+-- Fix vscode colors to mach this ones
+-- Light colors look different compared to vscode's
 
 return {
-   { "Mofiqul/vscode.nvim", event = "UIEnter",
-      enabled = false,
-      config = function()
-         require("vscode").setup({})
-      end
-   },
-   { "sainnhe/gruvbox-material", event = "UIEnter",
-      enabled = false,
-      config = function()
-         -- local group = vim.api.nvim_create_augroup("custom_highlights_gruvboxmaterial", { clear=true })
-         --
-         -- vim.g.gruvbox_material_foreground = "material" -- material, mix, original
-         --
-         -- vim.api.nvim_create_autocmd("ColorScheme", {
-         --    group = group,
-         --    pattern = "gruvbox-material",
-         --    callback = function()
-         --       vim.api.nvim_set_hl(0, "Normal", { bg = "#1E1E1E" })
-         --       vim.api.nvim_set_hl(0, "NormalNC", { bg = "#1E1E1E" })
-         --       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1E1E1E" })
-         --       vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#1E1E1E" })
-         --       vim.api.nvim_set_hl(0, "Folded", { bg = "#282828" })
-         --       vim.api.nvim_set_hl(0, "Search", { bg = "#283946" })
-         --       vim.api.nvim_set_hl(0, "CursorLine", { bg = "#303030" })
-         --       vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = "#E1DCD6", bg = "#303030" })
-         --
-         --       vim.api.nvim_set_hl(0, "Visual", { bg = "#2C2C2C" })
-         --       vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555" })
-         --       vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" })
-         --       vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "#2F2F2F", bg = "NONE" })
-         --       vim.api.nvim_set_hl(0, "SignColumn", { bg = "#1E1E1E" })
-         --       vim.api.nvim_set_hl(0, "IblIndent", { fg = "#2F2F2F" })
-         --       vim.api.nvim_set_hl(0, "@comment", { fg = "#585858" })
-         --    end
-         -- })
-      end
-   },
    { "navarasu/onedark.nvim", event = "UIEnter",
       enabled = true,
       config = function()
@@ -51,9 +15,9 @@ return {
                comments = 'none'
             },
 
-            -- -----------------------
+            -- -------------------------------------------------------------------------------
             -- GRUVDARK
-            -- -----------------------
+            -- -------------------------------------------------------------------------------
             colors = {
                fg         = "#CDC5B8",
                black      = "#1B1B1B",
@@ -74,54 +38,55 @@ return {
                bg1 = "#303030",
                bg_blue = "#5b98c9",
             },
+
             highlights = {
                -- Interface
-               Normal                         = { fg = "$fg", bg = "#1E1E1E" },
-               NormalFloat                    = { fg = "$fg", bg = "#1E1E1E" },
-               FloatBorder                    = { fg = "$fg", bg = "#1E1E1E" },
-               SignColumn                     = { bg = "#1E1E1E" },
+               Normal                           = { fg = "$fg", bg = "#1E1E1E" },
+               NormalFloat                      = { fg = "$fg", bg = "#1E1E1E" },
+               FloatBorder                      = { fg = "$fg", bg = "#1E1E1E" },
+               SignColumn                       = { bg = "#1E1E1E" },
 
-               MsgArea                        = { fg = "$fg", bg = "#232323" },
-               StatusLine                     = { fg = "$fg", bg = "#2B2B2B" },
+               MsgArea                          = { fg = "$fg", bg = "#232323" },
+               StatusLine                       = { fg = "$fg", bg = "#2B2B2B" },
 
-               FloatTitle                     = { fg = "$red"},
-               FloatermBorder                 = { fg = "NONE", bg = "#1E1E1E" },
+               FloatTitle                       = { fg = "$red"},
+               FloatermBorder                   = { fg = "NONE", bg = "#1E1E1E" },
 
-               Search                         = { fg = "$fg", bg = "#283946" },
-               FlashCurrent                   = { fg = "$fg", bg="#283946" },  
-               FlashLabel                     = { fg = "$black", bg="#BF5959", fmt="bold" },
-               IncSearch                      = { fg = "$black", bg="#BF5959", fmt="bold" },
+               Search                           = { fg = "$fg", bg = "#283946" },
+               FlashCurrent                     = { fg = "$fg", bg="#283946" },  
+               FlashLabel                       = { fg = "$black", bg="#BF5959", fmt="bold" },
+               IncSearch                        = { fg = "$black", bg="#BF5959", fmt="bold" },
 
-               MatchParen                     = { bg = "#343434" },
-               Folded                         = { fg = "$fg", bg = "#282828" },
-               CursorLine                     = { bg = "#1e1e1e" },
-               CursorLineNr                   = { fg = "#7F7D7A" },
+               MatchParen                       = { bg = "#343434" },
+               Folded                           = { fg = "$fg", bg = "#282828" },
+               CursorLine                       = { bg = "#1e1e1e" },
+               CursorLineNr                     = { fg = "#7F7D7A" },
 
-               Cursor                         = { fg = "#1E1E1E", bg = "#CDC5B8", fmt="bold" },
-               Cursor2                        = { fg = "#1E1E1E", bg = "#BF5959" },
+               Cursor                           = { fg = "#1E1E1E", bg = "#CDC5B8", fmt="bold" },
+               Cursor2                          = { fg = "#1E1E1E", bg = "#BF5959" },
 
-               Visual                         = { bg = "#2C2C2C" },
-               TSParameter                    = { fg = "$fg" },
-               TSParameterReference           = { fg = "$fg" }, 
-               LineNr                         = { fg = "#555555" },
-               ColorColumn                    = { bg = "#222222" },
-               EndOfBuffer                    = { fg = "#303030", bg = "NONE" },
-               IblIndent                      = { fg = "#2F2F2F" },
-               WinSeparator                   = { fg = "#2F2F2F" },
+               Visual                           = { bg = "#2C2C2C" },
+               TSParameter                      = { fg = "$fg" },
+               TSParameterReference             = { fg = "$fg" }, 
+               LineNr                           = { fg = "#555555" },
+               ColorColumn                      = { bg = "#222222" },
+               EndOfBuffer                      = { fg = "#303030", bg = "NONE" },
+               IblIndent                        = { fg = "#2F2F2F" },
+               WinSeparator                     = { fg = "#2F2F2F" },
 
-               TelescopeSelection             = { fg = "#E1DCD6", bg = "#303030"},
-               TelescopeSelectionCaret        = { fg = "$fg" },
-               TelescopeMatching              = { fg = "$green" },
-               TelescopePromptBorder          = { fg = "$fg" },
-               TelescopePromptPrefix          = { fg = "$fg" },
-               TelescopeResultsBorder         = { fg = "$fg" },
-               TelescopePreviewBorder         = { fg = "$fg" },
+               TelescopeSelection               = { fg = "#E1DCD6", bg = "#303030"},
+               TelescopeSelectionCaret          = { fg = "$fg" },
+               TelescopeMatching                = { fg = "$green" },
+               TelescopePromptBorder            = { fg = "$fg" },
+               TelescopePromptPrefix            = { fg = "$fg" },
+               TelescopeResultsBorder           = { fg = "$fg" },
+               TelescopePreviewBorder           = { fg = "$fg" },
 
-               CmpItemAbbrMatch               = { fg = "$green" },
-               CmpItemAbbrMatchFuzzy          = { fg = "$green", fmt = "none" },
-               CmpItemKindText                = { fg = "$lightGrey" },
-               CmpItemMenu                    = { fg = "$lightGrey" },
-               PmenuSel                       = { fg = "#E1DCD6", bg = "#444444" },
+               CmpItemAbbrMatch                 = { fg = "$green" },
+               CmpItemAbbrMatchFuzzy            = { fg = "$green", fmt = "none" },
+               CmpItemKindText                  = { fg = "$lightGrey" },
+               CmpItemMenu                      = { fg = "$lightGrey" },
+               PmenuSel                         = { fg = "#E1DCD6", bg = "#444444" },
 
                -- General
                ["@none"]                        = { fg = "NONE" },
@@ -200,13 +165,13 @@ return {
                ["@markup.heading.html"]         = { fg = "$orange" },
 
                -- Typescript
-               ["@keyword.directive.typescript"]   = { fg = "$green" },
+               ["@keyword.directive.typescript"]                        = { fg = "$green" },
 
                -- Javascript
-               ["@tag.javascript"]                 = { fg = "$aqua" },
-               ["@tag.attribute.javascript"]       = { fg = "#9266DA" },
-               ["@type.javascript"]                = { fg = "$fg" },  
-               ["@constant.javascript"]            = { fg = "$fg" },  
+               ["@tag.javascript"]                                      = { fg = "$aqua" },
+               ["@tag.attribute.javascript"]                            = { fg = "#9266DA" },
+               ["@type.javascript"]                                     = { fg = "$fg" },  
+               ["@constant.javascript"]                                 = { fg = "$fg" },  
 
                ["@lsp.typemod.property.declaration.javascript"]         = { fg = "$fg" },
                ["@lsp.typemod.property.defaultLibrary.javascript"]      = { fg = "$orange" },
@@ -218,10 +183,9 @@ return {
                ["@markup.heading.1.javascript"]                         = { fg = "$orange", fmt = "none" },
             }
 
-            -- -----------------------
+            -- -------------------------------------------------------------------------------
             -- LIGHT GRUVDARK 
-            -- Light colors look different compared to vscode
-            -- -----------------------
+            -- -------------------------------------------------------------------------------
             -- colors = {
             --    fg         = "#111111",
             --    cyan       = "#111111",
@@ -240,8 +204,9 @@ return {
             --    bg1 = "#b0b0a6",
             --    bg_blue = "#5b98c9",
             -- },
+            --
             -- highlights = {
-
+            --
             -- }
          })
       end
