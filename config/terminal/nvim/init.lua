@@ -557,37 +557,19 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.opt.guicursor="n-v-c:block-Cursor,i-ci-ve:block-Cursor2"
 
 -- File changed indicator
-local last_line = -1
+vim.fn.sign_define("FileChanged", { text = "✗", texthl = "WarningMsg", numhl = "WarningMsg" })
 
-vim.fn.sign_define("FileChanged", { 
-   text = "x", 
-   texthl = "WarningMsg", 
-   numhl = "WarningMsg" 
-})
-
-vim.api.nvim_create_autocmd({"TextChangedI", "TextChanged", "BufWritePost", "CursorMoved"}, {
-   callback = function() 
-      if vim.bo.filetype:match("^harpoon") then 
-         return -- Ignore harpoon buffer
-      end
-
-      local current_line = vim.api.nvim_win_get_cursor(0)[1]
-      local current_buf = vim.api.nvim_get_current_buf()
-
-      if not vim.bo.modified then
-      vim.fn.sign_unplace("user", { buffer = current_buf })
-         return -- If buffer is not modified, remove the sign and return early
-      end
-      if current_line == last_line then
-         return -- If the line has not changed, don't update the sign
-      end
-
-      last_line = current_line -- Update last_line and place new sign on current line
-
-      -- Unplace any existing sign and place a new one at the current line
-      vim.fn.sign_unplace("user", { buffer = current_buf })
-      vim.fn.sign_place(0, "user", "FileChanged", current_buf, { 
-         lnum = current_line, priority = 1  -- Place sign behind (use -1 to place in top)
-      })
+local function update_sign()
+   if vim.bo.filetype:match("^harpoon") then return end
+   local buf, line = vim.api.nvim_get_current_buf(), vim.api.nvim_win_get_cursor(0)[1]
+   if vim.bo.modified then
+      vim.fn.sign_unplace("user", { buffer = buf })
+      vim.fn.sign_place(0, "user", "FileChanged", buf, { lnum = line, priority = 1 })
+   else
+      vim.fn.sign_unplace("user", { buffer = buf })
    end
+end
+
+vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "CursorMoved", "CursorMovedI", "BufWritePost" }, {
+   callback = function() vim.schedule(update_sign) end
 })
