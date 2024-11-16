@@ -14,7 +14,7 @@ SendMode Input ; For new scripts due to its superior speed and reliability
 ; LAlt ----- to Fn
 ; Fn-z ----- to Fn-a
 
-!Space::
+!t::
 toggle:=!toggle
 If toggle
 Send, !{Esc}
