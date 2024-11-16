@@ -1,6 +1,6 @@
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 -- SETTINGS
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 vim.g.mapleader = " "
 vim.opt.termguicolors = true
 vim.opt.hlsearch = false
@@ -13,11 +13,11 @@ vim.opt.showcmd = false
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 0
 
-vim.opt.updatetime = 80
+vim.opt.updatetime = 50
 vim.opt.mouse = ""
 vim.opt.cursorline = true
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
@@ -33,7 +33,7 @@ vim.opt.spelloptions="camel"
 
 vim.opt.scrolloff = 6
 vim.opt.sidescrolloff = 6
-vim.opt.colorcolumn = "95"
+vim.opt.colorcolumn = "90"
 vim.opt.signcolumn = "yes"
 vim.opt.undofile = true
 
@@ -47,9 +47,9 @@ vim.schedule(function()
    vim.opt.clipboard = "unnamedplus"
 end)
 
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 -- REMAPS
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 local function smart_quit() -- Fix: quit in diff
    if vim.wo.diff then vim.cmd("wincmd p | q")
    else vim.cmd(":q") end
@@ -76,18 +76,18 @@ vim.keymap.set("n", "<leader>a", "A")
 vim.keymap.set("n", "<leader>i", "I")
 vim.keymap.set("n", "<leader>h", "<c-g>")
 
-vim.keymap.set("n", "<leader>e", "<cmd>FloatermNew --height=0.88 vifm<cr>")
-vim.keymap.set("n", "<leader>lg", "<cmd>FloatermNew --width=0.75 lazygit<cr>")
+vim.keymap.set("n", "<leader>e", "<cmd>FloatermNew --height=0.92 vifm<cr>")
+vim.keymap.set("n", "<leader>lg", "<cmd>FloatermNew --width=0.78 lazygit<cr>")
 
 vim.keymap.set("n", "<leader>tI", "<cmd>IBLToggle<cr>")
-vim.keymap.set("n", "<leader>ti", "m`<cmd>ToggleScope<CR>| <cmd>IBLToggle<cr>``")
+vim.keymap.set("n", "<leader>ti", "m`<cmd>ToggleScope<CR> | <cmd>IBLToggle<cr>``")
 vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<cr>")
 vim.keymap.set("n", "<leader>tn", "<cmd>set relativenumber!<cr>")
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<cr>")
-vim.keymap.set("n", "<leader>tu", "<cmd>UndotreeToggle<cr>| <cmd>UndotreeFocus<cr> ")
+vim.keymap.set("n", "<leader>tu", "<cmd>UndotreeToggle<cr> | <cmd>UndotreeFocus<cr> ")
 
 vim.keymap.set("n", "<leader>tm", "<cmd>MarkdownPreviewToggle<cr>")
-vim.keymap.set("n", "<leader>lm", "<cmd>Lazy load markdown-preview.nvim<cr>| <cmd>Lazy<cr>")
+vim.keymap.set("n", "<leader>lm", "<cmd>Lazy load markdown-preview.nvim<cr> | <cmd>Lazy<cr>")
 
 vim.keymap.set("n", "<leader>r", "<cmd>LspRestart<cr>")
 
@@ -96,9 +96,9 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
 
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 -- PLUGIN LIST
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 local plugins = {
    { "TaDaa/vimade", event = "VeryLazy",
       opts = {
@@ -215,7 +215,7 @@ local plugins = {
             layout_config = {
                preview_cutoff = 0,
                width = 0.6,
-               height = 35,
+               height = 0.9,
                preview_height = 0.6
             },
             file_ignore_patterns = { "node_modules" },
@@ -286,8 +286,8 @@ local plugins = {
       config = function()
          require("gitsigns").setup({
             on_attach = function(bufnr)
-               local gs = require("gitsigns")
-               local ln = vim.fn.line
+               local gitsigns = require("gitsigns")
+               local line = vim.fn.line
 
                local function map(mode, l, r, opts)
                   opts = opts or {}
@@ -295,22 +295,22 @@ local plugins = {
                   vim.keymap.set(mode, l, r, opts)
                end
 
-               map("n", "<leader>gi", gs.diffthis)
-               map("n", "<leader>gI", function() gs.diffthis("~") end)
+               map("n", "<leader>gi", gitsigns.diffthis)
+               map("n", "<leader>gI", function() gitsigns.diffthis("~") end)
 
-               map("n", "<leader>gj", gs.next_hunk)
-               map("n", "<leader>gk", gs.prev_hunk)
-               map("n", "<leader>gg", gs.preview_hunk)
+               map("n", "<leader>gj", gitsigns.next_hunk)
+               map("n", "<leader>gk", gitsigns.prev_hunk)
+               map("n", "<leader>gg", gitsigns.preview_hunk)
 
-               map("n", "<leader>gs", gs.stage_hunk)
-               map("n", "<leader>gr", gs.reset_hunk)
-               map("v", "<leader>gs", function() gs.stage_hunk{ ln("."), ln("v") } end)
-               map("v", "<leader>gr", function() gs.reset_hunk{ ln("."), ln("v") } end)
-               map("n", "<leader>gu", gs.undo_stage_hunk)
+               map("n", "<leader>gs", gitsigns.stage_hunk)
+               map("n", "<leader>gr", gitsigns.reset_hunk)
+               map("v", "<leader>gs", function() gitsigns.stage_hunk{ line("."), line("v") } end)
+               map("v", "<leader>gr", function() gitsigns.reset_hunk{ line("."), line("v") } end)
+               map("n", "<leader>gu", gitsigns.undo_stage_hunk)
 
-               map("n", "<leader>gb", function() gs.blame_line{ full = true } end)
-               map("n", "<leader>tb", gs.toggle_current_line_blame)
-               map("n", "<leader>tr", gs.toggle_deleted)
+               map("n", "<leader>gb", function() gitsigns.blame_line{ full = true } end)
+               map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
+               map("n", "<leader>tr", gitsigns.toggle_deleted)
             end
          })
       end
@@ -457,7 +457,7 @@ local plugins = {
             },
             mapping = cmp.mapping.preset.insert({ 
                ["<Enter>"] = cmp.mapping.confirm({ select = true }),
-               ["<F13>"] = cmp.mapping(function() -- C-Space x2, WezTerm binding
+               ["<C-Space>"] = cmp.mapping(function()
                   if cmp.visible_docs() then cmp.close_docs()
                   else cmp.open_docs() end
                end)
@@ -467,9 +467,9 @@ local plugins = {
    }
 }
 
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 -- PLUGIN INSTALLATION
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 local themes = require("themes") -- Load themes - GruvDark reference
 vim.list_extend(plugins,themes) -- Merge themes to main plugin list
 
@@ -507,9 +507,9 @@ require("lazy").setup(plugins, {
    }
 })
 
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 -- COMMANDS
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 vim.cmd.colorscheme("onedark") -- Default colorscheme
 vim.cmd("command BufOnly silent! execute '%bd|e#|bd#'") -- Close all others buffers
 vim.cmd("autocmd BufNewFile,BufRead * setlocal formatoptions-=cro") -- No auto-comments
@@ -550,9 +550,9 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
    end
 })
 
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 -- INDICATORS
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 -- InsertMode indicator: Relies in WezTerm force_reverse_video_cursor
 vim.opt.guicursor="n-v-c:block-Cursor,i-ci-ve:block-Cursor2"
 
