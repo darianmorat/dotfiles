@@ -38,7 +38,7 @@
       "when": "!terminalFocus && vim.mode == 'Insert'"
    },
    {
-      "key": "ctrl+space ctrl+space",
+      "key": "ctrl+space",
       "command": "toggleSuggestionDetails",
       "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
    },
