@@ -8,14 +8,14 @@
    // "vim.highlightedyank.color": "#2f2f2f25",
    // "vim.highlightedyank.textColor": "#000000",
    // "editor.fontWeight": "600",
-   // "editor.rulers": [{ "column": 95, "color": "#2b2b2b21" }],
+   // "editor.rulers": [{ "column": 90, "color": "#2b2b2b21" }],
 
    // Dark-themes
    // -----------
    "vim.highlightedyank.color": "#3e3f4074",
    "vim.highlightedyank.textColor": "#e6e3de",
    "editor.fontWeight": "400",
-   "editor.rulers": [{ "column": 95, "color": "#2b2b2b" }],
+   "editor.rulers": [{ "column": 90, "color": "#2b2b2b" }],
 
    // =================
    // VIM CONFIGURATION
@@ -53,10 +53,9 @@
       { "before": ["s"], "commands": ["findThenJump2.initiate"] },
       { "before": ["leader", "a"], "after": ["A"] },
       { "before": ["leader", "i"], "after": ["I"] },
-      { "before": ["leader", "z"], "commands": ["workbench.action.toggleZenMode"] },
 
       { "before": ["leader", "w"], "commands": [":w"] },
-      { "before": ["leader", "q"], "commands": [":q"] },
+      { "before": ["leader", "d"], "commands": [":q"] },
       { "before": ["leader", "leader", "d"], "commands": [":q!"] },
       { "before": ["leader", "leader", "b"], "commands": [":tabonly"] },
 
@@ -72,15 +71,16 @@
       { "before": ["c-l"], "commands": ["editor.action.selectHighlights"] },
       { "before": ["c-n"], "commands": ["editor.action.addSelectionToNextFindMatch"] },
 
-      { "before": ["leader", "e", "f"], "commands": ["editor.action.quickFix"] },
-      { "before": ["leader", "e", "j"], "commands": ["editor.action.marker.next"] },
-      { "before": ["leader", "e", "k"], "commands": ["editor.action.marker.prev"] },
+      { "before": ["leader", "x", "x"], "commands": ["editor.action.quickFix"] },
+      { "before": ["leader", "s", "r"], "commands": ["editor.action.rename"] },
+      { "before": ["leader", "v", "j"], "commands": ["editor.action.marker.next"] },
+      { "before": ["leader", "v", "k"], "commands": ["editor.action.marker.prev"] },
       
       { "before": ["leader", "g", "i"], "commands": ["git.openChange"] },
       { "before": ["leader", "g", "j"], "commands": ["workbench.action.compareEditor.nextChange", "editor.action.dirtydiff.next"] },
       { "before": ["leader", "g", "k"], "commands": ["workbench.action.compareEditor.previousChange", "editor.action.dirtydiff.previous"] },
 
-      { "before": ["leader", "f", "f"], "commands": ["find-it-faster.findFiles"] },
+      { "before": ["leader", "f", "i"], "commands": ["find-it-faster.findFiles"] },
       { "before": ["leader", "f", "g"], "commands": ["find-it-faster.findWithinFiles"] },
       { "before": ["leader", "f", "o"], "commands": ["find-it-faster.resumeSearch"] },
       { "before": ["leader", "f", "j"], "commands": ["workbench.action.showEditorsInGroup"] },
@@ -121,22 +121,23 @@
    // =====================
 
    "apc.electron": { "frame": false },
-   "apc.statusBar": { "height": 30, "fontSize": 12 },
+   "apc.statusBar": { "height": 26, "fontSize": 12 },
 
    "window.titleBarStyle": "native",
+   "window.customTitleBarVisibility": "never",
    "workbench.editor.revealIfOpen": true,
    "workbench.settings.editor": "json",
    "workbench.startupEditor": "none",
 
    "workbench.colorTheme": "GruvDark",
    "workbench.iconTheme": null,
-   "workbench.editor.showTabs": "single",
+   "workbench.editor.showTabs": "none",
    "editor.renderLineHighlight": "none",
    "editor.renderWhitespace": "none",
    "editor.bracketPairColorization.enabled": false,
    "editor.roundedSelection": false,
    "editor.cursorSurroundingLines": 6,
-   "editor.lineNumbers": "relative",
+   "editor.lineNumbers": "on",
    "editor.fontSize": 15,
    "terminal.integrated.fontSize": 15,
    "editor.fontFamily": "JetBrains Mono NL Slashed",
@@ -169,21 +170,14 @@
    "editor.stickyScroll.enabled": false,
    "editor.lightbulb.enabled": "off",
 
-   "zenMode.fullScreen": false,
-   "zenMode.hideLineNumbers": false,
-   "zenMode.silentNotifications": false,
-   "zenMode.showTabs": "none",
-
-   "errorLens.messageEnabled": true,
-   "errorLens.messageBackgroundMode": "message",
-   "errorLens.messageTemplate": " $message ‎",
+   "errorLens.messageEnabled": false,
    "errorLens.gutterIconsEnabled": true,
-   "errorLens.borderRadius": "0",
-   "errorLens.gutterIconSet": "square",
+   "errorLens.gutterIconSet": "letter",
+   "errorLens.errorGutterIconColor": "#DB6A6A",
+   "errorLens.warningGutterIconColor": "#D19A66",
+   "errorLens.hintGutterIconColor": "#CD60B9",
 
-   "editor.scrollbar.verticalScrollbarSize": 10,
-   "scm.diffDecorationsGutterWidth": 3,
-   "scm.diffDecorations": "gutter",
+   "editor.scrollbar.verticalScrollbarSize": 0,
    "scm.diffDecorationsGutterPattern": { "added": false, "modified": false },
 
    "workbench.panel.defaultLocation": "right",
@@ -211,9 +205,17 @@
       "[GruvDark]": {
          "editor.background":"#1e1e1e",
          "editorGutter.background":"#1e1e1e",
+         "statusBar.border":"#1e1e1e",
+
+         "editorSuggestWidget.border":"#00000000",
+         "editorSuggestWidget.background":"#303030",
+         "editorSuggestWidget.highlightForeground":"#76B568",
+         "editorSuggestWidget.focusHighlightForeground":"#76B568",
+         "editorSuggestWidget.selectedForeground":"#E1DCD6",
+         "editorSuggestWidget.selectedBackground":"#444444",
 
          "editorGroupHeader.noTabsBackground":"#1b1b1b",
-         "statusBar.background":"#1b1b1b",
+         "statusBar.background":"#2d2d2d",
          "sideBar.background":"#1b1b1b",
          "sideBarSectionHeader.background":"#1b1b1b",
          "panel.background":"#1b1b1b",
@@ -255,6 +257,8 @@
    "diffEditor.ignoreTrimWhitespace": false,
    "diffEditor.hideUnchangedRegions.enabled": true,
    "diffEditor.renderSideBySide": true,
+
+   "ActiveFileInStatusBar.fullpath": false,
 
    "update.mode": "none",
    "update.enableWindowsBackgroundUpdates": false,
