@@ -14,3 +14,7 @@
    - [markdown preview github](https://github.com/mjbvz/vscode-github-markdown-preview-style) - github style preview
    - [prettier code](https://github.com/prettier/prettier-vscode) - code formatting
    - [vscode harpoon](https://github.com/tobias-z/vscode-harpoon) - navigation management
+   - [codeium](https://marketplace.visualstudio.com/items?itemName=Codeium.codeium) - ai code suggestions
+   - [project name](https://github.com/maliarov/vscode-project-name-in-statusbar) - project name in statusbar
+   - [file name](https://github.com/RoscoP/ActiveFileInStatusBar) - active file in statusbar
+   - [unsaved files](https://github.com/wraith13/unsaved-files-vscode) - unsaved files in statusbar
