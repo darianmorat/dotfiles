@@ -1,6 +1,6 @@
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 -- MAIN
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 local wezterm = require "wezterm"
 local act = wezterm.action
 local config = {}
@@ -9,33 +9,43 @@ if wezterm.config_builder then config = wezterm.config_builder() end
 
 config.default_domain = "WSL:Ubuntu"
 config.window_decorations = "RESIZE"
-config.font = wezterm.font "JetBrains Mono NL Slashed"
-config.font_size = 11.5
+config.font = wezterm.font("JetBrains Mono NL Slashed")
+
+config.font_size = 12.5
+config.cell_width = 0.90
+config.line_height = 1.0
+
+config.freetype_load_target = "Light"
+config.freetype_render_target = "HorizontalLcd"
+
 config.scrollback_lines = 500
 config.animation_fps = 1
 config.cursor_blink_rate = 0
 
+config.enable_tab_bar = false
+config.enable_scroll_bar = false
+config.switch_to_last_active_tab_when_closing_tab = true
+config.tab_and_split_indices_are_zero_based = false
+
 config.window_padding = {
-   left = 2, 
-   right = 2,
+   left = 5, 
+   right = 5,
    top = 6,
-   bottom = 0,
+   bottom = 5
 }
 
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 -- BINDINGS 
--- -------------------------------------------------------------------------------------------
-config.leader = { key = "Space", mods = "CTRL" }
+-- --------------------------------------------------------------------------------------
+config.leader = { key = "Space", mods = "ALT" }
 
 config.keys = {
    { key = "v", mods = "CTRL", action = act{ PasteFrom = "Clipboard" } },
    { key = "c", mods = "CTRL", action = act{ CopyTo = "Clipboard" } },
-   { key = "[", mods = "LEADER", action = act.ActivateCopyMode },
+   { key = ",", mods = "LEADER", action = act.ActivateCopyMode },
 
    -- Tab navigation
    { key = "l", mods = "LEADER", action = act.ActivateLastTab },
-   { key = "l", mods = "LEADER|CTRL", action = act.ActivateLastTab },
-
    { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
    { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
 
@@ -48,7 +58,7 @@ config.keys = {
    { key = "4", mods = "LEADER", action = act.ActivateTab(3) },
 
    { key = "f", mods = "LEADER", action = act.ShowLauncherArgs { flags = "FUZZY|TABS" } },
-   { key = ",", mods = "LEADER", action = act.PromptInputLine {
+   { key = "r", mods = "LEADER", action = act.PromptInputLine {
       description = "Enter new name for tab:",
       action = wezterm.action_callback(
          function(window, pane, line)
@@ -63,8 +73,8 @@ config.keys = {
    { key = "i", mods = "LEADER", action = act.SwitchToWorkspace { name = "default" } },
    { key = "o", mods = "LEADER", action = act.SwitchToWorkspace { name = "secondary" } },
 
-   { key = "w", mods = "LEADER", action = act.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
-   { key = "$", mods = "LEADER|SHIFT", action = act.PromptInputLine {
+   { key = "s", mods = "LEADER", action = act.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
+   { key = "w", mods = "LEADER", action = act.PromptInputLine {
       description = "Enter new name for session:",
       action = wezterm.action_callback(
          function(window, pane, line)
@@ -78,64 +88,18 @@ config.keys = {
       )}
    },
 
-   -- Nvim toggle docs 
-   { key = "Space", mods = "LEADER|CTRL", action = act.SendKey { key = "F13" } },
+   -- Open in shell
+   { key = "j", mods = "LEADER", action = wezterm.action.SendString "\x15vifm\n" },
+   { key = "k", mods = "LEADER", action = wezterm.action.SendString "\x15nvim\n" },
 
    -- Disable defaults
-   { key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment, },
-   { key = "Tab", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment, }
+   { key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment },
+   { key = "Tab", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment }
 }
 
--- -------------------------------------------------------------------------------------------
--- STATUS-BAR
--- -------------------------------------------------------------------------------------------
-config.enable_tab_bar = false
-config.enable_scroll_bar = false
-config.switch_to_last_active_tab_when_closing_tab = true
-config.tab_and_split_indices_are_zero_based = false
-config.tab_bar_at_bottom = false
--- config.use_fancy_tab_bar = false
--- config.show_new_tab_button_in_tab_bar = true
---
--- function tab_title(tab_info)
---     if tab_info.tab_title ~= "" then
---         return (tab_info.tab_index + 1) .. ":" .. tab_info.tab_title
---     else
---         return (tab_info.tab_index + 1) .. ":" .. tab_info.window_title
---     end
--- end
---
--- wezterm.on(
---    "format-tab-title",
---    function(tab)
---       local title = tab_title(tab)
---
---       if tab.is_active then
---          return {
---             { Background = { Color = "#cdc5b8" } },
---             { Foreground = { Color = "#151515" } },
---             { Text = " " .. title .. " " },
---          }
---       end
---       return {
---          { Foreground = { Color = "#cdc5b8" } },
---          { Text = " " .. title .. " " },
---       }
---    end
--- )
---
--- wezterm.on("update-right-status", function(window, pane)
---    local date = wezterm.strftime "%m-%d-%y %H:%M "
---    local workspace_name = window:active_workspace()
---
---    window:set_right_status(wezterm.format {
---       { Text = "[0:" .. workspace_name .. "]  " .. date },
---    })
--- end)
-
--- -------------------------------------------------------------------------------------------
--- COLORS
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
+-- VISUAL
+-- --------------------------------------------------------------------------------------
 config.force_reverse_video_cursor = true
 
 config.foreground_text_hsb = {
@@ -193,9 +157,6 @@ config.colors = {
    quick_select_match_fg = { Color = "#CDC5B8" },
 }
 
--- -------------------------------------------------------------------------------------------
--- VISUAL
--- -------------------------------------------------------------------------------------------
 -- config.background = {
 --    {
 --       source = {
