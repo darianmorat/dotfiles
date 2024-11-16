@@ -34,9 +34,9 @@ return {
                orange     = "#D19F66",
                yellow     = "#D19F66",
 
-               bg2 = "#313131",
-               bg1 = "#303030",
-               bg_blue = "#5b98c9",
+               bg2        = "#313131",
+               bg1        = "#303030",
+               bg_blue    = "#5b98c9",
             },
 
             highlights = {
@@ -44,13 +44,11 @@ return {
                Normal                           = { fg = "$fg", bg = "#1E1E1E" },
                NormalFloat                      = { fg = "$fg", bg = "#1E1E1E" },
                FloatBorder                      = { fg = "$fg", bg = "#1E1E1E" },
-               SignColumn                       = { bg = "#1E1E1E" },
-
                MsgArea                          = { fg = "$fg", bg = "#232323" },
                StatusLine                       = { fg = "$fg", bg = "#2B2B2B" },
-
-               FloatTitle                       = { fg = "$red"},
                FloatermBorder                   = { fg = "NONE", bg = "#1E1E1E" },
+               FloatTitle                       = { fg = "$red"},
+               SignColumn                       = { bg = "#1E1E1E" },
 
                Search                           = { fg = "$fg", bg = "#283946" },
                FlashCurrent                     = { fg = "$fg", bg="#283946" },  
@@ -59,20 +57,16 @@ return {
 
                MatchParen                       = { bg = "#343434" },
                Folded                           = { fg = "$fg", bg = "#282828" },
-               CursorLine                       = { bg = "#1e1e1e" },
-               CursorLineNr                     = { fg = "#7F7D7A" },
-
+               CursorLine                       = { bg = "NONE" },
+               CursorLineNr                     = { fg = "$lightGrey" },
                Cursor                           = { fg = "#1E1E1E", bg = "#CDC5B8", fmt="bold" },
                Cursor2                          = { fg = "#1E1E1E", bg = "#BF5959" },
-
-               Visual                           = { bg = "#2C2C2C" },
-               TSParameter                      = { fg = "$fg" },
-               TSParameterReference             = { fg = "$fg" }, 
                LineNr                           = { fg = "#555555" },
                ColorColumn                      = { bg = "#222222" },
                EndOfBuffer                      = { fg = "#303030", bg = "NONE" },
                IblIndent                        = { fg = "#2F2F2F" },
                WinSeparator                     = { fg = "#2F2F2F" },
+               Visual                           = { bg = "#2C2C2C" },
 
                TelescopeSelection               = { fg = "#E1DCD6", bg = "#303030"},
                TelescopeSelectionCaret          = { fg = "$fg" },
@@ -87,6 +81,9 @@ return {
                CmpItemKindText                  = { fg = "$lightGrey" },
                CmpItemMenu                      = { fg = "$lightGrey" },
                PmenuSel                         = { fg = "#E1DCD6", bg = "#444444" },
+
+               TSParameter                      = { fg = "$fg" },
+               TSParameterReference             = { fg = "$fg" }, 
 
                -- General
                ["@none"]                        = { fg = "NONE" },
@@ -121,7 +118,6 @@ return {
                -- Html
                ["@tag"]                         = { fg = "$red" },
                ["@tag.delimiter"]               = { fg = "$red" },
-               ["@operator.html"]               = { fg = "#9266DA" },
                ["@tag.attribute"]               = { fg = "#9266DA" },
                ["@markup.heading.1.html"]       = { fg = "$fg", fmt = "none" },
                ["@markup.heading.html"]         = { fg = "$fg", fmt = "none" },
@@ -160,7 +156,6 @@ return {
                markdownListMarker               = { fg = "$blue" },
                ["@label.markdown"]              = { fg = "$red" },
                ["@markup.raw.block.markdown"]   = { fg = "$red" },
-
                ["@markup.heading.1.html"]       = { fg = "$orange" },
                ["@markup.heading.html"]         = { fg = "$orange" },
 
