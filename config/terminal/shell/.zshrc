@@ -8,7 +8,11 @@ z4h bindkey z4h-forward-word Ctrl+Alt+F
 
 # find way to send vifm directly. 
 # In bash: bind -x '"\C-o":"vifm"'
-bindkey -s '^O' '^Uvifm^J'
+# [[ ---
+# Disable for pinky pain, once you get a keyboard with more 
+# thumb keys you can again use the ctrl for this one and the others
+# bindkey -s '^O' '^Uvifm^J' 
+# ]] ---
 
 # Aliases
 alias dow="cd /mnt/d/DarianToledo/Downloads"
