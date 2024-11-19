@@ -19,6 +19,7 @@ config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
 
 config.scrollback_lines = 500
+config.front_end = "WebGpu"
 config.animation_fps = 1
 config.cursor_blink_rate = 0
 
@@ -31,7 +32,7 @@ config.window_padding = {
    left = 5, 
    right = 5,
    top = 6,
-   bottom = 5
+   bottom = 5,
 }
 
 -- --------------------------------------------------------------------------------------
@@ -94,7 +95,7 @@ config.keys = {
 
    -- Disable defaults
    { key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment },
-   { key = "Tab", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment }
+   { key = "Tab", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
 }
 
 -- --------------------------------------------------------------------------------------
@@ -121,7 +122,7 @@ config.colors = {
    scrollbar_thumb = "#4F4F4F",
 
    tab_bar = {
-      background = "#313131", 
+      background = "#313131",
    },
 
    ansi = {
