@@ -13,7 +13,7 @@ vim.opt.showcmd = false
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 0
 
-vim.opt.updatetime = 50
+vim.opt.updatetime = 150
 vim.opt.mouse = ""
 vim.opt.cursorline = true
 vim.opt.number = true
@@ -39,10 +39,11 @@ vim.opt.undofile = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-fileencoding = "utf-8"
+vim.opt.fileencoding = "utf-8"
 vim.opt.showtabline = 0
 vim.g.markdown_recommended_style = 0
 
+vim.opt.fillchars = { eob = " " }
 vim.schedule(function()
    vim.opt.clipboard = "unnamedplus"
 end)
@@ -553,10 +554,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- --------------------------------------------------------------------------------------
 -- INDICATORS
 -- --------------------------------------------------------------------------------------
--- InsertMode indicator: Relies in WezTerm force_reverse_video_cursor
+-- InsertMode cursor color
+-- For WezTerm use force_reverse_video_cursor
 vim.opt.guicursor="n-v-c:block-Cursor,i-ci-ve:block-Cursor2"
 
--- File changed indicator
+-- File changed sign in editor
 vim.fn.sign_define("FileChanged", { text = "✗", texthl = "WarningMsg", numhl = "WarningMsg" })
 
 local function update_sign()
