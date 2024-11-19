@@ -19,7 +19,6 @@ config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
 
 config.scrollback_lines = 500
-config.front_end = "WebGpu"
 config.animation_fps = 1
 config.cursor_blink_rate = 0
 
@@ -122,7 +121,7 @@ config.colors = {
    scrollbar_thumb = "#4F4F4F",
 
    tab_bar = {
-      background = "#313131",
+      background = "#313131", 
    },
 
    ansi = {
