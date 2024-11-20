@@ -75,20 +75,13 @@ vim.keymap.set("n", "=ap", "m`=ap``")
 
 vim.keymap.set("n", "<leader>a", "A")
 vim.keymap.set("n", "<leader>i", "I")
-vim.keymap.set("n", "<leader>h", "<c-g>")
-
-vim.keymap.set("n", "<leader>e", "<cmd>FloatermNew --height=0.92 vifm<cr>")
-vim.keymap.set("n", "<leader>lg", "<cmd>FloatermNew --width=0.78 lazygit<cr>")
+vim.keymap.set("n", "<leader>p", "<c-g>")
 
 vim.keymap.set("n", "<leader>tI", "<cmd>IBLToggle<cr>")
 vim.keymap.set("n", "<leader>ti", "m`<cmd>ToggleScope<CR> | <cmd>IBLToggle<cr>``")
 vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<cr>")
 vim.keymap.set("n", "<leader>tn", "<cmd>set relativenumber!<cr>")
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<cr>")
-vim.keymap.set("n", "<leader>tu", "<cmd>UndotreeToggle<cr> | <cmd>UndotreeFocus<cr> ")
-
-vim.keymap.set("n", "<leader>tm", "<cmd>MarkdownPreviewToggle<cr>")
-vim.keymap.set("n", "<leader>lm", "<cmd>Lazy load markdown-preview.nvim<cr> | <cmd>Lazy<cr>")
 
 vim.keymap.set("n", "<leader>r", "<cmd>LspRestart<cr>")
 
@@ -116,13 +109,17 @@ local plugins = {
       }
    },
 
-   { "voldikss/vim-floaterm", cmd = "FloatermNew",
+   { "voldikss/vim-floaterm",
       config = function() 
+         vim.g.floaterm_opener = "edit"
          vim.g.floaterm_title = ""
          vim.g.floaterm_width = 0.6
          vim.g.floaterm_height = 0.99
-         vim.g.floaterm_opener = "edit"
-      end
+      end,
+      keys = {
+         { "<leader>e", "<cmd>FloatermNew --height=0.92 vifm<cr>" },
+         { "<leader>lg", "<cmd>FloatermNew --width=0.78 lazygit<cr>" }
+      }
    },
 
    { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
@@ -143,9 +140,24 @@ local plugins = {
          vim.keymap.set("v", "<leader>b", "gb", { remap = true })
       end
    },
-
+ 
    -- On first install run: Lazy build markdown-preview.nvim
-   { "iamcco/markdown-preview.nvim", cmd = { "MarkdownPreviewToggle" } },
+   { "iamcco/markdown-preview.nvim", 
+      keys = {
+         {"<leader>tm", "<cmd>MarkdownPreviewToggle<cr>"},
+         {"<leader>lm", "<cmd>Lazy load markdown-preview.nvim<cr> | <cmd>Lazy<cr>"}
+      } 
+   },
+
+   { "uga-rosa/ccc.nvim", 
+      opts = { win_opts = { border = "single" } },
+      keys = {
+         { "<leader>hc", "<cmd>CccConvert<cr>" },
+         { "<leader>hf", "<cmd>CccPick<cr>" },
+         { "<leader>th", "<cmd>CccHighlighterToggle<cr>" }
+      }
+   },
+
    { "kylechui/nvim-surround", version = "*", event = "VeryLazy", opts = {} },
 
    { "jake-stewart/multicursor.nvim", branch = "1.0", event = "VeryLazy",
@@ -168,13 +180,16 @@ local plugins = {
       end
    },
 
-   { "mbbill/undotree", cmd = "UndotreeToggle",
+   { "mbbill/undotree",
       config = function()
          vim.g.undotree_WindowLayout = 3
          vim.g.undotree_SplitWidth = 38
          vim.g.undotree_ShortIndicators = 0
          vim.g.undotree_DiffAutoOpen = 0
-      end
+      end,
+      keys = {
+         { "<leader>tu", "<cmd>UndotreeToggle<cr> | <cmd>UndotreeFocus<cr>" }
+      }
    },
 
    { "folke/flash.nvim",
@@ -193,19 +208,6 @@ local plugins = {
       dependencies = {
          { "nvim-lua/plenary.nvim" },
          { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
-      },
-      keys = {
-         { "<leader>fi", "<cmd>Telescope find_files previewer=false<cr>"},
-         { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
-         { "<leader>fo", "<cmd>Telescope resume<cr>" },
-         { "<leader>fj", "<cmd>Telescope buffers previewer=false<cr>" },
-         { "<leader>fr", "<cmd>Telescope lsp_references<cr>" },
-
-         { "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string({ search=vim.fn.expand('<cword>') })<cr>" },
-         { "<leader>fW", "<cmd>lua require('telescope.builtin').grep_string({ search=vim.fn.expand('<cWORD>') })<cr>" },
-
-         { "<leader>fd", "<cmd>Telescope diagnostics bufnr=0<cr>" },
-         { "<leader>fD", "<cmd>Telescope diagnostics<cr>" },
       },
       config = function ()
       local actions = require("telescope.actions")
@@ -232,15 +234,28 @@ local plugins = {
          extensions = {
             fzf = {
                fuzzy = true,
-               override_generic_sorter = true,
                override_file_sorter = true,
-               case_mode = "smart_case"
+               case_mode = "smart_case",
+               override_generic_sorter = true
             }
          }
       })
 
       require("telescope").load_extension("fzf")
-      end
+      end,
+      keys = {
+         { "<leader>fi", "<cmd>Telescope find_files previewer=false<cr>"},
+         { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
+         { "<leader>fo", "<cmd>Telescope resume<cr>" },
+         { "<leader>fj", "<cmd>Telescope buffers previewer=false<cr>" },
+         { "<leader>fr", "<cmd>Telescope lsp_references<cr>" },
+
+         { "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string({ search=vim.fn.expand('<cword>') })<cr>" },
+         { "<leader>fW", "<cmd>lua require('telescope.builtin').grep_string({ search=vim.fn.expand('<cWORD>') })<cr>" },
+
+         { "<leader>fd", "<cmd>Telescope diagnostics bufnr=0<cr>" },
+         { "<leader>fD", "<cmd>Telescope diagnostics<cr>" }
+      }
    },
 
    { "ThePrimeagen/harpoon", branch = "harpoon2",
@@ -434,9 +449,7 @@ local plugins = {
          require("luasnip").filetype_extend("javascriptreact", { "html" })
 
          cmp.setup({
-            completion = {
-               completeopt = "menu, menuone, noinsert"
-            },
+            completion = { completeopt = "menu, menuone, noinsert" },
             sources = { 
                { name = "nvim_lsp" },
                { name = "luasnip" },
@@ -448,12 +461,10 @@ local plugins = {
                   require("luasnip").lsp_expand(args.body)
                end
             },
-            view = {
-               docs = { auto_open = false }
-            },
+            view = { docs = { auto_open = false } },
             window = {
                documentation = {
-                  winhighlight = "Normal:MatchParen,FloatBorder:MatchParen",
+                  winhighlight = "Normal:MatchParen,FloatBorder:MatchParen"
                }
             },
             mapping = cmp.mapping.preset.insert({ 
@@ -559,11 +570,16 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.opt.guicursor="n-v-c:block-Cursor,i-ci-ve:block-Cursor2"
 
 -- File changed sign in editor
-vim.fn.sign_define("FileChanged", { text = "✗", texthl = "WarningMsg", numhl = "WarningMsg" })
+vim.fn.sign_define("FileChanged", { 
+   text = "✗", 
+   texthl = "WarningMsg", 
+   numhl = "WarningMsg" 
+})
 
 local function update_sign()
    if vim.bo.filetype:match("^harpoon") then return end
    local buf, line = vim.api.nvim_get_current_buf(), vim.api.nvim_win_get_cursor(0)[1]
+
    if vim.bo.modified then
       vim.fn.sign_unplace("user", { buffer = buf })
       vim.fn.sign_place(0, "user", "FileChanged", buf, { lnum = line, priority = 1 })
@@ -572,6 +588,8 @@ local function update_sign()
    end
 end
 
-vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "CursorMoved", "CursorMovedI", "BufWritePost" }, {
+vim.api.nvim_create_autocmd({ 
+   "TextChanged", "TextChangedI", "CursorMoved", "CursorMovedI", "BufWritePost" 
+}, {
    callback = function() vim.schedule(update_sign) end
 })
