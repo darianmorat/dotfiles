@@ -25,12 +25,12 @@
       import * as zebar from 'https://esm.sh/zebar@2';
 
       const providers = zebar.createProviderGroup({
-         network: { type: 'network' },
+         network: { type: 'network', refreshInterval: 10000 },
          glazewm: { type: 'glazewm' },
-         cpu: { type: 'cpu' },
+         cpu: { type: 'cpu', refreshInterval: 40000 },
          date: { type: 'date', formatting: 'MM-dd-yy ‎ ‎ hh:mm a' },
-         battery: { type: 'battery' },
-         memory: { type: 'memory' },
+         battery: { type: 'battery', refreshInterval: 1000 },
+         memory: { type: 'memory', refreshInterval: 40000 },
       });
 
       createRoot(document.getElementById('root')).render(<App />);
