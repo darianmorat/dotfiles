@@ -267,28 +267,23 @@ local plugins = {
          }
       },
       keys = function()
-         local is_first_run = true -- Fix: Doesn't close [No Name] buffer as Telescope
-         local function handler()
-            if is_first_run then vim.cmd("bd 1") is_first_run = false end
-         end
-
          local keys = {
             { "<c-m>", function() require("harpoon"):list():add() end },
-            { "<tab>", function() require("harpoon"):list():prev() handler() end },
-            { "<c-o>", function() require("harpoon"):list():next() handler() end },
+            { "<tab>", function() require("harpoon"):list():prev() end },
+            { "<c-o>", function() require("harpoon"):list():next() end },
 
-            { "<leader>1", function() require("harpoon"):list():select(1) handler() end },
-            { "<leader>2", function() require("harpoon"):list():select(2) handler() end },
-            { "<leader>3", function() require("harpoon"):list():select(3) handler() end },
-            { "<leader>4", function() require("harpoon"):list():select(4) handler() end },
+            { "<leader>1", function() require("harpoon"):list():select(1) end },
+            { "<leader>2", function() require("harpoon"):list():select(2) end },
+            { "<leader>3", function() require("harpoon"):list():select(3) end },
+            { "<leader>4", function() require("harpoon"):list():select(4) end },
 
             { "<leader>fk", function()
                local harpoon = require("harpoon")
-               local UI = { 
+               local UI = {
                   title = " Harpoon ",
                   border = "single", 
-                  title_pos = "center", 
-                  ui_width_ratio = 0.6 
+                  title_pos = "center",
+                  ui_width_ratio = 0.6
                }
                harpoon.ui:toggle_quick_menu(harpoon:list(), UI)
                end
@@ -527,11 +522,10 @@ vim.cmd("command BufOnly silent! execute '%bd|e#|bd#'") -- Close all others buff
 vim.cmd("autocmd BufNewFile,BufRead * setlocal formatoptions-=cro") -- No auto-comments
 
 -- Yank highlighting
-vim.cmd("highlight YankHighlight guibg=#2b2b2b guifg=#e6e3de")
 local yank = vim.highlight.on_yank
 vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", { group = "YankHighlight",
-   callback = function() yank({ higroup = "YankHighlight", timeout = 190 }) end
+   callback = function() yank({ higroup = "YankHighlight", timeout = 150 }) end
 })
 
 -- Fixes 'cmdheight=0' flickering when using InsertMode
@@ -566,7 +560,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- INDICATORS
 -- --------------------------------------------------------------------------------------
 -- InsertMode cursor color
--- For WezTerm use force_reverse_video_cursor
 vim.opt.guicursor="n-v-c:block-Cursor,i-ci-ve:block-Cursor2"
 
 -- File changed sign in editor
