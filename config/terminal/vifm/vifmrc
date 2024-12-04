@@ -21,6 +21,7 @@ set scrolloff=3
 set statusline=" %A %-7g %= %18d "
 
 colorscheme gruvdark
+" colorscheme light-gruvdark
 fileviewer *[^/] bat --color always --wrap never --pager never --theme TwoDark %c -p
 
 " ------------------------------------------------------------------------------
@@ -28,13 +29,19 @@ fileviewer *[^/] bat --color always --wrap never --pager never --theme TwoDark %
 " ------------------------------------------------------------------------------
 
 command! FZFHistory : execute "normal! :history\r:write ~/history_list\rq" 
+" Dark-theme
 \| let $FZF_PICK = system("fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse < ~/history_list")
+" Light-theme
+" \| let $FZF_PICK = system("fzf --ansi --color 'fg+:#000000,hl:+2,hl+:+2,bg+:#d4d2c7' --color='gutter:-1' --layout=reverse < ~/history_list")
 \| if $FZF_PICK != ''
 \|     execute 'cd '.fnameescape($FZF_PICK)
 \| endif
 
 command! FZFGlobal :
+" Dark-theme
 \| let $FZF_PICK = term("find ~/dev ~/work -mindepth 1 -maxdepth 1 -type d | sed 's#^/home/darianmorat/##' | fzf --ansi --color 'fg+:#e1dcd6,hl:+2,hl+:+2' --color='gutter:-1' --layout=reverse")
+" Light-theme
+" \| let $FZF_PICK = term("find ~/dev ~/work -mindepth 1 -maxdepth 1 -type d | sed 's#^/home/darianmorat/##' | fzf --ansi --color 'fg+:#000000,hl:+2,hl+:+2,bg+:#d4d2c7' --color='gutter:-1' --layout=reverse")
 \| if $FZF_PICK != ''
 \|      execute 'cd ~/'.fnameescape($FZF_PICK)
 \| endif
