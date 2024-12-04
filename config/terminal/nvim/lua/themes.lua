@@ -15,9 +15,9 @@ return {
                comments = 'none'
             },
 
-            -- -------------------------------------------------------------------------------
+            -- --------------------------------------------------------------------------
             -- GRUVDARK
-            -- -------------------------------------------------------------------------------
+            -- --------------------------------------------------------------------------
             colors = {
                fg         = "#CDC5B8",
                black      = "#1B1B1B",
@@ -49,6 +49,7 @@ return {
                FloatermBorder                   = { fg = "NONE", bg = "#1E1E1E" },
                FloatTitle                       = { fg = "$red"},
                SignColumn                       = { bg = "#1E1E1E" },
+               YankHighlight                    = { fg = "#e6e3de", bg = "#2b2b2b" },
 
                Search                           = { fg = "$fg", bg = "#283946" },
                FlashCurrent                     = { fg = "$fg", bg="#283946" },  
@@ -178,31 +179,172 @@ return {
                ["@markup.heading.1.javascript"]                         = { fg = "$orange", fmt = "none" },
             }
 
-            -- -------------------------------------------------------------------------------
+            -- --------------------------------------------------------------------------
             -- LIGHT GRUVDARK 
-            -- -------------------------------------------------------------------------------
+            -- --------------------------------------------------------------------------
             -- colors = {
             --    fg         = "#111111",
-            --    cyan       = "#111111",
             --    black      = "#1B1B1B",
             --    blue       = "#1e5a8b",
             --    red        = "#9f0202",
             --    green      = "#006c00",
-            --    orange     = "#ae5f05",
             --    purple     = "#910e79",
-            --    yellow     = "#008b7f",
-            --    aqua       = "#008b7f",
-            --    grey       = "#8f8f85",
+            --    grey       = "#707070",
             --    lightGrey  = "#8D8A85",
+            --
+            --    aqua       = "#008b7f",
+            --    cyan       = "#008b7f",
+            --
+            --    orange     = "#ae5f05",
+            --    yellow     = "#ae5f05",
             --
             --    bg2 = "#d4d2c7",
             --    bg1 = "#b0b0a6",
-            --    bg_blue = "#5b98c9",
+            --    bg_blue = "#1e5a8b",
             -- },
             --
             -- highlights = {
+            --    -- Interface
+            --    Normal                           = { fg = "$fg", bg = "#f9f6e4" },
+            --    NormalFloat                      = { fg = "$fg", bg = "#f9f6e4" },
+            --    FloatBorder                      = { fg = "$fg", bg = "#f9f6e4" },
+            --    MsgArea                          = { fg = "$fg", bg = "#d4d2c7" },
+            --    StatusLine                       = { fg = "$fg", bg = "#c7c7bf" },
+            --    FloatermBorder                   = { fg = "NONE", bg = "#f9f6e4" },
+            --    FloatTitle                       = { fg = "$red"},
+            --    SignColumn                       = { bg = "#f9f6e4" },
+            --    YankHighlight                    = { fg = "$fg", bg = "#c7c7bf" },
             --
+            --    Search                           = { fg = "$fg", bg = "#ebd09c" },
+            --    FlashCurrent                     = { fg = "$fg", bg = "#ebd09c" },  
+            --    FlashLabel                       = { fg = "$fg", bg = "#df7474" },
+            --    IncSearch                        = { fg = "$fg", bg = "#df7474" },
+            --
+            --    MatchParen                       = { bg = "#b0b0a6" },
+            --    Folded                           = { fg = "$fg", bg = "#b0b0a6" },
+            --    CursorLine                       = { bg = "NONE" },
+            --    CursorLineNr                     = { fg = "#404040" },
+            --
+            --    Cursor                           = { fg = "#f9f6e4", bg = "#404040", fmt="bold" },
+            --    Cursor2                          = { fg = "#f9f6e4", bg = "#BF5959" },
+            --
+            --    LineNr                           = { fg = "#828282" },
+            --    ColorColumn                      = { bg = "#efecdb" },
+            --    EndOfBuffer                      = { fg = "#303030", bg = "NONE" },
+            --    Visual                           = { bg = "#d4d2c7" },
+            --
+            --    TelescopeSelection               = { fg = "#000000", bg = "#d4d2c7" },
+            --    TelescopeSelectionCaret          = { fg = "$fg" },
+            --    TelescopeMatching                = { fg = "$green" },
+            --    TelescopePromptBorder            = { fg = "$fg" },
+            --    TelescopePromptPrefix            = { fg = "$fg" },
+            --    TelescopeResultsBorder           = { fg = "$fg" },
+            --    TelescopePreviewBorder           = { fg = "$fg" },
+            --
+            --    CmpItemAbbrMatch                 = { fg = "$green" },
+            --    CmpItemAbbrMatchFuzzy            = { fg = "$green", fmt = "none" },
+            --    CmpItemKindText                  = { fg = "$lightGrey" },
+            --    CmpItemMenu                      = { fg = "$lightGrey" },
+            --    Pmenu                            = { fg = "$fg", bg = "$bg2" },
+            --    PmenuSel                         = { fg = "$fg", bg = "$bg1" },
+            --
+            --    TSParameter                      = { fg = "$fg" },
+            --    TSParameterReference             = { fg = "$fg" }, 
+            --
+            --    -- General
+            --    ["@none"]                        = { fg = "NONE" },
+            --    ["@spell"]                       = { fg = "NONE" },
+            --    ["@variable.parameter"]          = { fg = "$fg" },
+            --    ["@lsp.type.parameter"]          = { fg = "$fg" },
+            --    ["@keyword.function"]            = { fg = "$blue" },
+            --    ["@keyword"]                     = { fg = "$blue" },
+            --    ["@keyword.conditional.ternary"] = { fg = "$blue" },
+            --    ["@keyword.return"]              = { fg = "$purple" },
+            --    ["@keyword.conditional"]         = { fg = "$purple" },
+            --    ["@keyword.repeat"]              = { fg = "$purple" },
+            --    ["@keyword.import"]              = { fg = "$purple" },
+            --    ["@keyword.export"]              = { fg = "$purple" },
+            --    ["@function"]                    = { fg = "$red" },
+            --    ["@function.builtin"]            = { fg = "$red" },
+            --    ["@function.method"]             = { fg = "$red" },
+            --    ["@variable.builtin"]            = { fg = "$orange" },
+            --    ["@string"]                      = { fg = "$green" },
+            --    ["@lsp.type.namespace"]          = { fg = "$aqua" },
+            --    ["@constructor"]                 = { fg = "$aqua" },
+            --    ["@variable.member"]             = { fg = "$fg" },
+            --    ["@lsp.type.class.javascript"]   = { fg = "$aqua" },
+            --
+            --    -- Symbols
+            --    ["@comment"]                     = { fg = "#828282" },
+            --    ["@operator"]                    = { fg = "$blue" },
+            --    ["@punctuation"]                 = { fg = "$fg" },
+            --    ["@punctuation.bracket"]         = { fg = "$fg" },
+            --    ["@punctuation.delimiter"]       = { fg = "$lightGrey" },
+            --
+            --    -- Html
+            --    ["@tag"]                         = { fg = "$red" },
+            --    ["@tag.delimiter"]               = { fg = "$red" },
+            --    ["@tag.attribute"]               = { fg = "#480AAB" },
+            --    ["@markup.heading.1.html"]       = { fg = "$fg", fmt = "none" },
+            --    ["@markup.heading.html"]         = { fg = "$fg", fmt = "none" },
+            --
+            --    -- Css
+            --    ["@property.css"]                = { fg = "$blue" },  
+            --    ["@string.css"]                  = { fg = "$orange" },  
+            --    ["@string.plain.css"]            = { fg = "$fg" },  
+            --    ["@tag.css"]                     = { fg = "$red" },  
+            --    ["@constant.css"]                = { fg = "$red" },  
+            --    ["@property.id.css"]             = { fg = "$red" },  
+            --    ["@property.class.css"]          = { fg = "$red" },  
+            --    ["@tag.attribute.css"]           = { fg = "$fg" },  
+            --    ["@type.css"]                    = { fg = "$red" },  
+            --    ["@type.tag.css"]                = { fg = "$red" },  
+            --    ["@operator.css"]                = { fg = "$fg" },  
+            --    ["@attribute.css"]               = { fg = "$red" },  
+            --    ["@keyword.modifier.css"]        = { fg = "$purple" },  
+            --
+            --    -- Lua
+            --    ["@constructor.lua"]             = { fg = "$fg" },
+            --    ["@keyword.operator.lua"]        = { fg = "$blue" },
+            --    ["@module.builtin.lua"]          = { fg = "$aqua" },
+            --    ["@property.lua"]                = { fg = "$fg" },
+            --    
+            --    -- Json
+            --    ["@property.json"]               = { fg = "$red" },
+            --
+            --    -- Markdown
+            --    htmlTag                          = { fg = "$red" },
+            --    htmlTagName                      = { fg = "$red" },
+            --    markdownCodeDelimiter            = { fg = "$green" },
+            --    markdownLinkText                 = { fg = "$blue" },
+            --    markdownUrl                      = { fg = "$green" },
+            --    markdownCode                     = { fg = "$green" },
+            --    markdownListMarker               = { fg = "$blue" },
+            --    ["@label.markdown"]              = { fg = "$red" },
+            --    ["@markup.raw.block.markdown"]   = { fg = "$red" },
+            --    ["@markup.heading.1.html"]       = { fg = "$orange" },
+            --    ["@markup.heading.html"]         = { fg = "$orange" },
+            --
+            --    -- Typescript
+            --    ["@keyword.directive.typescript"]                        = { fg = "$green" },
+            --
+            --    -- Javascript
+            --    ["@tag.javascript"]                                      = { fg = "$aqua" },
+            --    ["@tag.attribute.javascript"]                            = { fg = "#480AAB" },
+            --    ["@type.javascript"]                                     = { fg = "$fg" },  
+            --    ["@constant.javascript"]                                 = { fg = "$fg" },  
+            --
+            --    ["@lsp.typemod.property.declaration.javascript"]         = { fg = "$fg" },
+            --    ["@lsp.typemod.property.defaultLibrary.javascript"]      = { fg = "$orange" },
+            --    ["@lsp.typemod.variable.defaultLibrary.javascript"]      = { fg = "$orange" },
+            --    ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = { fg = "$orange" },
+            --    ["@lsp.typemod.function.defaultLibrary"]                 = { fg = "$red" },
+            --
+            --    ["@markup.raw.javascript"]                               = { fg = "$fg" },
+            --    ["@markup.heading.1.javascript"]                         = { fg = "$orange", fmt = "none" },
             -- }
+
+            -- --------------------------------------------------------------------------
          })
       end
    }
