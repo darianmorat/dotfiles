@@ -11,7 +11,8 @@ gui:
       - white
       - bold
     selectedLineBgColor:
-      - "#444444"
+      - "#444444" # Dark theme
+      # - "#d4d2c7" # Light theme
 
 git:
   paging:
