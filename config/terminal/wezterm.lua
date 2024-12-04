@@ -98,7 +98,7 @@ config.keys = {
 }
 
 -- --------------------------------------------------------------------------------------
--- VISUAL
+-- DARK COLORS
 -- --------------------------------------------------------------------------------------
 config.force_reverse_video_cursor = true
 
@@ -119,10 +119,6 @@ config.colors = {
 
    split = "#4F4F4F",
    scrollbar_thumb = "#4F4F4F",
-
-   tab_bar = {
-      background = "#313131", 
-   },
 
    ansi = {
       "#4F4F4F", -- black
@@ -157,6 +153,58 @@ config.colors = {
    quick_select_match_fg = { Color = "#CDC5B8" },
 }
 
+-- --------------------------------------------------------------------------------------
+-- LIGHT COLORS
+-- --------------------------------------------------------------------------------------
+-- config.colors = {
+--    foreground = "#111111",
+--    background = "#f9f6e4",
+--    cursor_fg = "#eae7e1",
+--    cursor_bg = "#404040",
+--    cursor_border = "#404040",
+--
+--    selection_fg = "#111111",
+--    selection_bg = "#b0b0a6",
+--
+--    split = "#4F4F4F",
+--    scrollbar_thumb = "#4F4F4F",
+--
+--    ansi = {
+--       "#1B1B1B", -- black
+--       "#9f0202", -- red
+--       "#006c00", -- green
+--       "#ae5f05", -- yellow
+--       "#1e5a8b", -- blue
+--       "#910e79", -- purple
+--       "#008b7f", -- cyan
+--       "#111111", -- white
+--    },
+--    brights = {
+--       "#111111", -- brightBlack
+--       "#9f0202", -- brightRed
+--       "#006c00", -- brightGreen
+--       "#ae5f05", -- brightYellow
+--       "#1e5a8b", -- brightBlue
+--       "#910e79", -- brightPurple
+--       "#008b7f", -- brightCyan
+--       "#111111", -- brightWhite
+--    },
+--
+--    indexed = {},
+--    copy_mode_active_highlight_bg = { Color = "#f9f6e4" },
+--    copy_mode_active_highlight_fg = { Color = "#111111" },
+--    copy_mode_inactive_highlight_bg = { Color = "#006c00" },
+--    copy_mode_inactive_highlight_fg = { Color = "#111111" },
+--
+--    quick_select_label_bg = { Color = "#ae5f05" },
+--    quick_select_label_fg = { Color = "#111111" },
+--    quick_select_match_bg = { Color = "#1e5a8b" },
+--    quick_select_match_fg = { Color = "#111111" },
+-- }
+
+-- --------------------------------------------------------------------------------------
+-- BACKGROUND
+-- --------------------------------------------------------------------------------------
 -- config.background = {
 --    {
 --       source = {
