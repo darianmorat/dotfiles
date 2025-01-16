@@ -1,3 +1,4 @@
+```html
 <div 
    style="text-align: center; font-size: 2rem; font-weight: bold; 
    background: linear-gradient(-0.075turn, #2a2a2a, #1f1f1f, #3a4a5a); 
@@ -10,6 +11,7 @@
   </div>
   <p style="color:#cccccc; font-size: 1.0rem;">Personal Dotfiles 21</p>
 </div>
+```
 
 ## AutoHotKey Setup:
 - [autohotkey](https://github.com/AutoHotkey/AutoHotkey) - custom bindings (v1.1)
