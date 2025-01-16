@@ -14,7 +14,7 @@ vim.opt.cmdheight = 0
 vim.opt.laststatus = 0
 
 vim.opt.updatetime = 150
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.relativenumber = false
@@ -140,7 +140,7 @@ local plugins = {
          vim.keymap.set("v", "<leader>b", "gb", { remap = true })
       end
    },
- 
+
    -- On first install run: Lazy build markdown-preview.nvim
    { "iamcco/markdown-preview.nvim", 
       keys = {
@@ -149,12 +149,11 @@ local plugins = {
       } 
    },
 
-   { "uga-rosa/ccc.nvim", 
-      opts = { win_opts = { border = "single" } },
-      keys = {
-         { "<leader>hc", "<cmd>CccConvert<cr>" },
-         { "<leader>hf", "<cmd>CccPick<cr>" },
-         { "<leader>th", "<cmd>CccHighlighterToggle<cr>" }
+   { "brenoprata10/nvim-highlight-colors", 
+      ft = { "css", "html" },
+      opts = {
+         render = "virtual",
+         virtual_symbol = "■■"
       }
    },
 
@@ -331,8 +330,9 @@ local plugins = {
       config = function()
          require"nvim-treesitter.configs".setup({
             ensure_installed = {
-               "lua", "javascript", "typescript", "tsx", --[[ "html", "css", ]]
-               "json", "jsonc", "diff", "markdown", "markdown_inline", --[[ "yaml", ]]
+               "lua", "javascript", "typescript", "tsx", "html", "css", "sql", 
+               "json", "jsonc", "diff", "markdown", "markdown_inline", "yaml",
+               "bash", "c", "python", "query", "regex", "rust", "vim", "vimdoc",
             },
             sync_install = false,
             indent = { enable = true },
@@ -518,8 +518,19 @@ require("lazy").setup(plugins, {
 -- COMMANDS
 -- --------------------------------------------------------------------------------------
 vim.cmd.colorscheme("onedark") -- Default colorscheme
-vim.cmd("command BufOnly silent! execute '%bd|e#|bd#'") -- Close all others buffers
-vim.cmd("autocmd BufNewFile,BufRead * setlocal formatoptions-=cro") -- No auto-comments
+
+-- Close all buffers except current
+vim.api.nvim_create_user_command("BufOnly", function()
+   vim.cmd("%bd|e#|bd#")
+end, { nargs = 0 })
+
+-- Disable automatic comment continuation
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+   pattern = "*",
+   callback = function()
+      vim.opt.formatoptions:remove { "c", "r", "o" }
+   end
+})
 
 -- Yank highlighting
 local yank = vim.highlight.on_yank
@@ -554,6 +565,20 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
          vim.b.miniindentscope_disable = true
       end
    end
+})
+
+-- EJS syntax highlighting (use :TSInstall embedded_template)
+vim.filetype.add({ extension = { ejs = "ejs" } })
+vim.treesitter.language.register("html", "ejs")
+vim.treesitter.language.register("javascript", "ejs")
+vim.treesitter.language.register("embedded_template", "ejs")
+
+-- Use HTML indentation for EJS 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "ejs",
+  callback = function()
+    vim.cmd.source(vim.fn.expand("$VIMRUNTIME/indent/html.vim"))
+  end
 })
 
 -- --------------------------------------------------------------------------------------
