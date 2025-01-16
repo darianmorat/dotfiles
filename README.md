@@ -1,17 +1,4 @@
-```html
-<div 
-   style="text-align: center; font-size: 2rem; font-weight: bold; 
-   background: linear-gradient(-0.075turn, #2a2a2a, #1f1f1f, #3a4a5a); 
-   color: white; padding: 1em; border-radius: 10px; font-family: consolas"
->
-  <div>
-    <code style="background-color: rgba(0,0,0,.2); padding:.2em .5em; border-radius:.25em;">.dotfiles</code>
-    → 
-    <code style="background-color: rgba(0,0,0,.2); padding:.2em .5em; border-radius:.25em;">~/config</code>
-  </div>
-  <p style="color:#cccccc; font-size: 1.0rem;">Personal Dotfiles 21</p>
-</div>
-```
+![screenshot](./docs/Screenshot.png)
 
 ## AutoHotKey Setup:
 - [autohotkey](https://github.com/AutoHotkey/AutoHotkey) - custom bindings (v1.1)
