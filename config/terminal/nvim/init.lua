@@ -394,7 +394,8 @@ local plugins = {
                prettier = {
                   prepend_args = { 
                      "--tab-width", "3", 
-                     "--single-quote" 
+                     "--single-quote",
+                     "--print-width", "90"
                   }
                }
             }
