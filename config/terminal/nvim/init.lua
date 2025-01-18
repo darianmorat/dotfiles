@@ -72,6 +72,7 @@ vim.keymap.set("n", "J", "m`J``")
 
 vim.keymap.set("n", "<C-h>", "<C-6>")
 vim.keymap.set("n", "=ap", "m`=ap``")
+vim.keymap.set("n", "<leader>ff", "<cmd>lua vim.lsp.buf.format()<cr>")
 
 vim.keymap.set("n", "<leader>a", "A")
 vim.keymap.set("n", "<leader>i", "I")
@@ -446,9 +447,9 @@ local plugins = {
          cmp.setup({
             completion = { completeopt = "menu, menuone, noinsert" },
             sources = { 
+               { name = "path" },
                { name = "nvim_lsp" },
                { name = "luasnip" },
-               { name = "path" },
                { name = "buffer" }
             },
             snippet = {
