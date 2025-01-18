@@ -388,11 +388,14 @@ local plugins = {
                html = { "prettier" },
                css = { "prettier" },
                json = { "prettier" },
-               markdown = { "prettier" },
+               markdown = { "prettier" }
             },
             formatters = {
                prettier = {
-                  prepend_args = { "--tab-width", "3" }
+                  prepend_args = { 
+                     "--tab-width", "3", 
+                     "--single-quote" 
+                  }
                }
             }
          })
