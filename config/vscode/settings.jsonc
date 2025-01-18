@@ -154,7 +154,7 @@
    "prettier.singleQuote": true,
    "prettier.tabWidth": 3,
    "editor.tabSize": 3,
-   "prettier.printWidth": 80,
+   "prettier.printWidth": 90,
    "editor.detectIndentation": false,
    "editor.defaultFormatter": "esbenp.prettier-vscode",
    "[html]": { "editor.defaultFormatter": "vscode.html-language-features" },
