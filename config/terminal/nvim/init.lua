@@ -389,13 +389,9 @@ local plugins = {
                css = { "prettier" },
                json = { "prettier" },
                markdown = { "prettier" },
-               lua = { "stylua" }
             },
             formatters = {
                prettier = {
-                  prepend_args = { "--tab-width", "3" }
-               },
-               stylua = {
                   prepend_args = { "--tab-width", "3" }
                }
             }
