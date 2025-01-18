@@ -72,7 +72,6 @@ vim.keymap.set("n", "J", "m`J``")
 
 vim.keymap.set("n", "<C-h>", "<C-6>")
 vim.keymap.set("n", "=ap", "m`=ap``")
-vim.keymap.set("n", "<leader>ff", "<cmd>lua vim.lsp.buf.format()<cr>")
 
 vim.keymap.set("n", "<leader>a", "A")
 vim.keymap.set("n", "<leader>i", "I")
@@ -377,6 +376,41 @@ local plugins = {
       }
    },
 
+   { "stevearc/conform.nvim", event = "VeryLazy",
+      config = function()
+         require("conform").setup({
+            -- Not able to use prettierd
+            formatters_by_ft = {
+               javascript = { "prettier" },
+               typescript = { "prettier" },
+               javascriptreact = { "prettier" },
+               typescriptreact = { "prettier" },
+               html = { "prettier" },
+               css = { "prettier" },
+               json = { "prettier" },
+               markdown = { "prettier" },
+               lua = { "stylua" }
+            },
+            formatters = {
+               prettier = {
+                  prepend_args = { "--tab-width", "3" }
+               },
+               stylua = {
+                  prepend_args = { "--tab-width", "3" }
+               }
+            }
+         })
+
+         vim.keymap.set( "n", "<leader>ff", function()
+            require("conform").format({
+               lsp_fallback = true,
+               async = false,
+               timeout_ms = 1000
+            })
+         end)
+      end
+   },
+
    { "neovim/nvim-lspconfig", -- Don't lazy load
       dependencies = {
          "williamboman/mason.nvim",
@@ -407,7 +441,7 @@ local plugins = {
          )
 
          -- [css-lsp] [eslint-lsp] [html-lsp] [json-lsp] [marksman]
-         -- [prettierd] [stylelint] [typescript-language-server]
+         -- [prettier] [stylelint] [stylua] [typescript-language-server]
          require("mason").setup({
             ui = { border = "single" }
          })
