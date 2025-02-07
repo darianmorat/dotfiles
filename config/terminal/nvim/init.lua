@@ -379,13 +379,11 @@ local plugins = {
    { "stevearc/conform.nvim", event = "VeryLazy",
       config = function()
          require("conform").setup({
-            -- Not able to use prettierd
             formatters_by_ft = {
                javascript = { "prettier" },
                typescript = { "prettier" },
                javascriptreact = { "prettier" },
                typescriptreact = { "prettier" },
-               html = { "prettier" },
                css = { "prettier" },
                json = { "prettier" },
                markdown = { "prettier" }
@@ -401,13 +399,15 @@ local plugins = {
             }
          })
 
-         vim.keymap.set( "n", "<leader>ff", function()
-            require("conform").format({
-               lsp_fallback = true,
-               async = false,
-               timeout_ms = 1000
-            })
-         end)
+         vim.keymap.set( "n", "<leader>ff", 
+            function()
+               require("conform").format({
+                  lsp_fallback = true,
+                  async = false,
+                  timeout_ms = 1000
+               })
+            end
+         )
       end
    },
 
