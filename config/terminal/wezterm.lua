@@ -28,10 +28,10 @@ config.switch_to_last_active_tab_when_closing_tab = true
 config.tab_and_split_indices_are_zero_based = false
 
 config.window_padding = {
-   left = 5, 
-   right = 5,
-   top = 6,
-   bottom = 5,
+   left = 7,
+   right = 7,
+   top = 7,
+   bottom = 0,
 }
 
 -- --------------------------------------------------------------------------------------
