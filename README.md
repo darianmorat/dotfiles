@@ -4,8 +4,8 @@
 - [autohotkey](https://github.com/AutoHotkey/AutoHotkey) - custom bindings (v1.1)
 
 ## GlazeWM setup:
-- [glazewm](https://github.com/glzr-io/glazewm) - tiling window manager (v3.3.0)
-- [zebar](https://github.com/glzr-io/zebar) - custom taskbar (v2.2.2)
+- [glazewm](https://github.com/glzr-io/glazewm) - tiling window manager (v3.8.1)
+- [zebar](https://github.com/glzr-io/zebar) - custom taskbar (v2.7.0)
 
 ## Terminal Setup: 
 - [wezterm](https://github.com/wez/wezterm) - terminal emulator (nightly)
