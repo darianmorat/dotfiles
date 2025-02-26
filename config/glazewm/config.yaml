@@ -27,7 +27,7 @@ gaps:
   outer_gap:
     top: '0px'
     right: '0px'
-    bottom: '31px'
+    bottom: '27px'
     left: '0px'
 
 window_effects:
