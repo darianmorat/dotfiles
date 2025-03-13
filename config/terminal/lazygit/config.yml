@@ -1,5 +1,5 @@
 gui: 
- authorColors:
+  authorColors:
     'darianmorat': 'blue'
     '*': 'blue'    
   border: single
@@ -11,21 +11,20 @@ gui:
       - white
       - bold
     selectedLineBgColor:
-      - "#444444" # Dark theme
-      # - "#d4d2c7" # Light theme
+      - reverse
 
-git:
-  paging:
-    pager: ""
-    externalDiffCommand: ""
-  commitPrefix:
-    pattern: " " 
-    replace: " "    
+  git:
+    paging:
+      pager: ""
+      externalDiffCommand: ""
+    commitPrefix:
+      pattern: " " 
+      replace: " "    
 
-customCommands:
-  - key: "w"
-    command: "git cz"
-    description: "commit with commitizen"
-    context: "files"
-    loadingText: "opening commitizen commit tool"
-    subprocess: true
+  customCommands:
+    - key: "w"
+      command: "git cz"
+      description: "commit with commitizen"
+      context: "files"
+      loadingText: "opening commitizen commit tool"
+      subprocess: true
