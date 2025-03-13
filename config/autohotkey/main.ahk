@@ -158,7 +158,7 @@ AdjustScreenBrightness(step) {
 ; ==== CHROME ====
 ; ================
 
-#IfWinActive, ahk_exe chrome.exe
+#IfWinActive, ahk_exe brave.exe
 
     ; Ctrl - Home / End
     !w::
@@ -210,7 +210,7 @@ $Alt::
    KeyWait, Alt, T0.16
    If ErrorLevel
    {
-     return
+      return
    }
    Send {Esc}
 Return
