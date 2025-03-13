@@ -3,16 +3,16 @@ highlight clear
 highlight Win             cterm=none ctermfg=default ctermbg=default
 highlight OtherWin        cterm=none ctermfg=default ctermbg=default
 
-highlight TopLine         cterm=none ctermfg=default ctermbg=236
-highlight TopLineSel      cterm=bold ctermfg=default ctermbg=236
+highlight TopLine         cterm=none ctermfg=default ctermbg=default
+highlight TopLineSel      cterm=underline ctermfg=default ctermbg=default
 highlight JobLine	        cterm=bold ctermfg=default ctermbg=236
-highlight StatusLine	     cterm=none ctermfg=default ctermbg=236
+highlight StatusLine	     cterm=reverse ctermfg=default ctermbg=default
 highlight Border          cterm=none ctermfg=default ctermbg=default
 
 highlight Selected        cterm=bold ctermfg=default ctermbg=237
 highlight CurrLine        cterm=reverse ctermfg=default ctermbg=default
 
-highlight WildMenu        cterm=underline,reverse ctermfg=11 ctermbg=white
+highlight WildMenu        cterm=reverse ctermfg=11 ctermbg=white
 highlight CmdLine         cterm=none ctermfg=default ctermbg=default
 highlight ErrorMsg        cterm=none ctermfg=red ctermbg=default
 
