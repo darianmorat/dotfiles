@@ -28,8 +28,8 @@ config.switch_to_last_active_tab_when_closing_tab = true
 config.tab_and_split_indices_are_zero_based = false
 
 config.window_padding = {
-   left = 7,
-   right = 7,
+   left = 5,
+   right = 5,
    top = 7,
    bottom = 0,
 }
@@ -93,12 +93,11 @@ config.keys = {
    { key = "k", mods = "LEADER", action = wezterm.action.SendString "\x15nvim\n" },
 
    -- Toogle theme
-   { key = "Tab", mods = "CTRL", action = wezterm.action.EmitEvent("toggle-theme") },
+   { key = "Tab", mods = "LEADER", action = wezterm.action.EmitEvent("toggle-theme") },
 
    -- Disable defaults
    { key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment },
    { key = "Tab", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
-
 }
 
 -- --------------------------------------------------------------------------------------
