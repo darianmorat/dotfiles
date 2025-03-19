@@ -77,8 +77,7 @@ vim.keymap.set("n", "<leader>a", "A")
 vim.keymap.set("n", "<leader>i", "I")
 vim.keymap.set("n", "<leader>p", "<c-g>")
 
-vim.keymap.set("n", "<leader>tI", "<cmd>IBLToggle<cr>")
-vim.keymap.set("n", "<leader>ti", "m`<cmd>ToggleScope<CR> | <cmd>IBLToggle<cr>``")
+vim.keymap.set("n", "<leader>ti", "<cmd>IBLToggle<cr>")
 vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<cr>")
 vim.keymap.set("n", "<leader>tn", "<cmd>set relativenumber!<cr>")
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<cr>")
@@ -350,7 +349,7 @@ local plugins = {
    { "windwp/nvim-ts-autotag", event = "VeryLazy", opts = {} },
    { "windwp/nvim-autopairs", event = "VeryLazy", opts = {} },
 
-   { "lukas-reineke/indent-blankline.nvim", main = "ibl", lazy = true,
+   { "lukas-reineke/indent-blankline.nvim", main = "ibl",
       opts = {
          indent = {
             char = "╎", -- │╎|
@@ -360,18 +359,6 @@ local plugins = {
             enabled = false,
             show_start = false,
             show_end = false
-         }
-      }
-   },
-
-   { "echasnovski/mini.indentscope", version = "*", event = "BufReadPre",
-      opts = {
-         symbol = "╎", -- │╎|
-         draw = {
-            delay = 0,
-            animation = function()
-               return 0
-            end
          }
       }
    },
@@ -578,41 +565,6 @@ vim.api.nvim_create_autocmd("TextYankPost", { group = "YankHighlight",
 vim.api.nvim_create_autocmd("ModeChanged", {
   callback = function()
     if vim.fn.mode() == "i" then vim.schedule(vim.cmd.redraw) end
-  end
-})
-
--- Toggle Scope Indentation
-vim.cmd("command! ToggleScope lua ToggleScope()")
-function ToggleScope()
-   vim.g.miniindentscope_disable = not vim.g.miniindentscope_disable
-end
-
--- Disable Line Indentation
-require("ibl").overwrite {
-   exclude = { filetypes = { "help", "undotree" } }
-}
-
--- Disable Scope Indentation
-vim.api.nvim_create_autocmd({ "FileType" }, {
-   callback = function()
-      local ignore_filetypes = { "help", "undotree", "lazy", "mason", "startuptime" }
-      if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
-         vim.b.miniindentscope_disable = true
-      end
-   end
-})
-
--- EJS syntax highlighting (use :TSInstall embedded_template)
-vim.filetype.add({ extension = { ejs = "ejs" } })
-vim.treesitter.language.register("html", "ejs")
-vim.treesitter.language.register("javascript", "ejs")
-vim.treesitter.language.register("embedded_template", "ejs")
-
--- Use HTML indentation for EJS 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "ejs",
-  callback = function()
-    vim.cmd.source(vim.fn.expand("$VIMRUNTIME/indent/html.vim"))
   end
 })
 
