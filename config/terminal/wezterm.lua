@@ -149,7 +149,7 @@ local themes = {
 
    light = {
       foreground = "#111111",
-      background = "#f9f6e4",
+      background = "#f7f5ea",
       cursor_fg = "#eae7e1",
       cursor_bg = "#404040",
       cursor_border = "#404040",
@@ -157,7 +157,7 @@ local themes = {
       selection_bg = "#b0b0a6",
       split = "#4F4F4F",
       scrollbar_thumb = "#4F4F4F",
-      copy_mode_active_highlight_bg = { Color = "#f9f6e4" },
+      copy_mode_active_highlight_bg = { Color = "#f7f5ea" },
       copy_mode_active_highlight_fg = { Color = "#111111" },
       copy_mode_inactive_highlight_bg = { Color = "#006c00" },
       copy_mode_inactive_highlight_fg = { Color = "#111111" },
