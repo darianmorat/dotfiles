@@ -373,7 +373,8 @@ local plugins = {
                typescriptreact = { "prettier" },
                css = { "prettier" },
                json = { "prettier" },
-               markdown = { "prettier" }
+               markdown = { "prettier" },
+               python = { "black" }
             },
             formatters = {
                prettier = {
@@ -381,6 +382,13 @@ local plugins = {
                      "--tab-width", "3", 
                      "--single-quote",
                      "--print-width", "90"
+                  }
+               },
+               black = {
+                  prepend_args = { 
+                     -- 4 spaces is the standard
+                     -- Double quotes are the standard
+                     "--line-length", "90"
                   }
                }
             }
@@ -420,15 +428,29 @@ local plugins = {
             vim.keymap.set("n", "<leader>vd", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
          end
 
-         vim.diagnostic.config({ virtual_text = false })
-         vim.diagnostic.config { float = { border = "single" } }
+         vim.diagnostic.config({ 
+            virtual_text = true,
+            signs = true,
+            underline = true,
+            update_in_insert = false,
+            severity_sort = false,
+            float = { border = "single" },
+         })
 
-         vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-            vim.lsp.handlers.hover, { border = "single" }
-         )
+         local open_float = vim.lsp.util.open_floating_preview
+         function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+            opts = opts or {}
+            opts.border = "single"
+            return open_float(contents, syntax, opts, ...)
+         end
 
-         -- [css-lsp] [eslint-lsp] [html-lsp] [json-lsp] [marksman]
-         -- [prettier] [stylelint] [stylua] [typescript-language-server]
+         -- JavaScript
+         -- [eslint-lsp] [prettier] [typescript-language-server]
+         -- [css-lsp] [stylelint] [html-lsp] [json-lsp] [marksman] [stylua]
+
+         -- Python
+         -- [black] [pyright]
+
          require("mason").setup({
             ui = { border = "single" }
          })
