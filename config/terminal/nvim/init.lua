@@ -103,7 +103,10 @@ local plugins = {
          fadelevel = 0.3,
          blocklist = {
             only_behind_float_windows = function(win, current)
-               if (win.win_config.relative == "") and (current and current.win_config.relative ~= "") then
+               if
+                  (win.win_config.relative == "")
+                  and (current and current.win_config.relative ~= "")
+               then
                   return false
                end
                return true
@@ -429,7 +432,6 @@ local plugins = {
       config = function()
          require("nvim-treesitter.configs").setup({
             ensure_installed = {
-               "lua",
                "javascript",
                "typescript",
                "tsx",
@@ -443,11 +445,12 @@ local plugins = {
                "markdown_inline",
                "yaml",
                "bash",
-               "c",
-               "python",
                "query",
                "regex",
                "rust",
+               "c",
+               "python",
+               "lua",
                "vim",
                "vimdoc",
             },
@@ -522,7 +525,7 @@ local plugins = {
                      "--indent-width",
                      "3",
                      "--column-width",
-                     "120",
+                     "100",
                   },
                },
             },
@@ -640,9 +643,7 @@ local plugins = {
             },
             view = { docs = { auto_open = false } },
             window = {
-               documentation = {
-                  winhighlight = "Normal:MatchParen,FloatBorder:MatchParen",
-               },
+               documentation = { winhighlight = "Normal:MatchParen,FloatBorder:MatchParen" },
             },
             mapping = cmp.mapping.preset.insert({
                ["<Enter>"] = cmp.mapping.confirm({ select = true }),
@@ -681,21 +682,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup(plugins, {
    ui = { border = "single" },
-   change_detection = {
-      enabled = false,
-      notify = false,
-   },
+   change_detection = { enabled = false, notify = false },
    performance = {
       cache = { enabled = true },
-      rtp = {
-         disabled_plugins = {
-            "gzip",
-            "tarPlugin",
-            "tohtml",
-            "tutor",
-            "zipPlugin",
-         },
-      },
+      rtp = { disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin" } },
    },
 })
 
@@ -743,11 +733,7 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:block-Cursor2"
 
 -- File changed sign in editor
-vim.fn.sign_define("FileChanged", {
-   text = "✗",
-   texthl = "WarningMsg",
-   numhl = "WarningMsg",
-})
+vim.fn.sign_define("FileChanged", { text = "✗", texthl = "WarningMsg", numhl = "WarningMsg" })
 
 local function update_sign()
    if vim.bo.filetype:match("^harpoon") then
@@ -763,14 +749,11 @@ local function update_sign()
    end
 end
 
-vim.api.nvim_create_autocmd({
-   "TextChanged",
-   "TextChangedI",
-   "CursorMoved",
-   "CursorMovedI",
-   "BufWritePost",
-}, {
-   callback = function()
-      vim.schedule(update_sign)
-   end,
-})
+vim.api.nvim_create_autocmd(
+   { "TextChanged", "TextChangedI", "CursorMoved", "CursorMovedI", "BufWritePost" },
+   {
+      callback = function()
+         vim.schedule(update_sign)
+      end,
+   }
+)
