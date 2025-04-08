@@ -45,10 +45,7 @@ config.keys = {
    { key = ",", mods = "LEADER", action = act.ActivateCopyMode },
 
    -- Tab navigation
-   { key = "l", mods = "LEADER", action = act.ActivateLastTab },
-   { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
-   { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
-
+   { key = "j", mods = "CTRL", action = act.ActivateLastTab },
    { key = "c", mods = "LEADER", action = act{ SpawnTab = "CurrentPaneDomain" } },
    { key = "d", mods = "LEADER", action = act{ CloseCurrentTab = { confirm = true } } },
 
