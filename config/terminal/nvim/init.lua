@@ -157,15 +157,6 @@ local plugins = {
       },
    },
 
-   {
-      "brenoprata10/nvim-highlight-colors",
-      ft = { "css", "html" },
-      opts = {
-         render = "virtual",
-         virtual_symbol = "■■",
-      },
-   },
-
    { "kylechui/nvim-surround", version = "*", event = "VeryLazy", opts = {} },
 
    {
@@ -579,14 +570,19 @@ local plugins = {
             return open_float(contents, syntax, opts, ...)
          end
 
-         -- [eslint-lsp] [prettier]
-         -- [typescript-server]
-         -- [css-lsp] [stylelint]
-         -- [html-lsp] [json-lsp]
-         -- [marksman] ## JavasCript
-
-         -- [stylua] ## Lua
-         -- [black] [pyright] ## Python
+         -- Installed (11)
+         -- --------------
+         -- ◍ basedpyright
+         -- ◍ black
+         -- ◍ css-lsp cssls
+         -- ◍ eslint-lsp eslint
+         -- ◍ html-lsp html
+         -- ◍ json-lsp jsonls
+         -- ◍ marksman
+         -- ◍ prettier
+         -- ◍ stylelint
+         -- ◍ stylua
+         -- ◍ typescript-language-server ts_ls
 
          require("mason").setup({
             ui = { border = "single" },
