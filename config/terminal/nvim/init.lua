@@ -148,15 +148,6 @@ local plugins = {
       end,
    },
 
-   -- On first install run: Lazy build markdown-preview.nvim
-   {
-      "iamcco/markdown-preview.nvim",
-      keys = {
-         { "<leader>tm", "<cmd>MarkdownPreviewToggle<cr>" },
-         { "<leader>lm", "<cmd>Lazy load markdown-preview.nvim<cr> | <cmd>Lazy<cr>" },
-      },
-   },
-
    { "kylechui/nvim-surround", version = "*", event = "VeryLazy", opts = {} },
 
    {
@@ -499,6 +490,8 @@ local plugins = {
             formatters = {
                prettier = {
                   prepend_args = {
+                     "--tab-width",
+                     "3",
                      "--print-width",
                      "90",
                   },
