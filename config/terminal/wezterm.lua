@@ -5,7 +5,9 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = {}
 
-if wezterm.config_builder then config = wezterm.config_builder() end
+if wezterm.config_builder then
+   config = wezterm.config_builder()
+end
 
 config.default_domain = "WSL:Ubuntu"
 config.window_decorations = "RESIZE"
@@ -35,59 +37,60 @@ config.window_padding = {
 }
 
 -- --------------------------------------------------------------------------------------
--- BINDINGS 
+-- BINDINGS
 -- --------------------------------------------------------------------------------------
 config.leader = { key = "Space", mods = "ALT" }
 
 config.keys = {
-   { key = "v", mods = "CTRL", action = act{ PasteFrom = "Clipboard" } },
-   { key = "c", mods = "CTRL", action = act{ CopyTo = "Clipboard" } },
+   { key = "v", mods = "CTRL", action = act({ PasteFrom = "Clipboard" }) },
+   { key = "c", mods = "CTRL", action = act({ CopyTo = "Clipboard" }) },
    { key = ",", mods = "LEADER", action = act.ActivateCopyMode },
 
    -- Tab navigation
    { key = "j", mods = "CTRL", action = act.ActivateLastTab },
-   { key = "c", mods = "LEADER", action = act{ SpawnTab = "CurrentPaneDomain" } },
-   { key = "d", mods = "LEADER", action = act{ CloseCurrentTab = { confirm = true } } },
+   { key = "c", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
+   { key = "d", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
 
    { key = "1", mods = "LEADER", action = act.ActivateTab(0) },
    { key = "2", mods = "LEADER", action = act.ActivateTab(1) },
    { key = "3", mods = "LEADER", action = act.ActivateTab(2) },
    { key = "4", mods = "LEADER", action = act.ActivateTab(3) },
 
-   { key = "f", mods = "LEADER", action = act.ShowLauncherArgs { flags = "FUZZY|TABS" } },
-   { key = "r", mods = "LEADER", action = act.PromptInputLine {
-      description = "Enter new name for tab:",
-      action = wezterm.action_callback(
-         function(window, pane, line)
+   { key = "f", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
+   {
+      key = "r",
+      mods = "LEADER",
+      action = act.PromptInputLine({
+         description = "Enter new name for tab:",
+         action = wezterm.action_callback(function(window, pane, line)
             if line then
                window:active_tab():set_title(line)
             end
-         end
-      )}
+         end),
+      }),
    },
 
    -- Workspace navigation
-   { key = "i", mods = "LEADER", action = act.SwitchToWorkspace { name = "default" } },
-   { key = "o", mods = "LEADER", action = act.SwitchToWorkspace { name = "secondary" } },
+   { key = "i", mods = "LEADER", action = act.SwitchToWorkspace({ name = "default" }) },
+   { key = "o", mods = "LEADER", action = act.SwitchToWorkspace({ name = "secondary" }) },
 
-   { key = "s", mods = "LEADER", action = act.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
-   { key = "w", mods = "LEADER", action = act.PromptInputLine {
-      description = "Enter new name for session:",
-      action = wezterm.action_callback(
-         function(window, pane, line)
+   { key = "s", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+   {
+      key = "w",
+      mods = "LEADER",
+      action = act.PromptInputLine({
+         description = "Enter new name for session:",
+         action = wezterm.action_callback(function(window, pane, line)
             if line then
-               wezterm.mux.rename_workspace(
-                  wezterm.mux.get_active_workspace(),
-                  line
-               )
+               wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
             end
-         end
-      )}
+         end),
+      }),
    },
 
    -- Open in shell
-   { key = "j", mods = "LEADER", action = wezterm.action.SendString "\x15vifm\n" },
-   { key = "k", mods = "LEADER", action = wezterm.action.SendString "\x15nvim\n" },
+   { key = "j", mods = "LEADER", action = wezterm.action.SendString("\x15vifm\n") },
+   { key = "k", mods = "LEADER", action = wezterm.action.SendString("\x15nvim\n") },
 
    -- Toogle theme
    { key = "Tab", mods = "LEADER", action = wezterm.action.EmitEvent("toggle-theme") },
@@ -141,7 +144,7 @@ local themes = {
          "#CD60B9", -- brightPurple
          "#00AA9C", -- brightCyan
          "#CDC5B8", -- brightWhite
-      }
+      },
    },
 
    light = {
@@ -182,20 +185,25 @@ local themes = {
          "#910e79", -- brightPurple
          "#008b7f", -- brightCyan
          "#111111", -- brightWhite
-      }
-   }
+      },
+   },
 }
 
 local function read_theme()
    local file = io.open(theme_file, "r")
    local theme = file and file:read("*l"):match("%S+") or "dark"
-   if file then file:close() end
+   if file then
+      file:close()
+   end
    return themes[theme] and theme or "dark"
 end
 
 local function save_theme(theme)
    local file = io.open(theme_file, "w")
-   if file then file:write(theme) file:close() end
+   if file then
+      file:write(theme)
+      file:close()
+   end
 end
 
 local current_theme = read_theme()
@@ -203,12 +211,12 @@ config.colors = themes[current_theme]
 
 wezterm.on("toggle-theme", function(window)
    current_theme = (current_theme == "dark") and "light" or "dark"
-   window:set_config_overrides({ 
+   window:set_config_overrides({
       colors = themes[current_theme],
       foreground_text_hsb = (current_theme == "dark") and {
-         saturation = 1.03,
-         brightness = 1.2
-      } or nil
+         saturation = 1.05,
+         brightness = 1.2,
+      } or nil,
    })
    save_theme(current_theme)
 end)
