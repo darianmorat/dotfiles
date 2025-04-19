@@ -214,7 +214,7 @@ wezterm.on("toggle-theme", function(window)
    window:set_config_overrides({
       colors = themes[current_theme],
       foreground_text_hsb = (current_theme == "dark") and {
-         saturation = 1.05,
+         saturation = 1.04,
          brightness = 1.2,
       } or nil,
    })
