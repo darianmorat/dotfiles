@@ -128,8 +128,6 @@
    "workbench.editor.revealIfOpen": true,
    "workbench.settings.editor": "json",
    "workbench.startupEditor": "none",
-
-   "workbench.colorTheme": "GruvDark",
    "workbench.iconTheme": null,
    "workbench.editor.showTabs": "none",
    "editor.renderLineHighlight": "none",
@@ -137,7 +135,6 @@
    "editor.bracketPairColorization.enabled": false,
    "editor.roundedSelection": false,
    "editor.cursorSurroundingLines": 6,
-   "editor.lineNumbers": "on",
    "editor.fontSize": 15,
    "terminal.integrated.fontSize": 15,
    "editor.fontFamily": "JetBrains Mono NL Slashed",
@@ -151,7 +148,6 @@
    "editor.suggest.insertMode": "insert",
    "editor.quickSuggestions": { "other": "on", "comments": "off", "strings": "off" },
 
-   "prettier.singleQuote": true,
    "prettier.tabWidth": 3,
    "editor.tabSize": 3,
    "prettier.printWidth": 90,
@@ -266,5 +262,7 @@
    "editor.accessibilitySupport": "off",
    "remote.autoForwardPortsSource": "hybrid",
    "typescript.disableAutomaticTypeAcquisition": true,
-   "cSpell.enabled": false
+   "cSpell.enabled": false,
+   "workbench.colorTheme": "GruvDark",
+   "editor.occurrencesHighlight": "off"
 }
