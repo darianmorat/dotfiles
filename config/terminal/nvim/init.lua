@@ -565,7 +565,6 @@ local plugins = {
 
          -- Installed (11)
          -- --------------
-         -- ◍ basedpyright
          -- ◍ black
          -- ◍ css-lsp cssls
          -- ◍ eslint-lsp eslint
@@ -573,6 +572,7 @@ local plugins = {
          -- ◍ json-lsp jsonls
          -- ◍ marksman
          -- ◍ prettier
+         -- ◍ pyright
          -- ◍ stylelint
          -- ◍ stylua
          -- ◍ typescript-language-server ts_ls
