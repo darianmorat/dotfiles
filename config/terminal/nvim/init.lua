@@ -536,16 +536,32 @@ local plugins = {
          local cmp_lsp = require("cmp_nvim_lsp")
          local capabilities = cmp_lsp.default_capabilities()
 
-         local lsp_attach = function(client, bufnr)
-            local opts = { buffer = bufnr, silent = true }
-            vim.keymap.set("n", "gh", ":silent lua vim.lsp.buf.hover()<cr>", opts)
-            vim.keymap.set("n", "gd", ":silent lua vim.lsp.buf.definition()<cr>", opts)
-            vim.keymap.set("n", "<leader>xx", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-            vim.keymap.set("n", "<leader>sr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-            vim.keymap.set("n", "<leader>vj", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
-            vim.keymap.set("n", "<leader>vk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
-            vim.keymap.set("n", "<leader>vd", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
-         end
+         local augroup = vim.api.nvim_create_augroup
+         local lsp_group = augroup("lsp_group", {})
+
+         vim.api.nvim_create_autocmd("LspAttach", {
+            group = lsp_group,
+            callback = function(args)
+               local opts = { buffer = args.buf }
+               vim.keymap.set("n", "gh", ":silent lua vim.lsp.buf.hover()<cr>", opts)
+               vim.keymap.set("n", "gd", ":silent lua vim.lsp.buf.definition()<cr>", opts)
+               vim.keymap.set("n", "<leader>xx", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+               vim.keymap.set("n", "<leader>sr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+               vim.keymap.set("n", "<leader>vd", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
+               vim.keymap.set(
+                  "n",
+                  "<leader>vj",
+                  "<cmd>lua vim.diagnostic.jump({count= 1,float = true})<cr>",
+                  opts
+               )
+               vim.keymap.set(
+                  "n",
+                  "<leader>vk",
+                  "<cmd>lua vim.diagnostic.jump({count= -1,float = true})<cr>",
+                  opts
+               )
+            end,
+         })
 
          vim.diagnostic.config({
             virtual_text = false,
@@ -580,12 +596,12 @@ local plugins = {
          require("mason").setup({
             ui = { border = "single" },
          })
+
          require("mason-lspconfig").setup({
             handlers = {
                function(server_name)
-                  require("lspconfig")[server_name].setup({
+                  lspconfig[server_name].setup({
                      capabilities = capabilities,
-                     on_attach = lsp_attach,
                   })
                end,
             },
@@ -697,7 +713,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 })
 
 -- Yank highlighting
-local yank = vim.highlight.on_yank
+local yank = vim.hl.on_yank
 vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
    group = "YankHighlight",
