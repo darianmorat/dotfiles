@@ -22,6 +22,6 @@
    - [trash-cli](https://github.com/sindresorhus/trash-cli) - trash management
    - [empty-trash-cli](https://github.com/sindresorhus/empty-trash-cli) - empties trash
 - Tools ➜
-   - [neovim](https://github.com/neovim/neovim) - text editor (v0.11.0)
+   - [neovim](https://github.com/neovim/neovim) - text editor (v0.12.0)
    - [vifm](https://github.com/vifm/vifm) - vim-like file manager
    - [lazygit](https://github.com/jesseduffield/lazygit) - git management
