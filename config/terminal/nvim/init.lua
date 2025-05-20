@@ -78,14 +78,12 @@ vim.keymap.set("n", "=ap", "m`=ap``")
 
 vim.keymap.set("n", "<leader>a", "A")
 vim.keymap.set("n", "<leader>i", "I")
-vim.keymap.set("n", "<leader>p", "<c-g>")
+vim.keymap.set("n", "<leader>r", "<c-g>")
 
 vim.keymap.set("n", "<leader>ti", "<cmd>IBLToggle<cr>")
 vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<cr>")
 vim.keymap.set("n", "<leader>tn", "<cmd>set relativenumber!<cr>")
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<cr>")
-
-vim.keymap.set("n", "<leader>r", "<cmd>LspRestart<cr>")
 
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
@@ -271,6 +269,10 @@ local plugins = {
       keys = {
          { "<leader>fi", "<cmd>Telescope find_files previewer=false<cr>" },
          { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
+         {
+            "<leader>fc",
+            "<cmd>lua require('telescope.builtin').live_grep({search_dirs={vim.fn.expand('%:p')}})<cr>",
+         },
          { "<leader>fo", "<cmd>Telescope resume<cr>" },
          { "<leader>fj", "<cmd>Telescope buffers previewer=false<cr>" },
          { "<leader>fr", "<cmd>Telescope lsp_references<cr>" },
