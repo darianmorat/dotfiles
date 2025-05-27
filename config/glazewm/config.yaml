@@ -107,7 +107,6 @@ window_rules:
   - commands: ['set-fullscreen']
     match:
       - window_process: { equals: 'wezterm-gui' } 
-      - window_process: { equals: 'Code' } 
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
@@ -179,8 +178,8 @@ keybindings:
     bindings: ['alt+v']
 
   # Change focus from tiling windows -> floating -> fullscreen.
-  - commands: ['wm-cycle-focus']
-    bindings: ['alt+c']
+  # - commands: ['wm-cycle-focus']
+  #   bindings: ['alt+c']
 
   # Change the focused window to be floating.
   - commands: ['toggle-floating --centered']
@@ -196,7 +195,7 @@ keybindings:
 
   # Minimize focused window.
   - commands: ['toggle-minimized']
-    bindings: ['alt+m']
+    bindings: ['alt+c']
 
   # Close focused window.
   - commands: ['close']
@@ -240,8 +239,8 @@ keybindings:
     bindings: ['alt+3']
   - commands: ['focus --workspace 4']
     bindings: ['alt+4']
-  # - commands: ['focus --workspace 5']
-  #   bindings: ['alt+5']
+  - commands: ['focus --workspace 5']
+    bindings: ['alt+5']
   # - commands: ['focus --workspace 6']
   #   bindings: ['alt+6']
   # - commands: ['focus --workspace 7']
@@ -271,8 +270,8 @@ keybindings:
     bindings: ['alt+ctrl+3']
   - commands: ['move --workspace 4', 'focus --workspace 4']
     bindings: ['alt+ctrl+4']
-  # - commands: ['move --workspace 5', 'focus --workspace 5']
-  #   bindings: ['alt+ctrl+5']
+  - commands: ['move --workspace 5', 'focus --workspace 5']
+    bindings: ['alt+ctrl+5']
   # - commands: ['move --workspace 6', 'focus --workspace 6']
   #   bindings: ['alt+ctrl+6']
   # - commands: ['move --workspace 7', 'focus --workspace 7']
