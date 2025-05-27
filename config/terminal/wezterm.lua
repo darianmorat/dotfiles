@@ -74,9 +74,9 @@ config.keys = {
    { key = "i", mods = "LEADER", action = act.SwitchToWorkspace({ name = "default" }) },
    { key = "o", mods = "LEADER", action = act.SwitchToWorkspace({ name = "secondary" }) },
 
-   { key = "s", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+   { key = "9", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
    {
-      key = "w",
+      key = "0",
       mods = "LEADER",
       action = act.PromptInputLine({
          description = "Enter new name for session:",
