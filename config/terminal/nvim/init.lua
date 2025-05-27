@@ -368,6 +368,10 @@ local plugins = {
       event = "BufReadPre",
       config = function()
          require("gitsigns").setup({
+            preview_config = {
+               border = "single",
+            },
+
             on_attach = function(bufnr)
                local gitsigns = require("gitsigns")
                local line = vim.fn.line
