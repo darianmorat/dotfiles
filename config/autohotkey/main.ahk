@@ -41,6 +41,11 @@ return
 send, {enter}
 return
 
+!u::
+return
+!p::
+return
+
 !i::
 SendRaw {
 return
@@ -56,10 +61,10 @@ return
 ![::
 send, ]
 return
-
-!f::
-send % "{Raw}%"
+!]::
+send, ]
 return
+
 !w::
 send, {^}
 return
@@ -73,13 +78,16 @@ return
 send, {W}
 return
 !r::
-send, {&}
+send, =
+return
+!f::
+send % "{Raw}%"
 return
 
 !-::
 send, {_}
 return
-!=::
+*=::
 send, {+}
 return
 !\::
