@@ -47,10 +47,10 @@ return
 return
 
 !y::
-SendRaw &
+send &
 return
 !8::
-SendRaw *
+send *
 return
 
 !i::
