@@ -49,6 +49,10 @@ return
 !y::
 SendRaw &
 return
+!8::
+SendRaw *
+return
+
 !i::
 SendRaw {
 return
