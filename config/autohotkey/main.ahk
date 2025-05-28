@@ -46,6 +46,9 @@ return
 !p::
 return
 
+!y::
+SendRaw &
+return
 !i::
 SendRaw {
 return
