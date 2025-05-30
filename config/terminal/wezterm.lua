@@ -11,7 +11,11 @@ end
 
 config.default_domain = "WSL:Ubuntu"
 config.window_decorations = "RESIZE"
-config.font = wezterm.font("JetBrains Mono NL Slashed")
+
+config.font = wezterm.font({
+   family = "JetBrains Mono NL Slashed",
+   harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+})
 
 config.font_size = 12.5
 config.cell_width = 0.90
