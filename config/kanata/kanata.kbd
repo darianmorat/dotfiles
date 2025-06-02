@@ -1,8 +1,5 @@
-;; alt+lspc = toggle
-
-(defcfg
+(defcfg 
   process-unmapped-keys yes
-  log-layer-changes no
 )
 
 (defvar
@@ -13,15 +10,7 @@
   ht $hold-timeout
 )
 
-(defsrc
-  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-  grv  1    2    3    4    5    6    7    8    9    0    -    =   bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]   \
-  caps a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet cmp  rctl
-)
-
+(defsrc)
 (deflayermap (default)
   esc grv
   lsft (caps-word-toggle 2000)
@@ -48,7 +37,7 @@
 )
 
 (deflayermap (spc-layer)
-  ;; WHAT CAN I USE IN THIS LAYER WITH SPACE?
+  ;; PENDING
 )
 
 (deflayermap (lalt-layer)
@@ -88,7 +77,6 @@
   d (macro C-f12 50 d)
   r (macro C-f12 50 r)
 
-  ;; Should I use the same logic here with qwert for navigation? seems simpler
   1 (macro C-f12 50 1)
   2 (macro C-f12 50 2)
   3 (macro C-f12 50 3)
