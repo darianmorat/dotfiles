@@ -1,0 +1,107 @@
+;; alt+lspc = toggle
+
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes no
+)
+
+(defvar
+  tap-timeout 150
+  hold-timeout 150
+
+  tt $tap-timeout
+  ht $hold-timeout
+)
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =   bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]   \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet cmp  rctl
+)
+
+(deflayermap (default)
+  esc grv
+  lsft (caps-word-toggle 2000)
+  rsft (caps-word-toggle 2000)
+
+  b (tap-hold-release $tt $ht b lmet) 
+  
+  s (tap-hold-release $tt $ht s lalt)
+  d (tap-hold-release $tt $ht d lsft)
+  f (tap-hold-release $tt $ht f lctl)
+  
+  j (tap-hold-release $tt $ht j rctl)
+  k (tap-hold-release $tt $ht k rsft)
+  l (tap-hold-release $tt $ht l ralt)
+
+  spc (tap-hold-release $tt $ht spc (layer-while-held spc-layer))
+  lalt (tap-hold-release $tt $ht esc (layer-while-held lalt-layer))
+  
+  e (tap-hold-release $tt $ht e (layer-while-held symb-layer))
+  i (tap-hold-release $tt $ht i (layer-while-held symb-layer))
+
+  v (tap-hold-release $tt $ht v (layer-while-held term-layer))
+  n (tap-hold-release $tt $ht n (layer-while-held term-layer))
+)
+
+(deflayermap (spc-layer)
+  ;; WHAT CAN I USE IN THIS LAYER WITH SPACE?
+)
+
+(deflayermap (lalt-layer)
+  a lmet
+  s lalt
+  d lsft
+  f lctl
+
+  h bspc
+  j down
+  k up
+  l ret
+
+  i left
+  o right
+
+  w Home
+  e End
+)
+
+(deflayermap (symb-layer)
+  w S-6
+  e S-4
+  r =
+  s S-b
+  d S-w
+  f S-5
+
+  i S-[
+  o S-]
+)
+
+(deflayermap (term-layer)
+  , (macro C-f12 50 ,)
+
+  c (macro C-f12 50 c)
+  d (macro C-f12 50 d)
+  r (macro C-f12 50 r)
+
+  ;; Should I use the same logic here with qwert for navigation? seems simpler
+  1 (macro C-f12 50 1)
+  2 (macro C-f12 50 2)
+  3 (macro C-f12 50 3)
+  4 (macro C-f12 50 4)
+
+  f (macro C-f12 50 f)
+  t (macro C-f12 50 r)
+
+  i (macro C-f12 50 i)
+  o (macro C-f12 50 o)
+  ;; 9 (macro C-f12 50 9)
+  ;; 0 (macro C-f12 50 0)
+
+  v (macro C-f12 50 j)
+  n (macro C-f12 50 k)
+)
