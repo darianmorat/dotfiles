@@ -5,124 +5,6 @@
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory
 SendMode Input ; For new scripts due to its superior speed and reliability
 
-; ====================
-; ==== KEYBD MAIN ====
-; ====================
-
-; VORTEX CYPHER:
-; LSpc ----- to LAlt
-; LAlt ----- to Fn
-; Fn-z ----- to Fn-a
-
-!t::
-toggle:=!toggle
-If toggle
-Send, !{Esc}
-else
-Send, !+{Esc}
-return
-
-!j::
-send, {down}
-return
-!k::
-send, {up}
-return
-^!h::
-send, {left}
-return
-^!l::
-send, {right}
-return
-!h::
-send, {backspace}
-return
-!l::
-send, {enter}
-return
-
-!u::
-return
-!p::
-return
-
-!y::
-send &
-return
-!8::
-send *
-return
-
-!i::
-SendRaw {
-return
-!o::
-SendRaw }
-return
-!9::
-send, (
-return
-!0::
-send, )
-return
-![::
-send, ]
-return
-!]::
-send, ]
-return
-
-!w::
-send, {^}
-return
-!e::
-send, {$}
-return
-!s::
-send, {B}
-return
-!d::
-send, {W}
-return
-!r::
-send, =
-return
-!f::
-send % "{Raw}%"
-return
-
-!-::
-send, {_}
-return
-*=::
-send, {+}
-return
-!\::
-send, |
-return
-!;::
-send, :
-return
-!'::
-send, "
-return
-!,::
-send, <
-return
-!.::
-send, >
-return
-!/::
-send, ?
-return
-
-*Esc::
-send, ``
-return
-*+Esc::
-send, ~
-return
-
 ; ==================
 ; ===== BRIGHT =====
 ; ==================
@@ -161,7 +43,7 @@ AdjustScreenBrightness(step) {
 ; ===== TASKBR =====
 ; ==================
 
-!g::
+!+h::
     Toggle := !Toggle
     If (Toggle)
         WinSet, Transparent, 0, ahk_class Shell_TrayWnd
@@ -169,70 +51,11 @@ AdjustScreenBrightness(step) {
         WinSet Transparent, 255, ahk_class Shell_TrayWnd
     Return
 
-; ================
-; ==== CHROME ====
-; ================
-
-#IfWinActive, ahk_exe brave.exe
-
-    ; Ctrl - Home / End
-    !w::
-    send, {Home}
-    return
-    !+w::
-    send, {ShiftDown}{Home}{ShiftUp}}
-    return
-    !e::
-    send, {End}
-    !+e::
-    send, {ShiftDown}{End}{ShiftUp}}
-    return
-
-    ; Ctrl - Right / Left
-    !d::
-    send, {CtrlDown}{Right}{CtrlUp}
-    return
-    !+d::
-    send, {CtrlDown}{ShiftDown}{Right}{CtrlUp}{ShiftUp}
-    return
-    !s::
-    send, {CtrlDown}{Left}{CtrlUp}
-    return
-    !+s::
-    send, {CtrlDown}{ShiftDown}{Left}{CtrlUp}{ShiftUp}
-    return
-
-#IfWinActive
-
-; ==================
-; ===== CENTER =====
-; ==================
-
-; !Enter::
-; SysGet Mon,MonitorWorkArea
-; WinGetPos ,,,wW,wH,A
-; WinMove A,,(MonRight-wW)/2,(MonBottom-wH)/2-16
-; Return
-
-; ==================
-; ==== MODIFIER ====
-; ==================
-
-LCtrl::CapsLock
-CapsLock::Ctrl
-
-$Alt::
-   KeyWait, Alt, T0.16
-   If ErrorLevel
-   {
-      return
-   }
-   Send {Esc}
-Return
-
 ; ==================
 ; ===== MACROS =====
 ; ==================
+; Macros are not working due to the priority with kanata keymaps, find a way to make it 
+; work with ahk or with any other external app. For now just focus in kanata config
 
 :*?:;date::
 Send %A_MM%-%A_DD%-%A_YYYY%
