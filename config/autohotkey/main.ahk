@@ -9,10 +9,10 @@ SendMode Input ; For new scripts due to its superior speed and reliability
 ; ===== BRIGHT =====
 ; ==================
 
-!+-:: ;Brightness Down
+!+-:: 
   AdjustScreenBrightness(-10)
   Return
-!+=:: ;Brightness Up
+!+=::
   AdjustScreenBrightness(10)
   Return
   
