@@ -1,9 +1,10 @@
 ![screenshot](./docs/Screenshot.png)
 
-## AutoHotKey Setup:
-- [autohotkey](https://github.com/AutoHotkey/AutoHotkey) - custom bindings (v1.1)
+## Keybindings Setup:
+- [kanata](https://github.com/jtroo/kanata/) - custom keymaps (v1.8.1)
+- [autohotkey](https://github.com/AutoHotkey/AutoHotkey) - windows scripts (v1.1)
 
-## GlazeWM setup:
+## Window Manager Setup:
 - [glazewm](https://github.com/glzr-io/glazewm) - tiling window manager (v3.8.1)
 - [zebar](https://github.com/glzr-io/zebar) - custom taskbar (v2.7.0)
 
