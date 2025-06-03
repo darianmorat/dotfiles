@@ -13,6 +13,10 @@
 (defsrc)
 (deflayermap (default)
   esc grv
+
+  ;; USE CAPS FOR ANOTHER LAYER? 
+  ;; CAPS IN LCTRL AS BEFORE OR NOT?
+  
   lsft (caps-word-toggle 2000)
   rsft (caps-word-toggle 2000)
 
@@ -29,19 +33,16 @@
   spc (tap-hold-release $tt $ht spc (layer-while-held spc-layer))
   lalt (tap-hold-release $tt $ht esc (layer-while-held lalt-layer))
   
-  e (tap-hold-release $tt $ht e (layer-while-held symb-layer))
-  i (tap-hold-release $tt $ht i (layer-while-held symb-layer))
-
-  v (tap-hold-release $tt $ht v (layer-while-held term-layer))
+  e (tap-hold-release $tt $ht e (layer-while-held symb-layer-right))
+  i (tap-hold-release $tt $ht i (layer-while-held symb-layer-left))
   n (tap-hold-release $tt $ht n (layer-while-held term-layer))
 )
 
 (deflayermap (spc-layer)
-  ;; PENDING
+  ;; USE?
 )
 
 (deflayermap (lalt-layer)
-  a lmet
   s lalt
   d lsft
   f lctl
@@ -54,42 +55,49 @@
   i left
   o right
 
-  w Home
-  e End
+  q home
+  r end
+  w pgup
+  e pgdn
+
+  u A-S-C-u 
+  a A-S-C-a  
+  n A-S-C-n
 )
 
-(deflayermap (symb-layer)
+(deflayermap (symb-layer-left)
   w S-6
   e S-4
-  r =
-  s S-b
-  d S-w
   f S-5
+)
+
+(deflayermap (symb-layer-right)
+  p XX
+  [ ]
+
+  ;; MOVE - + SYMBS? OR LEAVE THEM, IF SO, CHANGE = TO + 
+  ;; THEN THINK ABOUT SYMBOLS THAT YOU USE THE MOST
+  
+  j =
 
   i S-[
   o S-]
+  k S-9
+  l S-0
 )
 
 (deflayermap (term-layer)
-  , (macro C-f12 50 ,)
-
   c (macro C-f12 50 c)
   d (macro C-f12 50 d)
-  r (macro C-f12 50 r)
-
-  1 (macro C-f12 50 1)
-  2 (macro C-f12 50 2)
-  3 (macro C-f12 50 3)
-  4 (macro C-f12 50 4)
+  x (macro C-f12 50 x)
 
   f (macro C-f12 50 f)
-  t (macro C-f12 50 r)
+  r (macro C-f12 50 r)
 
-  i (macro C-f12 50 i)
-  o (macro C-f12 50 o)
-  ;; 9 (macro C-f12 50 9)
-  ;; 0 (macro C-f12 50 0)
+  s (macro C-f12 50 s)
+  w (macro C-f12 50 w)
 
-  v (macro C-f12 50 j)
-  n (macro C-f12 50 k)
+  e (macro C-f12 50 e)
+  v (macro C-f12 50 v)
+  t (macro C-f12 50 t) 
 )
