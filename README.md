@@ -1,16 +1,14 @@
-<div align="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&height=200&color=0:02569B,100:005078&text=~/dotfiles&fontAlignY=38&fontColor=ffffff&fontSize=60&animation=fadeIn&section=header" alt="Dotfiles Banner"/>
-</div>
+<img src="https://capsule-render.vercel.app/api?type=waving&height=200&color=0:02569B,100:005078&text=~/dotfiles&fontAlignY=38&fontColor=ffffff&fontSize=60&animation=fadeIn&section=header" alt="Dotfiles Banner" align="center"/>
 
-## Keybindings Setup:
+## Keyboard:
 - [kanata](https://github.com/jtroo/kanata/) - custom keymaps (v1.8.1)
 - [autohotkey](https://github.com/AutoHotkey/AutoHotkey) - windows scripts (v1.1)
 
-## Window Manager Setup:
+## Window Manager:
 - [glazewm](https://github.com/glzr-io/glazewm) - tiling window manager (v3.8.1)
 - [zebar](https://github.com/glzr-io/zebar) - custom taskbar (v2.7.0)
 
-## Terminal Setup: 
+## Terminal: 
 - [wezterm](https://github.com/wez/wezterm) - terminal emulator (nightly)
 - [homebrew](https://github.com/Homebrew/brew) - package manager
 - Shell ➜
