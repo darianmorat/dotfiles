@@ -13,7 +13,6 @@
 (defsrc)
 (deflayermap (default)
   esc grv
-  lsft (caps-word-toggle 2000)
 
   b (tap-hold-release $tt $ht b lmet) 
  
