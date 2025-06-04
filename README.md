@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:02569B,100:005078&height=200&section=header&text=~/dotfiles&fontSize=60&fontColor=ffffff&animation=fadeIn&fontAlignY=38" alt="Dotfiles Banner"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&height=200&color=0:02569B,100:005078&text=~/dotfiles&fontAlignY=38&fontColor=ffffff&fontSize=60&animation=fadeIn&section=header" alt="Dotfiles Banner"/>
 </div>
 
 ## Keybindings Setup:
