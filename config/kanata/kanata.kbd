@@ -73,23 +73,25 @@
 )
 
 (deflayermap (symb-layer-right)
-  j =
   u -
+  j =
   m S-=
   h S--
 
-  ;; I'M FEELING COMFY WITH IO FOR () USE IT FOR A WHILE IF THE PATTERN IS NOT GOOD 
-  ;; ENOUGH FOR YOU, CHANGE IT TO IO AS {} AS BEFORE AND CONFIRM THE COMFORT
-
-  k S-[
-  l S-]
   i S-9
   o S-0
+  k S-[
+  l S-]
   , S-,
   . S-.
 
   [ ]
   p XX
+
+  \ S-\
+  ; S-;
+  ' S-'
+  / S-/
 )
 
 (deflayermap (term-layer)
