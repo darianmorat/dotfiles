@@ -12,8 +12,6 @@
 
 (defsrc)
 (deflayermap (default)
-  esc grv
-
   b (tap-hold-release $tt $ht b lmet) 
  
   s (tap-hold-release $tt $ht s lalt)
@@ -70,6 +68,11 @@
 
   t S-1
   g S-2
+
+  q S-grv
+  a grv
+  c \
+  v S-\
 )
 
 (deflayermap (symb-layer-right)
@@ -86,9 +89,6 @@
   . S-.
 
   [ ]
-  p XX
-
-  \ S-\
   ; S-;
   ' S-'
   / S-/
