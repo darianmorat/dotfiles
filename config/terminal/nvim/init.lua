@@ -74,11 +74,11 @@ vim.keymap.set("n", "K", "m`i<cr><Esc>``")
 vim.keymap.set("n", "J", "m`J``")
 
 vim.keymap.set("n", "<C-h>", "<C-6>")
-vim.keymap.set("n", "=ap", "m`=ap``")
-
-vim.keymap.set("n", "<leader>a", "A")
-vim.keymap.set("n", "<leader>i", "I")
 vim.keymap.set("n", "<leader>r", "<c-g>")
+
+vim.keymap.set({ "n", "v" }, "<leader>y", '"ay')
+vim.keymap.set({ "n", "v" }, "<leader>p", '"ap')
+vim.keymap.set({ "n", "v" }, "<leader>x", '\"_d')
 
 vim.keymap.set("n", "<leader>ti", "<cmd>IBLToggle<cr>")
 vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<cr>")
