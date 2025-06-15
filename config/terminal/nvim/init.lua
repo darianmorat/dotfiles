@@ -78,7 +78,7 @@ vim.keymap.set("n", "<leader>r", "<c-g>")
 
 vim.keymap.set({ "n", "v" }, "<leader>y", '"ay')
 vim.keymap.set({ "n", "v" }, "<leader>p", '"ap')
-vim.keymap.set({ "n", "v" }, "<leader>x", '\"_d')
+vim.keymap.set({ "n", "v" }, "<leader>x", '"_d')
 
 vim.keymap.set("n", "<leader>ti", "<cmd>IBLToggle<cr>")
 vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<cr>")
@@ -124,6 +124,16 @@ local plugins = {
       keys = {
          { "<leader>e", "<cmd>FloatermNew --height=0.92 vifm<cr>" },
          { "<leader>lg", "<cmd>FloatermNew --width=0.78 lazygit<cr>" },
+      },
+   },
+
+   {
+      "brenoprata10/nvim-highlight-colors",
+      ft = { "css", "html" },
+      opts = {
+         render = "virtual",
+         virtual_symbol = "■■",
+         enable_var_usage = true,
       },
    },
 
