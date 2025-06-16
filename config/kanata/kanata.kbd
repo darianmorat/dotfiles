@@ -31,7 +31,15 @@
 )
 
 (deflayermap (spc-layer)
-  ;; ---
+  s (macro ; i d)
+  a (macro ; p h)
+
+  f (macro ; d a r)
+  d (macro ; n a s)
+
+  e (macro ; m l)
+  w (macro ; d m l)
+  q (macro ; f m l)
 )
 
 (deflayermap (lalt-layer)
