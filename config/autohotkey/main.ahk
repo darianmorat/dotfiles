@@ -50,18 +50,3 @@ AdjustScreenBrightness(step) {
     Else
         WinSet Transparent, 255, ahk_class Shell_TrayWnd
     Return
-
-; ==================
-; ===== MACROS =====
-; ==================
-; Macros are not working due to the priority with kanata keymaps, find a way to make it 
-; work with ahk or with any other external app. For now just focus in kanata config
-
-:*?:;date::
-Send %A_MM%-%A_DD%-%A_YYYY%
-return
-
-:*?:;time::
-FormatTime, currentTime,, h:mm tt
-Send %currentTime%
-return
