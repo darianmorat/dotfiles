@@ -43,6 +43,7 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.showtabline = 0
 vim.g.markdown_recommended_style = 0
 
+vim.opt.exrc = true
 vim.opt.fillchars = { eob = " " }
 vim.schedule(function()
    vim.opt.clipboard = "unnamedplus"
@@ -644,6 +645,7 @@ local plugins = {
          "saadparwaiz1/cmp_luasnip",
          "hrsh7th/cmp-path",
          "hrsh7th/cmp-buffer",
+         "roginfarrer/cmp-css-variables",
       },
       opts = function()
          local cmp = require("cmp")
@@ -656,6 +658,7 @@ local plugins = {
                { name = "nvim_lsp" },
                { name = "luasnip" },
                { name = "buffer" },
+               { name = "css-variables" },
             },
             snippet = {
                expand = function(args)
