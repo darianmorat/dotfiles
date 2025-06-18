@@ -298,6 +298,8 @@ local plugins = {
 
          { "<leader>fd", "<cmd>Telescope diagnostics bufnr=0<cr>" },
          { "<leader>fD", "<cmd>Telescope diagnostics<cr>" },
+
+         { "<leader>fs", "<cmd>Telescope spell_suggest<cr>" },
       },
    },
 
