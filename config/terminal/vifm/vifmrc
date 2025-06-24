@@ -8,6 +8,7 @@ set confirm-=delete
 set dotdirs=
 set millerview
 set milleroptions=lsize:0,csize:1,rsize:1,rpreview:dirs
+set dotfiles
 only
 
 set vicmd=nvim
