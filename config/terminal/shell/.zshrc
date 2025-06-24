@@ -1,4 +1,3 @@
-zstyle ':z4h:' prompt-at-bottom 'no'
 ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c160,)" # Ignore suggestions with more than 100char
 zstyle ':z4h:autosuggestions' forward-char 'accept' # Accepts 1char 'partial-accept' or for all 'accept' 
 
