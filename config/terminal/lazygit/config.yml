@@ -1,30 +1,20 @@
-gui: 
+gui:
   authorColors:
     'darianmorat': 'blue'
-    '*': 'blue'    
+    '*': 'blue'
   border: single
   showBottomLine: false
   showPanelJumps: false
-  commandLogSize: 1
   theme:
     activeBorderColor:
       - white
       - bold
     selectedLineBgColor:
       - reverse
-
-  git:
-    paging:
-      pager: ""
-      externalDiffCommand: ""
-    commitPrefix:
-      pattern: " " 
-      replace: " "    
-
-  customCommands:
-    - key: "w"
-      command: "git cz"
-      description: "commit with commitizen"
-      context: "files"
-      loadingText: "opening commitizen commit tool"
-      subprocess: true
+customCommands:
+  - key: "w"
+    command: "git cz"
+    description: "commit with commitizen"
+    context: "files"
+    loadingText: "opening commitizen commit tool"
+    output: terminal
