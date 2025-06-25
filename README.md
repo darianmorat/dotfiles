@@ -18,6 +18,9 @@
 
 ### Shell & Prompt:
 
+<!-- SHOULD I INCLUDE - NODE, GIT, CZ-COMMITIZEN? -->
+<!-- After all those are things that I need to install, think about it -->
+
 - [zsh4humans](https://github.com/romkatv/zsh4humans) - zero config zsh distro
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k) - custom prompt (v1.20.0)
 
