@@ -13,7 +13,7 @@ vim.opt.showcmd = false
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 0
 
-vim.opt.updatetime = 150
+vim.opt.updatetime = 100
 vim.opt.mouse = "a"
 vim.opt.cursorline = true
 vim.opt.number = true
@@ -232,6 +232,7 @@ local plugins = {
       dependencies = {
          { "nvim-lua/plenary.nvim" },
          { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+         { "nvim-telescope/telescope-media-files.nvim" },
       },
       config = function()
          local actions = require("telescope.actions")
@@ -275,6 +276,7 @@ local plugins = {
          })
 
          require("telescope").load_extension("fzf")
+         require("telescope").load_extension("media_files")
       end,
       keys = {
          { "<leader>fi", "<cmd>Telescope find_files previewer=false<cr>" },
@@ -299,6 +301,7 @@ local plugins = {
          { "<leader>fd", "<cmd>Telescope diagnostics bufnr=0<cr>" },
          { "<leader>fD", "<cmd>Telescope diagnostics<cr>" },
 
+         { "<leader>fm", "<cmd>Telescope media_files<cr>" },
          { "<leader>fs", "<cmd>Telescope spell_suggest<cr>" },
       },
    },
