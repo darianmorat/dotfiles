@@ -22,24 +22,34 @@
   k (tap-hold-release $tt $ht k rsft)
   l (tap-hold-release $tt $ht l ralt)
 
-  spc (tap-hold-release $tt $ht spc (layer-while-held spc-layer))
+  spc (tap-hold-release $tt $ht spc (layer-while-held rspc-layer))
   lalt (tap-hold-release $tt $ht esc (layer-while-held lalt-layer))
 
-  e (tap-hold-release $tt $ht e (layer-while-held symb-layer-right))
-  i (tap-hold-release $tt $ht i (layer-while-held symb-layer-left))
+  i (tap-hold-release $tt $ht i (layer-while-held lsymb-layer))
+  e (tap-hold-release $tt $ht e (layer-while-held rsymb-layer))
+
   n (tap-hold-release $tt $ht n (layer-while-held term-layer))
+  ; (tap-hold-release $tt $ht ; (layer-while-held expd-layer))
 )
 
-(deflayermap (spc-layer)
-  s (macro ; i d)
-  a (macro ; p h)
+(deflayermap (rspc-layer)
+   j mlft
+	k mmid
+	l mrgt
 
-  f (macro ; d a r)
-  d (macro ; n a s)
+	s (movemouse-accel-left  5 300 1 7)
+	d (movemouse-accel-down  5 300 1 7)
+	e (movemouse-accel-up    5 300 1 7)
+	f (movemouse-accel-right 5 300 1 7)
 
-  e (macro ; m l)
-  w (macro ; d m l)
-  q (macro ; f m l)
+	; (layer-while-held mouse-slow)
+)
+
+(deflayermap (mouse-slow)
+	s (movemouse-left  15 1)
+	d (movemouse-down  15 1)
+	e (movemouse-up    15 1)
+	f (movemouse-right 15 1)
 )
 
 (deflayermap (lalt-layer)
@@ -65,7 +75,7 @@
   n A-S-C-n
 )
 
-(deflayermap (symb-layer-left)
+(deflayermap (lsymb-layer)
   w S-6
   e S-4
   f S-5
@@ -83,7 +93,7 @@
   v S-\
 )
 
-(deflayermap (symb-layer-right)
+(deflayermap (rsymb-layer)
   u -
   j =
   m S-=
@@ -116,4 +126,14 @@
   e (macro C-f12 50 e)
   v (macro C-f12 50 v)
   t (macro C-f12 50 t) 
+)
+
+(deflayermap (expd-layer)
+  s (macro ; i d)
+  a (macro ; p h)
+  w (macro ; y m)
+  e (macro ; d m)
+  r (macro ; f m)
+  f (macro ; d a)
+  d (macro ; n a)
 )
