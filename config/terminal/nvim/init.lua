@@ -551,6 +551,8 @@ local plugins = {
       dependencies = {
          "williamboman/mason.nvim",
          "williamboman/mason-lspconfig.nvim",
+         "jay-babu/mason-null-ls.nvim",
+         "nvimtools/none-ls.nvim",
       },
       config = function()
          local lspconfig = require("lspconfig")
@@ -600,31 +602,36 @@ local plugins = {
             return open_float(contents, syntax, opts, ...)
          end
 
-         -- Installed (11)
-         -- --------------
-         -- ◍ black
-         -- ◍ css-lsp cssls
-         -- ◍ eslint-lsp eslint
-         -- ◍ html-lsp html
-         -- ◍ json-lsp jsonls
-         -- ◍ marksman
-         -- ◍ prettier
-         -- ◍ pyright
-         -- ◍ stylelint
-         -- ◍ stylua
-         -- ◍ typescript-language-server ts_ls
-
          require("mason").setup({
             ui = { border = "single" },
          })
 
          require("mason-lspconfig").setup({
+            ensure_installed = {
+               "ts_ls",
+               "html",
+               "cssls",
+               "tailwindcss",
+               "jsonls",
+               "marksman",
+               "pyright",
+            },
             handlers = {
                function(server_name)
                   lspconfig[server_name].setup({
                      capabilities = capabilities,
                   })
                end,
+            },
+         })
+
+         require("mason-null-ls").setup({
+            ensure_installed = {
+               "prettier",
+               "eslint-lsp",
+               "stylelint",
+               "black",
+               "stylua",
             },
          })
       end,
