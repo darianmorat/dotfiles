@@ -37,6 +37,11 @@
 	k mmid
 	l mrgt
 
+   i (mwheel-up    100 120)
+	o (mwheel-down  100 120)
+   u (mwheel-left  100 120)
+	p (mwheel-right 100 120)
+
 	s (movemouse-accel-left  5 300 1 7)
 	d (movemouse-accel-down  5 300 1 7)
 	e (movemouse-accel-up    5 300 1 7)
