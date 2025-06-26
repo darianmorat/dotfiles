@@ -18,8 +18,11 @@
 
 ### Shell & Prompt:
 
-<!-- SHOULD I INCLUDE - NODE, GIT, CZ-COMMITIZEN? -->
-<!-- After all those are things that I need to install, think about it -->
+<!-- Should I include: node, git, cz-commitizen? -->
+<!-- Another dependencies to keep in check: python3 python3-venv pip3 -->
+
+<!-- After all those are things that I need to install -->
+<!-- Also keep a list of the dependencies that you need system wide -->
 
 - [zsh4humans](https://github.com/romkatv/zsh4humans) - zero config zsh distro
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k) - custom prompt (v1.20.0)
