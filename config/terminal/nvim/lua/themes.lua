@@ -1,11 +1,6 @@
 -- -------------------------------------------------------------------------------------------
--- GRUVDARK THEMES REFERENCE
+-- GRUVDARK THEMES
 -- -------------------------------------------------------------------------------------------
--- Use :Inspect to check groups
--- Pending with variations: darianmorat/gruvdark-theme.nvim
--- Fix vscode colors to mach this ones
--- Light colors look different compared to vscode's
-
 return {
    {
       "navarasu/onedark.nvim",
@@ -154,11 +149,13 @@ return {
                   ["@markup.heading.html"] = { fg = "$orange" },
 
                   -- Typescript
+                  ["@tag.tsx"] = { fg = "$aqua" },
+                  ["@type.tsx"] = { fg = "$fg" },
+                  ["@constant.tsx"] = { fg = "$fg" },
                   ["@keyword.directive.typescript"] = { fg = "$green" },
 
                   -- Javascript
                   ["@tag.javascript"] = { fg = "$aqua" },
-                  ["@tag.attribute.javascript"] = { fg = "#9266DA" },
                   ["@type.javascript"] = { fg = "$fg" },
                   ["@constant.javascript"] = { fg = "$fg" },
 
