@@ -148,11 +148,19 @@ return {
                   ["@markup.heading.1.html"] = { fg = "$orange" },
                   ["@markup.heading.html"] = { fg = "$orange" },
 
+                  -- Typescript Javascript
+                  ["@lsp.typemod.function.defaultLibrary"] = { fg = "$red" },
+
                   -- Typescript
                   ["@tag.tsx"] = { fg = "$aqua" },
                   ["@type.tsx"] = { fg = "$fg" },
                   ["@constant.tsx"] = { fg = "$fg" },
                   ["@keyword.directive.typescript"] = { fg = "$green" },
+
+                  ["@lsp.typemod.property.declaration.typescript"] = { fg = "$fg" },
+                  ["@lsp.typemod.property.defaultLibrary.typescript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.typescript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.typescriptreact"] = { fg = "$orange" },
 
                   -- Javascript
                   ["@tag.javascript"] = { fg = "$aqua" },
@@ -163,7 +171,6 @@ return {
                   ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange" },
                   ["@lsp.typemod.variable.defaultLibrary.javascript"] = { fg = "$orange" },
                   ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = { fg = "$orange" },
-                  ["@lsp.typemod.function.defaultLibrary"] = { fg = "$red" },
 
                   ["@markup.raw.javascript"] = { fg = "$fg" },
                   ["@markup.heading.1.javascript"] = { fg = "$orange", fmt = "none" },
@@ -310,11 +317,19 @@ return {
                   ["@markup.heading.1.html"] = { fg = "$orange" },
                   ["@markup.heading.html"] = { fg = "$orange" },
 
+                  -- Typescript Javascript
+                  ["@lsp.typemod.function.defaultLibrary"] = { fg = "$red" },
+
                   -- Typescript
                   ["@tag.tsx"] = { fg = "$aqua" },
                   ["@type.tsx"] = { fg = "$fg" },
                   ["@constant.tsx"] = { fg = "$fg" },
                   ["@keyword.directive.typescript"] = { fg = "$green" },
+
+                  ["@lsp.typemod.property.declaration.typescript"] = { fg = "$fg" },
+                  ["@lsp.typemod.property.defaultLibrary.typescript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.typescript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.typescriptreact"] = { fg = "$orange" },
 
                   -- Javascript
                   ["@tag.javascript"] = { fg = "$aqua" },
@@ -325,7 +340,6 @@ return {
                   ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange" },
                   ["@lsp.typemod.variable.defaultLibrary.javascript"] = { fg = "$orange" },
                   ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = { fg = "$orange" },
-                  ["@lsp.typemod.function.defaultLibrary"] = { fg = "$red" },
 
                   ["@markup.raw.javascript"] = { fg = "$fg" },
                   ["@markup.heading.1.javascript"] = { fg = "$orange", fmt = "none" },
