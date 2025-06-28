@@ -1,6 +1,6 @@
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 -- GRUVDARK THEMES
--- -------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------
 return {
    {
       "navarasu/onedark.nvim",
@@ -311,11 +311,13 @@ return {
                   ["@markup.heading.html"] = { fg = "$orange" },
 
                   -- Typescript
+                  ["@tag.tsx"] = { fg = "$aqua" },
+                  ["@type.tsx"] = { fg = "$fg" },
+                  ["@constant.tsx"] = { fg = "$fg" },
                   ["@keyword.directive.typescript"] = { fg = "$green" },
 
                   -- Javascript
                   ["@tag.javascript"] = { fg = "$aqua" },
-                  ["@tag.attribute.javascript"] = { fg = "#480AAB" },
                   ["@type.javascript"] = { fg = "$fg" },
                   ["@constant.javascript"] = { fg = "$fg" },
 
