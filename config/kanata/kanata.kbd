@@ -58,10 +58,6 @@
 )
 
 (deflayermap (lalt-layer)
-  s lalt
-  d lsft
-  f lctl
-
   h bspc
   j down
   k up
