@@ -12,8 +12,6 @@
 
 (defsrc)
 (deflayermap (default)
-  b (tap-hold-release $tt $ht b lmet) 
- 
   s (tap-hold-release $tt $ht s lalt)
   d (tap-hold-release $tt $ht d lsft)
   f (tap-hold-release $tt $ht f lctl)
@@ -30,6 +28,17 @@
 
   n (tap-hold-release $tt $ht n (layer-while-held term-layer))
   ; (tap-hold-release $tt $ht ; (layer-while-held expd-layer))
+
+  esc XX
+  lsft XX
+  - XX
+  rsft XX
+  lctl XX
+  = XX
+  bspc XX
+  ret XX
+  ] XX
+  \ XX
 )
 
 (deflayermap (rspc-layer)
