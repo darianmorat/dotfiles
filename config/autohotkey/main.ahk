@@ -5,14 +5,17 @@
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory
 SendMode Input ; For new scripts due to its superior speed and reliability
 
-; ==================
-; ===== BRIGHT =====
-; ==================
+; =================
+; ===== MEDIA =====
+; =================
 
-!+-:: 
+^!3::Send {Media_Prev}
+^!4::Send {Media_Next}
+
+^!1::
   AdjustScreenBrightness(-10)
   Return
-!+=::
+^!2::
   AdjustScreenBrightness(10)
   Return
   
