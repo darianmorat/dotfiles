@@ -228,7 +228,7 @@ keybindings:
 
   # Focus the workspace that last had focus.
   - commands: ['focus --recent-workspace']
-    bindings: ['alt+shift+ctrl+n']
+    bindings: ['alt+n']
 
   # Change focus to a workspace defined in `workspaces` config.
   - commands: ['focus --workspace 1']
