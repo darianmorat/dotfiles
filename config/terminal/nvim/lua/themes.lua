@@ -95,7 +95,6 @@ return {
                   ["@lsp.type.namespace"] = { fg = "$aqua" },
                   ["@constructor"] = { fg = "$aqua" },
                   ["@variable.member"] = { fg = "$fg" },
-                  ["@lsp.type.class.javascript"] = { fg = "$aqua" },
 
                   -- Symbols
                   ["@comment"] = { fg = "#555555" },
@@ -154,7 +153,9 @@ return {
                   -- Typescript
                   ["@tag.tsx"] = { fg = "$aqua" },
                   ["@type.tsx"] = { fg = "$fg" },
+                  ["@type.typescript"] = { fg = "$fg" },
                   ["@constant.tsx"] = { fg = "$fg" },
+                  ["@constant.typescript"] = { fg = "$fg" },
                   ["@keyword.directive.typescript"] = { fg = "$green" },
 
                   ["@lsp.typemod.property.declaration.typescript"] = { fg = "$fg" },
@@ -166,6 +167,7 @@ return {
                   ["@tag.javascript"] = { fg = "$aqua" },
                   ["@type.javascript"] = { fg = "$fg" },
                   ["@constant.javascript"] = { fg = "$fg" },
+                  ["@lsp.type.class.javascript"] = { fg = "$aqua" },
 
                   ["@lsp.typemod.property.declaration.javascript"] = { fg = "$fg" },
                   ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange" },
@@ -264,7 +266,6 @@ return {
                   ["@lsp.type.namespace"] = { fg = "$aqua" },
                   ["@constructor"] = { fg = "$aqua" },
                   ["@variable.member"] = { fg = "$fg" },
-                  ["@lsp.type.class.javascript"] = { fg = "$aqua" },
 
                   -- Symbols
                   ["@comment"] = { fg = "#828282" },
@@ -323,7 +324,9 @@ return {
                   -- Typescript
                   ["@tag.tsx"] = { fg = "$aqua" },
                   ["@type.tsx"] = { fg = "$fg" },
+                  ["@type.typescript"] = { fg = "$fg" },
                   ["@constant.tsx"] = { fg = "$fg" },
+                  ["@constant.typescript"] = { fg = "$fg" },
                   ["@keyword.directive.typescript"] = { fg = "$green" },
 
                   ["@lsp.typemod.property.declaration.typescript"] = { fg = "$fg" },
@@ -335,6 +338,7 @@ return {
                   ["@tag.javascript"] = { fg = "$aqua" },
                   ["@type.javascript"] = { fg = "$fg" },
                   ["@constant.javascript"] = { fg = "$fg" },
+                  ["@lsp.type.class.javascript"] = { fg = "$aqua" },
 
                   ["@lsp.typemod.property.declaration.javascript"] = { fg = "$fg" },
                   ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange" },
