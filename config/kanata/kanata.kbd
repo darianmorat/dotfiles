@@ -12,8 +12,6 @@
 
 (defsrc)
 (deflayermap (default)
-   b (tap-hold-release $tt $ht b lmet)
-
    s (tap-hold-release $tt $ht s lalt)
    d (tap-hold-release $tt $ht d lsft)
    f (tap-hold-release $tt $ht f lctl)
@@ -22,51 +20,49 @@
    k (tap-hold-release $tt $ht k rsft)
    l (tap-hold-release $tt $ht l ralt)
 
-   spc (tap-hold-release $tt $ht spc (layer-while-held rspc-layer))
-   lalt (tap-hold-release $tt $ht esc (layer-while-held lalt-layer))
+   lalt (tap-hold-release $tt $ht esc (layer-while-held nav-layer))
+   spc (tap-hold-release $tt $ht spc (layer-while-held mouse-layer))
 
-   i (tap-hold-release $tt $ht i (layer-while-held lsymb-layer))
-   e (tap-hold-release $tt $ht e (layer-while-held rsymb-layer))
+   i (tap-hold-release $tt $ht i (layer-while-held lsym-layer))
+   e (tap-hold-release $tt $ht e (layer-while-held rsym-layer))
 
+   b (tap-hold-release $tt $ht b lmet)
+   m (tap-hold-release $tt $ht m (layer-while-held func-layer))
    n (tap-hold-release $tt $ht n (layer-while-held term-layer))
-   ; (tap-hold-release $tt $ht ; (layer-while-held expd-layer))
+   v (tap-hold-release $tt $ht v (layer-while-held expd-layer))
 
-   esc (tap-hold-release $tt $ht XX (layer-while-held func-layer))
-   - (tap-hold-release $tt $ht XX (layer-while-held medi-layer))
+   esc XX
    lsft XX
-   rsft XX
-
    lctl XX
+   - XX
    = XX
    bspc XX
-   ret XX
    ] XX
    \ XX
+   ret XX
+   rsft XX
 )
 
-(deflayermap (medi-layer)
-   1 vold
-   2 volu
-   3 mute
-   4 (macro A-C-1) 
-   5 (macro A-C-2) 
-   z (macro A-C-3)
-   c (macro A-C-4)
-   x pp
+(deflayermap (nav-layer)
+   h bspc
+   j down
+   k up
+   l ret
+
+   y del
+   u A-S-C-u 
+   i left
+   o right
+
+   , home
+   . end
+   n pgdn
+   m pgup
+
+   a A-S-C-a  
 )
 
-(deflayermap (func-layer)
-	6 f8
-	7 f5
-	8 f2
-   9 f11
-	0 f12
-   , del 
-   . C-z
-   / prtsc
-)
-
-(deflayermap (rspc-layer)
+(deflayermap (mouse-layer)
    j mlft
 	k mmid
 	l mrgt
@@ -91,26 +87,7 @@
    f (movemouse-right 15 1)
 )
 
-(deflayermap (lalt-layer)
-   h bspc
-   j down
-   k up
-   l ret
-
-   i left
-   o right
-
-   q home
-   r end
-   w pgup
-   e pgdn
-
-   u A-S-C-u 
-   a A-S-C-a  
-   n A-S-C-n
-)
-
-(deflayermap (lsymb-layer)
+(deflayermap (lsym-layer)
    w S-6
    e S-4
    f S-5
@@ -128,7 +105,7 @@
    v S-\
 )
 
-(deflayermap (rsymb-layer)
+(deflayermap (rsym-layer)
    u -
    j =
    m S-=
@@ -145,6 +122,25 @@
    ; S-;
    ' S-'
    / S-/
+)
+
+(deflayermap (func-layer)
+   w vold
+   e volu
+   r mute
+
+   s (macro A-C-3)
+   d pp
+   f (macro A-C-4)
+
+   x prtsc
+   c (macro A-C-1) 
+   v (macro A-C-2) 
+
+   t f12
+   g f11
+   b f2
+   ; f8
 )
 
 (deflayermap (term-layer)
@@ -164,11 +160,8 @@
 )
 
 (deflayermap (expd-layer)
-   s (macro ; i d)
-   a (macro ; p h)
-   w (macro ; y m)
-   e (macro ; d m)
-   r (macro ; f m)
-   f (macro ; d a)
-   d (macro ; n a)
+   i (macro ; y m)
+   o (macro ; d m)
+   k (macro ; d a)
+   l (macro ; n a)
 )
