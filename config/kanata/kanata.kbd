@@ -64,20 +64,20 @@
 
 (deflayermap (mouse-layer)
    j mlft
-	k mmid
-	l mrgt
+   k mmid
+   l mrgt
 
    u (mwheel-left  100 120)
    i (mwheel-down  100 120)
-	o (mwheel-up    100 120)
-	p (mwheel-right 100 120)
+   o (mwheel-up    100 120)
+   p (mwheel-right 100 120)
 
-	s (movemouse-accel-left  5 300 1 7)
-	d (movemouse-accel-down  5 300 1 7)
-	e (movemouse-accel-up    5 300 1 7)
-	f (movemouse-accel-right 5 300 1 7)
+   s (movemouse-accel-left  5 300 1 7)
+   d (movemouse-accel-down  5 300 1 7)
+   e (movemouse-accel-up    5 300 1 7)
+   f (movemouse-accel-right 5 300 1 7)
 
-	; (layer-while-held mouse-slow)
+   ; (layer-while-held mouse-slow)
 )
 
 (deflayermap (mouse-slow)
