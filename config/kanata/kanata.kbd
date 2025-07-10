@@ -31,6 +31,10 @@
    n (tap-hold-release $tt $ht n (layer-while-held term-layer))
    v (tap-hold-release $tt $ht v (layer-while-held expd-layer))
 
+   [ S-'
+   ' (unshift ')
+   / (unshift /)
+
    esc XX
    lsft XX
    lctl XX
@@ -90,38 +94,37 @@
 (deflayermap (lsym-layer)
    w S-6
    e S-4
-   f S-5
-
    r S-7
+   t S-1
+
+   a grv
    s S-3
    d S-8
-
-   t S-1
+   f S-5
    g S-2
 
-   q S-grv
-   a grv
-   c \
-   v S-\
+   x [
+   c ]
+   v S-grv
+   b \
 )
 
 (deflayermap (rsym-layer)
+   y S-\
    u -
-   j =
-   m S-=
-   h S--
-
    i S-9
    o S-0
+
+   h S--
+   j =
    k S-[
    l S-]
+   ; S-;
+
+   n S-/
+   m S-=
    , S-,
    . S-.
-
-   [ ]
-   ; S-;
-   ' S-'
-   / S-/
 )
 
 (deflayermap (func-layer)
