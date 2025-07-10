@@ -48,20 +48,20 @@
 )
 
 (deflayermap (nav-layer)
-   h bspc
-   j down
-   k up
-   l ret
-
    y del
    u A-S-C-u 
    i left
    o right
 
-   , home
-   . end
+   h bspc
+   j down
+   k up
+   l ret
+
    n pgdn
    m pgup
+   , home
+   . end
 
    a A-S-C-a  
 )
