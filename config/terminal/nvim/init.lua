@@ -122,7 +122,7 @@ local plugins = {
          vim.g.floaterm_height = 0.99
       end,
       keys = {
-         { "<leader>e", "<cmd>FloatermNew --height=0.92 vifm<cr>" },
+         { "<leader>e", "<cmd>FloatermNew --height=0.88 vifm<cr>" },
          { "<leader>lg", "<cmd>FloatermNew --width=0.78 lazygit<cr>" },
       },
    },
@@ -236,27 +236,49 @@ local plugins = {
       },
       config = function()
          local actions = require("telescope.actions")
+         local layout_strategies = require("telescope.pickers.layout_strategies")
+
+         layout_strategies.horizontal_merged = function(
+            picker,
+            max_columns,
+            max_lines,
+            layout_config
+         )
+            local layout =
+               layout_strategies.horizontal(picker, max_columns, max_lines, layout_config)
+
+            layout.prompt.title = ""
+            layout.prompt.borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+
+            layout.results.title = ""
+            layout.results.borderchars = { "─", "│", "─", "│", "├", "┤", "┘", "└" }
+
+            layout.results.line = layout.results.line - 1
+            layout.results.height = layout.results.height + 1
+
+            if layout.preview then
+               layout.preview.title = ""
+               layout.preview.borderchars =
+                  { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+            end
+
+            return layout
+         end
 
          require("telescope").setup({
             defaults = {
-               layout_strategy = "vertical",
+               layout_strategy = "horizontal_merged",
+               sorting_strategy = "ascending",
                layout_config = {
-                  preview_cutoff = 0,
-                  width = 0.6,
-                  height = 0.9,
-                  preview_height = 0.6,
+                  horizontal = {
+                     height = 0.85,
+                     preview_width = 0.5,
+                     results_width = 0.5,
+                     prompt_position = "top",
+                  },
                },
                file_ignore_patterns = { "node_modules" },
-               borderchars = {
-                  "─",
-                  "│",
-                  "─",
-                  "│",
-                  "┌",
-                  "┐",
-                  "┘",
-                  "└",
-               },
+               borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
                mappings = { i = { ["<esc>"] = actions.close } },
             },
             pickers = {
@@ -279,14 +301,14 @@ local plugins = {
          require("telescope").load_extension("media_files")
       end,
       keys = {
-         { "<leader>fi", "<cmd>Telescope find_files previewer=false<cr>" },
+         { "<leader>fi", "<cmd>Telescope find_files<cr>" },
          { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
          {
             "<leader>fc",
             "<cmd>lua require('telescope.builtin').live_grep({search_dirs={vim.fn.expand('%:p')}})<cr>",
          },
          { "<leader>fo", "<cmd>Telescope resume<cr>" },
-         { "<leader>fj", "<cmd>Telescope buffers previewer=false<cr>" },
+         { "<leader>fj", "<cmd>Telescope buffers<cr>" },
          { "<leader>fr", "<cmd>Telescope lsp_references<cr>" },
 
          {
@@ -365,9 +387,8 @@ local plugins = {
                function()
                   local harpoon = require("harpoon")
                   local UI = {
-                     title = " Harpoon ",
+                     title = "",
                      border = "single",
-                     title_pos = "center",
                      ui_width_ratio = 0.6,
                   }
                   harpoon.ui:toggle_quick_menu(harpoon:list(), UI)
