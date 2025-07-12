@@ -10,6 +10,15 @@
    ht $hold-timeout
 )
 
+(defalias
+   _a (fork (unicode á) (unicode Á) (lsft rsft))
+   _e (fork (unicode é) (unicode É) (lsft rsft))
+   _i (fork (unicode í) (unicode Í) (lsft rsft))
+   _o (fork (unicode ó) (unicode Ó) (lsft rsft))
+   _u (fork (unicode ú) (unicode Ú) (lsft rsft))
+   _n (fork (unicode ñ) (unicode Ñ) (lsft rsft))
+)
+
 (defsrc)
 (deflayermap (default)
    s (tap-hold-release $tt $ht s lalt)
@@ -31,12 +40,14 @@
    n (tap-hold-release $tt $ht n (layer-while-held term-layer))
    v (tap-hold-release $tt $ht v (layer-while-held expd-layer))
 
+   lsft (tap-hold-release $tt $ht XX (layer-while-held acct-layer))
+   rsft (tap-hold-release $tt $ht XX (layer-while-held acct-layer))
+
    [ S-'
    ' (unshift ')
    / (unshift /)
 
    esc XX
-   lsft XX
    lctl XX
    - XX
    = XX
@@ -44,7 +55,6 @@
    ] XX
    \ XX
    ret XX
-   rsft XX
 )
 
 (deflayermap (nav-layer)
@@ -167,4 +177,13 @@
    o (macro ; d m)
    k (macro ; d a)
    l (macro ; n a)
+)
+
+(deflayermap (acct-layer)
+   a @_a
+   e @_e
+   i @_i
+   o @_o
+   u @_u
+   n @_n
 )
