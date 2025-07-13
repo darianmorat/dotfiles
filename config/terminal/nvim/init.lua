@@ -40,10 +40,9 @@ vim.opt.undofile = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.fileencoding = "utf-8"
-vim.opt.showtabline = 0
+vim.opt.fillchars = { eob = " " }
 vim.g.markdown_recommended_style = 0
 
-vim.opt.fillchars = { eob = " " }
 vim.schedule(function()
    vim.opt.clipboard = "unnamedplus"
 end)
@@ -128,23 +127,11 @@ local plugins = {
    },
 
    {
-      "brenoprata10/nvim-highlight-colors",
-      ft = { "css", "html" },
-      opts = {
-         render = "virtual",
-         virtual_symbol = "■■",
-         enable_var_usage = true,
-      },
-   },
-
-   { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
-   {
       "numToStr/Comment.nvim",
       event = "VeryLazy",
       config = function()
-         require("Comment").setup({
-            pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-         })
+         require("Comment").setup()
+
          vim.keymap.set("n", "<leader>cc", "gcc", { remap = true })
          vim.keymap.set("n", "<leader>cb", "gbc", { remap = true })
          vim.keymap.set("n", "<leader>ca", "gcA", { remap = true })
@@ -483,8 +470,8 @@ local plugins = {
             highlight = {
                enable = true,
                additional_vim_regex_highlighting = { "markdown" },
-               disable = function(_, bufnr) -- Disable for files with +1K lines
-                  return vim.api.nvim_buf_line_count(bufnr) > 1000
+               disable = function(_, bufnr) -- Disable for files with +5K lines
+                  return vim.api.nvim_buf_line_count(bufnr) > 5000
                end,
             },
          })
@@ -687,7 +674,9 @@ local plugins = {
          require("luasnip").filetype_extend("javascriptreact", { "html" })
 
          cmp.setup({
-            completion = { completeopt = "menu, menuone, noinsert" },
+            completion = {
+               completeopt = "menu, menuone, noinsert",
+            },
             sources = {
                { name = "path" },
                { name = "nvim_lsp" },
@@ -700,7 +689,9 @@ local plugins = {
                   require("luasnip").lsp_expand(args.body)
                end,
             },
-            view = { docs = { auto_open = false } },
+            view = {
+               docs = { auto_open = false },
+            },
             window = {
                documentation = { winhighlight = "Normal:MatchParen,FloatBorder:MatchParen" },
             },
@@ -741,10 +732,15 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup(plugins, {
    ui = { border = "single" },
-   change_detection = { enabled = false, notify = false },
+   change_detection = {
+      enabled = false,
+      notify = false,
+   },
    performance = {
       cache = { enabled = true },
-      rtp = { disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin" } },
+      rtp = {
+         disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin" },
+      },
    },
 })
 
@@ -792,7 +788,11 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:block-Cursor2"
 
 -- File changed sign in editor
-vim.fn.sign_define("FileChanged", { text = "✗", texthl = "WarningMsg", numhl = "WarningMsg" })
+vim.fn.sign_define("FileChanged", {
+   text = "✗",
+   texthl = "WarningMsg",
+   numhl = "WarningMsg",
+})
 
 local function update_sign()
    if vim.bo.filetype:match("^harpoon") then
@@ -802,7 +802,10 @@ local function update_sign()
 
    if vim.bo.modified then
       vim.fn.sign_unplace("user", { buffer = buf })
-      vim.fn.sign_place(0, "user", "FileChanged", buf, { lnum = line, priority = 1 })
+      vim.fn.sign_place(0, "user", "FileChanged", buf, {
+         lnum = line,
+         priority = 1,
+      })
    else
       vim.fn.sign_unplace("user", { buffer = buf })
    end
