@@ -126,11 +126,14 @@ local plugins = {
       },
    },
 
+   { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
    {
       "numToStr/Comment.nvim",
       event = "VeryLazy",
       config = function()
-         require("Comment").setup()
+         require("Comment").setup({
+            pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+         })
 
          vim.keymap.set("n", "<leader>cc", "gcc", { remap = true })
          vim.keymap.set("n", "<leader>cb", "gbc", { remap = true })
