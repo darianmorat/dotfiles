@@ -40,14 +40,15 @@
    n (tap-hold-release $tt $ht n (layer-while-held term-layer))
    v (tap-hold-release $tt $ht v (layer-while-held expd-layer))
 
-   lsft (tap-hold-release $tt $ht XX (layer-while-held acct-layer))
-   rsft (tap-hold-release $tt $ht XX (layer-while-held acct-layer))
+   x (tap-hold-release $tt $ht x (layer-while-held acct-layer))
+   . (tap-hold-release $tt $ht . (layer-while-held acct-layer))
 
    [ S-'
    ' (unshift ')
    / (unshift /)
 
    esc XX
+   lsft XX
    lctl XX
    - XX
    = XX
@@ -55,6 +56,7 @@
    ] XX
    \ XX
    ret XX
+   rsft XX
 )
 
 (deflayermap (nav-layer)
