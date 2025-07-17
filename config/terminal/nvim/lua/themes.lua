@@ -32,8 +32,8 @@ return {
                   Normal = { fg = "$fg", bg = "#1E1E1E" },
                   NormalFloat = { fg = "$fg", bg = "#1E1E1E" },
                   FloatBorder = { fg = "$fg", bg = "#1E1E1E" },
-                  MsgArea = { fg = "$fg", bg = "#232323" },
-                  StatusLine = { fg = "$fg", bg = "#2B2B2B" },
+                  MsgArea = { fg = "$fg", bg = "#1E1E1E" },
+                  StatusLine = { fg = "$fg", bg = "#252525" },
                   FloatermBorder = { fg = "NONE", bg = "#1E1E1E" },
                   FloatTitle = { fg = "$red" },
                   SignColumn = { bg = "#1E1E1E" },
@@ -161,7 +161,9 @@ return {
                   ["@lsp.typemod.property.declaration.typescript"] = { fg = "$fg" },
                   ["@lsp.typemod.property.defaultLibrary.typescript"] = { fg = "$orange" },
                   ["@lsp.typemod.variable.defaultLibrary.typescript"] = { fg = "$orange" },
-                  ["@lsp.typemod.variable.defaultLibrary.typescriptreact"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.typescriptreact"] = {
+                     fg = "$orange",
+                  },
 
                   -- Javascript
                   ["@tag.javascript"] = { fg = "$aqua" },
@@ -172,7 +174,9 @@ return {
                   ["@lsp.typemod.property.declaration.javascript"] = { fg = "$fg" },
                   ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange" },
                   ["@lsp.typemod.variable.defaultLibrary.javascript"] = { fg = "$orange" },
-                  ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = {
+                     fg = "$orange",
+                  },
 
                   ["@markup.raw.javascript"] = { fg = "$fg" },
                   ["@markup.heading.1.javascript"] = { fg = "$orange", fmt = "none" },
@@ -202,8 +206,8 @@ return {
                   Normal = { fg = "$fg", bg = "#f7f5ea" },
                   NormalFloat = { fg = "$fg", bg = "#f7f5ea" },
                   FloatBorder = { fg = "$fg", bg = "#f7f5ea" },
-                  MsgArea = { fg = "$fg", bg = "#e9e8dd" },
-                  StatusLine = { fg = "$fg", bg = "#cececa" },
+                  MsgArea = { fg = "$fg", bg = "#f7f5ea" },
+                  StatusLine = { fg = "$fg", bg = "#e0ddd7" },
                   FloatermBorder = { fg = "NONE", bg = "#f7f5ea" },
                   FloatTitle = { fg = "$red" },
                   SignColumn = { bg = "#f7f5ea" },
@@ -332,7 +336,9 @@ return {
                   ["@lsp.typemod.property.declaration.typescript"] = { fg = "$fg" },
                   ["@lsp.typemod.property.defaultLibrary.typescript"] = { fg = "$orange" },
                   ["@lsp.typemod.variable.defaultLibrary.typescript"] = { fg = "$orange" },
-                  ["@lsp.typemod.variable.defaultLibrary.typescriptreact"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.typescriptreact"] = {
+                     fg = "$orange",
+                  },
 
                   -- Javascript
                   ["@tag.javascript"] = { fg = "$aqua" },
@@ -343,7 +349,9 @@ return {
                   ["@lsp.typemod.property.declaration.javascript"] = { fg = "$fg" },
                   ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange" },
                   ["@lsp.typemod.variable.defaultLibrary.javascript"] = { fg = "$orange" },
-                  ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = {
+                     fg = "$orange",
+                  },
 
                   ["@markup.raw.javascript"] = { fg = "$fg" },
                   ["@markup.heading.1.javascript"] = { fg = "$orange", fmt = "none" },

@@ -5,7 +5,7 @@ vim.g.mapleader = " "
 vim.opt.termguicolors = true
 vim.opt.hlsearch = false
 vim.opt.wrap = false
-vim.opt.pumheight = 8
+vim.opt.pumheight = 10
 
 vim.opt.ruler = false
 vim.opt.showmode = false
@@ -94,39 +94,126 @@ vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
 -- --------------------------------------------------------------------------------------
 local plugins = {
    {
-      "TaDaa/vimade",
+      "stevearc/oil.nvim",
       event = "VeryLazy",
       opts = {
-         fadelevel = 0.3,
-         blocklist = {
-            only_behind_float_windows = function(win, current)
-               if
-                  (win.win_config.relative == "")
-                  and (current and current.win_config.relative ~= "")
-               then
-                  return false
-               end
-               return true
+         default_file_explorer = true,
+         keymaps = {
+            ["<BS>"] = { "actions.parent", mode = "n" },
+            ["<CR>"] = "actions.select",
+            ["_"] = { "actions.open_cwd", mode = "n" },
+            ["q"] = { "actions.close", mode = "n" },
+            ["g."] = { "actions.toggle_hidden", mode = "n" },
+
+            ["<C-s>"] = { "actions.select", opts = { vertical = true } },
+            ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
+            ["<C-l>"] = "actions.refresh",
+            ["g?"] = { "actions.show_help", mode = "n" },
+            ["gs"] = { "actions.change_sort", mode = "n" },
+            ["`"] = { "actions.cd", mode = "n" },
+            ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
+            ["g\\"] = { "actions.toggle_trash", mode = "n" },
+            ["gx"] = "actions.open_external",
+
+            ["<C-p>"] = {
+               callback = function()
+                  local oil = require("oil")
+                  oil.open_preview({ vertical = true, split = "botright" })
+               end,
+            },
+
+            ["<C-f>"] = {
+               callback = function()
+                  require("fzf-lua").files({
+                     cwd = vim.fn.getcwd(),
+                     fd_opts = "--color=never --type d --hidden --follow --exclude .git",
+                     previewer = false,
+                  })
+               end,
+               mode = "n",
+            },
+
+            ["<C-g>"] = {
+               callback = function()
+                  require("fzf-lua").files({
+                     cwd = require("oil").get_current_dir(),
+                     fd_opts = "--color=never --type d --hidden --follow --exclude .git",
+                     previewer = false,
+                  })
+               end,
+               mode = "n",
+            },
+         },
+         use_default_keymaps = false,
+         view_options = {
+            show_hidden = true,
+            is_always_hidden = function(name, bufnr)
+               return name == ".."
             end,
          },
+         win_options = { signcolumn = "yes:2" },
+         confirmation = { border = "single" },
+         progress = { border = "single" },
+         ssh = { border = "single" },
+         keymaps_help = { border = "single" },
       },
+
+      config = function(_, opts)
+         require("oil").setup(opts)
+         vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>")
+      end,
    },
 
    {
-      "voldikss/vim-floaterm",
+      "refractalize/oil-git-status.nvim",
+      dependencies = { "stevearc/oil.nvim" },
+      event = "VeryLazy",
       config = function()
-         vim.g.floaterm_opener = "edit"
-         vim.g.floaterm_title = ""
-         vim.g.floaterm_width = 0.6
-         vim.g.floaterm_height = 0.99
+         require("oil-git-status").setup({
+            show_ignored = false,
+         })
       end,
-      keys = {
-         { "<leader>e", "<cmd>FloatermNew --height=0.88 vifm<cr>" },
-         { "<leader>lg", "<cmd>FloatermNew --width=0.78 lazygit<cr>" },
-      },
    },
 
+   {
+      "akinsho/toggleterm.nvim",
+      version = "*",
+      event = "VeryLazy",
+      config = function()
+         require("toggleterm").setup({})
+
+         local Terminal = require("toggleterm.terminal").Terminal
+         local fullscreen_float = {
+            border = "none",
+            width = vim.o.columns,
+            height = vim.o.lines,
+         }
+         local lazygit = Terminal:new({
+            cmd = "lazygit",
+            direction = "float",
+            float_opts = fullscreen_float,
+         })
+
+         local vifm = Terminal:new({
+            cmd = "vifm",
+            direction = "float",
+            float_opts = fullscreen_float,
+         })
+
+         vim.keymap.set("n", "<leader>lg", function()
+            lazygit:toggle()
+         end)
+         vim.keymap.set("n", "<leader><leader>e", function()
+            vifm:toggle()
+         end)
+      end,
+   },
+
+   { "windwp/nvim-ts-autotag", event = "VeryLazy", opts = {} },
+   { "windwp/nvim-autopairs", event = "VeryLazy", opts = {} },
+   { "kylechui/nvim-surround", version = "*", event = "VeryLazy", opts = {} },
    { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+
    {
       "numToStr/Comment.nvim",
       event = "VeryLazy",
@@ -145,8 +232,6 @@ local plugins = {
          vim.keymap.set("v", "<leader>b", "gb", { remap = true })
       end,
    },
-
-   { "kylechui/nvim-surround", version = "*", event = "VeryLazy", opts = {} },
 
    {
       "jake-stewart/multicursor.nvim",
@@ -217,105 +302,72 @@ local plugins = {
    },
 
    {
-      "nvim-telescope/telescope.nvim",
-      tag = "0.1.8",
-      dependencies = {
-         { "nvim-lua/plenary.nvim" },
-         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-         { "nvim-telescope/telescope-media-files.nvim" },
-      },
+      "ibhagwan/fzf-lua",
       config = function()
-         local actions = require("telescope.actions")
-         local layout_strategies = require("telescope.pickers.layout_strategies")
+         local fzf = require("fzf-lua")
+         local img_previewer = { "chafa", "{file}" }
 
-         layout_strategies.horizontal_merged = function(
-            picker,
-            max_columns,
-            max_lines,
-            layout_config
-         )
-            local layout =
-               layout_strategies.horizontal(picker, max_columns, max_lines, layout_config)
-
-            layout.prompt.title = ""
-            layout.prompt.borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
-
-            layout.results.title = ""
-            layout.results.borderchars = { "─", "│", "─", "│", "├", "┤", "┘", "└" }
-
-            layout.results.line = layout.results.line - 1
-            layout.results.height = layout.results.height + 1
-
-            if layout.preview then
-               layout.preview.title = ""
-               layout.preview.borderchars =
-                  { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+         local function fzf_vertical(command)
+            return function()
+               require("fzf-lua")[command]({
+                  winopts = {
+                     preview = {
+                        layout = "vertical",
+                     },
+                  },
+               })
             end
-
-            return layout
          end
 
-         require("telescope").setup({
-            defaults = {
-               layout_strategy = "horizontal_merged",
-               sorting_strategy = "ascending",
-               layout_config = {
-                  horizontal = {
-                     height = 0.85,
-                     preview_width = 0.5,
-                     results_width = 0.5,
-                     prompt_position = "top",
+         fzf.setup({
+            winopts = {
+               border = "single",
+               backdrop = false,
+               title_flags = false,
+               fullscreen = true,
+
+               preview = {
+                  border = "single",
+                  vertical = "down:50%",
+                  horizontal = "right:50%",
+                  layout = "horizontal",
+                  title = false,
+                  scrollbar = false,
+               },
+            },
+            previewers = {
+               builtin = {
+                  extensions = {
+                     ["png"] = img_previewer,
+                     ["jpg"] = img_previewer,
+                     ["jpeg"] = img_previewer,
+                     ["gif"] = img_previewer,
+                     ["webp"] = img_previewer,
                   },
                },
-               file_ignore_patterns = { "node_modules" },
-               borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-               mappings = { i = { ["<esc>"] = actions.close } },
             },
-            pickers = {
-               buffers = {
-                  sort_lastused = true,
-                  ignore_current_buffer = true,
-               },
-            },
-            extensions = {
-               fzf = {
-                  fuzzy = true,
-                  override_file_sorter = true,
-                  case_mode = "smart_case",
-                  override_generic_sorter = true,
-               },
+            fzf_colors = {
+               ["gutter"] = "-1",
+               ["hl"] = "2",
+               ["hl+"] = "2",
+               ["info"] = "8",
+               ["prompt"] = "4",
             },
          })
 
-         require("telescope").load_extension("fzf")
-         require("telescope").load_extension("media_files")
+         vim.keymap.set("n", "<leader>fi", "<cmd>FzfLua files<cr>")
+         vim.keymap.set("n", "<leader>fj", "<cmd>FzfLua buffers<cr>")
+         vim.keymap.set("n", "<leader>fd", "<cmd>FzfLua diagnostics_document<cr>")
+         vim.keymap.set("n", "<leader>fD", "<cmd>FzfLua diagnostics_workspace<cr>")
+         vim.keymap.set("n", "<leader>fs", "<cmd>FzfLua spell_suggest<cr>")
+         vim.keymap.set("n", "<leader>fo", "<cmd>FzfLua resume<cr>")
+
+         vim.keymap.set("n", "<leader>fg", fzf_vertical("live_grep"))
+         vim.keymap.set("n", "<leader>fc", fzf_vertical("grep_curbuf"))
+         vim.keymap.set("n", "<leader>fr", fzf_vertical("lsp_references"))
+         vim.keymap.set("n", "<leader>fw", fzf_vertical("grep_cword"))
+         vim.keymap.set("n", "<leader>fW", fzf_vertical("grep_cWORD"))
       end,
-      keys = {
-         { "<leader>fi", "<cmd>Telescope find_files<cr>" },
-         { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
-         {
-            "<leader>fc",
-            "<cmd>lua require('telescope.builtin').live_grep({search_dirs={vim.fn.expand('%:p')}})<cr>",
-         },
-         { "<leader>fo", "<cmd>Telescope resume<cr>" },
-         { "<leader>fj", "<cmd>Telescope buffers<cr>" },
-         { "<leader>fr", "<cmd>Telescope lsp_references<cr>" },
-
-         {
-            "<leader>fw",
-            "<cmd>lua require('telescope.builtin').grep_string({ search=vim.fn.expand('<cword>') })<cr>",
-         },
-         {
-            "<leader>fW",
-            "<cmd>lua require('telescope.builtin').grep_string({ search=vim.fn.expand('<cWORD>') })<cr>",
-         },
-
-         { "<leader>fd", "<cmd>Telescope diagnostics bufnr=0<cr>" },
-         { "<leader>fD", "<cmd>Telescope diagnostics<cr>" },
-
-         { "<leader>fm", "<cmd>Telescope media_files<cr>" },
-         { "<leader>fs", "<cmd>Telescope spell_suggest<cr>" },
-      },
    },
 
    {
@@ -445,6 +497,7 @@ local plugins = {
       event = "BufReadPre",
       config = function()
          require("nvim-treesitter.configs").setup({
+            auto_install = true,
             ensure_installed = {
                "javascript",
                "typescript",
@@ -461,14 +514,9 @@ local plugins = {
                "bash",
                "query",
                "regex",
-               "rust",
-               "c",
                "python",
                "lua",
-               "vim",
-               "vimdoc",
             },
-            sync_install = false,
             indent = { enable = true },
             highlight = {
                enable = true,
@@ -480,9 +528,6 @@ local plugins = {
          })
       end,
    },
-
-   { "windwp/nvim-ts-autotag", event = "VeryLazy", opts = {} },
-   { "windwp/nvim-autopairs", event = "VeryLazy", opts = {} },
 
    {
       "lukas-reineke/indent-blankline.nvim",
@@ -504,8 +549,114 @@ local plugins = {
    },
 
    {
+      "saghen/blink.cmp",
+      build = "cargo build --release",
+      dependencies = {
+         "L3MON4D3/LuaSnip",
+      },
+      event = "InsertEnter",
+      opts = {
+         snippets = {
+            preset = "luasnip",
+         },
+         completion = {
+            menu = {
+               border = "none",
+               auto_show = true,
+               draw = {
+                  columns = {
+                     { "label", "label_description", gap = 1 },
+                     { "kind" },
+                  },
+               },
+            },
+            documentation = {
+               auto_show = false,
+               auto_show_delay_ms = 100,
+               window = {
+                  border = "single",
+               },
+            },
+            accept = {
+               auto_brackets = {
+                  enabled = false,
+               },
+            },
+         },
+         appearance = {
+            use_nvim_cmp_as_default = false,
+            nerd_font_variant = "mono",
+         },
+         signature = {
+            enabled = false,
+            window = { border = "single" },
+         },
+         cmdline = {
+            enabled = false,
+         },
+         keymap = {
+            preset = "enter",
+            ["<C-Space>"] = { "show_documentation", "hide_documentation" },
+         },
+      },
+      opts_extend = { "sources.default" },
+   },
+
+   {
+      "neovim/nvim-lspconfig",
+
+      -- npm install -g typescript-language-server
+      -- npm install -g vscode-langservers-extracted  # html, css, json
+      -- npm install -g @tailwindcss/language-server
+      -- pip install pyright
+
+      config = function()
+         vim.diagnostic.config({
+            virtual_text = false,
+            underline = true,
+            update_in_insert = false,
+            jump = { float = true },
+         })
+
+         local open_float = vim.lsp.util.open_floating_preview
+         function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+            opts = opts or {}
+            opts.border = "single"
+            return open_float(contents, syntax, opts, ...)
+         end
+
+         vim.lsp.config("*", {})
+         vim.lsp.enable({
+            "ts_ls",
+            "html",
+            "cssls",
+            "tailwindcss",
+            "jsonls",
+            "pyright",
+         })
+
+         vim.keymap.set("n", "gh", vim.lsp.buf.hover)
+         vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+         vim.keymap.set("n", "<leader>xx", vim.lsp.buf.code_action)
+         vim.keymap.set("n", "<leader>sr", vim.lsp.buf.rename)
+         vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float)
+
+         vim.keymap.set("n", "<leader>vj", function()
+            vim.diagnostic.jump({ count = 1 })
+         end)
+         vim.keymap.set("n", "<leader>vk", function()
+            vim.diagnostic.jump({ count = -1 })
+         end)
+      end,
+   },
+
+   {
       "stevearc/conform.nvim",
-      event = "VeryLazy",
+
+      -- npm install -g prettier
+      -- pip install black
+      -- brew install stylua
+
       config = function()
          require("conform").setup({
             formatters_by_ft = {
@@ -513,6 +664,7 @@ local plugins = {
                typescript = { "prettier" },
                javascriptreact = { "prettier" },
                typescriptreact = { "prettier" },
+               html = { "prettier_html" },
                css = { "prettier" },
                json = { "prettier" },
                markdown = { "prettier" },
@@ -528,6 +680,18 @@ local plugins = {
                      "90",
                   },
                },
+               prettier_html = {
+                  command = "prettier",
+                  args = {
+                     "--stdin-filepath",
+                     "$FILENAME",
+                     "--tab-width",
+                     "3",
+                     "--print-width",
+                     "120",
+                  },
+                  stdin = true,
+               },
                black = {
                   prepend_args = {
                      "--line-length",
@@ -541,7 +705,7 @@ local plugins = {
                      "--indent-width",
                      "3",
                      "--column-width",
-                     "100",
+                     "90",
                   },
                },
             },
@@ -554,161 +718,6 @@ local plugins = {
                timeout_ms = 1000,
             })
          end)
-      end,
-   },
-
-   {
-      "neovim/nvim-lspconfig", -- Don't lazy load
-      dependencies = {
-         "williamboman/mason.nvim",
-         "williamboman/mason-lspconfig.nvim",
-         "jay-babu/mason-null-ls.nvim",
-         "nvimtools/none-ls.nvim",
-      },
-      config = function()
-         local lspconfig = require("lspconfig")
-         local cmp_lsp = require("cmp_nvim_lsp")
-         local capabilities = cmp_lsp.default_capabilities()
-
-         local augroup = vim.api.nvim_create_augroup
-         local lsp_group = augroup("lsp_group", {})
-
-         vim.api.nvim_create_autocmd("LspAttach", {
-            group = lsp_group,
-            callback = function(args)
-               local opts = { buffer = args.buf }
-               vim.keymap.set("n", "gh", ":silent lua vim.lsp.buf.hover()<cr>", opts)
-               vim.keymap.set("n", "gd", ":silent lua vim.lsp.buf.definition()<cr>", opts)
-               vim.keymap.set("n", "<leader>xx", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-               vim.keymap.set("n", "<leader>sr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-               vim.keymap.set("n", "<leader>vd", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
-               vim.keymap.set(
-                  "n",
-                  "<leader>vj",
-                  "<cmd>lua vim.diagnostic.jump({count= 1,float = true})<cr>",
-                  opts
-               )
-               vim.keymap.set(
-                  "n",
-                  "<leader>vk",
-                  "<cmd>lua vim.diagnostic.jump({count= -1,float = true})<cr>",
-                  opts
-               )
-            end,
-         })
-
-         vim.diagnostic.config({
-            virtual_text = false,
-            signs = true,
-            underline = true,
-            update_in_insert = false,
-            severity_sort = false,
-            float = { border = "single" },
-         })
-
-         local open_float = vim.lsp.util.open_floating_preview
-         function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-            opts = opts or {}
-            opts.border = "single"
-            return open_float(contents, syntax, opts, ...)
-         end
-
-         require("mason").setup({
-            ui = { border = "single" },
-         })
-
-         require("mason-lspconfig").setup({
-            ensure_installed = {
-               "ts_ls",
-               "html",
-               "cssls",
-               "tailwindcss",
-               "jsonls",
-               "marksman",
-               "pyright",
-            },
-            handlers = {
-               function(server_name)
-                  lspconfig[server_name].setup({
-                     capabilities = capabilities,
-                  })
-               end,
-            },
-         })
-
-         require("mason-null-ls").setup({
-            ensure_installed = {
-               "prettier",
-               "eslint-lsp",
-               "stylelint",
-               "black",
-               "stylua",
-            },
-         })
-      end,
-   },
-
-   {
-      "L3MON4D3/LuaSnip",
-      event = "VeryLazy",
-      dependencies = {
-         "rafamadriz/friendly-snippets",
-         config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-         end,
-      },
-   },
-
-   {
-      "hrsh7th/nvim-cmp",
-      event = "VeryLazy",
-      dependencies = {
-         "hrsh7th/cmp-nvim-lsp",
-         "saadparwaiz1/cmp_luasnip",
-         "hrsh7th/cmp-path",
-         "hrsh7th/cmp-buffer",
-         {
-            "jdrupal-dev/css-vars.nvim",
-            opts = {},
-         },
-      },
-      opts = function()
-         local cmp = require("cmp")
-         require("luasnip").filetype_extend("javascriptreact", { "html" })
-
-         cmp.setup({
-            completion = {
-               completeopt = "menu, menuone, noinsert",
-            },
-            sources = {
-               { name = "path" },
-               { name = "nvim_lsp" },
-               { name = "luasnip" },
-               { name = "buffer" },
-               { name = "css_vars" },
-            },
-            snippet = {
-               expand = function(args)
-                  require("luasnip").lsp_expand(args.body)
-               end,
-            },
-            view = {
-               docs = { auto_open = false },
-            },
-            window = {
-               documentation = { winhighlight = "Normal:MatchParen,FloatBorder:MatchParen" },
-            },
-            mapping = cmp.mapping.preset.insert({
-               ["<Enter>"] = cmp.mapping.confirm({ select = true }),
-               ["<C-Space>"] = cmp.mapping(function()
-                  if cmp.visible_docs() then
-                     cmp.close_docs()
-                  else
-                     cmp.open_docs()
-                  end
-               end),
-            }),
-         })
       end,
    },
 }
