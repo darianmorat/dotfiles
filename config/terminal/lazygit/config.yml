@@ -10,7 +10,8 @@ gui:
       - white
       - bold
     selectedLineBgColor:
-      - reverse
+      - "#303030"
+      - bold
 customCommands:
   - key: "w"
     command: "git cz"
