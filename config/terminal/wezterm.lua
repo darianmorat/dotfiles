@@ -54,7 +54,11 @@ config.keys = {
    { key = "d", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
    { key = "x", mods = "LEADER", action = act.ActivateCopyMode },
 
-   { key = "f", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
+   {
+      key = "f",
+      mods = "LEADER",
+      action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }),
+   },
    {
       key = "r",
       mods = "LEADER",
@@ -68,7 +72,11 @@ config.keys = {
       }),
    },
 
-   { key = "s", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+   {
+      key = "s",
+      mods = "LEADER",
+      action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+   },
    {
       key = "w",
       mods = "LEADER",
@@ -178,11 +186,11 @@ local themes = {
 
 local function read_theme()
    local file = io.open(theme_file, "r")
-   local theme = file and file:read("*l"):match("%S+") or "dark"
+   local theme = file and file:read("*l"):match("%S+")
    if file then
       file:close()
    end
-   return themes[theme] and theme or "dark"
+   return (themes[theme] and theme) or "dark"
 end
 
 local function save_theme(theme)
@@ -193,18 +201,24 @@ local function save_theme(theme)
    end
 end
 
+local function get_theme_config(theme_name)
+   return {
+      colors = themes[theme_name],
+      foreground_text_hsb = (theme_name == "dark") and {
+         saturation = 1.04,
+         brightness = 1.20,
+      } or nil,
+   }
+end
+
 local current_theme = read_theme()
-config.colors = themes[current_theme]
+local theme_config = get_theme_config(current_theme)
+config.colors = theme_config.colors
+config.foreground_text_hsb = theme_config.foreground_text_hsb
 
 wezterm.on("toggle-theme", function(window)
    current_theme = (current_theme == "dark") and "light" or "dark"
-   window:set_config_overrides({
-      colors = themes[current_theme],
-      foreground_text_hsb = (current_theme == "dark") and {
-         saturation = 1.04,
-         brightness = 1.2,
-      } or nil,
-   })
+   window:set_config_overrides(get_theme_config(current_theme))
    save_theme(current_theme)
 end)
 
