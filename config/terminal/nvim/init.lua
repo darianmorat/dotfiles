@@ -97,13 +97,13 @@ local plugins = {
       "stevearc/oil.nvim",
       event = "VeryLazy",
       opts = {
-         default_file_explorer = true,
          keymaps = {
             ["<BS>"] = { "actions.parent", mode = "n" },
             ["<CR>"] = "actions.select",
             ["_"] = { "actions.open_cwd", mode = "n" },
             ["q"] = { "actions.close", mode = "n" },
             ["g."] = { "actions.toggle_hidden", mode = "n" },
+            ["gt"] = { "actions.toggle_trash", mode = "n" },
 
             ["<C-s>"] = { "actions.select", opts = { vertical = true } },
             ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
@@ -112,15 +112,7 @@ local plugins = {
             ["gs"] = { "actions.change_sort", mode = "n" },
             ["`"] = { "actions.cd", mode = "n" },
             ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
-            ["g\\"] = { "actions.toggle_trash", mode = "n" },
             ["gx"] = "actions.open_external",
-
-            ["<C-p>"] = {
-               callback = function()
-                  local oil = require("oil")
-                  oil.open_preview({ vertical = true, split = "botright" })
-               end,
-            },
 
             ["<C-f>"] = {
                callback = function()
@@ -143,8 +135,35 @@ local plugins = {
                end,
                mode = "n",
             },
+
+            ["<C-p>"] = {
+               callback = function()
+                  local oil = require("oil")
+                  local util = require("oil.util")
+                  local entry = oil.get_cursor_entry()
+                  if not entry then
+                     vim.notify("Could not find entry under cursor", vim.log.levels.ERROR)
+                     return
+                  end
+                  local winid = util.get_preview_win()
+                  if winid then
+                     local cur_id = vim.w[winid].oil_entry_id
+                     if entry.id == cur_id then
+                        vim.api.nvim_win_close(winid, true)
+                        if util.is_floating_win() then
+                           local layout = require("oil.layout")
+                           local win_opts = layout.get_fullscreen_win_opts()
+                           vim.api.nvim_win_set_config(0, win_opts)
+                        end
+                        return
+                     end
+                  end
+                  oil.open_preview({ vertical = true, split = "botright" })
+               end,
+            },
          },
          use_default_keymaps = false,
+         delete_to_trash = true,
          view_options = {
             show_hidden = true,
             is_always_hidden = function(name, bufnr)
@@ -161,6 +180,17 @@ local plugins = {
       config = function(_, opts)
          require("oil").setup(opts)
          vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>")
+
+         vim.api.nvim_create_autocmd("FileType", {
+            pattern = "oil_preview",
+            callback = function(params)
+               vim.keymap.set("n", "<cr>", "o", {
+                  buffer = params.buf,
+                  remap = true,
+                  nowait = true,
+               })
+            end,
+         })
       end,
    },
 
@@ -181,7 +211,6 @@ local plugins = {
       event = "VeryLazy",
       config = function()
          require("toggleterm").setup({})
-
          local Terminal = require("toggleterm.terminal").Terminal
          local fullscreen_float = {
             border = "none",
@@ -193,7 +222,6 @@ local plugins = {
             direction = "float",
             float_opts = fullscreen_float,
          })
-
          local vifm = Terminal:new({
             cmd = "vifm",
             direction = "float",
@@ -325,7 +353,6 @@ local plugins = {
                backdrop = false,
                title_flags = false,
                fullscreen = true,
-
                preview = {
                   border = "single",
                   vertical = "down:50%",
@@ -605,10 +632,10 @@ local plugins = {
    {
       "neovim/nvim-lspconfig",
 
-      -- npm install -g typescript-language-server
-      -- npm install -g vscode-langservers-extracted  # html, css, json
-      -- npm install -g @tailwindcss/language-server
-      -- pip install pyright
+      -- npm install -g typescript-language-server -- # ts_ls
+      -- npm install -g vscode-langservers-extracted -- # eslint, html, cssls, jsonls
+      -- npm install -g @tailwindcss/language-server -- # tailwindcss
+      -- pip install pyright -- # pyright
 
       config = function()
          vim.diagnostic.config({
@@ -628,10 +655,11 @@ local plugins = {
          vim.lsp.config("*", {})
          vim.lsp.enable({
             "ts_ls",
+            "eslint",
             "html",
             "cssls",
-            "tailwindcss",
             "jsonls",
+            -- "tailwindcss", -- slow
             "pyright",
          })
 
@@ -640,6 +668,7 @@ local plugins = {
          vim.keymap.set("n", "<leader>xx", vim.lsp.buf.code_action)
          vim.keymap.set("n", "<leader>sr", vim.lsp.buf.rename)
          vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float)
+         vim.keymap.set("i", "<c-h>", vim.lsp.buf.signature_help)
 
          vim.keymap.set("n", "<leader>vj", function()
             vim.diagnostic.jump({ count = 1 })
