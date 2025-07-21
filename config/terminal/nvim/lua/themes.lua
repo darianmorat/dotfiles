@@ -57,14 +57,6 @@ return {
                   WinSeparator = { fg = "#2F2F2F" },
                   Visual = { bg = "#2C2C2C" },
 
-                  TelescopeSelection = { fg = "#E1DCD6", bg = "#303030" },
-                  TelescopeSelectionCaret = { fg = "$fg" },
-                  TelescopeMatching = { fg = "$green" },
-                  TelescopePromptBorder = { fg = "$fg" },
-                  TelescopePromptPrefix = { fg = "$fg" },
-                  TelescopeResultsBorder = { fg = "$fg" },
-                  TelescopePreviewBorder = { fg = "$fg" },
-
                   CmpItemAbbrMatch = { fg = "$green" },
                   CmpItemAbbrMatchFuzzy = { fg = "$green", fmt = "none" },
                   CmpItemKindText = { fg = "$lightGrey" },
@@ -230,14 +222,6 @@ return {
                   ColorColumn = { bg = "#f0efe4" },
                   EndOfBuffer = { fg = "#303030", bg = "NONE" },
                   Visual = { bg = "#e9e8dd" },
-
-                  TelescopeSelection = { fg = "#000000", bg = "#e9e8dd" },
-                  TelescopeSelectionCaret = { fg = "$fg" },
-                  TelescopeMatching = { fg = "$green" },
-                  TelescopePromptBorder = { fg = "$fg" },
-                  TelescopePromptPrefix = { fg = "$fg" },
-                  TelescopeResultsBorder = { fg = "$fg" },
-                  TelescopePreviewBorder = { fg = "$fg" },
 
                   CmpItemAbbrMatch = { fg = "$green" },
                   CmpItemAbbrMatchFuzzy = { fg = "$green", fmt = "none" },
