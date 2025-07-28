@@ -7,8 +7,7 @@ alias doc="cd /mnt/d/DarianToledo/Documents"
 
 alias rm="trash"
 alias lg="lazygit"
-alias vif="vifm ."
-alias vim="nvim"
+alias vifm="vifm ."
 # Find way to send nvim/vifm directly
 # Like in bash: bind -x '"\C-o":"vifm"'
 
