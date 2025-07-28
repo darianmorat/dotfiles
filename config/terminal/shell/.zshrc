@@ -1,31 +1,16 @@
 ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c160,)" # Ignore suggestions with more than 100char
 zstyle ':z4h:autosuggestions' forward-char 'accept' # Accepts 1char 'partial-accept' or for all 'accept' 
 
-# Bindings
-z4h bindkey z4h-backward-word Ctrl+Alt+B
-z4h bindkey z4h-forward-word Ctrl+Alt+F
-
-# find way to send vifm directly. 
-# In bash: bind -x '"\C-o":"vifm"'
-# [[ ---
-# Disable for pinky pain, once you get a keyboard with more 
-# thumb keys you can again use the ctrl for this one and the others
-# bindkey -s '^O' '^Uvifm^J' 
-# ]] ---
-
 # Aliases
 alias dow="cd /mnt/d/DarianToledo/Downloads"
 alias doc="cd /mnt/d/DarianToledo/Documents"
-alias mf="touch" # md: make-dir
+
 alias rm="trash"
-# `$rm` cli: Trash/files/
-# `dd` vifm: Trash/vifm/
-# `$empty-trash` cli: Trash/
-
 alias lg="lazygit"
-
-alias vifm="vifm ."
+alias vif="vifm ."
 alias vim="nvim"
+# Find way to send nvim/vifm directly
+# Like in bash: bind -x '"\C-o":"vifm"'
 
 alias ls="eza --color=always --long --git --no-filesize --no-time --no-user --no-permissions -F"
 alias lsl="eza --color=always --long --git --no-filesize --no-time --no-user --no-permissions -F --grid"
