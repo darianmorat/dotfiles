@@ -15,9 +15,9 @@ vim.opt.laststatus = 0
 
 vim.opt.updatetime = 100
 vim.opt.mouse = "a"
-vim.opt.cursorline = true
+vim.opt.guicursor = ""
 vim.opt.number = true
-vim.opt.relativenumber = false
+vim.opt.cursorline = true
 
 vim.opt.shiftwidth = 3
 vim.opt.softtabstop = 3
@@ -86,13 +86,386 @@ vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<cr>")
 
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
-vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
-vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { silent = true })
+vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
 
 -- --------------------------------------------------------------------------------------
 -- PLUGIN LIST
 -- --------------------------------------------------------------------------------------
 local plugins = {
+   {
+      -- In development...
+      -- This would be the only theme left
+      dir = "~/dev/test-code/gruvdark.nvim",
+   },
+
+   {
+      -- For testing...
+      "folke/tokyonight.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {},
+   },
+   {
+      -- For testing...
+      "navarasu/onedark.nvim",
+      lazy = false,
+      priority = 1000,
+      config = function()
+         local themes = {
+            gruvdark = {
+               code_style = { comments = "none" },
+               colors = {
+                  fg = "#D6CFC4",
+                  fg_bright = "#E6E3DE",
+
+                  blue = "#579DD4",
+                  red = "#E16464",
+                  -- red_dark = "#B55353", -- use this for darker reds
+                  green = "#72BA62",
+                  purple = "#D159B6", -- this is pink for my theme
+                  purple_2 = "#9266DA",
+
+                  aqua = "#00A596",
+                  cyan = "#00A596", -- just aqua for my theme
+                  orange = "#D19F66",
+                  yellow = "#D19F66", -- just orange for my theme
+
+                  grey = "#575757",
+                  lightGrey = "#9D9A94",
+
+                  bg = "#1E1E1E",
+                  bg1 = "#303030",
+                  bg2 = "#313131",
+
+                  menu = "#454545",
+               },
+               highlights = {
+                  Normal = { fg = "$fg", bg = "$bg" },
+                  NormalFloat = { fg = "$fg", bg = "$bg" },
+                  FloatBorder = { fg = "$fg", bg = "$bg" },
+                  MsgArea = { fg = "$fg", bg = "$bg" },
+                  StatusLine = { fg = "$fg", bg = "#252525" },
+                  FloatermBorder = { fg = "NONE", bg = "$bg" },
+                  FloatTitle = { fg = "$red" },
+                  SignColumn = { bg = "$bg" },
+                  YankHighlight = { fg = "$fg_bright", bg = "$bg1" },
+
+                  Search = { fg = "$bg", bg = "#B55353" },
+                  FlashCurrent = { fg = "$bg", bg = "#B55353" },
+                  IncSearch = { fg = "$fg_bright", bg = "#B55353" },
+                  FlashLabel = { fg = "$fg_bright", bg = "#2A404F" },
+
+                  MatchParen = { fg = "$fg_bright", bg = "$menu" },
+                  Folded = { fg = "$fg", bg = "#282828" },
+                  CursorLine = { bg = "NONE" },
+                  CursorLineNr = { fg = "$lightGrey" },
+                  LineNr = { fg = "$grey" },
+                  ColorColumn = { bg = "#222222" },
+                  EndOfBuffer = { fg = "#323232", bg = "NONE" }, -- not importnat for my theme
+                  IblIndent = { fg = "#323232" },
+                  WinSeparator = { fg = "#2F2F2F" },
+                  Visual = { bg = "$bg1" },
+
+                  BlinkCmpLabelMatch = { fg = "$green" },
+                  PmenuSel = { fg = "#E1DCD6", bg = "$menu" },
+                  -- CmpItemAbbrMatch = { fg = "$green" },
+                  -- CmpItemAbbrMatchFuzzy = { fg = "$green" },
+                  -- CmpItemKindText = { fg = "$lightGrey" },
+                  -- CmpItemMenu = { fg = "$lightGrey" },
+
+                  TSParameter = { fg = "$fg" },
+                  TSParameterReference = { fg = "$fg" },
+
+                  -- General
+                  ["@none"] = { fg = "NONE" },
+                  ["@spell"] = { fg = "NONE" },
+                  ["@variable.parameter"] = { fg = "$fg" },
+                  ["@lsp.type.parameter"] = { fg = "$fg" },
+                  ["@keyword.function"] = { fg = "$blue" },
+                  ["@keyword"] = { fg = "$blue" },
+                  ["@keyword.conditional.ternary"] = { fg = "$blue" },
+                  ["@keyword.return"] = { fg = "$purple" },
+                  ["@keyword.conditional"] = { fg = "$purple" },
+                  ["@keyword.repeat"] = { fg = "$purple" },
+                  ["@keyword.import"] = { fg = "$purple" },
+                  ["@keyword.export"] = { fg = "$purple" },
+                  ["@function"] = { fg = "$red" },
+                  ["@function.builtin"] = { fg = "$red" },
+                  ["@function.method"] = { fg = "$red" },
+                  ["@variable.builtin"] = { fg = "$orange" },
+                  ["@string"] = { fg = "$green" },
+                  ["@lsp.type.namespace"] = { fg = "$aqua" },
+                  ["@constructor"] = { fg = "$aqua" },
+                  ["@variable.member"] = { fg = "$fg" },
+
+                  -- Symbols
+                  ["@comment"] = { fg = "$grey" },
+                  ["@operator"] = { fg = "$blue" },
+                  ["@punctuation"] = { fg = "$fg" },
+                  ["@punctuation.bracket"] = { fg = "$fg" },
+                  ["@punctuation.delimiter"] = { fg = "$lightGrey" },
+
+                  -- Html
+                  ["@tag"] = { fg = "$red" },
+                  ["@tag.delimiter"] = { fg = "$red" },
+                  ["@tag.attribute"] = { fg = "$purple_2" },
+
+                  -- Css
+                  ["@property.css"] = { fg = "$blue" },
+                  ["@string.css"] = { fg = "$orange" },
+                  ["@string.plain.css"] = { fg = "$fg" },
+                  ["@tag.css"] = { fg = "$red" },
+                  ["@constant.css"] = { fg = "$red" },
+                  ["@property.id.css"] = { fg = "$red" },
+                  ["@property.class.css"] = { fg = "$red" },
+                  ["@tag.attribute.css"] = { fg = "$fg" },
+                  ["@type.css"] = { fg = "$red" },
+                  ["@type.tag.css"] = { fg = "$red" },
+                  ["@operator.css"] = { fg = "$fg" },
+                  ["@attribute.css"] = { fg = "$red" },
+                  ["@keyword.modifier.css"] = { fg = "$purple" },
+
+                  -- Lua
+                  ["@constructor.lua"] = { fg = "$fg" },
+                  ["@keyword.operator.lua"] = { fg = "$blue" },
+                  ["@module.builtin.lua"] = { fg = "$aqua" },
+                  ["@property.lua"] = { fg = "$fg" },
+
+                  -- Json
+                  ["@property.json"] = { fg = "$red" },
+
+                  -- Markdown
+                  ["@label.markdown"] = { fg = "$grey" },
+                  ["@markup.raw.block.markdown"] = { fg = "$green" },
+                  ["@markup.heading.1.markdown"] = { fg = "$red" },
+                  ["@markup.heading.2.markdown"] = { fg = "$red" },
+                  ["@markup.heading.3.markdown"] = { fg = "$red" },
+                  ["@markup.heading.4.markdown"] = { fg = "$red" },
+                  ["@markup.heading.5.markdown"] = { fg = "$red" },
+                  ["@markup.heading.6.markdown"] = { fg = "$red" },
+
+                  ["@markup.heading.html"] = { fg = "$orange" },
+                  ["@markup.heading.1.html"] = { fg = "$orange" },
+                  ["@markup.heading.2.html"] = { fg = "$orange" },
+                  ["@markup.heading.3.html"] = { fg = "$orange" },
+                  ["@markup.heading.4.html"] = { fg = "$orange" },
+                  ["@markup.heading.5.html"] = { fg = "$orange" },
+                  ["@markup.heading.6.html"] = { fg = "$orange" },
+
+                  -- Typescript Javascript
+                  ["@lsp.typemod.function.defaultLibrary"] = { fg = "$red" },
+
+                  -- Typescript
+                  ["@tag.tsx"] = { fg = "$aqua" },
+                  ["@type.tsx"] = { fg = "$fg" },
+                  ["@type.typescript"] = { fg = "$fg" },
+                  ["@constant.tsx"] = { fg = "$fg" },
+                  ["@constant.typescript"] = { fg = "$fg" },
+                  ["@keyword.directive.typescript"] = { fg = "$green" },
+
+                  ["@lsp.typemod.property.declaration.typescript"] = { fg = "$fg" },
+                  ["@lsp.typemod.property.defaultLibrary.typescript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.typescript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.typescriptreact"] = {
+                     fg = "$orange",
+                  },
+
+                  -- Javascript
+                  ["@tag.javascript"] = { fg = "$aqua" },
+                  ["@type.javascript"] = { fg = "$fg" },
+                  ["@constant.javascript"] = { fg = "$fg" },
+                  ["@lsp.type.class.javascript"] = { fg = "$aqua" },
+
+                  ["@lsp.typemod.property.declaration.javascript"] = { fg = "$fg" },
+                  ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.javascript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = {
+                     fg = "$orange",
+                  },
+
+                  ["@markup.raw.javascript"] = { fg = "$fg" },
+                  ["@markup.heading.1.javascript"] = { fg = "$orange", fmt = "none" },
+               },
+            },
+
+            -- LIGH THEME
+            -- gruvdark_light = {
+            --    code_style = { comments = "none" },
+            --    colors = {
+            --       fg = "#111111",
+            --       blue = "#1E5A8B",
+            --       red = "#9F0202",
+            --       green = "#006C00",
+            --       purple = "#910E79", -- this is pink for my theme
+            --
+            --       aqua = "#008B7F",
+            --       cyan = "#008B7F", -- just aqua for my theme
+            --       orange = "#AE5F05",
+            --       yellow = "#AE5F05", -- just orange for my theme
+            --
+            --       grey = "#707070",
+            --       lightGrey = "#8D8A85",
+            --
+            --       bg = "#F7F5EA",
+            --       bg2 = "#E9E8DD",
+            --       bg1 = "#B0B0A6",
+            --    },
+            --    highlights = {
+            --       -- Interface
+            --       Normal = { fg = "$fg", bg = "$bg" },
+            --       NormalFloat = { fg = "$fg", bg = "$bg" },
+            --       FloatBorder = { fg = "$fg", bg = "$bg" },
+            --       MsgArea = { fg = "$fg", bg = "$bg" },
+            --       StatusLine = { fg = "$fg", bg = "#e0ddd7" },
+            --       FloatermBorder = { fg = "NONE", bg = "$bg" },
+            --       FloatTitle = { fg = "$red" },
+            --       SignColumn = { bg = "$bg" },
+            --       YankHighlight = { fg = "$fg", bg = "#cececa" },
+            --
+            --       Search = { fg = "$fg", bg = "#ebd09c" },
+            --       FlashCurrent = { fg = "$fg", bg = "#ebd09c" },
+            --       FlashLabel = { fg = "$fg", bg = "#df7474" },
+            --       IncSearch = { fg = "$fg", bg = "#df7474" },
+            --
+            --       MatchParen = { bg = "#b0b0a6" },
+            --       Folded = { fg = "$fg", bg = "#b0b0a6" },
+            --       CursorLine = { bg = "NONE" },
+            --       CursorLineNr = { fg = "#404040" },
+            --
+            --       Cursor = { fg = "$bg", bg = "#404040", fmt = "bold" },
+            --       Cursor2 = { fg = "$bg", bg = "#BF5959" },
+            --
+            --       LineNr = { fg = "#828282" },
+            --       ColorColumn = { bg = "#f0efe4" },
+            --       EndOfBuffer = { fg = "#303030", bg = "NONE" },
+            --       Visual = { bg = "$bg1" },
+            --
+            --       CmpItemAbbrMatch = { fg = "$green" },
+            --       CmpItemAbbrMatchFuzzy = { fg = "$green", fmt = "none" },
+            --       CmpItemKindText = { fg = "$lightGrey" },
+            --       CmpItemMenu = { fg = "$lightGrey" },
+            --       Pmenu = { fg = "$fg", bg = "$bg2" },
+            --       PmenuSel = { fg = "$fg", bg = "$bg1" },
+            --
+            --       TSParameter = { fg = "$fg" },
+            --       TSParameterReference = { fg = "$fg" },
+            --
+            --       -- General
+            --       ["@none"] = { fg = "NONE" },
+            --       ["@spell"] = { fg = "NONE" },
+            --       ["@variable.parameter"] = { fg = "$fg" },
+            --       ["@lsp.type.parameter"] = { fg = "$fg" },
+            --       ["@keyword.function"] = { fg = "$blue" },
+            --       ["@keyword"] = { fg = "$blue" },
+            --       ["@keyword.conditional.ternary"] = { fg = "$blue" },
+            --       ["@keyword.return"] = { fg = "$purple" },
+            --       ["@keyword.conditional"] = { fg = "$purple" },
+            --       ["@keyword.repeat"] = { fg = "$purple" },
+            --       ["@keyword.import"] = { fg = "$purple" },
+            --       ["@keyword.export"] = { fg = "$purple" },
+            --       ["@function"] = { fg = "$red" },
+            --       ["@function.builtin"] = { fg = "$red" },
+            --       ["@function.method"] = { fg = "$red" },
+            --       ["@variable.builtin"] = { fg = "$orange" },
+            --       ["@string"] = { fg = "$green" },
+            --       ["@lsp.type.namespace"] = { fg = "$aqua" },
+            --       ["@constructor"] = { fg = "$aqua" },
+            --       ["@variable.member"] = { fg = "$fg" },
+            --
+            --       -- Symbols
+            --       ["@comment"] = { fg = "#828282" },
+            --       ["@operator"] = { fg = "$blue" },
+            --       ["@punctuation"] = { fg = "$fg" },
+            --       ["@punctuation.bracket"] = { fg = "$fg" },
+            --       ["@punctuation.delimiter"] = { fg = "$lightGrey" },
+            --
+            --       -- Html
+            --       ["@tag"] = { fg = "$red" },
+            --       ["@tag.delimiter"] = { fg = "$red" },
+            --       ["@tag.attribute"] = { fg = "#480AAB" },
+            --       ["@markup.heading.1.html"] = { fg = "$fg", fmt = "none" },
+            --       ["@markup.heading.html"] = { fg = "$fg", fmt = "none" },
+            --
+            --       -- Css
+            --       ["@property.css"] = { fg = "$blue" },
+            --       ["@string.css"] = { fg = "$orange" },
+            --       ["@string.plain.css"] = { fg = "$fg" },
+            --       ["@tag.css"] = { fg = "$red" },
+            --       ["@constant.css"] = { fg = "$red" },
+            --       ["@property.id.css"] = { fg = "$red" },
+            --       ["@property.class.css"] = { fg = "$red" },
+            --       ["@tag.attribute.css"] = { fg = "$fg" },
+            --       ["@type.css"] = { fg = "$red" },
+            --       ["@type.tag.css"] = { fg = "$red" },
+            --       ["@operator.css"] = { fg = "$fg" },
+            --       ["@attribute.css"] = { fg = "$red" },
+            --       ["@keyword.modifier.css"] = { fg = "$purple" },
+            --
+            --       -- Lua
+            --       ["@constructor.lua"] = { fg = "$fg" },
+            --       ["@keyword.operator.lua"] = { fg = "$blue" },
+            --       ["@module.builtin.lua"] = { fg = "$aqua" },
+            --       ["@property.lua"] = { fg = "$fg" },
+            --
+            --       -- Json
+            --       ["@property.json"] = { fg = "$red" },
+            --
+            --       -- Markdown
+            --       htmlTag = { fg = "$red" },
+            --       htmlTagName = { fg = "$red" },
+            --       markdownCodeDelimiter = { fg = "$green" },
+            --       markdownLinkText = { fg = "$blue" },
+            --       markdownUrl = { fg = "$green" },
+            --       markdownCode = { fg = "$green" },
+            --       markdownListMarker = { fg = "$blue" },
+            --       ["@label.markdown"] = { fg = "$red" },
+            --       ["@markup.raw.block.markdown"] = { fg = "$red" },
+            --       ["@markup.heading.1.html"] = { fg = "$orange" },
+            --       ["@markup.heading.html"] = { fg = "$orange" },
+            --
+            --       -- Typescript Javascript
+            --       ["@lsp.typemod.function.defaultLibrary"] = { fg = "$red" },
+            --
+            --       -- Typescript
+            --       ["@tag.tsx"] = { fg = "$aqua" },
+            --       ["@type.tsx"] = { fg = "$fg" },
+            --       ["@type.typescript"] = { fg = "$fg" },
+            --       ["@constant.tsx"] = { fg = "$fg" },
+            --       ["@constant.typescript"] = { fg = "$fg" },
+            --       ["@keyword.directive.typescript"] = { fg = "$green" },
+            --
+            --       ["@lsp.typemod.property.declaration.typescript"] = { fg = "$fg" },
+            --       ["@lsp.typemod.property.defaultLibrary.typescript"] = { fg = "$orange" },
+            --       ["@lsp.typemod.variable.defaultLibrary.typescript"] = { fg = "$orange" },
+            --       ["@lsp.typemod.variable.defaultLibrary.typescriptreact"] = {
+            --          fg = "$orange",
+            --       },
+            --
+            --       -- Javascript
+            --       ["@tag.javascript"] = { fg = "$aqua" },
+            --       ["@type.javascript"] = { fg = "$fg" },
+            --       ["@constant.javascript"] = { fg = "$fg" },
+            --       ["@lsp.type.class.javascript"] = { fg = "$aqua" },
+            --
+            --       ["@lsp.typemod.property.declaration.javascript"] = { fg = "$fg" },
+            --       ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange" },
+            --       ["@lsp.typemod.variable.defaultLibrary.javascript"] = { fg = "$orange" },
+            --       ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = {
+            --          fg = "$orange",
+            --       },
+            --
+            --       ["@markup.raw.javascript"] = { fg = "$fg" },
+            --       ["@markup.heading.1.javascript"] = { fg = "$orange", fmt = "none" },
+            --    },
+            -- },
+         }
+
+         require("onedark").setup(themes.gruvdark)
+         require("onedark").load()
+      end,
+   },
+
    {
       "stevearc/oil.nvim",
       event = "VeryLazy",
@@ -106,12 +479,9 @@ local plugins = {
             ["gt"] = { "actions.toggle_trash", mode = "n" },
 
             ["<C-s>"] = { "actions.select", opts = { vertical = true } },
-            ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
             ["<C-l>"] = "actions.refresh",
             ["g?"] = { "actions.show_help", mode = "n" },
             ["gs"] = { "actions.change_sort", mode = "n" },
-            ["`"] = { "actions.cd", mode = "n" },
-            ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
             ["gx"] = "actions.open_external",
 
             ["<C-f>"] = {
@@ -223,7 +593,7 @@ local plugins = {
             float_opts = fullscreen_float,
          })
          local vifm = Terminal:new({
-            cmd = "vifm",
+            cmd = "vifm .",
             direction = "float",
             float_opts = fullscreen_float,
          })
@@ -348,6 +718,9 @@ local plugins = {
          end
 
          fzf.setup({
+            defaults = {
+               formatter = "path.filename_first",
+            },
             winopts = {
                border = "single",
                backdrop = false,
@@ -372,13 +745,6 @@ local plugins = {
                      ["webp"] = img_previewer,
                   },
                },
-            },
-            fzf_colors = {
-               ["gutter"] = "-1",
-               ["hl"] = "2",
-               ["hl+"] = "2",
-               ["info"] = "8",
-               ["prompt"] = "4",
             },
          })
 
@@ -543,6 +909,8 @@ local plugins = {
                "regex",
                "python",
                "lua",
+               "vim",
+               "vimdoc",
             },
             indent = { enable = true },
             highlight = {
@@ -754,25 +1122,39 @@ local plugins = {
 -- --------------------------------------------------------------------------------------
 -- PLUGIN INSTALLATION
 -- --------------------------------------------------------------------------------------
-local themes = require("themes") -- Load themes - GruvDark reference
-vim.list_extend(plugins, themes) -- Merge themes to main plugin list
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-   vim.fn.system({
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+   local out = vim.fn.system({
       "git",
       "clone",
       "--filter=blob:none",
-      "https://github.com/folke/lazy.nvim.git",
       "--branch=stable",
+      "https://github.com/folke/lazy.nvim.git",
       lazypath,
    })
+   if vim.v.shell_error ~= 0 then
+      vim.api.nvim_echo({
+         { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+         { out, "WarningMsg" },
+         { "\nPress any key to exit..." },
+      }, true, {})
+      vim.fn.getchar()
+      os.exit(1)
+   end
 end
 
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup(plugins, {
    ui = { border = "single" },
+   defaults = {
+      lazy = false,
+      version = false,
+   },
+   checker = {
+      enabled = true,
+      notify = false,
+   },
    change_detection = {
       enabled = false,
       notify = false,
@@ -780,7 +1162,13 @@ require("lazy").setup(plugins, {
    performance = {
       cache = { enabled = true },
       rtp = {
-         disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin" },
+         disabled_plugins = {
+            "gzip",
+            "tarPlugin",
+            "tohtml",
+            "tutor",
+            "zipPlugin",
+         },
       },
    },
 })
@@ -825,9 +1213,6 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 -- --------------------------------------------------------------------------------------
 -- INDICATORS
 -- --------------------------------------------------------------------------------------
--- InsertMode cursor color
-vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:block-Cursor2"
-
 -- File changed sign in editor
 vim.fn.sign_define("FileChanged", {
    text = "✗",
