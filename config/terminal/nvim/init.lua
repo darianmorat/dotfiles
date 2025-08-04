@@ -1245,3 +1245,16 @@ vim.api.nvim_create_autocmd(
       end,
    }
 )
+
+-- Macro recording notifications
+vim.api.nvim_create_autocmd("RecordingEnter", {
+   callback = function()
+      print("Recording @" .. vim.fn.reg_recording())
+   end,
+})
+
+vim.api.nvim_create_autocmd("RecordingLeave", {
+   callback = function()
+      print("Stopped recording")
+   end,
+})
