@@ -25,24 +25,20 @@ vim.opt.tabstop = 3
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.spell = false
-vim.opt.spelllang = "en_us"
-vim.opt.spelloptions = "camel"
-
 vim.opt.scrolloff = 6
 vim.opt.sidescrolloff = 6
 vim.opt.colorcolumn = "90"
 vim.opt.signcolumn = "yes"
 vim.opt.undofile = true
 
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.spelllang = "en_us"
+vim.opt.spelloptions = "camel"
 vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.fileencoding = "utf-8"
-vim.opt.fillchars = { eob = " " }
-vim.g.markdown_recommended_style = 0
 
+vim.opt.fileencoding = "utf-8"
+vim.g.markdown_recommended_style = 0
 vim.schedule(function()
    vim.opt.clipboard = "unnamedplus"
 end)
@@ -138,6 +134,8 @@ local plugins = {
                   bg1 = "#303030",
                   bg2 = "#313131",
 
+                  bg3 = "#373737", -- just for the end of buffer for now
+
                   menu = "#454545",
                },
                highlights = {
@@ -161,8 +159,8 @@ local plugins = {
                   CursorLine = { bg = "NONE" },
                   CursorLineNr = { fg = "$lightGrey" },
                   LineNr = { fg = "$grey" },
-                  ColorColumn = { bg = "#222222" },
-                  EndOfBuffer = { fg = "#323232", bg = "NONE" }, -- not importnat for my theme
+                  ColorColumn = { bg = "#232323" },
+                  EndOfBuffer = { fg = "$bg3", bg = "NONE" }, -- not importnat for my theme
                   IblIndent = { fg = "#323232" },
                   WinSeparator = { fg = "#2F2F2F" },
                   Visual = { bg = "$bg1" },
@@ -1146,13 +1144,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup(plugins, {
-   ui = { border = "single" },
+   ui = {
+      border = "none",
+      size = { width = 1, height = 1 },
+   },
    defaults = {
       lazy = false,
       version = false,
    },
    checker = {
-      enabled = true,
+      enabled = false,
       notify = false,
    },
    change_detection = {
