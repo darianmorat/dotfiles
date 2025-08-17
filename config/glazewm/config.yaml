@@ -134,9 +134,9 @@ binding_modes:
 keybindings:
   # Shift focus in a given direction.
   - commands: ['focus --direction left']
-    bindings: ['alt+shift+j']
+    bindings: ['alt+j']
   - commands: ['focus --direction right']
-    bindings: ['alt+shift+k']
+    bindings: ['alt+k']
   #- commands: ['focus --direction up']
   #  bindings: ['alt+k', 'alt+up']
   #- commands: ['focus --direction down']
@@ -144,9 +144,9 @@ keybindings:
 
   # Move focused window in a given direction.
   - commands: ['move --direction left']
-    bindings: ['alt+shift+u']
+    bindings: ['alt+shift+j']
   - commands: ['move --direction right']
-    bindings: ['alt+shift+p']
+    bindings: ['alt+shift+k']
   #- commands: ['move --direction up']
   #  bindings: ['alt+shift+k', 'alt+shift+up']
   #- commands: ['move --direction down']
@@ -182,12 +182,12 @@ keybindings:
   #   bindings: ['alt+c']
 
   # Change the focused window to be floating.
-  - commands: ['toggle-floating --centered']
-    bindings: ['alt+shift+c']
+  # - commands: ['toggle-floating --centered']
+  #   bindings: ['alt+shift+c']
 
   # Change the focused window to be tiling.
   - commands: ['toggle-tiling']
-    bindings: ['alt+ctrl+c']
+    bindings: ['alt+shift+c']
 
   # Change the focused window to be fullscreen.
   - commands: ['toggle-fullscreen']
