@@ -288,175 +288,177 @@ local plugins = {
             },
 
             -- LIGH THEME
-            -- gruvdark_light = {
-            --    code_style = { comments = "none" },
-            --    colors = {
-            --       fg = "#111111",
-            --       blue = "#1E5A8B",
-            --       red = "#9F0202",
-            --       green = "#006C00",
-            --       purple = "#910E79", -- this is pink for my theme
-            --
-            --       aqua = "#008B7F",
-            --       cyan = "#008B7F", -- just aqua for my theme
-            --       orange = "#AE5F05",
-            --       yellow = "#AE5F05", -- just orange for my theme
-            --
-            --       grey = "#707070",
-            --       lightGrey = "#8D8A85",
-            --
-            --       bg = "#F7F5EA",
-            --       bg2 = "#E9E8DD",
-            --       bg1 = "#B0B0A6",
-            --    },
-            --    highlights = {
-            --       -- Interface
-            --       Normal = { fg = "$fg", bg = "$bg" },
-            --       NormalFloat = { fg = "$fg", bg = "$bg" },
-            --       FloatBorder = { fg = "$fg", bg = "$bg" },
-            --       MsgArea = { fg = "$fg", bg = "$bg" },
-            --       StatusLine = { fg = "$fg", bg = "#e0ddd7" },
-            --       FloatermBorder = { fg = "NONE", bg = "$bg" },
-            --       FloatTitle = { fg = "$red" },
-            --       SignColumn = { bg = "$bg" },
-            --       YankHighlight = { fg = "$fg", bg = "#cececa" },
-            --
-            --       Search = { fg = "$fg", bg = "#ebd09c" },
-            --       FlashCurrent = { fg = "$fg", bg = "#ebd09c" },
-            --       FlashLabel = { fg = "$fg", bg = "#df7474" },
-            --       IncSearch = { fg = "$fg", bg = "#df7474" },
-            --
-            --       MatchParen = { bg = "#b0b0a6" },
-            --       Folded = { fg = "$fg", bg = "#b0b0a6" },
-            --       CursorLine = { bg = "NONE" },
-            --       CursorLineNr = { fg = "#404040" },
-            --
-            --       Cursor = { fg = "$bg", bg = "#404040", fmt = "bold" },
-            --       Cursor2 = { fg = "$bg", bg = "#BF5959" },
-            --
-            --       LineNr = { fg = "#828282" },
-            --       ColorColumn = { bg = "#f0efe4" },
-            --       EndOfBuffer = { fg = "#303030", bg = "NONE" },
-            --       Visual = { bg = "$bg1" },
-            --
-            --       CmpItemAbbrMatch = { fg = "$green" },
-            --       CmpItemAbbrMatchFuzzy = { fg = "$green", fmt = "none" },
-            --       CmpItemKindText = { fg = "$lightGrey" },
-            --       CmpItemMenu = { fg = "$lightGrey" },
-            --       Pmenu = { fg = "$fg", bg = "$bg2" },
-            --       PmenuSel = { fg = "$fg", bg = "$bg1" },
-            --
-            --       TSParameter = { fg = "$fg" },
-            --       TSParameterReference = { fg = "$fg" },
-            --
-            --       -- General
-            --       ["@none"] = { fg = "NONE" },
-            --       ["@spell"] = { fg = "NONE" },
-            --       ["@variable.parameter"] = { fg = "$fg" },
-            --       ["@lsp.type.parameter"] = { fg = "$fg" },
-            --       ["@keyword.function"] = { fg = "$blue" },
-            --       ["@keyword"] = { fg = "$blue" },
-            --       ["@keyword.conditional.ternary"] = { fg = "$blue" },
-            --       ["@keyword.return"] = { fg = "$purple" },
-            --       ["@keyword.conditional"] = { fg = "$purple" },
-            --       ["@keyword.repeat"] = { fg = "$purple" },
-            --       ["@keyword.import"] = { fg = "$purple" },
-            --       ["@keyword.export"] = { fg = "$purple" },
-            --       ["@function"] = { fg = "$red" },
-            --       ["@function.builtin"] = { fg = "$red" },
-            --       ["@function.method"] = { fg = "$red" },
-            --       ["@variable.builtin"] = { fg = "$orange" },
-            --       ["@string"] = { fg = "$green" },
-            --       ["@lsp.type.namespace"] = { fg = "$aqua" },
-            --       ["@constructor"] = { fg = "$aqua" },
-            --       ["@variable.member"] = { fg = "$fg" },
-            --
-            --       -- Symbols
-            --       ["@comment"] = { fg = "#828282" },
-            --       ["@operator"] = { fg = "$blue" },
-            --       ["@punctuation"] = { fg = "$fg" },
-            --       ["@punctuation.bracket"] = { fg = "$fg" },
-            --       ["@punctuation.delimiter"] = { fg = "$lightGrey" },
-            --
-            --       -- Html
-            --       ["@tag"] = { fg = "$red" },
-            --       ["@tag.delimiter"] = { fg = "$red" },
-            --       ["@tag.attribute"] = { fg = "#480AAB" },
-            --       ["@markup.heading.1.html"] = { fg = "$fg", fmt = "none" },
-            --       ["@markup.heading.html"] = { fg = "$fg", fmt = "none" },
-            --
-            --       -- Css
-            --       ["@property.css"] = { fg = "$blue" },
-            --       ["@string.css"] = { fg = "$orange" },
-            --       ["@string.plain.css"] = { fg = "$fg" },
-            --       ["@tag.css"] = { fg = "$red" },
-            --       ["@constant.css"] = { fg = "$red" },
-            --       ["@property.id.css"] = { fg = "$red" },
-            --       ["@property.class.css"] = { fg = "$red" },
-            --       ["@tag.attribute.css"] = { fg = "$fg" },
-            --       ["@type.css"] = { fg = "$red" },
-            --       ["@type.tag.css"] = { fg = "$red" },
-            --       ["@operator.css"] = { fg = "$fg" },
-            --       ["@attribute.css"] = { fg = "$red" },
-            --       ["@keyword.modifier.css"] = { fg = "$purple" },
-            --
-            --       -- Lua
-            --       ["@constructor.lua"] = { fg = "$fg" },
-            --       ["@keyword.operator.lua"] = { fg = "$blue" },
-            --       ["@module.builtin.lua"] = { fg = "$aqua" },
-            --       ["@property.lua"] = { fg = "$fg" },
-            --
-            --       -- Json
-            --       ["@property.json"] = { fg = "$red" },
-            --
-            --       -- Markdown
-            --       htmlTag = { fg = "$red" },
-            --       htmlTagName = { fg = "$red" },
-            --       markdownCodeDelimiter = { fg = "$green" },
-            --       markdownLinkText = { fg = "$blue" },
-            --       markdownUrl = { fg = "$green" },
-            --       markdownCode = { fg = "$green" },
-            --       markdownListMarker = { fg = "$blue" },
-            --       ["@label.markdown"] = { fg = "$red" },
-            --       ["@markup.raw.block.markdown"] = { fg = "$red" },
-            --       ["@markup.heading.1.html"] = { fg = "$orange" },
-            --       ["@markup.heading.html"] = { fg = "$orange" },
-            --
-            --       -- Typescript Javascript
-            --       ["@lsp.typemod.function.defaultLibrary"] = { fg = "$red" },
-            --
-            --       -- Typescript
-            --       ["@tag.tsx"] = { fg = "$aqua" },
-            --       ["@type.tsx"] = { fg = "$fg" },
-            --       ["@type.typescript"] = { fg = "$fg" },
-            --       ["@constant.tsx"] = { fg = "$fg" },
-            --       ["@constant.typescript"] = { fg = "$fg" },
-            --       ["@keyword.directive.typescript"] = { fg = "$green" },
-            --
-            --       ["@lsp.typemod.property.declaration.typescript"] = { fg = "$fg" },
-            --       ["@lsp.typemod.property.defaultLibrary.typescript"] = { fg = "$orange" },
-            --       ["@lsp.typemod.variable.defaultLibrary.typescript"] = { fg = "$orange" },
-            --       ["@lsp.typemod.variable.defaultLibrary.typescriptreact"] = {
-            --          fg = "$orange",
-            --       },
-            --
-            --       -- Javascript
-            --       ["@tag.javascript"] = { fg = "$aqua" },
-            --       ["@type.javascript"] = { fg = "$fg" },
-            --       ["@constant.javascript"] = { fg = "$fg" },
-            --       ["@lsp.type.class.javascript"] = { fg = "$aqua" },
-            --
-            --       ["@lsp.typemod.property.declaration.javascript"] = { fg = "$fg" },
-            --       ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange" },
-            --       ["@lsp.typemod.variable.defaultLibrary.javascript"] = { fg = "$orange" },
-            --       ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = {
-            --          fg = "$orange",
-            --       },
-            --
-            --       ["@markup.raw.javascript"] = { fg = "$fg" },
-            --       ["@markup.heading.1.javascript"] = { fg = "$orange", fmt = "none" },
-            --    },
-            -- },
+            gruvdark_light = {
+               code_style = { comments = "none" },
+               colors = {
+                  fg = "#111111",
+                  blue = "#1E5A8B",
+                  red = "#9F0202",
+                  green = "#006C00",
+                  purple = "#910E79", -- this is pink for my theme
+
+                  aqua = "#008B7F",
+                  cyan = "#008B7F", -- just aqua for my theme
+                  orange = "#AE5F05",
+                  yellow = "#AE5F05", -- just orange for my theme
+
+                  grey = "#707070",
+                  lightGrey = "#8D8A85",
+
+                  bg = "#F7F5EA",
+                  bg2 = "#E9E8DD",
+                  bg1 = "#B0B0A6",
+
+                  bg3 = "#B5B5AC", -- just for the end of buffer for now
+               },
+               highlights = {
+                  -- Interface
+                  Normal = { fg = "$fg", bg = "$bg" },
+                  NormalFloat = { fg = "$fg", bg = "$bg" },
+                  FloatBorder = { fg = "$fg", bg = "$bg" },
+                  MsgArea = { fg = "$fg", bg = "$bg" },
+                  StatusLine = { fg = "$fg", bg = "#e0ddd7" },
+                  FloatermBorder = { fg = "NONE", bg = "$bg" },
+                  FloatTitle = { fg = "$red" },
+                  SignColumn = { bg = "$bg" },
+                  YankHighlight = { fg = "$fg", bg = "#cececa" },
+
+                  Search = { fg = "$fg", bg = "#ebd09c" },
+                  FlashCurrent = { fg = "$fg", bg = "#ebd09c" },
+                  FlashLabel = { fg = "$fg", bg = "#df7474" },
+                  IncSearch = { fg = "$fg", bg = "#df7474" },
+
+                  MatchParen = { bg = "#b0b0a6" },
+                  Folded = { fg = "$fg", bg = "#b0b0a6" },
+                  CursorLine = { bg = "NONE" },
+                  CursorLineNr = { fg = "#404040" },
+
+                  Cursor = { fg = "$bg", bg = "#404040", fmt = "bold" },
+                  Cursor2 = { fg = "$bg", bg = "#BF5959" },
+
+                  LineNr = { fg = "#828282" },
+                  ColorColumn = { bg = "#f0efe4" },
+                  EndOfBuffer = { fg = "$bg3", bg = "NONE" },
+                  Visual = { bg = "$bg1" },
+
+                  CmpItemAbbrMatch = { fg = "$green" },
+                  CmpItemAbbrMatchFuzzy = { fg = "$green", fmt = "none" },
+                  CmpItemKindText = { fg = "$lightGrey" },
+                  CmpItemMenu = { fg = "$lightGrey" },
+                  Pmenu = { fg = "$fg", bg = "$bg2" },
+                  PmenuSel = { fg = "$fg", bg = "$bg1" },
+
+                  TSParameter = { fg = "$fg" },
+                  TSParameterReference = { fg = "$fg" },
+
+                  -- General
+                  ["@none"] = { fg = "NONE" },
+                  ["@spell"] = { fg = "NONE" },
+                  ["@variable.parameter"] = { fg = "$fg" },
+                  ["@lsp.type.parameter"] = { fg = "$fg" },
+                  ["@keyword.function"] = { fg = "$blue" },
+                  ["@keyword"] = { fg = "$blue" },
+                  ["@keyword.conditional.ternary"] = { fg = "$blue" },
+                  ["@keyword.return"] = { fg = "$purple" },
+                  ["@keyword.conditional"] = { fg = "$purple" },
+                  ["@keyword.repeat"] = { fg = "$purple" },
+                  ["@keyword.import"] = { fg = "$purple" },
+                  ["@keyword.export"] = { fg = "$purple" },
+                  ["@function"] = { fg = "$red" },
+                  ["@function.builtin"] = { fg = "$red" },
+                  ["@function.method"] = { fg = "$red" },
+                  ["@variable.builtin"] = { fg = "$orange" },
+                  ["@string"] = { fg = "$green" },
+                  ["@lsp.type.namespace"] = { fg = "$aqua" },
+                  ["@constructor"] = { fg = "$aqua" },
+                  ["@variable.member"] = { fg = "$fg" },
+
+                  -- Symbols
+                  ["@comment"] = { fg = "#828282" },
+                  ["@operator"] = { fg = "$blue" },
+                  ["@punctuation"] = { fg = "$fg" },
+                  ["@punctuation.bracket"] = { fg = "$fg" },
+                  ["@punctuation.delimiter"] = { fg = "$lightGrey" },
+
+                  -- Html
+                  ["@tag"] = { fg = "$red" },
+                  ["@tag.delimiter"] = { fg = "$red" },
+                  ["@tag.attribute"] = { fg = "#480AAB" },
+                  ["@markup.heading.1.html"] = { fg = "$fg", fmt = "none" },
+                  ["@markup.heading.html"] = { fg = "$fg", fmt = "none" },
+
+                  -- Css
+                  ["@property.css"] = { fg = "$blue" },
+                  ["@string.css"] = { fg = "$orange" },
+                  ["@string.plain.css"] = { fg = "$fg" },
+                  ["@tag.css"] = { fg = "$red" },
+                  ["@constant.css"] = { fg = "$red" },
+                  ["@property.id.css"] = { fg = "$red" },
+                  ["@property.class.css"] = { fg = "$red" },
+                  ["@tag.attribute.css"] = { fg = "$fg" },
+                  ["@type.css"] = { fg = "$red" },
+                  ["@type.tag.css"] = { fg = "$red" },
+                  ["@operator.css"] = { fg = "$fg" },
+                  ["@attribute.css"] = { fg = "$red" },
+                  ["@keyword.modifier.css"] = { fg = "$purple" },
+
+                  -- Lua
+                  ["@constructor.lua"] = { fg = "$fg" },
+                  ["@keyword.operator.lua"] = { fg = "$blue" },
+                  ["@module.builtin.lua"] = { fg = "$aqua" },
+                  ["@property.lua"] = { fg = "$fg" },
+
+                  -- Json
+                  ["@property.json"] = { fg = "$red" },
+
+                  -- Markdown
+                  htmlTag = { fg = "$red" },
+                  htmlTagName = { fg = "$red" },
+                  markdownCodeDelimiter = { fg = "$green" },
+                  markdownLinkText = { fg = "$blue" },
+                  markdownUrl = { fg = "$green" },
+                  markdownCode = { fg = "$green" },
+                  markdownListMarker = { fg = "$blue" },
+                  ["@label.markdown"] = { fg = "$red" },
+                  ["@markup.raw.block.markdown"] = { fg = "$red" },
+                  ["@markup.heading.1.html"] = { fg = "$orange" },
+                  ["@markup.heading.html"] = { fg = "$orange" },
+
+                  -- Typescript Javascript
+                  ["@lsp.typemod.function.defaultLibrary"] = { fg = "$red" },
+
+                  -- Typescript
+                  ["@tag.tsx"] = { fg = "$aqua" },
+                  ["@type.tsx"] = { fg = "$fg" },
+                  ["@type.typescript"] = { fg = "$fg" },
+                  ["@constant.tsx"] = { fg = "$fg" },
+                  ["@constant.typescript"] = { fg = "$fg" },
+                  ["@keyword.directive.typescript"] = { fg = "$green" },
+
+                  ["@lsp.typemod.property.declaration.typescript"] = { fg = "$fg" },
+                  ["@lsp.typemod.property.defaultLibrary.typescript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.typescript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.typescriptreact"] = {
+                     fg = "$orange",
+                  },
+
+                  -- Javascript
+                  ["@tag.javascript"] = { fg = "$aqua" },
+                  ["@type.javascript"] = { fg = "$fg" },
+                  ["@constant.javascript"] = { fg = "$fg" },
+                  ["@lsp.type.class.javascript"] = { fg = "$aqua" },
+
+                  ["@lsp.typemod.property.declaration.javascript"] = { fg = "$fg" },
+                  ["@lsp.typemod.property.defaultLibrary.javascript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.javascript"] = { fg = "$orange" },
+                  ["@lsp.typemod.variable.defaultLibrary.javascriptreact"] = {
+                     fg = "$orange",
+                  },
+
+                  ["@markup.raw.javascript"] = { fg = "$fg" },
+                  ["@markup.heading.1.javascript"] = { fg = "$orange", fmt = "none" },
+               },
+            },
          }
 
          require("onedark").setup(themes.gruvdark)
@@ -1017,6 +1019,14 @@ local plugins = {
             opts.border = "single"
             return open_float(contents, syntax, opts, ...)
          end
+
+         vim.api.nvim_create_autocmd("LspAttach", {
+            callback = function(args)
+               vim.lsp.document_color.enable(true, args.buf, {
+                  style = "background",
+               })
+            end,
+         })
 
          vim.lsp.config("*", {})
          vim.lsp.enable({
