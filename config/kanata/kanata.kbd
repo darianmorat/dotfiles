@@ -17,74 +17,80 @@
    _o (fork (unicode ó) (unicode Ó) (lsft rsft))
    _u (fork (unicode ú) (unicode Ú) (lsft rsft))
    _n (fork (unicode ñ) (unicode Ñ) (lsft rsft))
+
+   lock-nav (layer-switch nav-layer)
+   lock-numb (layer-switch numb-layer)
+   lock-mouse (layer-switch mouse-layer)
 )
 
 (defsrc)
 (deflayermap (default)
+   w (tap-hold-release $tt $ht w (layer-while-held mdia-layer))
+   e (tap-hold-release $tt $ht e (layer-while-held rsym-layer))
+   i (tap-hold-release $tt $ht i (layer-while-held lsym-layer))
+   o (tap-hold-release $tt $ht o (layer-while-held func-layer))
+
    s (tap-hold-release $tt $ht s lalt)
    d (tap-hold-release $tt $ht d lsft)
-   f (tap-hold-release $tt $ht f lctl)
+   c (tap-hold-release $tt $ht c lctl)
+   x (tap-hold-release $tt $ht x lmet)
 
-   j (tap-hold-release $tt $ht j rctl)
+   , (tap-hold-release $tt $ht , rmet)
+   m (tap-hold-release $tt $ht m rctl)
    k (tap-hold-release $tt $ht k rsft)
    l (tap-hold-release $tt $ht l ralt)
 
-   i (tap-hold-release $tt $ht i (layer-while-held lsym-layer))
-   e (tap-hold-release $tt $ht e (layer-while-held rsym-layer))
+   f (tap-hold-release $tt $ht f (layer-while-held nav-layer))
+   j (tap-hold-release $tt $ht j (layer-while-held numb-layer))
 
-   b (tap-hold-release $tt $ht b lmet)
-   v (tap-hold-release $tt $ht v (layer-while-held expd-layer))
+   a (tap-hold-release $tt $ht a (layer-while-held acct-layer))
+   ; (tap-hold-release $tt $ht ; (layer-while-held acct-layer))
+
+   v (tap-hold-release $tt $ht v XX)
    n (tap-hold-release $tt $ht n (layer-while-held term-layer))
-   m (tap-hold-release $tt $ht m (layer-while-held func-layer))
 
-   x (tap-hold-release $tt $ht x (layer-while-held acct-layer))
-   . (tap-hold-release $tt $ht . (layer-while-held acct-layer))
-
-   lalt (tap-hold-release $tt $ht esc (layer-while-held nav-layer))
    spc (tap-hold-release $tt $ht spc (layer-while-held mouse-layer))
-
-   1 (tap-hold-release $tt $ht (unshift 1) XX)
-   2 (tap-hold-release $tt $ht (unshift 2) XX)
-   3 (tap-hold-release $tt $ht (unshift 3) XX)
-   4 (tap-hold-release $tt $ht (unshift 4) XX)
-   5 (tap-hold-release $tt $ht (unshift 5) XX)
-   6 (tap-hold-release $tt $ht (unshift 6) XX)
-   7 (tap-hold-release $tt $ht (unshift 7) XX)
-   8 (tap-hold-release $tt $ht (unshift 8) XX)
-   9 (tap-hold-release $tt $ht (unshift 9) XX)
-   0 (tap-hold-release $tt $ht (unshift 0) XX)
+   lalt (tap-hold-release $tt $ht esc XX)
 
    q (tap-hold-release $tt $ht q XX)
-   w (tap-hold-release $tt $ht w XX)
    r (tap-hold-release $tt $ht r XX)
    t (tap-hold-release $tt $ht t XX)
    y (tap-hold-release $tt $ht y XX)
    u (tap-hold-release $tt $ht u XX)
-   o (tap-hold-release $tt $ht o XX)
    p (tap-hold-release $tt $ht p XX)
-   [ (tap-hold-release $tt $ht S-' XX)
-
-   a (tap-hold-release $tt $ht a XX)
    g (tap-hold-release $tt $ht g XX)
    h (tap-hold-release $tt $ht h XX)
-   ; (tap-hold-release $tt $ht ; XX)
-   ' (tap-hold-release $tt $ht (unshift ') XX)
-
    z (tap-hold-release $tt $ht z XX)
-   c (tap-hold-release $tt $ht c XX)
-   , (tap-hold-release $tt $ht , XX)
+   b (tap-hold-release $tt $ht b XX)
+   . (tap-hold-release $tt $ht . XX)
+
+   [ (tap-hold-release $tt $ht S-' XX)
+   ' (tap-hold-release $tt $ht (unshift ') XX)
    / (tap-hold-release $tt $ht (unshift /) XX)
 
+   1 XX
+   2 XX
+   3 XX
+   4 XX
+   5 XX
+   6 XX
+   7 XX
+   8 XX
+   9 XX
+   0 XX
+
    esc XX
-   lsft XX
-   lctl XX
    - XX
    = XX
    bspc XX
    ] XX
    \ XX
    ret XX
+
+   lsft XX
    rsft XX
+   lctl XX
+   rctl XX
 )
 
 (deflayermap (nav-layer)
@@ -98,12 +104,46 @@
    k up
    l ret
 
-   n pgdn
-   m pgup
+   n pgup
+   m pgdn
    , home
    . end
 
-   a A-S-C-a  
+   d lsft
+   lalt lctl
+
+   rsft @lock-nav
+   f (layer-switch default)
+)
+
+(deflayermap (numb-layer)
+   f 1
+   d 2
+   s 3
+
+   r 4
+   e 5
+   w 6
+
+   v 7
+   c 8
+   x 9
+
+   lalt 0
+
+   q S-8 
+   a -
+   z S-5
+
+   t /
+   g S-=
+   b =
+
+   k rctl
+   caps bspc
+
+   lsft @lock-numb
+   j (layer-switch default)
 )
 
 (deflayermap (mouse-layer)
@@ -123,6 +163,9 @@
 
    k (layer-while-held mouse-fast)
    ; (layer-while-held mouse-slow)
+
+   lsft @lock-mouse
+   spc (layer-switch default)
 )
 
 (deflayermap (mouse-fast)
@@ -176,21 +219,30 @@
 )
 
 (deflayermap (func-layer)
-   w vold
-   e volu
-   r mute
+   f f1
+   d f2
+   s f3
 
-   s (macro A-C-3)
-   d pp
-   f (macro A-C-4)
+   r f4
+   e f5
+   w f6
 
-   x prtsc
-   c (macro A-C-1) 
-   v (macro A-C-2) 
+   v f7
+   c f8
+   x f9
 
-   t f8
-   g f11
-   b f2
+   q f11
+   a f10
+   z f12
+)
+
+(deflayermap (mdia-layer)
+   i vold
+   o volu
+   p mute
+
+   j pp
+   l prtsc
 )
 
 (deflayermap (term-layer)
@@ -206,14 +258,6 @@
 
    e (macro C-f12 50 e)
    v (macro C-f12 50 v)
-   t (macro C-f12 50 t) 
-)
-
-(deflayermap (expd-layer)
-   i (macro ; y m)
-   o (macro ; d m)
-   k (macro ; d a)
-   l (macro ; n a)
 )
 
 (deflayermap (acct-layer)
