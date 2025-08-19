@@ -39,12 +39,11 @@ config.cursor_blink_rate = 0
 config.enable_tab_bar = false
 config.enable_scroll_bar = false
 config.switch_to_last_active_tab_when_closing_tab = true
-config.tab_and_split_indices_are_zero_based = false
 
 config.window_padding = {
    left = 5,
    right = 5,
-   top = 7,
+   top = 5,
    bottom = 0,
 }
 
@@ -56,11 +55,12 @@ config.leader = { key = "F12", mods = "CTRL" }
 config.keys = {
    { key = "c", mods = "CTRL", action = act({ CopyTo = "Clipboard" }) },
    { key = "v", mods = "CTRL", action = act({ PasteFrom = "Clipboard" }) },
+
    { key = "j", mods = "CTRL", action = act.ActivateLastTab },
+   { key = "x", mods = "LEADER", action = act.ActivateCopyMode },
 
    { key = "c", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
    { key = "d", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
-   { key = "x", mods = "LEADER", action = act.ActivateCopyMode },
 
    { key = "e", mods = "LEADER", action = wezterm.action.SendString("\x15vifm\n") },
    { key = "v", mods = "LEADER", action = wezterm.action.SendString("\x15nvim\n") },
