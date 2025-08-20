@@ -587,23 +587,20 @@ local plugins = {
             width = vim.o.columns,
             height = vim.o.lines,
          }
-         local lazygit = Terminal:new({
-            cmd = "lazygit",
-            direction = "float",
-            float_opts = fullscreen_float,
-         })
-         local vifm = Terminal:new({
-            cmd = "vifm .",
-            direction = "float",
-            float_opts = fullscreen_float,
-         })
 
-         vim.keymap.set("n", "<leader>lg", function()
-            lazygit:toggle()
-         end)
-         vim.keymap.set("n", "<leader><leader>e", function()
-            vifm:toggle()
-         end)
+         local function create_terminal(cmd, keymap)
+            local terminal = Terminal:new({
+               cmd = cmd,
+               direction = "float",
+               float_opts = fullscreen_float,
+            })
+            vim.keymap.set("n", keymap, function()
+               terminal:toggle()
+            end)
+         end
+
+         create_terminal("lazygit", "<leader>lg")
+         create_terminal("vifm .", "<leader>le")
       end,
    },
 
@@ -794,30 +791,6 @@ local plugins = {
                end,
             },
             {
-               "<leader>1",
-               function()
-                  require("harpoon"):list():select(1)
-               end,
-            },
-            {
-               "<leader>2",
-               function()
-                  require("harpoon"):list():select(2)
-               end,
-            },
-            {
-               "<leader>3",
-               function()
-                  require("harpoon"):list():select(3)
-               end,
-            },
-            {
-               "<leader>4",
-               function()
-                  require("harpoon"):list():select(4)
-               end,
-            },
-            {
                "<leader>fk",
                function()
                   local harpoon = require("harpoon")
@@ -1002,7 +975,6 @@ local plugins = {
 
       -- npm install -g typescript-language-server -- # ts_ls
       -- npm install -g vscode-langservers-extracted -- # eslint, html, cssls, jsonls
-      -- npm install -g @tailwindcss/language-server -- # tailwindcss
       -- pip install pyright -- # pyright
 
       config = function()
@@ -1035,7 +1007,6 @@ local plugins = {
             "html",
             "cssls",
             "jsonls",
-            -- "tailwindcss", -- slow
             "pyright",
          })
 
@@ -1232,10 +1203,11 @@ vim.fn.sign_define("FileChanged", {
 })
 
 local function update_sign()
+   local buf, line = vim.api.nvim_get_current_buf(), vim.api.nvim_win_get_cursor(0)[1]
+
    if vim.bo.filetype:match("^harpoon") then
       return
    end
-   local buf, line = vim.api.nvim_get_current_buf(), vim.api.nvim_win_get_cursor(0)[1]
 
    if vim.bo.modified then
       vim.fn.sign_unplace("user", { buffer = buf })
