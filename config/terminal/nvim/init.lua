@@ -1,52 +1,72 @@
--- --------------------------------------------------------------------------------------
--- SETTINGS
--- --------------------------------------------------------------------------------------
-vim.g.mapleader = " "
-vim.opt.termguicolors = true
-vim.opt.hlsearch = false
-vim.opt.wrap = false
-vim.opt.pumheight = 10
+-- ======================================================================================
+-- TITLE: Options
+-- ======================================================================================
 
+-- Global settings
+vim.g.mapleader = " "
+vim.g.markdown_recommended_style = 0
+
+-- Basic settings
+vim.opt.number = true
+vim.opt.cursorline = true
+vim.opt.scrolloff = 6
+vim.opt.sidescrolloff = 6
+vim.opt.wrap = false
+
+-- Spell settings
+vim.opt.spelllang = "en_us"
+vim.opt.spelloptions = "camel"
+
+-- Statusline settings
 vim.opt.ruler = false
 vim.opt.showmode = false
 vim.opt.showcmd = false
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 0
 
-vim.opt.updatetime = 100
-vim.opt.mouse = "a"
+-- Visual settings
+vim.opt.termguicolors = true
+vim.opt.pumheight = 10
 vim.opt.guicursor = ""
-vim.opt.number = true
-vim.opt.cursorline = true
+vim.opt.signcolumn = "yes"
+vim.opt.colorcolumn = "90"
 
+-- Indentation settings
 vim.opt.shiftwidth = 3
 vim.opt.softtabstop = 3
 vim.opt.tabstop = 3
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
-vim.opt.scrolloff = 6
-vim.opt.sidescrolloff = 6
-vim.opt.colorcolumn = "90"
-vim.opt.signcolumn = "yes"
-vim.opt.undofile = true
-
+-- Search settings
+vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.spelllang = "en_us"
-vim.opt.spelloptions = "camel"
-vim.opt.swapfile = false
 
-vim.opt.fileencoding = "utf-8"
-vim.g.markdown_recommended_style = 0
+-- File handling settings
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.writebackup = false
+vim.opt.undofile = true
+
+-- Performance settings
+vim.opt.updatetime = 100
+vim.opt.timeoutlen = 500
+vim.opt.ttimeoutlen = 0
+
+-- Behavior settings
+vim.opt.fileencoding = "UTF-8"
+vim.opt.mouse = "a"
 vim.schedule(function()
    vim.opt.clipboard = "unnamedplus"
 end)
 
--- --------------------------------------------------------------------------------------
--- REMAPS
--- --------------------------------------------------------------------------------------
-local function smart_quit() -- Fix: quit in diff
+-- ======================================================================================
+-- TITLE: Keymaps
+-- ======================================================================================
+
+-- Handle gitsigns diff
+local function smart_quit()
    if vim.wo.diff then
       vim.cmd("wincmd p | q")
    else
@@ -54,40 +74,46 @@ local function smart_quit() -- Fix: quit in diff
    end
 end
 
+-- File handling
 vim.keymap.set("n", "<leader>q", smart_quit)
 vim.keymap.set("n", "<leader>w", ":silent w<cr>", { silent = true })
 vim.keymap.set("n", "<leader>d", "<cmd>bd<cr>")
 vim.keymap.set("n", "<leader><leader>d", "<cmd>bd!<cr>")
 vim.keymap.set("n", "<leader><leader>b", "<cmd>BufOnly<cr>")
 
+-- Centered jumps
 vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "N", "Nzz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
-vim.keymap.set("n", "K", "m`i<cr><Esc>``")
-vim.keymap.set("n", "J", "m`J``")
-
+-- Editing helpers
+vim.keymap.set("n", "K", "mzi<cr><Esc>`z")
+vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-h>", "<C-6>")
 vim.keymap.set("n", "<leader>r", "<c-g>")
 
+-- Registers
 vim.keymap.set({ "n", "v" }, "<leader>y", '"ay')
 vim.keymap.set({ "n", "v" }, "<leader>p", '"ap')
 vim.keymap.set({ "n", "v" }, "<leader>x", '"_d')
 
+-- Toggles
 vim.keymap.set("n", "<leader>ti", "<cmd>IBLToggle<cr>")
 vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<cr>")
 vim.keymap.set("n", "<leader>tn", "<cmd>set relativenumber!<cr>")
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<cr>")
 
+-- Visual mode improvements
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { silent = true })
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
 
--- --------------------------------------------------------------------------------------
--- PLUGIN LIST
--- --------------------------------------------------------------------------------------
+-- ======================================================================================
+-- TITLE: Plugin list
+-- ======================================================================================
+
 local plugins = {
    {
       -- In development...
@@ -1098,9 +1124,10 @@ local plugins = {
    },
 }
 
--- --------------------------------------------------------------------------------------
--- PLUGIN INSTALLATION
--- --------------------------------------------------------------------------------------
+-- ======================================================================================
+-- TITLE: Plugin installation
+-- ======================================================================================
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
    local out = vim.fn.system({
@@ -1155,10 +1182,12 @@ require("lazy").setup(plugins, {
    },
 })
 
--- --------------------------------------------------------------------------------------
--- COMMANDS
--- --------------------------------------------------------------------------------------
-vim.cmd.colorscheme("onedark") -- Default colorscheme
+-- ======================================================================================
+-- TITLE: Commands & Auto-commands
+-- ======================================================================================
+
+-- Default colorscheme
+vim.cmd.colorscheme("onedark")
 
 -- Close all buffers except current
 vim.api.nvim_create_user_command("BufOnly", function()
@@ -1183,7 +1212,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
    end,
 })
 
--- Fixes 'cmdheight=0' flickering when using InsertMode
+-- Fixes 'cmdheight=0' flickering on InsertMode
 vim.api.nvim_create_autocmd("ModeChanged", {
    callback = function()
       if vim.fn.mode() == "i" then
@@ -1192,9 +1221,23 @@ vim.api.nvim_create_autocmd("ModeChanged", {
    end,
 })
 
--- --------------------------------------------------------------------------------------
--- INDICATORS
--- --------------------------------------------------------------------------------------
+-- Restore last cursor position when reopening a file
+local last_cursor_group = vim.api.nvim_create_augroup("LastCursorGroup", {})
+vim.api.nvim_create_autocmd("BufReadPost", {
+   group = last_cursor_group,
+   callback = function()
+      local mark = vim.api.nvim_buf_get_mark(0, '"')
+      local lcount = vim.api.nvim_buf_line_count(0)
+      if mark[1] > 0 and mark[1] <= lcount then
+         pcall(vim.api.nvim_win_set_cursor, 0, mark)
+      end
+   end,
+})
+
+-- ======================================================================================
+-- TITLE: Indicators
+-- ======================================================================================
+
 -- File changed sign in editor
 vim.fn.sign_define("FileChanged", {
    text = "✗",
