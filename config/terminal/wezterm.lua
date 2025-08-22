@@ -21,6 +21,7 @@ config.foreground_text_hsb = {
 
 config.font = wezterm.font({
    family = "JetBrains Mono NL Slashed",
+   -- family = "Fira Code", -- For avoiding BOLD in GRUVDARK theme
    weight = "Regular",
    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 })
