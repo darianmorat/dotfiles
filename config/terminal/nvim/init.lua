@@ -158,11 +158,10 @@ local plugins = {
 
                   bg = "#1E1E1E",
                   bg1 = "#303030",
-                  bg2 = "#313131",
-
-                  bg3 = "#373737", -- just for the end of buffer for now
-
-                  menu = "#454545",
+                  bg2 = "#3C3C3C",
+                  bg3 = "#373737",
+                  bg4 = "#424242",
+                  bg5 = "#323232",
                },
                highlights = {
                   Normal = { fg = "$fg", bg = "$bg" },
@@ -180,7 +179,7 @@ local plugins = {
                   IncSearch = { fg = "$fg_bright", bg = "#B55353" },
                   FlashLabel = { fg = "$fg_bright", bg = "#2A404F" },
 
-                  MatchParen = { fg = "$fg_bright", bg = "$menu" },
+                  MatchParen = { fg = "$fg_bright", bg = "$bg3" },
                   Folded = { fg = "$fg", bg = "#282828" },
                   CursorLine = { bg = "NONE" },
                   CursorLineNr = { fg = "$lightGrey" },
@@ -191,12 +190,15 @@ local plugins = {
                   WinSeparator = { fg = "#2F2F2F" },
                   Visual = { bg = "$bg1" },
 
+                  BlinkCmpMenu = { fg = "$fg", bg = "$bg3" },
+                  BlinkCmpMenuBorder = { fg = "$fg", bg = "$bg3" },
+                  BlinkCmpDoc = { fg = "$fg", bg = "$bg5" },
+                  BlinkCmpDocBorder = { fg = "$fg", bg = "$bg5" },
+                  BlinkCmpDocSeparator = { fg = "$fg", bg = "$bg5" },
+                  BlinkCmpScrollBarThumb = { bg = "$grey" },
+                  BlinkCmpScrollBarGutter = { bg = "$bg2" },
+                  PmenuSel = { fg = "#E1DCD6", bg = "$bg4" },
                   BlinkCmpLabelMatch = { fg = "$green" },
-                  PmenuSel = { fg = "#E1DCD6", bg = "$menu" },
-                  -- CmpItemAbbrMatch = { fg = "$green" },
-                  -- CmpItemAbbrMatchFuzzy = { fg = "$green" },
-                  -- CmpItemKindText = { fg = "$lightGrey" },
-                  -- CmpItemMenu = { fg = "$lightGrey" },
 
                   TSParameter = { fg = "$fg" },
                   TSParameterReference = { fg = "$fg" },
@@ -958,17 +960,19 @@ local plugins = {
                border = "none",
                auto_show = true,
                draw = {
+                  padding = 1,
                   columns = {
                      { "label", "label_description", gap = 1 },
-                     { "kind" },
+                     { "kind", gap = 1 },
                   },
                },
             },
             documentation = {
-               auto_show = false,
-               auto_show_delay_ms = 100,
+               auto_show = true,
+               auto_show_delay_ms = 0,
                window = {
-                  border = "single",
+                  border = { "", "", "", " ", "", "", "", " " },
+                  winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDoc",
                },
             },
             accept = {
