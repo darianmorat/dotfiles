@@ -116,18 +116,25 @@ vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
 
 local plugins = {
    {
-      -- In development...
-      -- This would be the only theme left
-      dir = "~/dev/test-code/gruvdark.nvim",
-   },
-
-   {
-      -- For testing...
-      "folke/tokyonight.nvim",
+      "darianmorat/gruvdark.nvim",
       lazy = false,
       priority = 1000,
       opts = {},
    },
+
+   -- {
+   --    -- For testing...
+   --    dir = "~/dev/gruvdark.nvim",
+   -- },
+
+   -- {
+   --    -- For testing...
+   --    "folke/tokyonight.nvim",
+   --    lazy = false,
+   --    priority = 1000,
+   --    opts = {},
+   -- },
+
    {
       -- For testing...
       "navarasu/onedark.nvim",
@@ -143,7 +150,7 @@ local plugins = {
 
                   blue = "#579DD4",
                   red = "#E16464",
-                  -- red_dark = "#B55353", -- use this for darker reds
+                  red_dark = "#B55353",
                   green = "#72BA62",
                   purple = "#D159B6", -- this is pink for my theme
                   purple_2 = "#9266DA",
@@ -169,14 +176,15 @@ local plugins = {
                   FloatBorder = { fg = "$fg", bg = "$bg" },
                   MsgArea = { fg = "$fg", bg = "$bg" },
                   StatusLine = { fg = "$fg", bg = "#252525" },
+
                   FloatermBorder = { fg = "NONE", bg = "$bg" },
                   FloatTitle = { fg = "$red" },
                   SignColumn = { bg = "$bg" },
                   YankHighlight = { fg = "$fg_bright", bg = "$bg1" },
 
-                  Search = { fg = "$bg", bg = "#B55353" },
-                  FlashCurrent = { fg = "$bg", bg = "#B55353" },
-                  IncSearch = { fg = "$fg_bright", bg = "#B55353" },
+                  Search = { fg = "$bg", bg = "$red_dark" },
+                  FlashCurrent = { fg = "$bg", bg = "$red_dark" },
+                  IncSearch = { fg = "$fg_bright", bg = "$red_dark" },
                   FlashLabel = { fg = "$fg_bright", bg = "#2A404F" },
 
                   MatchParen = { fg = "$fg_bright", bg = "$bg3" },
@@ -1191,7 +1199,7 @@ require("lazy").setup(plugins, {
 -- ======================================================================================
 
 -- Default colorscheme
-vim.cmd.colorscheme("onedark")
+vim.cmd.colorscheme("gruvdark")
 
 -- Close all buffers except current
 vim.api.nvim_create_user_command("BufOnly", function()
@@ -1227,7 +1235,7 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 
 -- Restore last cursor position when reopening a file
 local last_cursor_group = vim.api.nvim_create_augroup("LastCursorGroup", {})
-vim.api.nvim_create_autocmd("BufReadPost", {
+vim.api.nvim_create_autocmd("BufWinEnter", {
    group = last_cursor_group,
    callback = function()
       local mark = vim.api.nvim_buf_get_mark(0, '"')
