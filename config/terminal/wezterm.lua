@@ -13,16 +13,12 @@ end
 
 config.default_domain = "WSL:Ubuntu"
 config.window_decorations = "RESIZE"
-
+config.window_background_opacity = 1
 config.colors = themes.gruvdark
-config.foreground_text_hsb = {
-   brightness = 1.20, -- Just for dark themes
-}
 
 config.font = wezterm.font({
    family = "JetBrains Mono NL Slashed",
-   -- family = "Fira Code", -- For avoiding BOLD in GRUVDARK theme
-   weight = "Regular",
+   weight = "Medium",
    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 })
 
