@@ -376,6 +376,10 @@ local plugins = {
          fzf.setup({
             defaults = {
                formatter = "path.filename_first",
+               file_ignore_patterns = {
+                  "node_modules",
+                  "package%-lock%.json",
+               },
             },
             winopts = {
                border = "single",
