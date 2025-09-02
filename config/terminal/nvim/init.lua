@@ -117,12 +117,10 @@ vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
 local plugins = {
    {
       "darianmorat/gruvdark.nvim",
+      -- dir = "~/dev/gruvdark.nvim",
       lazy = false,
       priority = 1000,
       opts = {},
-
-      -- For testing...
-      -- dir = "~/dev/gruvdark.nvim",
    },
 
    {
@@ -629,7 +627,6 @@ local plugins = {
          },
          keymap = {
             preset = "enter",
-            ["<C-Space>"] = { "show_documentation", "hide_documentation" },
          },
       },
       opts_extend = { "sources.default" },
