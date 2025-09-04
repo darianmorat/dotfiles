@@ -135,6 +135,8 @@
    v S-grv
    b \
 
+   m rctl
+
    ___ XX
 )
 
@@ -155,6 +157,8 @@
    m S-=
    , S-,
    . S-.
+
+   c lctl
 
    ___ XX
 )
