@@ -1,5 +1,5 @@
 " ------------------------------------------------------------------------------
-" MAIN SETTINGS
+" GENERAL
 " ------------------------------------------------------------------------------
 
 set dirsize=nitems
@@ -95,3 +95,13 @@ nnoremap <space>fi :FZFGlobal<cr>
 
 nnoremap o :histprev<cr>
 nnoremap i :histnext<cr>
+
+" ------------------------------------------------------------------------------
+" COLORSCHEME
+" ------------------------------------------------------------------------------
+
+if $THEME_MODE == 'light'
+    source ~/.config/theme-manager/light/vifm
+else
+    source ~/.config/theme-manager/dark/vifm
+endif
