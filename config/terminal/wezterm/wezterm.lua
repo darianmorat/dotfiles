@@ -2,7 +2,7 @@
 -- MAIN
 -- --------------------------------------------------------------------------------------
 local wezterm = require("wezterm")
-local themes = require("gruvdark")
+local themes = require("themes")
 
 local act = wezterm.action
 local config = {}
@@ -14,7 +14,6 @@ end
 config.default_domain = "WSL:Ubuntu"
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 1
-config.colors = themes.gruvdark
 
 config.font = wezterm.font({
    family = "JetBrains Mono NL Slashed",
@@ -98,6 +97,31 @@ config.keys = {
       }),
    },
 }
+
+-- --------------------------------------------------------------------------------------
+-- THEME
+-- --------------------------------------------------------------------------------------
+local function read_current_theme()
+   local theme_file = "//wsl$/Ubuntu/home/darianmorat/.config/current_theme"
+   local f = io.open(theme_file, "r")
+
+   if not f then
+      return "gruvdark"
+   end
+
+   local theme = f:read("*l")
+   f:close()
+
+   local theme_mapping = {
+      dark = "gruvdark",
+      light = "gruvdark_light",
+   }
+
+   return theme_mapping[theme] or "gruvdark"
+end
+
+local current_theme = read_current_theme()
+config.colors = themes[current_theme]
 
 -- --------------------------------------------------------------------------------------
 -- END
