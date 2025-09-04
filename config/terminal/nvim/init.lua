@@ -824,7 +824,7 @@ require("lazy").setup(plugins, {
 
 -- Close all buffers except current
 vim.api.nvim_create_user_command("BufOnly", function()
-   vim.cmd("%bd|e#|bd#")
+   vim.cmd("%bd!|e#|bd#")
 end, { nargs = 0 })
 
 -- Disable automatic comment continuation
@@ -867,7 +867,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
    end,
 })
 
--- Apply colorsheme
+-- Apply colorscheme
 dofile(
    vim.fn.expand("~/.config/theme-manager/")
       .. (os.getenv("THEME_MODE") or "dark")
