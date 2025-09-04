@@ -822,9 +822,6 @@ require("lazy").setup(plugins, {
 -- TITLE: Commands & Auto-commands
 -- ======================================================================================
 
--- Default colorscheme
-vim.cmd.colorscheme("gruvdark")
-
 -- Close all buffers except current
 vim.api.nvim_create_user_command("BufOnly", function()
    vim.cmd("%bd|e#|bd#")
@@ -869,6 +866,13 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
       end
    end,
 })
+
+-- Apply colorsheme
+dofile(
+   vim.fn.expand("~/.config/theme-manager/")
+      .. (os.getenv("THEME_MODE") or "dark")
+      .. "/nvim.lua"
+)
 
 -- ======================================================================================
 -- TITLE: Indicators
