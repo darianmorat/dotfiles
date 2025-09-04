@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# INSTRUCTIONS:
+#
+# 1. Create script in system PATH to run 'theme-manager' from anywhere:
+#    sudo cp theme-manager /usr/local/bin/theme-manager
+# 2. Make it executable:
+#    sudo chmod +x /usr/local/bin/theme-manager
+# 3. Create theme folder structure:
+#    mkdir -p ~/.config/theme-manager/{dark,light}
+
+THEME_DIR="$HOME/.config/theme-manager"
+CURRENT_THEME_FILE="$HOME/.config/current_theme"
+CONFIG_DIR="$HOME/.config"
+
+# Get current theme 
+if [ -f "$CURRENT_THEME_FILE" ]; then
+    current=$(cat "$CURRENT_THEME_FILE")
+else
+    current="dark"
+fi
+
+# Toggle theme
+if [ "$current" = "dark" ]; then
+    theme="light"
+else
+    theme="dark"
+fi
+
+# Apply new theme
+echo "$theme" > "$CURRENT_THEME_FILE"
+export THEME_MODE="$theme"
+
+if [ -f ~/.zshrc ]; then
+    sed -i '/^export THEME_MODE=/d' ~/.zshrc
+    echo "export THEME_MODE=\"$theme\"" >> ~/.zshrc
+fi
+
+if [ -f "$CONFIG_DIR/lazygit/config.yml" ] && [ -f "$THEME_DIR/$theme/lazygit" ]; then
+    color=$(cat "$THEME_DIR/$theme/lazygit")
+    sed -i "s/- \"#[^\"]*\"/- \"$color\"/" "$CONFIG_DIR/lazygit/config.yml"
+fi
