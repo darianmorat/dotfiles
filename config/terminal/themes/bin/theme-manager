@@ -31,11 +31,6 @@ fi
 echo "$theme" > "$CURRENT_THEME_FILE"
 export THEME_MODE="$theme"
 
-if [ -f ~/.zshrc ]; then
-    sed -i '/^export THEME_MODE=/d' ~/.zshrc
-    echo "export THEME_MODE=\"$theme\"" >> ~/.zshrc
-fi
-
 if [ -f "$CONFIG_DIR/lazygit/config.yml" ] && [ -f "$THEME_DIR/$theme/lazygit" ]; then
     color=$(cat "$THEME_DIR/$theme/lazygit")
     sed -i "s/- \"#[^\"]*\"/- \"$color\"/" "$CONFIG_DIR/lazygit/config.yml"
