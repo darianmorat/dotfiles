@@ -90,7 +90,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- Editing helpers
 vim.keymap.set("n", "K", "mzi<cr><Esc>`z")
 vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "<C-h>", "<C-6>")
+vim.keymap.set("n", "<C-k>", "<C-6>")
 vim.keymap.set("n", "<leader>r", "<c-g>")
 
 -- Registers
@@ -109,6 +109,32 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { silent = true })
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
+
+-- Floating helper
+local function float_terminal(cmd)
+   local buf = vim.api.nvim_create_buf(false, true)
+   local win = vim.api.nvim_open_win(buf, true, {
+      relative = "editor",
+      row = 0,
+      col = 0,
+      width = vim.o.columns,
+      height = vim.o.lines,
+   })
+   vim.fn.termopen(cmd, {
+      on_exit = function()
+         vim.api.nvim_win_close(win, true)
+         vim.api.nvim_buf_delete(buf, { force = true })
+      end,
+   })
+   vim.cmd("startinsert")
+end
+
+vim.keymap.set("n", "<leader>lg", function()
+   float_terminal("lazygit")
+end)
+vim.keymap.set("n", "<leader>le", function()
+   float_terminal("vifm .")
+end)
 
 -- ======================================================================================
 -- TITLE: Plugin list
@@ -229,35 +255,6 @@ local plugins = {
          require("oil-git-status").setup({
             show_ignored = false,
          })
-      end,
-   },
-
-   {
-      "akinsho/toggleterm.nvim",
-      version = "*",
-      event = "VeryLazy",
-      config = function()
-         require("toggleterm").setup({})
-         local Terminal = require("toggleterm.terminal").Terminal
-         local fullscreen_float = {
-            border = "none",
-            width = vim.o.columns,
-            height = vim.o.lines,
-         }
-
-         local function create_terminal(cmd, keymap)
-            local terminal = Terminal:new({
-               cmd = cmd,
-               direction = "float",
-               float_opts = fullscreen_float,
-            })
-            vim.keymap.set("n", keymap, function()
-               terminal:toggle()
-            end)
-         end
-
-         create_terminal("lazygit", "<leader>lg")
-         create_terminal("vifm .", "<leader>le")
       end,
    },
 
@@ -418,53 +415,6 @@ local plugins = {
          vim.keymap.set("n", "<leader>fr", fzf_vertical("lsp_references"))
          vim.keymap.set("n", "<leader>fw", fzf_vertical("grep_cword"))
          vim.keymap.set("n", "<leader>fW", fzf_vertical("grep_cWORD"))
-      end,
-   },
-
-   {
-      "ThePrimeagen/harpoon",
-      branch = "harpoon2",
-      dependencies = { { "nvim-lua/plenary.nvim" } },
-      opts = {
-         settings = {
-            save_on_toggle = true,
-            sync_on_ui_close = true,
-         },
-      },
-      keys = function()
-         local keys = {
-            {
-               "<c-m>",
-               function()
-                  require("harpoon"):list():add()
-               end,
-            },
-            {
-               "<tab>",
-               function()
-                  require("harpoon"):list():prev()
-               end,
-            },
-            {
-               "<c-o>",
-               function()
-                  require("harpoon"):list():next()
-               end,
-            },
-            {
-               "<leader>fh",
-               function()
-                  local harpoon = require("harpoon")
-                  local UI = {
-                     title = "",
-                     border = "single",
-                     ui_width_ratio = 0.6,
-                  }
-                  harpoon.ui:toggle_quick_menu(harpoon:list(), UI)
-               end,
-            },
-         }
-         return keys
       end,
    },
 
