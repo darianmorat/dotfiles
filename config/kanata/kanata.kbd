@@ -184,11 +184,12 @@
 )
 
 (deflayermap (mdia-layer)
+   u mute
    i vold
    o volu
-   p mute
 
-   j pp
+   j f24
+   k pp
    l prtsc
 
    ___ XX
