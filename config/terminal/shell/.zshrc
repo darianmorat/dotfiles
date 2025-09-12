@@ -28,4 +28,15 @@ alias lst="ls --tree --level=2"
 
 alias clear=z4h-clear-screen-soft-bottom
 eval "$(zoxide init zsh)"
-# export PATH="$HOME/bin:$PATH" # ~/bin/color_test / if needed 
+
+# theme
+if [ -f "$HOME/.config/current_theme" ]; then
+    THEME_MODE=$(cat "$HOME/.config/current_theme")
+fi
+if [ -n "$THEME_MODE" ] && [ -f "$HOME/.config/theme-manager/$THEME_MODE/fzf.sh" ]; then
+    source "$HOME/.config/theme-manager/$THEME_MODE/fzf.sh"
+else
+    source "$HOME/.config/theme-manager/dark/fzf.sh"
+fi
+
+export THEME_MODE
