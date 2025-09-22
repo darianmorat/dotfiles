@@ -160,12 +160,8 @@ local plugins = {
             ["q"] = { "actions.close", mode = "n" },
             ["g."] = { "actions.toggle_hidden", mode = "n" },
             ["gt"] = { "actions.toggle_trash", mode = "n" },
-
-            ["<C-s>"] = { "actions.select", opts = { vertical = true } },
-            ["<C-l>"] = "actions.refresh",
-            ["g?"] = { "actions.show_help", mode = "n" },
             ["gs"] = { "actions.change_sort", mode = "n" },
-            ["gx"] = "actions.open_external",
+            -- gx = open externally with selected app
 
             ["<C-f>"] = {
                callback = function()
@@ -774,8 +770,16 @@ require("lazy").setup(plugins, {
 
 -- Close all buffers except current
 vim.api.nvim_create_user_command("BufOnly", function()
-   vim.cmd("%bd!|e#|bd#")
-end, { nargs = 0 })
+   local listed_buffers = 0
+   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.bo[buf].buflisted then
+         listed_buffers = listed_buffers + 1
+      end
+   end
+   local closed_count = listed_buffers - 1
+   vim.cmd([[silent! execute '%bd|e#|bd#']])
+   vim.notify(closed_count .. " buffers closed")
+end, {})
 
 -- Disable automatic comment continuation
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
