@@ -58,8 +58,7 @@ config.keys = {
    { key = "c", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
    { key = "d", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
 
-   { key = "e", mods = "LEADER", action = wezterm.action.SendString("\x15vifm\n") },
-   { key = "v", mods = "LEADER", action = wezterm.action.SendString("\x15nvim\n") },
+   { key = "v", mods = "LEADER", action = wezterm.action.SendString("\x1bZ") },
 
    {
       key = "f",
