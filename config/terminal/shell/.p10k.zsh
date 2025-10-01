@@ -1,19 +1,31 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+    context
     example
+    dir
+    prompt_char
+  )
 
   function prompt_example() {
-    p10k segment -f 4 -i '~/'
+    p10k segment -f 7 -i ':'
+  }
 
-  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+  typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SUBSEGMENT_SEPARATOR=''  # separate segments with a space
 
-  typeset -g POWERLEVEL9K_SHOW_RULER=true
-  typeset -g POWERLEVEL9K_RULER_CHAR=' '
-  typeset -g POWERLEVEL9K_RULER_FOREGROUND=0
-  
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='❯❯'
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION='❮❮'
+  # Tip: Remove the next line to always show context.
+  # typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
 
-  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last
+  # Context color when running with privileges.
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=2
+  # Context color in SSH without privileges.
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=2
+  # Default context color (no privileges, no SSH).
+  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=2
 
-  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
-  typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+  # Green prompt symbol if the last command succeeded.
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=7
+  # Red prompt symbol if the last command failed.
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=7
+  # Default prompt symbol.
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='$'
+  # Prompt symbol in command vi mode.
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION='$'
