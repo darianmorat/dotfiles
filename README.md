@@ -10,9 +10,9 @@
 
 - [wezterm](https://github.com/wez/wezterm) - terminal emulator
 - [homebrew](https://github.com/Homebrew/brew) - package manager
-- [mono-font](https://github.com/sharpjs/JetBrainsMonoSlashed) - jetbrains zero slashed
 - [zsh4humans](https://github.com/romkatv/zsh4humans) - zero config zsh distro
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k) - custom prompt (v1.20.0)
+- [mono-font](https://github.com/sharpjs/JetBrainsMonoSlashed) - jetbrains zero slashed
 
 ## Development Tools:
 
