@@ -132,9 +132,6 @@ end
 vim.keymap.set("n", "<leader>lg", function()
    float_terminal("lazygit")
 end)
-vim.keymap.set("n", "<leader>le", function()
-   float_terminal("vifm .")
-end)
 
 -- ======================================================================================
 -- TITLE: Plugin list
@@ -163,10 +160,10 @@ local plugins = {
             ["gs"] = { "actions.change_sort", mode = "n" },
             -- gx = open externally with selected app
 
-            ["<C-f>"] = {
+            ["<C-i>"] = {
                callback = function()
                   require("fzf-lua").files({
-                     cwd = vim.fn.getcwd(),
+                     cwd = require("oil").get_current_dir(),
                      fd_opts = "--color=never --type d --hidden --follow --exclude .git",
                      previewer = false,
                   })
@@ -174,10 +171,10 @@ local plugins = {
                mode = "n",
             },
 
-            ["<C-g>"] = {
+            ["<C-o>"] = {
                callback = function()
                   require("fzf-lua").files({
-                     cwd = require("oil").get_current_dir(),
+                     cwd = vim.fn.getcwd(),
                      fd_opts = "--color=never --type d --hidden --follow --exclude .git",
                      previewer = false,
                   })
