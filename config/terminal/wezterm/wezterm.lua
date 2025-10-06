@@ -21,7 +21,7 @@ config.font = wezterm.font({
    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 })
 
-config.font_size = 12.5
+config.font_size = 13.0
 config.cell_width = 0.90
 config.line_height = 1.0
 
@@ -39,7 +39,7 @@ config.switch_to_last_active_tab_when_closing_tab = true
 config.window_padding = {
    left = 5,
    right = 5,
-   top = 5,
+   top = 1,
    bottom = 0,
 }
 
