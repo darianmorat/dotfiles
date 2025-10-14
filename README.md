@@ -26,8 +26,3 @@
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - recursive search (v14.1.1)
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - better dir navigation (v0.9.8)
 - [eza](https://github.com/eza-community/eza) - ls replacement (v0.21.5)
-
-## WSL2 Utilities:
-
-- [trash-cli](https://github.com/sindresorhus/trash-cli) - trash management (v6.0.0)
-- [empty-trash-cli](https://github.com/sindresorhus/empty-trash-cli) - empties trash (v2.0.0)
