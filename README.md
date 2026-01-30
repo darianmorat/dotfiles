@@ -2,9 +2,9 @@
 
 ## Window Manager:
 
-- [kanata](https://github.com/jtroo/kanata/) - custom keymaps (v1.8.1)
-- [glazewm](https://github.com/glzr-io/glazewm) - tiling window manager (v3.8.1)
-- [zebar](https://github.com/glzr-io/zebar) - custom taskbar (v2.7.0)
+- [kanata](https://github.com/jtroo/kanata/) - custom keymaps (v1.8.1) <!-- Pending update -->
+- [glazewm](https://github.com/glzr-io/glazewm) - tiling window manager (v3.9.1)
+- [zebar](https://github.com/glzr-io/zebar) - custom taskbar (v3.2.0)
 
 ## Terminal Setup:
 
