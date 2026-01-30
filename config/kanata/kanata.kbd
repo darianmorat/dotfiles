@@ -237,6 +237,7 @@
    f (movemouse-accel-right 5 300 1 7)
 
    k (layer-while-held mouse-slow)
+   lalt lctl
 
    ___ XX
 )
