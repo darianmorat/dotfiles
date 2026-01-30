@@ -91,7 +91,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "K", "mzi<cr><Esc>`z")
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-k>", "<C-6>")
-vim.keymap.set("n", "<leader>r", "<c-g>")
 
 -- Registers
 vim.keymap.set({ "n", "v" }, "<leader>y", '"ay')
@@ -139,11 +138,51 @@ end)
 
 local plugins = {
    {
-      "darianmorat/gruvdark.nvim",
-      -- dir = "~/dev/gruvdark.nvim",
+      -- "darianmorat/gruvdark.nvim",
+      dir = "~/dev/gruvdark.nvim",
       lazy = false,
       priority = 1000,
       opts = {},
+   },
+
+   {
+      "b0o/incline.nvim",
+      event = "VeryLazy",
+      config = function()
+         require("incline").setup({
+            render = function(props)
+               local filename =
+                  vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+
+               if vim.bo[props.buf].filetype == "oil" or filename == "" then
+                  return ""
+               end
+
+               local modified = vim.bo[props.buf].modified and " [+]" or ""
+
+               return {
+                  "▓▒ ",
+                  filename,
+                  modified,
+                  " ▒▓",
+               }
+            end,
+            hide = {
+               cursorline = false,
+            },
+            window = {
+               margin = {
+                  horizontal = 0,
+                  vertical = 0,
+               },
+               padding = 0,
+               placement = {
+                  horizontal = "right",
+                  vertical = "top",
+               },
+            },
+         })
+      end,
    },
 
    {
@@ -514,9 +553,9 @@ local plugins = {
             show_start = false,
             show_end = false,
          },
-         exclude = {
-            filetypes = { "python" },
-         },
+         -- exclude = {
+         --    filetypes = { "python" },
+         -- },
       },
    },
 
@@ -765,6 +804,13 @@ require("lazy").setup(plugins, {
 -- TITLE: Commands & Auto-commands
 -- ======================================================================================
 
+-- Apply colorscheme
+dofile(
+   vim.fn.expand("~/.config/theme-manager/")
+      .. (os.getenv("THEME_MODE") or "dark")
+      .. "/nvim.lua"
+)
+
 -- Close all buffers except current
 vim.api.nvim_create_user_command("BufOnly", function()
    local listed_buffers = 0
@@ -818,51 +864,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
    end,
 })
 
--- Apply colorscheme
-dofile(
-   vim.fn.expand("~/.config/theme-manager/")
-      .. (os.getenv("THEME_MODE") or "dark")
-      .. "/nvim.lua"
-)
-
--- ======================================================================================
--- TITLE: Indicators
--- ======================================================================================
-
--- File changed sign in editor
-vim.fn.sign_define("FileChanged", {
-   text = "✗",
-   texthl = "WarningMsg",
-   numhl = "WarningMsg",
-})
-
-local function update_sign()
-   local buf, line = vim.api.nvim_get_current_buf(), vim.api.nvim_win_get_cursor(0)[1]
-
-   if vim.bo.filetype:match("^harpoon") then
-      return
-   end
-
-   if vim.bo.modified then
-      vim.fn.sign_unplace("user", { buffer = buf })
-      vim.fn.sign_place(0, "user", "FileChanged", buf, {
-         lnum = line,
-         priority = 1,
-      })
-   else
-      vim.fn.sign_unplace("user", { buffer = buf })
-   end
-end
-
-vim.api.nvim_create_autocmd(
-   { "TextChanged", "TextChangedI", "CursorMoved", "CursorMovedI", "BufWritePost" },
-   {
-      callback = function()
-         vim.schedule(update_sign)
-      end,
-   }
-)
-
 -- Macro recording notifications
 vim.api.nvim_create_autocmd("RecordingEnter", {
    callback = function()
@@ -873,5 +874,15 @@ vim.api.nvim_create_autocmd("RecordingEnter", {
 vim.api.nvim_create_autocmd("RecordingLeave", {
    callback = function()
       print("Stopped recording")
+   end,
+})
+
+-- Automatically Split help Buffers to the right
+vim.api.nvim_create_autocmd("BufWinEnter", {
+   pattern = "*.txt",
+   callback = function()
+      if vim.bo.filetype == "help" then
+         vim.cmd("wincmd L")
+      end
    end,
 })
