@@ -144,9 +144,9 @@ keybindings:
 
   # Move focused window in a given direction.
   - commands: ['move --direction left']
-    bindings: ['alt+shift+j']
+    bindings: ['alt+shift+i']
   - commands: ['move --direction right']
-    bindings: ['alt+shift+k']
+    bindings: ['alt+shift+o']
   #- commands: ['move --direction up']
   #  bindings: ['alt+shift+k', 'alt+shift+up']
   #- commands: ['move --direction down']
@@ -154,9 +154,9 @@ keybindings:
 
   # Resize focused window by a percentage or pixel amount.
   - commands: ['resize --width -2%']
-    bindings: ['alt+shift+i']
+    bindings: ['alt+i']
   - commands: ['resize --width +2%']
-    bindings: ['alt+shift+o']
+    bindings: ['alt+o']
   #- commands: ['resize --height +2%']
   #  bindings: ['alt+o']
   #- commands: ['resize --height -2%']
@@ -199,7 +199,7 @@ keybindings:
 
   # Close focused window.
   - commands: ['close']
-    bindings: ['alt+shift+d']
+    bindings: ['alt+shift+a']
 
   # Kill GlazeWM process safely.
   # - commands: ['wm-exit']
