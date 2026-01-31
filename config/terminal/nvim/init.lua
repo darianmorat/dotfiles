@@ -806,7 +806,7 @@ require("lazy").setup(plugins, {
 
 -- Apply colorscheme
 dofile(
-   vim.fn.expand("~/.config/theme-manager/")
+   vim.fn.expand("~/.config/theme/")
       .. (os.getenv("THEME_MODE") or "dark")
       .. "/nvim.lua"
 )

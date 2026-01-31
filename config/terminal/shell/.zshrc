@@ -54,13 +54,53 @@ export PATH="/opt/nvim/bin:$PATH"
 # =======================================================================================
 # =======================================================================================
 
+theme-manager() {
+    local THEME_DIR="$HOME/.config/theme"
+    local CURRENT_THEME_FILE="$HOME/.config/current_theme"
+    local CONFIG_DIR="$HOME/.config"
+
+    # Get current theme
+    local current="dark"
+    if [ -f "$CURRENT_THEME_FILE" ]; then
+        current=$(cat "$CURRENT_THEME_FILE")
+    fi
+
+    # Toggle theme
+    local theme="dark"
+    if [ "$current" = "dark" ]; then
+        theme="light"
+    else
+        theme="dark"
+    fi
+
+    # Save new theme
+    echo "$theme" > "$CURRENT_THEME_FILE"
+    export THEME_MODE="$theme"
+
+    # Apply lazygit theme
+    if [ -f "$CONFIG_DIR/lazygit/config.yml" ] && [ -f "$THEME_DIR/$theme/lazygit" ]; then
+        local color=$(cat "$THEME_DIR/$theme/lazygit")
+        sed -i "s/- \"#[^\"]*\"/- \"$color\"/" "$CONFIG_DIR/lazygit/config.yml"
+    fi
+
+    # Apply FZF theme
+    if [ -f "$THEME_DIR/$theme/fzf.sh" ]; then
+        source "$THEME_DIR/$theme/fzf.sh"
+    fi
+
+    echo "Theme switched to: $theme"
+}
+
+# =======================================================================================
+# =======================================================================================
+
 if [ -f "$HOME/.config/current_theme" ]; then
    THEME_MODE=$(cat "$HOME/.config/current_theme")
 fi
-if [ -n "$THEME_MODE" ] && [ -f "$HOME/.config/theme-manager/$THEME_MODE/fzf.sh" ]; then
-   source "$HOME/.config/theme-manager/$THEME_MODE/fzf.sh"
+if [ -n "$THEME_MODE" ] && [ -f "$HOME/.config/theme/$THEME_MODE/fzf.sh" ]; then
+   source "$HOME/.config/theme/$THEME_MODE/fzf.sh"
 else
-   source "$HOME/.config/theme-manager/dark/fzf.sh"
+   source "$HOME/.config/theme/dark/fzf.sh"
 fi
 
 export THEME_MODE
