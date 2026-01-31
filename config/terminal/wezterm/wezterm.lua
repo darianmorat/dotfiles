@@ -2,7 +2,7 @@
 -- GENERAL
 -- --------------------------------------------------------------------------------------
 local wezterm = require("wezterm")
-local themes = require("themes")
+local themes = require("theme")
 
 local act = wezterm.action
 local config = {}
