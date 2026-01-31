@@ -37,8 +37,8 @@ config.enable_scroll_bar = false
 config.switch_to_last_active_tab_when_closing_tab = true
 
 config.window_padding = {
-   left = 5,
-   right = 5,
+   left = 6,
+   right = 0,
    top = 1,
    bottom = 0,
 }
