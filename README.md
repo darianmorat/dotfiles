@@ -2,7 +2,7 @@
 
 ## Window Manager:
 
-- [kanata](https://github.com/jtroo/kanata/) - custom keymaps (v1.8.1) <!-- Pending update -->
+- [kanata](https://github.com/jtroo/kanata/) - custom keymaps (v1.10.1)
 - [glazewm](https://github.com/glzr-io/glazewm) - tiling window manager (v3.9.1)
 - [zebar](https://github.com/glzr-io/zebar) - custom taskbar (v3.2.0)
 
