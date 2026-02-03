@@ -16,8 +16,7 @@ autorestart_on_crash = false
 
 [defaults.layer_icons]
 
-
 [presets.'Default Preset']
-kanata_executable = 'C:\Users\DarianToledo\AppData\Roaming\kanata-tray\kanata.exe'
-kanata_config = 'C:\Users\DarianToledo\AppData\Roaming\kanata-tray\kanata.kbd'
+kanata_executable = 'D:\Apps\kanata\kanata.exe'
+kanata_config = 'D:\Apps\kanata\kanata.kbd'
 autorun = true

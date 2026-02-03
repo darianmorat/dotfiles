@@ -806,10 +806,15 @@ require("lazy").setup(plugins, {
 
 -- Apply colorscheme
 dofile(
-   vim.fn.expand("~/.config/theme/")
-      .. (os.getenv("THEME_MODE") or "dark")
-      .. "/nvim.lua"
+   vim.fn.expand("~/.config/theme/") .. (os.getenv("THEME_MODE") or "dark") .. "/nvim.lua"
 )
+
+-- Filetype detection for XAML
+vim.filetype.add({
+   extension = {
+      xaml = "xml",
+   },
+})
 
 -- Close all buffers except current
 vim.api.nvim_create_user_command("BufOnly", function()
