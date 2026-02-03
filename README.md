@@ -6,6 +6,11 @@
 - [glazewm](https://github.com/glzr-io/glazewm) - tiling window manager (v3.9.1)
 - [zebar](https://github.com/glzr-io/zebar) - custom taskbar (v3.2.0)
 
+## GUI Utilities:
+
+- [flowlauncher](https://github.com/Flow-Launcher/Flow.Launcher) - app launcher (v2.0.3)
+- [autocursor](https://www.softwareok.com/?seite=Microsoft/AutoHideMouseCursor) - hide cursor automatically (v6.11)
+
 ## Terminal Setup:
 
 - [wezterm](https://github.com/wez/wezterm) - terminal emulator
@@ -26,8 +31,3 @@
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - recursive search (v15.1.0)
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - better dir navigation (v0.9.9)
 - [eza](https://github.com/eza-community/eza) - ls replacement (v0.23.4)
-
-## GUI Utilities:
-
-- [flowlauncher](https://github.com/Flow-Launcher/Flow.Launcher) - app launcher (v2.0.3)
-- [autocursor](https://www.softwareok.com/?seite=Microsoft/AutoHideMouseCursor) - hide cursor automatically (v6.11)
