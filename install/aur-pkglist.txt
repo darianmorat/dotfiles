@@ -1,0 +1,11 @@
+wezterm-nightly
+kanata-bin
+neovim-nightly
+xautolock
+i3lock-color
+xhidecursor
+impala
+bluetui
+brave-bin
+qimgv-git
+go-mtpfs-git

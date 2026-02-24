@@ -1,0 +1,2 @@
+#!/bin/bash
+i3lock --nofork --indicator --radius=40 --ring-width=4 --time-str="" --date-str="" --verif-text="" --wrong-text="" --noinput-text="" --greeter-text="$USER" --greeter-color=ffffffaa --greeter-size=16 --greeter-pos="ix:iy+80" --inside-color=00000000 --ring-color=ffffff80 --insidever-color=00ff0040 --ringver-color=00ff0060 --insidewrong-color=ff000040 --ringwrong-color=ff000060 --line-color=00000000 --keyhl-color=ffffffcc --bshl-color=ff0000cc --separator-color=00000000 -c 000000

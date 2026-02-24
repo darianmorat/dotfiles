@@ -1,0 +1,8 @@
+Xft.dpi: 130
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+
+! Then apply the changes:
+! xrdb -merge ~/.Xresources

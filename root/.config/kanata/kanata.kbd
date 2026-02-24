@@ -1,0 +1,250 @@
+(defcfg 
+   process-unmapped-keys yes
+   concurrent-tap-hold yes
+)
+
+(defvar
+   tap-timeout 150
+   hold-timeout 150
+
+   tt $tap-timeout
+   ht $hold-timeout
+)
+
+(defalias
+   lock-nav (layer-switch nav-layer)
+   lock-numb (layer-switch numb-layer)
+)
+
+(defchordsv2
+  (d k) caps 50 all-released ()
+)
+
+(defsrc)
+(deflayermap (default)
+   w (tap-hold-release $tt $ht w (layer-while-held mdia-layer))
+   e (tap-hold-release $tt $ht e (layer-while-held rsym-layer))
+   i (tap-hold-release $tt $ht i (layer-while-held lsym-layer))
+   o (tap-hold-release $tt $ht o (layer-while-held func-layer))
+
+   s (tap-hold-release $tt $ht s lalt)
+   d (tap-hold-release $tt $ht d lsft)
+   c (tap-hold-release $tt $ht c lctl)
+
+   l (tap-hold-release $tt $ht l ralt)
+   k (tap-hold-release $tt $ht k rsft)
+   m (tap-hold-release $tt $ht m rctl)
+
+   v (tap-hold-release $tt $ht v lmet)
+
+   f (tap-hold-release $tt $ht f (layer-while-held nav-layer))
+   j (tap-hold-release $tt $ht j (layer-while-held numb-layer))
+
+   n (tap-hold-release $tt $ht n (layer-while-held term-layer))
+
+   lalt (tap-hold-release $tt $ht esc (layer-while-held acct-layer))
+   spc (tap-hold-release $tt $ht spc (layer-while-held mouse-layer))
+
+   q (tap-hold-release $tt $ht q XX)
+   r (tap-hold-release $tt $ht r XX)
+   t (tap-hold-release $tt $ht t XX)
+   y (tap-hold-release $tt $ht y XX)
+   u (tap-hold-release $tt $ht u XX)
+   p (tap-hold-release $tt $ht p XX)
+   a (tap-hold-release $tt $ht a XX)
+   g (tap-hold-release $tt $ht g XX)
+   h (tap-hold-release $tt $ht h XX)
+   ; (tap-hold-release $tt $ht S-; XX)
+   z (tap-hold-release $tt $ht z XX)
+   x (tap-hold-release $tt $ht x XX)
+   b (tap-hold-release $tt $ht b XX)
+   , (tap-hold-release $tt $ht , XX)
+   . (tap-hold-release $tt $ht . XX)
+   / (tap-hold-release $tt $ht ; XX)
+
+   ___ XX
+)
+
+(deflayermap (nav-layer)
+   y del
+   u A-S-C-u 
+   i left
+   o right
+
+   h bspc
+   j down
+   k up
+   l ret
+
+   n pgup
+   m pgdn
+   , home
+   . end
+
+   s lalt
+   d lsft
+   lalt lctl
+   spc tab
+
+   a @lock-nav
+   f (layer-switch default)
+
+   ___ XX
+)
+
+(deflayermap (numb-layer)
+   a 0
+
+   f 1
+   d 2
+   s 3
+
+   v 4
+   c 5
+   x 6
+
+   r 7
+   e 8
+   w 9
+
+   k rctl
+   lalt bspc
+   spc spc
+
+   ; @lock-numb
+   j (layer-switch default)
+
+   ___ XX
+)
+
+(deflayermap (lsym-layer)
+   q S-3
+   w S-6
+   e S-4
+   r S-7
+   t S-1
+
+   a grv
+   s S-'
+   d '
+   f S-5
+   g S-2
+
+   x [
+   c ]
+   v S-grv
+   b \
+
+   m rctl
+
+   ___ XX
+)
+
+(deflayermap (rsym-layer)
+   y S-\
+   u -
+   i S-9
+   o S-0
+   p S-8
+
+   h S--
+   j =
+   k S-[
+   l S-]
+   ; /
+
+   n S-/
+   m S-=
+   , S-,
+   . S-.
+
+   c lctl
+
+   ___ XX
+)
+
+(deflayermap (func-layer)
+   f f1
+   d f2
+   s f3
+
+   r f4
+   e f5
+   w f6
+
+   v f7
+   c f8
+   x f9
+
+   q f11
+   a f10
+   z f12
+
+   ___ XX
+)
+
+(deflayermap (mdia-layer)
+   u mute
+   i vold
+   o volu
+
+   j f24
+   k pp
+   l prtsc
+
+   m A-S-C-m
+   , brdown
+   . brup
+
+   ___ XX
+)
+
+(deflayermap (term-layer)
+   c (macro C-f12 50 c)
+   d (macro C-f12 50 d)
+
+   f (macro C-f12 50 f)
+   r (macro C-f12 50 r)
+
+   s (macro C-f12 50 s)
+   w (macro C-f12 50 w)
+
+   ___ XX
+)
+
+(deflayermap (acct-layer)
+   a (fork (unicode á) (unicode Á) (lsft rsft))
+   e (fork (unicode é) (unicode É) (lsft rsft))
+   i (fork (unicode í) (unicode Í) (lsft rsft))
+   o (fork (unicode ó) (unicode Ó) (lsft rsft))
+   u (fork (unicode ú) (unicode Ú) (lsft rsft))
+   n (fork (unicode ñ) (unicode Ñ) (lsft rsft))
+)
+
+(deflayermap (mouse-layer)
+   j mlft
+   u mmid
+   l mrgt
+
+   w (mwheel-left  100 120)
+   i (mwheel-down  100 120)
+   o (mwheel-up    100 120)
+   r (mwheel-right 100 120)
+
+   s (movemouse-accel-left  5 300 1 7)
+   d (movemouse-accel-down  5 300 1 7)
+   e (movemouse-accel-up    5 300 1 7)
+   f (movemouse-accel-right 5 300 1 7)
+
+   k (layer-while-held mouse-slow)
+   lalt lctl
+
+   ___ XX
+)
+
+(deflayermap (mouse-slow)
+   s (movemouse-left  15 1)
+   d (movemouse-down  15 1)
+   e (movemouse-up    15 1)
+   f (movemouse-right 15 1)
+)
