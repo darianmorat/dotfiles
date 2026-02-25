@@ -129,67 +129,6 @@ setopt no_auto_menu  # require an extra TAB press to open the completion menu
 # =======================================================================================
 # =======================================================================================
 
-theme-manager() {
-   local THEME_DIR="$HOME/.config/theme"
-   local CURRENT_THEME_FILE="$HOME/.config/current_theme"
-   local CONFIG_DIR="$HOME/.config"
-   local GTK_CONFIG="$CONFIG_DIR/gtk-3.0/settings.ini"
-
-   # Toggle
-   local current=$([ -f "$CURRENT_THEME_FILE" ] && cat "$CURRENT_THEME_FILE" || echo "dark")
-   local theme=$([ "$current" = "dark" ] && echo "light" || echo "dark")
-
-   # Save and export
-   echo "$theme" > "$CURRENT_THEME_FILE"
-   export THEME_MODE="$theme"
-
-   # GTK
-   local gtk_theme=$([ "$theme" = "dark" ] && echo "Materia-dark" || echo "Materia-light")
-   sed -i "s|gtk-theme-name=.*|gtk-theme-name=$gtk_theme|" "$GTK_CONFIG"
-   gsettings set org.gnome.desktop.interface color-scheme "prefer-$theme"
-
-   # Background
-   if [ "$theme" = "dark" ]; then
-      xsetroot -solid "#232323"
-   else
-      xsetroot -solid "#E8E8E8"
-   fi
-
-   # Lazygit
-   if [ "$theme" = "dark" ]; then
-      lg_color="#303030"
-   else
-      lg_color="#C9C9BF"
-   fi
-   sed -i "s/- \"#[^\"]*\"/- \"$lg_color\"/" "$CONFIG_DIR/lazygit/config.yml"
-
-   # FZF
-   if [ "$theme" = "dark" ]; then
-      fzf_opts="--ansi
-      --layout=reverse
-      --border=none
-      --color=fg:#D6CFC4,fg+:#E6E3DE,bg:#1E1E1E,bg+:#303030
-      --color=gutter:#1E1E1E,prompt:#579DD4,marker:#B55353
-      --color=pointer:#B55353,header:#D19F66,info:#575757
-      --color=hl:#72BA62,hl+:#72BA62,query:#D6CFC4"
-   else
-      fzf_opts="--ansi
-      --layout=reverse
-      --border=none
-      --color=fg:#101010,fg+:#000000,bg:#F7F5EA,bg+:#C9C9BF
-      --color=gutter:#F7F5EA,prompt:#0F5289,marker:#AD4B4B
-      --color=pointer:#AD4B4B,header:#AE5F05,info:#707070
-      --color=hl:#006C00,hl+:#006C00,query:#101010"
-   fi
-   echo "$fzf_opts" > ~/.fzfrc
-
-   # WezTerm
-   touch ~/.config/wezterm/wezterm.lua
-
-   # Notification
-   notify-send "Theme switched to $theme"
-}
-
 THEME_MODE=$([ -f "$HOME/.config/current_theme" ] && cat "$HOME/.config/current_theme" || echo "dark")
 
 export THEME_MODE

@@ -730,7 +730,13 @@ require("lazy").setup(plugins, {
 -- ======================================================================================
 
 -- Apply colorscheme
-local theme_mode = os.getenv("THEME_MODE") or "dark"
+local theme_file = io.open(os.getenv("HOME") .. "/.config/current_theme", "r")
+local theme_mode = theme_file and theme_file:read("*l") or "dark"
+
+if theme_file then
+   theme_file:close()
+end
+
 local colorscheme = theme_mode == "light" and "gruvdark-light" or "gruvdark"
 
 vim.o.background = theme_mode
