@@ -23,6 +23,14 @@
 - **neovim-nightly** - text editor `AUR`
 - **lazygit** - git management tui
 
+## Runtime
+
+- **nodejs** - javascript runtime environment
+- **npm** - javascript package manager
+- **commitizen** - conventional commits cli `NPM`
+- **cz-conventional-changelog** - commitizen adapter `NPM`
+- **markdown-preview** - preview markdown in browser `NPM`
+
 ## Display
 
 - **xautolock** - x screen-locker `AUR`
