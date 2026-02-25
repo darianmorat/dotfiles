@@ -4,8 +4,6 @@ neovim-nightly
 xautolock
 i3lock-color
 xhidecursor
-impala
-bluetui
+go-mtpfs-git
 brave-bin
 qimgv-git
-go-mtpfs-git

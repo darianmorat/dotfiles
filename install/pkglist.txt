@@ -1,10 +1,17 @@
+i3-wm
+polybar
+rofi
 fzf
 ripgrep
 zoxide
 tree
 chafa
 lazygit
+nodejs
+npm
 redshift
+impala
+bluetui
 dunst
 clipmenu
 trash-cli
@@ -21,7 +28,7 @@ mpv
 flameshot
 gimp
 inter-font
-ttf-jetbrains-mono-nerd
+jetbrains-mono-nerd
 materia-gtk-theme
 papirus-icon-theme
 feh
