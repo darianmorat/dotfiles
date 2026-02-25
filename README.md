@@ -75,3 +75,4 @@
 - **papirus-icon-theme** - icon theme
 - **feh** - set wallpaper background
 - **xorg-xsetroot** - set background color
+- **xsettingsd** - live gtk theme reloading

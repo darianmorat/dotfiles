@@ -19,6 +19,11 @@ theme-manager() {
    sed -i "s|gtk-theme-name=.*|gtk-theme-name=$gtk_theme|" "$GTK_CONFIG"
    gsettings set org.gnome.desktop.interface color-scheme "prefer-$theme"
 
+   # Live change open apps
+   XSETTINGS="$HOME/.config/xsettingsd/xsettingsd.conf"
+   sed -i "s|Net/ThemeName .*|Net/ThemeName \"$gtk_theme\"|" "$XSETTINGS"
+   pkill -HUP xsettingsd 2>/dev/null || xsettingsd &
+
    # Background
    if [ "$theme" = "dark" ]; then
       xsetroot -solid "#232323"

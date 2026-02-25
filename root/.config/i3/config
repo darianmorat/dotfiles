@@ -26,6 +26,9 @@ client.urgent           #161616 #801717 #FFFFFF #801717   #801717
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
+# Initialize X11 apps settings
+exec_always --no-startup-id xsettingsd
+
 # Initialize bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 

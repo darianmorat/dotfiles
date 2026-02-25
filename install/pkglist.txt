@@ -33,3 +33,4 @@ materia-gtk-theme
 papirus-icon-theme
 feh
 xorg-xsetroot
+xsettingsd
