@@ -334,6 +334,9 @@ local plugins = {
                   "node_modules",
                   "package%-lock%.json",
                },
+               fzf_opts = {
+                  ["--no-multi"] = true,
+               },
             },
             winopts = {
                border = "single",

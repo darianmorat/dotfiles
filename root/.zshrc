@@ -42,8 +42,11 @@ zstyle ':z4h:ssh:*'                   enable 'no'
 # enabled hosts.
 zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
 
-# disable syntax highlighting
+# Disable syntax highlighting
 zstyle ':z4h:zsh-syntax-highlighting' channel 'none' 
+
+# Use default styles for all fzf cmds
+zstyle ':z4h:*' fzf-command fzf
 
 # Clone additional Git repositories from GitHub.
 #
@@ -83,6 +86,7 @@ fzf-global() {
       sed "s#^$HOME/##" | \
       fzf \
       --ansi \
+      --border=sharp \
       --prompt="Projects > ")
 
    if [[ -n "$selected" ]]; then
