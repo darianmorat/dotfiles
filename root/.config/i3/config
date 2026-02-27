@@ -33,7 +33,7 @@ exec_always --no-startup-id xsettingsd
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Set solid/image background
-exec_always --no-startup-id xsetroot -solid "#232323"
+exec_always --no-startup-id xsetroot -solid "#282828"
 # exec_always --no-startup-id feh --bg-fill "$HOME/filename.png"
 
 # Hide cursor when typing
@@ -41,6 +41,9 @@ exec --no-startup-id xhidecursor
 
 # Start clipboard manager
 exec --no-startup-id clipmenud
+
+# Start Brave browser at startup
+exec --no-startup-id brave
 
 # Lock screen after 20min, screen off after 25min, xss-lock handles suspend
 exec --no-startup-id xautolock -time 20 -locker ~/.config/i3/lock.sh
