@@ -67,13 +67,16 @@
 - **flameshot** - screenshot software
 - **gimp** - image manipulation program
 
-## Theme
+## Fonts
 
 - **inter-font** - typeface for interfaces
 - **jetbrains-mono-nerd** - typeface for devs
 - **noto-fonts-lite** - google ttf font `AUR`
 - **noto-fonts-cjk** - cjk character support
 - **noto-fonts-emoji** - emoji support
+
+## Theme
+
 - **materia-gtk-theme** - gtk theme
 - **papirus-icon-theme** - icon theme
 - **feh** - set wallpaper background
