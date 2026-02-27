@@ -766,7 +766,7 @@ vim.api.nvim_create_user_command("BufOnly", function()
 end, {})
 
 -- Disable automatic comment continuation
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+vim.api.nvim_create_autocmd("FileType", {
    pattern = "*",
    callback = function()
       vim.opt.formatoptions:remove({ "c", "r", "o" })
