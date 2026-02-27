@@ -29,6 +29,8 @@ flameshot
 gimp
 inter-font
 jetbrains-mono-nerd
+noto-fonts-cjk
+noto-fonts-emoji
 materia-gtk-theme
 papirus-icon-theme
 feh

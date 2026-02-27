@@ -7,3 +7,4 @@ xhidecursor
 go-mtpfs-git
 brave-bin
 qimgv-git
+noto-fonts-lite
