@@ -108,6 +108,7 @@
    w 9
 
    k rctl
+   l lsft
    lalt bspc
    spc spc
 
@@ -168,16 +169,16 @@
    d f2
    s f3
 
-   r f4
-   e f5
-   w f6
+   v f4
+   c f5
+   x f6
 
-   v f7
-   c f8
-   x f9
+   r f7
+   e f8
+   w f9
 
-   q f11
-   a f10
+   q f10
+   a f11
    z f12
 
    ___ XX
