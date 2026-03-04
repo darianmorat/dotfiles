@@ -5,6 +5,5 @@ xautolock
 i3lock-color
 xhidecursor
 go-mtpfs-git
-brave-bin
 qimgv-git
 noto-fonts-lite

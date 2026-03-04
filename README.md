@@ -59,7 +59,7 @@
 
 ## Apps
 
-- **brave-bin** - web browser `AUR`
+- **vivaldi** - power user web browser
 - **libreoffice** - office suite
 - **nemo** - file manager
 - **mpv** - media player

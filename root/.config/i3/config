@@ -7,6 +7,7 @@ set $mod Mod1
 # is used in the bar {} block below.
 font pango:Inter Display 10
 for_window [class=".*"] title_format "%title"
+for_window [class="Vivaldi"] title_format "Vivaldi - Web Browser"
 
 # Window options
 title_align center
@@ -42,8 +43,8 @@ exec --no-startup-id xhidecursor
 # Start clipboard manager
 exec --no-startup-id clipmenud
 
-# Start Brave browser at startup
-exec --no-startup-id brave
+# Start Vivaldi browser at startup
+exec --no-startup-id vivaldi
 
 # Lock screen after 20min, screen off after 25min, xss-lock handles suspend
 exec --no-startup-id xautolock -time 20 -locker ~/.config/i3/lock.sh
