@@ -55,9 +55,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh
 bindsym $mod+Shift+l exec ~/.config/i3/lock.sh
 
 # Volume controls with notifications
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pamixer -i 5 && if pamixer --get-mute | grep -q 'true'; then dunstify -t 1000 -r 991049 -h int:value:$(pamixer --get-volume) 'Volume (Muted)'; else dunstify -t 1000 -r 991049 -h int:value:$(pamixer --get-volume) 'Volume'; fi"
-bindsym XF86AudioLowerVolume exec --no-startup-id "pamixer -d 5 && if pamixer --get-mute | grep -q 'true'; then dunstify -t 1000 -r 991049 -h int:value:$(pamixer --get-volume) 'Volume (Muted)'; else dunstify -t 1000 -r 991049 -h int:value:$(pamixer --get-volume) 'Volume'; fi"
-bindsym XF86AudioMute exec --no-startup-id "pamixer -t && if pamixer --get-mute | grep -q 'true'; then dunstify -t 1000 -r 991049 'Muted'; else dunstify -t 1000 -r 991049 -h int:value:$(pamixer --get-volume) 'Volume'; fi"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pamixer -i 5 && if pamixer --get-mute | grep -q 'true'; then dunstify -r 991049 -h int:value:$(pamixer --get-volume) 'Volume (Muted)'; else dunstify -r 991049 -h int:value:$(pamixer --get-volume) 'Volume'; fi"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pamixer -d 5 && if pamixer --get-mute | grep -q 'true'; then dunstify -r 991049 -h int:value:$(pamixer --get-volume) 'Volume (Muted)'; else dunstify -r 991049 -h int:value:$(pamixer --get-volume) 'Volume'; fi"
+bindsym XF86AudioMute exec --no-startup-id "pamixer -t && if pamixer --get-mute | grep -q 'true'; then dunstify -r 991049 'Muted'; else dunstify -r 991049 -h int:value:$(pamixer --get-volume) 'Volume'; fi"
 
 # Media controls
 bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
@@ -66,8 +66,8 @@ bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
 bindsym Print exec --no-startup-id "flameshot gui"
 
 # Brightness controls with notifications
-bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +10% && dunstify -t 1000 -r 991050 -h int:value:$(brightnessctl -m | cut -d, -f4 | tr -d '%') 'Brightness'"
-bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 10%- && dunstify -t 1000 -r 991050 -h int:value:$(brightnessctl -m | cut -d, -f4 | tr -d '%') 'Brightness'"
+bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +10% && dunstify -r 991049 -h int:value:$(brightnessctl -m | cut -d, -f4 | tr -d '%') 'Brightness'"
+bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 10%- && dunstify -r 991049 -h int:value:$(brightnessctl -m | cut -d, -f4 | tr -d '%') 'Brightness'"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
