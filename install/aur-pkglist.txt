@@ -1,4 +1,3 @@
-wezterm-nightly
 kanata-bin
 neovim-nightly
 xautolock
