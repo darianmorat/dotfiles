@@ -1,3 +1,6 @@
+# After installing p10k just change this lines
+# Some are commented out and others have different values
+
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     context
     example
