@@ -46,10 +46,12 @@ exec --no-startup-id clipmenud
 # Start Vivaldi browser at startup
 exec --no-startup-id vivaldi
 
-# Lock screen after 20min, screen off after 25min, xss-lock handles suspend
-exec --no-startup-id xautolock -time 20 -locker ~/.config/i3/lock.sh
-exec --no-startup-id xset s 1400 1400
-exec --no-startup-id xset dpms 0 0 1500
+# Disable screen off. Since is already handled by lock
+exec --no-startup-id xset dpms 0 0 0
+exec --no-startup-id xset s off
+
+# Lock screen after 15min, turn off screen 5s after locking
+exec --no-startup-id xautolock -time 15 -locker ~/.config/i3/lock.sh
 exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh
 
 bindsym $mod+Shift+l exec ~/.config/i3/lock.sh

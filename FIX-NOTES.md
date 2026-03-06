@@ -1,4 +1,4 @@
-## Autologin
+## Autologin at startup
 
 ```sh
 $ sudo groupadd -r autologin
@@ -15,7 +15,7 @@ autologin-user=username
 autologin-user-timeout=0
 ```
 
-## Sound solution
+## No sound after pausing
 
 Audio stops working if you play sound, pause for 5-10s, then try
 to play again. The cause is WirePlumber suspending idle ALSA nodes
@@ -40,4 +40,18 @@ monitor.alsa.rules = [
       }
    }
 ]
+```
+
+## Don't suspend in close lid
+
+Sound was lost when closing the lid, so the workaround is never suspending the computer
+we just lock and turn off the screen instead
+
+```sh
+$ sudo nvim /etc/systemd/logind.conf
+```
+
+```
+HandleLidSwitch=lock
+HandleLidSwitchExternalPower=lock
 ```
