@@ -48,6 +48,7 @@
 - **7zip** - compress and extract files
 - **pacman-contrib** - extra utility scripts
 - **rsync** - fast cli file copying tool
+- **tlp** - power management daemon
 
 ## Drives
 

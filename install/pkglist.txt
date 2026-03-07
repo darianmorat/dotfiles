@@ -19,6 +19,7 @@ trash-cli
 7zip
 pacman-contrib
 rsync
+tlp
 f3
 gvfs-mtp
 exfatprogs
