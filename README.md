@@ -71,10 +71,11 @@
 ## Fonts
 
 - **inter-font** - typeface for interfaces
-- **jetbrains-mono-nerd** - typeface for devs
-- **noto-fonts-lite** - google ttf font `AUR`
 - **noto-fonts-cjk** - cjk character support
 - **noto-fonts-emoji** - emoji support
+- **noto-fonts-lite** - google ttf font `aur`
+- **ttf-dejavu** - broad unicode fallback font <!-- find a mono-font alternative... it covers this icon in lazygit: ⏣  -->
+- **ttf-jetbrains-mono-nerd** - typeface for devs
 
 ## Theme
 
