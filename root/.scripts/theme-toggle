@@ -46,6 +46,7 @@ theme-manager() {
       --border=none
       --preview-window=border-sharp
       --info=inline-right
+      --highlight-line
       --color=scrollbar:#1E1E1E
       --color=fg:#D6CFC4,fg+:#E6E3DE,bg:#1E1E1E,bg+:#303030
       --color=gutter:#1E1E1E,prompt:#579DD4,marker:#B55353
@@ -57,6 +58,7 @@ theme-manager() {
       --border=none
       --preview-window=border-sharp
       --info=inline-right
+      --highlight-line
       --color=scrollbar:#F7F5EA
       --color=fg:#101010,fg+:#000000,bg:#F7F5EA,bg+:#C9C9BF
       --color=gutter:#F7F5EA,prompt:#0F5289,marker:#AD4B4B

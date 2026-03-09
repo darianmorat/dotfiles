@@ -1,14 +1,9 @@
 gui:
   authorColors:
-    'darianmorat': 'blue'
-    '*': 'magenta'
+    'darianmorat': 'cyan'
   border: single
   showBottomLine: false
-  # showPanelJumps: false
   theme:
-    # activeBorderColor:
-    #   - white
-    #   - bold
     selectedLineBgColor:
       - "#303030"
       - bold

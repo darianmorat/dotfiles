@@ -26,7 +26,8 @@ configuration {
    /*---------- Drun settings ----------*/
    drun-categories: "";
    drun-match-fields: "name,generic,exec,categories,keywords";
-   drun-display-format: "{name}";
+   drun-display-format: "{name}\n<span color='#909090' size='small'>{comment}</span>";
+   eh: 2;
    drun-show-actions: false;
    drun-url-launcher: "xdg-open";
    drun-use-desktop-cache: false;

@@ -13,26 +13,25 @@ configuration {
 /*****----- Global Properties -----*****/
 * {
    font:                        "Inter 10";
-   background:                  #202020;
-   background-alt:              #252525;
+   background:                  #171717;
+   background-alt:              #191919;
    foreground:                  #FFFFFF;
-   selected:                    #303030;
-   active:                      #454545;
-   urgent:                      #404040;
-   border-color:                #424242;
+   selected:                    #1A293D;
+   active:                      #323232;
+   urgent:                      #282828;
+   border-color:                #323232;
 }
 
 /*****----- Main Window -----*****/
 window {
    /* properties for window widget */
    transparency:                "real";
-   location:                    center;
-   anchor:                      center;
+   location:                    north;
+   anchor:                      north;
    fullscreen:                  false;
    width:                       800px;
-   height:                      480px;
    x-offset:                    0px;
-   y-offset:                    0px;
+   y-offset:                    271;
 
    /* properties for all widgets */
    enabled:                     true;
@@ -54,7 +53,7 @@ mainbox {
 
 listbox {
    spacing:                     0px;
-   padding:                     20px 20px 20px 20px;
+   padding:                     0px 20px 20px 20px;
    background-color:            transparent;
    orientation:                 vertical;
    children:                    [ "message", "listview" ];
@@ -65,7 +64,7 @@ inputbar {
    enabled:                     true;
    spacing:                     10px;
    padding:                     15px 20px;
-   margin:                      20px 20px 0px 20px;
+   margin:                      20px 20px 20px 20px;
    border-radius:               0px;
    border:                      1px;
    border-color:                @border-color;
@@ -93,16 +92,16 @@ prompt {
 listview {
    enabled:                     true;
    columns:                     1;
-   lines:                       8;
+   lines:                       6;
    cycle:                       true;
    dynamic:                     true;
    scrollbar:                   false;
    layout:                      vertical;
    reverse:                     false;
-   fixed-height:                true;
+   fixed-height:                false;
    fixed-columns:               true;
 
-   spacing:                     5px;
+   spacing:                     0px;
    background-color:            transparent;
    text-color:                  @foreground;
    cursor:                      "default";
