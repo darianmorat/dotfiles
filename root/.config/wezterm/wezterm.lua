@@ -30,7 +30,6 @@ config.font = wezterm.font({
 
 config.font_size = 12.0
 config.cell_width = 0.90
-config.line_height = 1.0
 
 config.underline_thickness = "2px"
 config.cursor_thickness = "1px"
@@ -38,13 +37,11 @@ config.cursor_thickness = "1px"
 config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
 
-config.scrollback_lines = 3000
 config.animation_fps = 1
 config.cursor_blink_rate = 0
 
 config.enable_tab_bar = false
 config.enable_scroll_bar = false
-config.switch_to_last_active_tab_when_closing_tab = true
 
 config.window_padding = {
    left = 6,
