@@ -1,8 +1,0 @@
-kanata-bin
-neovim-nightly
-xautolock
-i3lock-color
-xhidecursor
-go-mtpfs-git
-qimgv-git
-noto-fonts-lite
