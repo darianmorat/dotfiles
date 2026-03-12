@@ -73,7 +73,7 @@
 - **inter-font** - typeface for interfaces
 - **noto-fonts-cjk** - cjk character support
 - **noto-fonts-emoji** - emoji support
-- **noto-fonts-lite** - google ttf font `aur`
+- **noto-fonts-lite** - google ttf font `AUR`
 - **ttf-dejavu** - broad unicode fallback font
 - **ttf-jetbrains-mono-nerd** - typeface for devs
 
