@@ -54,6 +54,7 @@ vim.opt.ttimeoutlen = 0
 vim.g.mapleader = " "
 vim.g.markdown_recommended_style = 0
 vim.opt.splitright = true
+vim.o.winborder = "single"
 
 -- Title settings
 vim.o.title = true
@@ -124,6 +125,7 @@ local function float_terminal(cmd)
       col = 0,
       width = vim.o.columns,
       height = vim.o.lines,
+      border = "none"
    })
    vim.fn.termopen(cmd, {
       on_exit = function()
@@ -153,9 +155,8 @@ local plugins = {
       "stevearc/oil.nvim",
       opts = {
          default_file_explorer = true,
-         use_default_keymaps = false,
          delete_to_trash = true,
-         confirmation = { border = "single" },
+         use_default_keymaps = false,
          keymaps = {
             ["<BS>"] = { "actions.parent", mode = "n" },
             ["<CR>"] = "actions.select",
@@ -384,9 +385,6 @@ local plugins = {
       event = "BufReadPre",
       config = function()
          require("gitsigns").setup({
-            preview_config = {
-               border = "single",
-            },
             signs = {
                add = { text = "❘" },
                change = { text = "❘" },
@@ -421,7 +419,7 @@ local plugins = {
 
                map("n", "<leader>gj", gitsigns.next_hunk)
                map("n", "<leader>gk", gitsigns.prev_hunk)
-               map("n", "<leader>gg", gitsigns.preview_hunk)
+               map("n", "<leader>go", gitsigns.preview_hunk)
 
                map("n", "<leader>gs", gitsigns.stage_hunk)
                map("n", "<leader>gr", gitsigns.reset_hunk)
@@ -545,7 +543,6 @@ local plugins = {
          },
          signature = {
             enabled = false,
-            window = { border = "single" },
          },
          cmdline = {
             enabled = false,
@@ -576,13 +573,6 @@ local plugins = {
             jump = { float = true },
          })
 
-         local open_float = vim.lsp.util.open_floating_preview
-         function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-            opts = opts or {}
-            opts.border = "single"
-            return open_float(contents, syntax, opts, ...)
-         end
-
          vim.api.nvim_create_autocmd("LspAttach", {
             callback = function(args)
                vim.lsp.document_color.enable(true, args.buf, {
@@ -605,7 +595,7 @@ local plugins = {
          vim.keymap.set("n", "gd", vim.lsp.buf.definition)
          vim.keymap.set("n", "<leader>xx", vim.lsp.buf.code_action)
          vim.keymap.set("n", "<leader>sr", vim.lsp.buf.rename)
-         vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float)
+         vim.keymap.set("n", "<leader>vo", vim.diagnostic.open_float)
          vim.keymap.set("i", "<c-h>", vim.lsp.buf.signature_help)
 
          vim.keymap.set("n", "<leader>vj", function()
