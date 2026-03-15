@@ -5,7 +5,7 @@
 - **i3-wm** - tiling window manager
 - **polybar** - status bar
 - **rofi** - application launcher
-- **wezterm** - terminal emulator
+- **wezterm-nightly-bin** - terminal emulator `AUR`
 - **kanata-bin** - custom keymaps `AUR`
 
 ## Shell
