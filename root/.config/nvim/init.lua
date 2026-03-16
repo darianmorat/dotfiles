@@ -125,7 +125,7 @@ local function float_terminal(cmd)
       col = 0,
       width = vim.o.columns,
       height = vim.o.lines,
-      border = "none"
+      border = "none",
    })
    vim.fn.termopen(cmd, {
       on_exit = function()
@@ -233,17 +233,17 @@ local plugins = {
          local mc = require("multicursor-nvim")
          mc.setup({})
 
-         vim.keymap.set({ "v" }, "<up>", function()
+         vim.keymap.set({ "n", "v" }, "<c-up>", function()
             mc.lineAddCursor(-1)
          end)
-         vim.keymap.set({ "v" }, "<down>", function()
+         vim.keymap.set({ "n", "v" }, "<c-down>", function()
             mc.lineAddCursor(1)
          end)
 
-         vim.keymap.set({ "v" }, "<leader><up>", function()
+         vim.keymap.set({ "n", "v" }, "<leader><up>", function()
             mc.lineSkipCursor(-1)
          end)
-         vim.keymap.set({ "v" }, "<leader><down>", function()
+         vim.keymap.set({ "n", "v" }, "<leader><down>", function()
             mc.lineSkipCursor(1)
          end)
 

@@ -48,10 +48,19 @@ theme-manager() {
       --info=inline-right
       --highlight-line
       --color=scrollbar:#1E1E1E
-      --color=fg:#D6CFC4,fg+:#E6E3DE,bg:#1E1E1E,bg+:#303030
-      --color=gutter:#1E1E1E,prompt:#579DD4,marker:#B55353
-      --color=pointer:#B55353,header:#D19F66,info:#575757
-      --color=hl:#72BA62,hl+:#72BA62,query:#D6CFC4"
+      --color=fg:#D6CFC4
+      --color=fg+:#E6E3DE
+      --color=bg:#1E1E1E
+      --color=bg+:#303030
+      --color=gutter:#1E1E1E
+      --color=prompt:#579DD4
+      --color=marker:#B55353
+      --color=pointer:#B55353
+      --color=header:#D19F66
+      --color=info:#575757
+      --color=hl:#72BA62
+      --color=hl+:#72BA62
+      --color=query:#D6CFC4"
    else
       fzf_opts="--ansi
       --layout=reverse
@@ -60,12 +69,31 @@ theme-manager() {
       --info=inline-right
       --highlight-line
       --color=scrollbar:#F7F5EA
-      --color=fg:#101010,fg+:#000000,bg:#F7F5EA,bg+:#C9C9BF
-      --color=gutter:#F7F5EA,prompt:#0F5289,marker:#AD4B4B
-      --color=pointer:#AD4B4B,header:#AE5F05,info:#707070
-      --color=hl:#006C00,hl+:#006C00,query:#101010"
+      --color=fg:#070707
+      --color=fg+:#000000
+      --color=bg:#F7F5EA
+      --color=bg+:#C9C9BF
+      --color=gutter:#F7F5EA
+      --color=prompt:#0F5289
+      --color=marker:#AD4B4B
+      --color=pointer:#AD4B4B
+      --color=header:#AE5F05
+      --color=info:#707070
+      --color=hl:#006C00
+      --color=hl+:#006C00
+      --color=query:#101010"
    fi
    echo "$fzf_opts" > ~/.fzfrc
+
+   # i3 indicator color
+   if [ "$theme" = "dark" ]; then
+      i3_indicator="#FFFFFF"
+   else
+      i3_indicator="#2E9EF4"
+   fi
+
+   sed -i "s|client.focused .*|client.focused          #181818 #131313 #FFFFFF $i3_indicator   #181818|" "$HOME/.config/i3/config"
+   i3-msg reload
 
    # WezTerm
    touch ~/.config/wezterm/wezterm.lua
