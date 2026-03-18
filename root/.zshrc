@@ -108,6 +108,55 @@ mpv-pick() { find "$@" -type f \( -iname "*.mp3" -o -iname "*.m4a" \) | shuf | m
 # =======================================================================================
 # =======================================================================================
 
+FILE_CLIPBOARD=~/.file_clipboard
+
+yy() {
+   [[ $# -eq 0 ]] && set -- "."
+   echo "copy" > "$FILE_CLIPBOARD"
+   for item in "$@"; do
+      realpath "$item" >> "$FILE_CLIPBOARD"
+   done
+   echo "Copied $# item(s)"
+}
+
+xx() {
+   [[ $# -eq 0 ]] && set -- "."
+   echo "cut" > "$FILE_CLIPBOARD"
+   for item in "$@"; do
+      realpath "$item" >> "$FILE_CLIPBOARD"
+   done
+   echo "Cut $# item(s)"
+}
+
+pp() {
+   [[ ! -f "$FILE_CLIPBOARD" ]] && echo "Nothing to paste" && return 1
+   local mode=$(head -1 "$FILE_CLIPBOARD")
+   local dest="${1:-.}"
+   local count=0
+   while IFS= read -r source; do
+      [[ ! -e "$source" ]] && echo "Skipping: $source (not found)" && continue
+      local target="$dest"
+      [[ -d "$dest" ]] && target="$dest/$(basename "$source")"
+      if [[ "$mode" == "copy" ]]; then
+         cp -r "$source" "$target" && ((count++)) || true
+      else
+         mv "$source" "$target" && ((count++)) || true
+      fi
+   done < <(tail -n +2 "$FILE_CLIPBOARD")
+   echo "Pasted $count item(s)"
+   [[ "$mode" == "cut" ]] && rm "$FILE_CLIPBOARD"
+}
+
+ll() {
+   [[ ! -f "$FILE_CLIPBOARD" ]] && echo "Clipboard empty" && return
+   local mode=$(head -1 "$FILE_CLIPBOARD")
+   echo "[$mode]"
+   tail -n +2 "$FILE_CLIPBOARD"
+}
+
+# =======================================================================================
+# =======================================================================================
+
 # Autoload functions.
 autoload -Uz zmv
 
