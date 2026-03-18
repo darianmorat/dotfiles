@@ -27,20 +27,22 @@ client.urgent           #161616 #801717 #FFFFFF #801717   #801717
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
+# compositor (vsync for screen tearing)
+exec_always --no-startup-id picom -b
+
+# Restore theme on startup
+exec_always --no-startup-id ~/.scripts/theme-toggle init
+
 # Initialize X11 apps settings
 exec_always --no-startup-id xsettingsd
 
 # Initialize bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-# Set solid/image background
-exec_always --no-startup-id xsetroot -solid "#282828"
-# exec_always --no-startup-id feh --bg-fill "$HOME/filename.png"
-
 # Hide cursor when typing
 exec --no-startup-id xhidecursor
 
-# Start clipboard manager
+# Clipboard manager
 exec --no-startup-id clipmenud
 
 # Start Vivaldi browser at startup

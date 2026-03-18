@@ -81,6 +81,6 @@
 
 - **materia-gtk-theme** - gtk theme
 - **papirus-icon-theme** - icon theme
-- **feh** - set wallpaper background
-- **xorg-xsetroot** - set background color
+- **hsetroot** - set background color
 - **xsettingsd** - live gtk theme reloading
+- **picom** - Lightweight compositor for X11
