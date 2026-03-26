@@ -1,4 +1,4 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&height=200&color=0:02569B,100:005078&text=~/dotfiles&fontAlignY=38&fontColor=ffffff&fontSize=60&animation=fadeIn&section=header" alt="Dotfiles Banner" align="center"/>
+<img src="https://capsule-render.vercel.app/api?type=rect&height=180&color=gradient&text=~/dotfiles&descAlign=0&descAlignY=0&textBg=false&fontSize=60&fontColor=ffffff" alt="Dotfiles Banner" align="center"/>
 
 ## Setup
 
