@@ -107,10 +107,12 @@
    e 8
    w 9
 
-   k rctl
-   l lsft
    lalt bspc
-   spc spc
+
+   k rsft
+   l ralt
+   spc rctl
+
 
    ; @lock-numb
    j (layer-switch default)
@@ -136,8 +138,6 @@
    v S-grv
    b \
 
-   m rctl
-
    ___ XX
 )
 
@@ -159,7 +159,7 @@
    , S-,
    . S-.
 
-   c lctl
+   lalt lctl
 
    ___ XX
 )
@@ -180,6 +180,8 @@
    q f10
    a f11
    z f12
+
+   spc rctl
 
    ___ XX
 )
