@@ -20,7 +20,7 @@ return {
       "#070707", -- white
    },
    brights = {
-      "#070707", -- brightBlack
+      "#C9C9BF", -- brightBlack -- Pending: correct gruvdark extra files
       "#9F0202", -- brightRed
       "#006C00", -- brightGreen
       "#AE5F05", -- brightOrange
