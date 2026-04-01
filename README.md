@@ -63,6 +63,7 @@
 - **vivaldi** - power user web browser
 - **libreoffice** - office suite
 - **nemo** - file manager
+- **nemo-fileroller** - file archiver
 - **mpv** - media player
 - **qimgv-git** - image viewer `AUR`
 - **flameshot** - screenshot software
