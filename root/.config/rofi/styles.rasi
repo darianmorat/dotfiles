@@ -92,7 +92,7 @@ prompt {
 listview {
    enabled:                     true;
    columns:                     1;
-   lines:                       6;
+   lines:                       5;
    cycle:                       true;
    dynamic:                     true;
    scrollbar:                   false;
