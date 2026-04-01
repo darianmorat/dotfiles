@@ -7,6 +7,7 @@ gui:
     selectedLineBgColor:
       - "#303030"
       - bold
+notARepository: 'quit'
 customCommands:
   - key: "w"
     command: "git cz"
