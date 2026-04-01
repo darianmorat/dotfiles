@@ -1,0 +1,23 @@
+[Default Applications]
+text/html=vivaldi-stable.desktop
+x-scheme-handler/http=vivaldi-stable.desktop
+x-scheme-handler/https=vivaldi-stable.desktop
+x-scheme-handler/about=vivaldi-stable.desktop
+x-scheme-handler/unknown=vivaldi-stable.desktop
+application/x-directory=nemo.desktop
+image/jpeg=qimgv.desktop
+image/png=qimgv.desktop
+application/pdf=vivaldi-stable.desktop
+image/x-sony-arw=vivaldi-stable.desktop
+image/gif=qimgv.desktop
+image/tiff=qimgv.desktop
+text/plain=nvim.desktop
+
+[Added Associations]
+image/png=qimgv.desktop;
+image/jpeg=qimgv.desktop;
+application/zip=nemo.desktop;
+application/pdf=vivaldi-stable.desktop;
+image/x-sony-arw=vivaldi-stable.desktop;
+image/gif=qimgv.desktop;
+image/tiff=qimgv.desktop;
