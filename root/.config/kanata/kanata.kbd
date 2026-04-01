@@ -234,10 +234,10 @@
    o (mwheel-up    100 120)
    r (mwheel-right 100 120)
 
-   s (movemouse-accel-left  5 300 1 7)
-   d (movemouse-accel-down  5 300 1 7)
-   e (movemouse-accel-up    5 300 1 7)
-   f (movemouse-accel-right 5 300 1 7)
+   s (movemouse-accel-left  3 400 1 10)
+   d (movemouse-accel-down  3 400 1 10)
+   e (movemouse-accel-up    3 400 1 10)
+   f (movemouse-accel-right 3 400 1 10)
 
    k (layer-while-held mouse-slow)
    lalt lctl
@@ -246,8 +246,8 @@
 )
 
 (deflayermap (mouse-slow)
-   s (movemouse-left  15 1)
-   d (movemouse-down  15 1)
-   e (movemouse-up    15 1)
-   f (movemouse-right 15 1)
+   s (movemouse-left  12 4)
+   d (movemouse-down  12 4)
+   e (movemouse-up    12 4)
+   f (movemouse-right 12 4)
 )
