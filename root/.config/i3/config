@@ -81,10 +81,13 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # Theme toggle
-bindsym $mod+Shift+z exec ~/.scripts/theme-toggle
+bindsym $mod+Shift+x exec ~/.scripts/theme-toggle
 
 # Start a terminal
 bindsym $mod+l exec wezterm
+
+# Start File Manager
+bindsym $mod+period exec nemo
 
 # Kill focused window
 bindsym $mod+Shift+d kill
@@ -125,10 +128,10 @@ bindsym $mod+Shift+c floating toggle
 bindsym $mod+c focus mode_toggle
 
 # Focus the parent container
-bindsym $mod+comma focus parent
+bindsym $mod+Shift+comma focus parent
 
 # Focus the child container
-bindsym $mod+period focus child
+bindsym $mod+Shift+period focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -150,7 +153,7 @@ bindsym $mod+Shift+r move container to workspace number $ws3
 bindsym $mod+Shift+t move container to workspace number $ws4
 
 # Go to most recent workspace
-bindsym $mod+n workspace back_and_forth
+bindsym $mod+m workspace back_and_forth
 
 # resize window
 mode "resize" {
