@@ -82,6 +82,9 @@ tiling_drag modifier titlebar
 # Theme toggle
 bindsym $mod+Shift+x exec ~/.scripts/theme-toggle
 
+# Tray toggle
+bindsym $mod+Shift+v exec --no-startup-id polybar-msg action tray module_toggle
+
 # Launch terminal
 bindsym $mod+l exec wezterm
 
