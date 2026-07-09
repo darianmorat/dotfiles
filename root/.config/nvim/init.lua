@@ -703,9 +703,9 @@ vim.api.nvim_create_user_command("BufOnly", function()
 end, {})
 
 vim.api.nvim_create_autocmd("FileType", {
-  callback = function()
-    vim.opt_local.formatoptions:remove("o")
-  end,
+   callback = function()
+      vim.opt_local.formatoptions:remove("o")
+   end,
 })
 
 local yank = vim.hl.on_yank
