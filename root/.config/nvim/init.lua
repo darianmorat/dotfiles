@@ -708,12 +708,12 @@ vim.api.nvim_create_autocmd("FileType", {
    end,
 })
 
-local yank = vim.hl.on_yank
+local hl_op = vim.hl.hl_op or vim.hl.on_yank
 vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
    group = "YankHighlight",
    callback = function()
-      yank({ higroup = "YankHighlight", timeout = 150 })
+      hl_op({ higroup = "YankHighlight", timeout = 150 })
    end,
 })
 
