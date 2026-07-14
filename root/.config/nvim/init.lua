@@ -47,9 +47,7 @@ vim.o.title = true
 vim.o.titlestring = "%{fnamemodify(getcwd(), ':t')} - %t %m"
 vim.o.titleold = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
 
-vim.schedule(function()
-   vim.opt.clipboard = "unnamedplus"
-end)
+vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
 
 -- ======================================================================================
 -- TITLE: Keymaps
@@ -86,7 +84,7 @@ vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-local function float_terminal(cmd)
+local function float(cmd)
    local buf = vim.api.nvim_create_buf(false, true)
    local win = vim.api.nvim_open_win(buf, true, {
       relative = "editor",
@@ -105,9 +103,7 @@ local function float_terminal(cmd)
    vim.cmd("startinsert")
 end
 
-vim.keymap.set("n", "<leader>lg", function()
-   float_terminal("lazygit")
-end)
+vim.keymap.set("n", "<leader>lg", function() float("lazygit") end)
 
 -- ======================================================================================
 -- TITLE: Plugin hooks
@@ -162,7 +158,7 @@ vim.pack.add({
 -- sudo pacman -S prettier stylua python-black
 
 -- nvim-lspconfig (language servers):
--- sudo pacman -S typescript-language-server
+-- npm install -g @vtsls/language-server
 -- sudo pacman -S pyright
 -- sudo pacman -S \
 -- vscode-html-languageserver \
@@ -216,9 +212,7 @@ require("oil").setup({
    },
    view_options = {
       show_hidden = true,
-      is_always_hidden = function(name, _)
-         return name == ".."
-      end,
+      is_always_hidden = function(name, _) return name == ".." end,
    },
 })
 
@@ -269,33 +263,17 @@ vim.keymap.set("v", "<leader>b", "gb", { remap = true })
 local mc = require("multicursor-nvim")
 mc.setup({})
 
-vim.keymap.set({ "n", "v" }, "<c-up>", function()
-   mc.lineAddCursor(-1)
-end)
-vim.keymap.set({ "n", "v" }, "<c-down>", function()
-   mc.lineAddCursor(1)
-end)
+vim.keymap.set({ "n", "v" }, "<c-up>", function() mc.lineAddCursor(-1) end)
+vim.keymap.set({ "n", "v" }, "<c-down>", function() mc.lineAddCursor(1) end)
 
-vim.keymap.set({ "n", "v" }, "<leader><up>", function()
-   mc.lineSkipCursor(-1)
-end)
-vim.keymap.set({ "n", "v" }, "<leader><down>", function()
-   mc.lineSkipCursor(1)
-end)
+vim.keymap.set({ "n", "v" }, "<leader><up>", function() mc.lineSkipCursor(-1) end)
+vim.keymap.set({ "n", "v" }, "<leader><down>", function() mc.lineSkipCursor(1) end)
 
-vim.keymap.set({ "v" }, "n", function()
-   mc.matchAddCursor(1)
-end)
-vim.keymap.set({ "v" }, "<leader>n", function()
-   mc.matchSkipCursor(1)
-end)
+vim.keymap.set({ "v" }, "n", function() mc.matchAddCursor(1) end)
+vim.keymap.set({ "v" }, "<leader>n", function() mc.matchSkipCursor(1) end)
 
-vim.keymap.set({ "v" }, "N", function()
-   mc.matchAddCursor(-1)
-end)
-vim.keymap.set({ "v" }, "<leader>N", function()
-   mc.matchSkipCursor(-1)
-end)
+vim.keymap.set({ "v" }, "N", function() mc.matchAddCursor(-1) end)
+vim.keymap.set({ "v" }, "<leader>N", function() mc.matchSkipCursor(-1) end)
 
 vim.keymap.set({ "v" }, "u", mc.deleteCursor)
 vim.keymap.set({ "n", "v" }, "<c-l>", mc.matchAllAddCursors)
@@ -331,13 +309,8 @@ require("flash").setup({
    modes = { char = { enabled = false } },
 })
 
-vim.keymap.set({ "n", "x", "o" }, "s", function()
-   require("flash").jump()
-end)
-
-vim.keymap.set({ "n", "x", "o" }, "S", function()
-   require("flash").treesitter()
-end)
+vim.keymap.set({ "n", "x", "o" }, "s", function() require("flash").jump() end)
+vim.keymap.set({ "n", "x", "o" }, "S", function() require("flash").treesitter() end)
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -469,9 +442,7 @@ require("gitsigns").setup({
       end
 
       map("n", "<leader>gi", gitsigns.diffthis)
-      map("n", "<leader>gI", function()
-         gitsigns.diffthis("~")
-      end)
+      map("n", "<leader>gI", function() gitsigns.diffthis("~") end)
 
       map("n", "q", function()
          if vim.wo.diff then
@@ -487,19 +458,13 @@ require("gitsigns").setup({
       map("n", "<leader>gr", gitsigns.reset_hunk)
       map("n", "<leader>gu", gitsigns.undo_stage_hunk)
 
-      map("v", "<leader>gs", function()
-         gitsigns.stage_hunk({ line("."), line("v") })
-      end)
-      map("v", "<leader>gr", function()
-         gitsigns.reset_hunk({ line("."), line("v") })
-      end)
+      map("v", "<leader>gs", function() gitsigns.stage_hunk({ line("."), line("v") }) end)
+      map("v", "<leader>gr", function() gitsigns.reset_hunk({ line("."), line("v") }) end)
 
       map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
       map("n", "<leader>td", gitsigns.toggle_deleted)
 
-      map("n", "<leader>gb", function()
-         gitsigns.blame_line({ full = true })
-      end)
+      map("n", "<leader>gb", function() gitsigns.blame_line({ full = true }) end)
    end,
 })
 
@@ -590,7 +555,7 @@ vim.diagnostic.config({
 
 vim.lsp.config("*", {})
 vim.lsp.enable({
-   "ts_ls",
+   "vtsls",
    "eslint",
    "html",
    "cssls",
@@ -605,16 +570,12 @@ vim.keymap.set("n", "<leader>sr", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>vo", vim.diagnostic.open_float)
 vim.keymap.set("i", "<c-h>", vim.lsp.buf.signature_help)
 
+vim.keymap.set("n", "<leader>vj", function() vim.diagnostic.jump({ count = 1 }) end)
+vim.keymap.set("n", "<leader>vk", function() vim.diagnostic.jump({ count = -1 }) end)
+
 vim.keymap.set("n", "<leader>tv", function()
    local new_config = not vim.diagnostic.config().virtual_text
    vim.diagnostic.config({ virtual_text = new_config })
-end)
-
-vim.keymap.set("n", "<leader>vj", function()
-   vim.diagnostic.jump({ count = 1 })
-end)
-vim.keymap.set("n", "<leader>vk", function()
-   vim.diagnostic.jump({ count = -1 })
 end)
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -667,18 +628,24 @@ require("conform").setup({
             "3",
             "--column-width",
             "90",
+            "--collapse-simple-statement",
+            "FunctionOnly",
          },
       },
    },
 })
 
-vim.keymap.set("n", "<leader>fk", function()
-   require("conform").format({
-      lsp_fallback = true,
-      async = false,
-      timeout_ms = 1000,
-   })
-end)
+vim.keymap.set(
+   "n",
+   "<leader>fk",
+   function()
+      require("conform").format({
+         lsp_fallback = true,
+         async = false,
+         timeout_ms = 1000,
+      })
+   end
+)
 
 -- ======================================================================================
 -- TITLE: Commands & Auto-commands
@@ -703,18 +670,14 @@ vim.api.nvim_create_user_command("BufOnly", function()
 end, {})
 
 vim.api.nvim_create_autocmd("FileType", {
-   callback = function()
-      vim.opt_local.formatoptions:remove("o")
-   end,
+   callback = function() vim.opt_local.formatoptions:remove("o") end,
 })
 
 local hl_op = vim.hl.hl_op or vim.hl.on_yank
 vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
    group = "YankHighlight",
-   callback = function()
-      hl_op({ higroup = "YankHighlight", timeout = 150 })
-   end,
+   callback = function() hl_op({ higroup = "YankHighlight", timeout = 150 }) end,
 })
 
 local last_cursor_group = vim.api.nvim_create_augroup("LastCursorGroup", {})
@@ -730,15 +693,11 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 })
 
 vim.api.nvim_create_autocmd("RecordingEnter", {
-   callback = function()
-      print("Recording @" .. vim.fn.reg_recording())
-   end,
+   callback = function() print("Recording @" .. vim.fn.reg_recording()) end,
 })
 
 vim.api.nvim_create_autocmd("RecordingLeave", {
-   callback = function()
-      print("Stopped recording")
-   end,
+   callback = function() print("Stopped recording") end,
 })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
