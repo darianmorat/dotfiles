@@ -8,6 +8,9 @@ set $mod Mod1
 font pango:Inter Display 10
 for_window [class=".*"] title_format "%title"
 
+# Fix oversized file-picker dialogs
+for_window [class="Xdg-desktop-portal-gtk"] resize set 1200 800, move position center
+
 # Window options
 title_align center
 smart_borders on
