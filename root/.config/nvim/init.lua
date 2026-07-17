@@ -1,6 +1,6 @@
--- ======================================================================================
+-- ================================================================================================
 -- TITLE: Options
--- ======================================================================================
+-- ================================================================================================
 
 vim.loader.enable()
 
@@ -19,7 +19,7 @@ vim.opt.sidescrolloff = 6
 vim.opt.pumheight = 10
 vim.opt.guicursor = ""
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "90"
+vim.opt.colorcolumn = "100"
 
 vim.opt.shiftwidth = 3
 vim.opt.softtabstop = 3
@@ -49,9 +49,9 @@ vim.o.titleold = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
 
 vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
 
--- ======================================================================================
+-- ================================================================================================
 -- TITLE: Keymaps
--- ======================================================================================
+-- ================================================================================================
 
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>")
 vim.keymap.set("n", "<leader>w", ":silent w<cr>", { silent = true })
@@ -82,7 +82,7 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { silent = true })
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 local function float(cmd)
    local buf = vim.api.nvim_create_buf(false, true)
@@ -105,9 +105,9 @@ end
 
 vim.keymap.set("n", "<leader>lg", function() float("lazygit") end)
 
--- ======================================================================================
+-- ================================================================================================
 -- TITLE: Plugin hooks
--- ======================================================================================
+-- ================================================================================================
 
 vim.api.nvim_create_autocmd("PackChanged", {
    callback = function(ev)
@@ -121,9 +121,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
    end,
 })
 
--- ======================================================================================
+-- ================================================================================================
 -- TITLE: Plugin list
--- ======================================================================================
+-- ================================================================================================
 
 vim.pack.add({
    { src = "https://github.com/darianmorat/gruvdark.nvim" },
@@ -147,18 +147,19 @@ vim.pack.add({
    { src = "https://github.com/stevearc/conform.nvim" },
 })
 
--- ======================================================================================
+-- ================================================================================================
 -- TITLE: Extra Install
--- ======================================================================================
+-- ================================================================================================
 
 -- treesitter (parser compiler):
 -- sudo pacman -S tree-sitter-cli
 
 -- conform.nvim (formatters):
 -- sudo pacman -S prettier stylua python-black
+-- sudo npm install -g @fsouza/prettierd
 
 -- nvim-lspconfig (language servers):
--- npm install -g @vtsls/language-server
+-- sudo npm install -g @vtsls/language-server
 -- sudo pacman -S pyright
 -- sudo pacman -S \
 -- vscode-html-languageserver \
@@ -166,9 +167,9 @@ vim.pack.add({
 -- vscode-json-languageserver \
 -- eslint-language-server
 
--- ======================================================================================
+-- ================================================================================================
 -- TITLE: Local/UI config
--- ======================================================================================
+-- ================================================================================================
 
 -- vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/gruvdark.nvim"))
 
@@ -177,9 +178,9 @@ vim.pack.add({
 -- vim.opt.report = 9999
 -- require("vim._core.ui2").enable({ enable = true })
 
--- ======================================================================================
+-- ================================================================================================
 -- TITLE: Plugin config
--- ======================================================================================
+-- ================================================================================================
 
 local theme_file = io.open(os.getenv("HOME") .. "/.config/current_theme", "r")
 local theme_mode = theme_file and theme_file:read("*l") or "dark"
@@ -193,7 +194,7 @@ local colorscheme = theme_mode == "light" and "gruvdark-light" or "gruvdark"
 vim.o.background = theme_mode
 vim.cmd.colorscheme(colorscheme)
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("oil").setup({
    default_file_explorer = true,
@@ -236,13 +237,13 @@ vim.api.nvim_create_autocmd("FileType", {
    end,
 })
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("nvim-autopairs").setup({})
 require("nvim-ts-autotag").setup({})
 require("nvim-surround").setup({})
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("ts_context_commentstring").setup({ enable_autocmd = false })
 require("Comment").setup({
@@ -258,7 +259,7 @@ vim.keymap.set("n", "<leader>cO", "gcO", { remap = true })
 vim.keymap.set("v", "<leader>c", "gc", { remap = true })
 vim.keymap.set("v", "<leader>b", "gb", { remap = true })
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 local mc = require("multicursor-nvim")
 mc.setup({})
@@ -286,7 +287,7 @@ vim.keymap.set("n", "<esc>", function()
    end
 end)
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 vim.g.undotree_WindowLayout = 3
 vim.g.undotree_SplitWidth = 38
@@ -296,12 +297,10 @@ vim.keymap.set("n", "<leader>tu", "<cmd>UndotreeToggle<cr>")
 
 vim.api.nvim_create_autocmd("FileType", {
    pattern = "undotree",
-   callback = function()
-      vim.keymap.set("n", "q", "<cmd>UndotreeHide<cr>", { buffer = true })
-   end,
+   callback = function() vim.keymap.set("n", "q", "<cmd>UndotreeHide<cr>", { buffer = true }) end,
 })
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("flash").setup({
    highlight = { backdrop = true },
@@ -312,7 +311,7 @@ require("flash").setup({
 vim.keymap.set({ "n", "x", "o" }, "s", function() require("flash").jump() end)
 vim.keymap.set({ "n", "x", "o" }, "S", function() require("flash").treesitter() end)
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 local nts = require("nvim-treesitter")
 nts.install({
@@ -347,7 +346,7 @@ vim.api.nvim_create_autocmd("FileType", {
    end,
 })
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("fzf-lua").setup({
    defaults = {
@@ -411,7 +410,7 @@ vim.keymap.set("n", "<leader>fr", fzf_vertical("lsp_references"))
 vim.keymap.set("n", "<leader>fw", fzf_vertical("grep_cword"))
 vim.keymap.set("n", "<leader>fW", fzf_vertical("grep_cWORD"))
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("gitsigns").setup({
    signs = {
@@ -468,7 +467,7 @@ require("gitsigns").setup({
    end,
 })
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("ibl").setup({
    indent = {
@@ -482,7 +481,7 @@ require("ibl").setup({
    },
 })
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("luasnip").config.setup({})
 require("blink.cmp").setup({
@@ -533,7 +532,7 @@ require("blink.cmp").setup({
    },
 })
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 vim.diagnostic.config({
    virtual_text = false,
@@ -578,78 +577,38 @@ vim.keymap.set("n", "<leader>tv", function()
    vim.diagnostic.config({ virtual_text = new_config })
 end)
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+
+local prettier = {
+   "prettierd",
+   "prettier",
+   stop_after_first = true,
+}
 
 require("conform").setup({
    formatters_by_ft = {
-      javascript = { "prettier" },
-      typescript = { "prettier" },
-      javascriptreact = { "prettier" },
-      typescriptreact = { "prettier" },
-      html = { "prettier_html" },
-      css = { "prettier" },
-      json = { "prettier" },
-      markdown = { "prettier" },
-      python = { "black" },
       lua = { "stylua" },
+      python = { "black" },
+
+      javascript = prettier,
+      javascriptreact = prettier,
+      typescript = prettier,
+      typescriptreact = prettier,
+
+      html = prettier,
+      css = prettier,
+      json = prettier,
+      markdown = prettier,
    },
-   formatters = {
-      prettier = {
-         prepend_args = {
-            "--tab-width",
-            "3",
-            "--print-width",
-            "90",
-         },
-      },
-      prettier_html = {
-         command = "prettier",
-         args = {
-            "--stdin-filepath",
-            "$FILENAME",
-            "--tab-width",
-            "3",
-            "--print-width",
-            "120",
-         },
-         stdin = true,
-      },
-      black = {
-         prepend_args = {
-            "--line-length",
-            "90",
-         },
-      },
-      stylua = {
-         prepend_args = {
-            "--indent-type",
-            "Spaces",
-            "--indent-width",
-            "3",
-            "--column-width",
-            "90",
-            "--collapse-simple-statement",
-            "FunctionOnly",
-         },
-      },
+   format_on_save = {
+      lsp_format = "fallback",
+      timeout_ms = 500,
    },
 })
 
-vim.keymap.set(
-   "n",
-   "<leader>fk",
-   function()
-      require("conform").format({
-         lsp_fallback = true,
-         async = false,
-         timeout_ms = 1000,
-      })
-   end
-)
-
--- ======================================================================================
+-- ================================================================================================
 -- TITLE: Commands & Auto-commands
--- ======================================================================================
+-- ================================================================================================
 
 vim.filetype.add({
    extension = {
