@@ -129,7 +129,6 @@ vim.pack.add({
    { src = "https://github.com/darianmorat/gruvdark.nvim" },
    { src = "https://github.com/stevearc/oil.nvim" },
    { src = "https://github.com/windwp/nvim-autopairs" },
-   { src = "https://github.com/windwp/nvim-ts-autotag" },
    { src = "https://github.com/kylechui/nvim-surround" },
    { src = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring" },
    { src = "https://github.com/numToStr/Comment.nvim" },
@@ -140,7 +139,6 @@ vim.pack.add({
    { src = "https://github.com/lewis6991/gitsigns.nvim" },
    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
    { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
-   { src = "https://github.com/L3MON4D3/LuaSnip" },
    { src = "https://github.com/saghen/blink.lib" },
    { src = "https://github.com/saghen/blink.cmp" },
    { src = "https://github.com/neovim/nvim-lspconfig" },
@@ -240,7 +238,6 @@ vim.api.nvim_create_autocmd("FileType", {
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("nvim-autopairs").setup({})
-require("nvim-ts-autotag").setup({})
 require("nvim-surround").setup({})
 
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
@@ -483,13 +480,9 @@ require("ibl").setup({
 
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
-require("luasnip").config.setup({})
 require("blink.cmp").setup({
    fuzzy = {
       implementation = "lua",
-   },
-   snippets = {
-      preset = "luasnip",
    },
    completion = {
       menu = {
@@ -511,18 +504,6 @@ require("blink.cmp").setup({
             winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDoc",
          },
       },
-      accept = {
-         auto_brackets = {
-            enabled = false,
-         },
-      },
-   },
-   appearance = {
-      use_nvim_cmp_as_default = false,
-      nerd_font_variant = "mono",
-   },
-   signature = {
-      enabled = false,
    },
    cmdline = {
       enabled = false,
@@ -609,10 +590,18 @@ require("conform").setup({
 -- ================================================================================================
 
 vim.filetype.add({
-   extension = {
-      xaml = "xml",
-   },
+   extension = { xaml = "xml" },
 })
+
+vim.api.nvim_set_hl(0, "SnippetTabstop", {})
+vim.api.nvim_set_hl(0, "SnippetTabstopActive", {})
+
+vim.keymap.set({ "i", "s" }, "<Esc>", function()
+   if vim.snippet then
+      vim.snippet.stop()
+   end
+   return "<Esc>"
+end, { expr = true })
 
 vim.api.nvim_create_user_command("BufOnly", function()
    local listed_buffers = 0
