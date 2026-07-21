@@ -41,6 +41,9 @@ exec_always --no-startup-id xsettingsd
 # Initialize bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
+# Compose key setup for kanata accents
+exec_always --no-startup-id setxkbmap us -option compose:menu
+
 # Hide cursor when typing
 exec --no-startup-id xhidecursor
 

@@ -216,12 +216,12 @@
 )
 
 (deflayermap (acct-layer)
-   a (fork (unicode á) (unicode Á) (lsft rsft))
-   e (fork (unicode é) (unicode É) (lsft rsft))
-   i (fork (unicode í) (unicode Í) (lsft rsft))
-   o (fork (unicode ó) (unicode Ó) (lsft rsft))
-   u (fork (unicode ú) (unicode Ú) (lsft rsft))
-   n (fork (unicode ñ) (unicode Ñ) (lsft rsft))
+   a (fork (macro menu ' a)     (macro menu ' S-a)     (lsft rsft))
+   e (fork (macro menu ' e)     (macro menu ' S-e)     (lsft rsft))
+   i (fork (macro menu ' i)     (macro menu ' S-i)     (lsft rsft))
+   o (fork (macro menu ' o)     (macro menu ' S-o)     (lsft rsft))
+   u (fork (macro menu ' u)     (macro menu ' S-u)     (lsft rsft))
+   n (fork (macro menu S-grv n) (macro menu S-grv S-n) (lsft rsft))
 )
 
 (deflayermap (mouse-layer)
