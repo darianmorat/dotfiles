@@ -64,6 +64,7 @@
 - **libreoffice** - office suite
 - **nemo** - file manager
 - **nemo-fileroller** - file archiver
+- **ffmpegthumbnailer** - video thumbnails
 - **mpv** - media player
 - **qimgv-git** - image viewer `AUR`
 - **flameshot** - screenshot software
