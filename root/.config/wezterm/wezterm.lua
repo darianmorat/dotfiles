@@ -24,6 +24,7 @@ config.underline_thickness = "2px"
 config.cursor_thickness = "1px"
 config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
+config.warn_about_missing_glyphs = false
 
 config.animation_fps = 1
 config.cursor_blink_rate = 0
