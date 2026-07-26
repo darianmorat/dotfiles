@@ -12,12 +12,14 @@ image/x-sony-arw=vivaldi-stable.desktop
 image/gif=qimgv.desktop
 image/tiff=qimgv.desktop
 text/plain=nvim.desktop
+image/webp=qimgv.desktop
+x-scheme-handler/stremio=stremio-enhanced.desktop
 
 [Added Associations]
 image/png=qimgv.desktop;
 image/jpeg=qimgv.desktop;
-application/zip=nemo.desktop;
 application/pdf=vivaldi-stable.desktop;
 image/x-sony-arw=vivaldi-stable.desktop;
 image/gif=qimgv.desktop;
 image/tiff=qimgv.desktop;
+image/webp=qimgv.desktop;
