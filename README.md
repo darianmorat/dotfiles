@@ -20,7 +20,7 @@
 
 ## Code
 
-- **neovim-nightly** - text editor `AUR`
+- **neovim** - text editor
 - **lazygit** - git management tui
 
 ## Runtime
@@ -48,6 +48,7 @@
 - **7zip** - compress and extract files
 - **pacman-contrib** - extra utility scripts
 - **rsync** - fast cli file copying tool
+- **rclone** - rsync for cloud storage
 - **tlp** - power management daemon
 
 ## Drives
