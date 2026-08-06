@@ -6,7 +6,7 @@
 - **polybar** - status bar
 - **rofi** - application launcher
 - **wezterm-nightly-bin** - terminal emulator `AUR`
-- **kanata-bin** - custom keymaps `AUR`
+- **kanata-bin** - custom keymaps `Manual`
 
 ## Shell
 
@@ -53,9 +53,7 @@
 
 ## Drives
 
-- **f3** - test drives real capacity and performance
 - **gvfs-mtp** - mtp support for file managers
-- **go-mtpfs-git** - mount mtp devices via fuse `AUR`
 - **exfatprogs** - utilities for exfat filesystems
 - **dosfstools** - utilities for fat12/16/32 filesystems
 
@@ -77,6 +75,7 @@
 - **noto-fonts-cjk** - cjk character support
 - **noto-fonts-emoji** - emoji support
 - **noto-fonts-lite** - google ttf font `AUR`
+- **ttf-ms-fonts** - core fonts from microsoft `AUR`
 - **ttf-dejavu** - broad unicode fallback font
 - **ttf-jetbrains-mono-nerd** - typeface for devs
 
