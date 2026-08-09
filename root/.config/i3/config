@@ -44,8 +44,8 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Compose key setup for kanata accents
 exec_always --no-startup-id setxkbmap us -option compose:menu
 
-# Hide cursor when typing
-exec --no-startup-id xhidecursor
+# Hide cursor after idle
+exec_always --no-startup-id unclutter --timeout 5 --ignore-scrolling --jitter 10 --start-hidden
 
 # Clipboard manager
 exec --no-startup-id clipmenud
@@ -57,8 +57,8 @@ exec --no-startup-id vivaldi
 exec --no-startup-id xset dpms 0 0 0
 exec --no-startup-id xset s off
 
-# Lock screen after 15min, turn off screen 5s after locking
-exec --no-startup-id xautolock -time 15 -locker ~/.config/i3/lock.sh
+# Lock screen after 15min, turn off screen 20s after locking
+exec --no-startup-id xset s 900
 exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh
 
 bindsym $mod+Shift+l exec ~/.config/i3/lock.sh

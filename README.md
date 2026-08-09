@@ -5,7 +5,7 @@
 - **i3-wm** - tiling window manager
 - **polybar** - status bar
 - **rofi** - application launcher
-- **wezterm-nightly-bin** - terminal emulator `AUR`
+- **wezterm** - terminal emulator
 - **kanata-bin** - custom keymaps `Manual`
 
 ## Shell
@@ -33,9 +33,8 @@
 
 ## Display
 
-- **xautolock** - x screen-locker `AUR`
-- **i3lock-color** - better display lock `AUR`
-- **xhidecursor** - hide cursor on key-press `AUR`
+- **i3lock** - screen locker
+- **unclutter** - hide cursor on idle
 - **redshift** - warmer colors at night
 
 ## System
