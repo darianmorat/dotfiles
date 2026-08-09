@@ -2,14 +2,14 @@
 # Some are commented out and others have different values
 
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    context
     example
     dir
     prompt_char
   )
 
   function prompt_example() {
-    p10k segment -f 7 -i ':'
+     p10k segment -f 2 -t 'nyx@atlas'
+     p10k segment -f 7 -t ':'
   }
 
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SUBSEGMENT_SEPARATOR=''  # separate segments with a space
