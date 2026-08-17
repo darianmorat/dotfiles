@@ -170,6 +170,7 @@ vim.pack.add({
 -- ================================================================================================
 
 -- vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/gruvdark.nvim"))
+-- vim.keymap.set("n", "<leader>r", "<cmd>ReloadTheme<cr>")
 
 -- Is currently showing all the messages, including yank, delete, undo and redo actions
 -- which breaks the silent setup completely, so have this as a reminder to fix later
@@ -645,6 +646,15 @@ vim.api.nvim_create_autocmd("RecordingEnter", {
 vim.api.nvim_create_autocmd("RecordingLeave", {
    callback = function() print("Stopped recording") end,
 })
+
+-- vim.api.nvim_create_user_command("ReloadTheme", function()
+--    for name, _ in pairs(package.loaded) do
+--       if name:match("^gruvdark") then
+--          package.loaded[name] = nil
+--       end
+--    end
+--    vim.cmd.colorscheme(colorscheme)
+-- end, {})
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
    pattern = "*.txt",
