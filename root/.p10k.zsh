@@ -8,7 +8,7 @@
   )
 
   function prompt_example() {
-     p10k segment -f 2 -t 'nyx@atlas'
+     p10k segment -f 2 -t 'kaizen@root'
      p10k segment -f 7 -t ':'
   }
 
