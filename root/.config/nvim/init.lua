@@ -11,6 +11,7 @@ vim.opt.splitbelow = true
 
 vim.opt.number = true
 vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
 vim.opt.wrap = false
 
 vim.opt.scrolloff = 6
@@ -176,7 +177,7 @@ vim.pack.add({
 -- ================================================================================================
 
 -- vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/gruvdark.nvim"))
--- vim.keymap.set("n", "<leader>rt", "<cmd>ReloadTheme<cr>")
+-- vim.keymap.set("n", "<leader>r", "<cmd>ReloadTheme<cr>")
 
 -- Is currently showing all the messages, including yank, delete, undo and redo actions
 -- which breaks the silent setup completely, so have this as a reminder to fix later
@@ -357,10 +358,12 @@ require("gitsigns").setup({
    signs = {
       add = { text = "❘" },
       change = { text = "❘" },
+      delete = { text = "_" },
    },
    signs_staged = {
       add = { text = "❘" },
       change = { text = "❘" },
+      delete = { text = "_" },
    },
 
    on_attach = function(bufnr)
@@ -621,11 +624,12 @@ vim.api.nvim_create_autocmd("CmdwinEnter", {
    callback = function() vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true }) end,
 })
 
--- vim.api.nvim_create_user_command("ReloadTheme", function()
---    for name, _ in pairs(package.loaded) do
---       if name:match("^gruvdark") then
---          package.loaded[name] = nil
---       end
---    end
---    vim.cmd.colorscheme(colorscheme)
--- end, {})
+vim.api.nvim_create_user_command("ReloadTheme", function()
+   for name, _ in pairs(package.loaded) do
+      if name:match("^gruvdark") then
+         package.loaded[name] = nil
+      end
+   end
+   vim.cmd("runtime! colors/" .. colorscheme .. ".lua")
+   vim.cmd.colorscheme(colorscheme)
+end, {})
