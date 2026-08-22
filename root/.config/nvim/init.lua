@@ -16,10 +16,12 @@ vim.opt.wrap = false
 vim.opt.scrolloff = 6
 vim.opt.sidescrolloff = 6
 
-vim.opt.pumheight = 10
 vim.opt.guicursor = ""
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "100"
+
+vim.opt.pumheight = 10
+vim.opt.cmdwinheight = 10
 
 vim.opt.shiftwidth = 3
 vim.opt.softtabstop = 3
@@ -44,8 +46,11 @@ vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 0
 
 vim.o.title = true
-vim.o.titlestring = "%{fnamemodify(getcwd(), ':t')} - %t %m"
 vim.o.titleold = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+vim.o.titlestring = table.concat({
+   "%{fnamemodify(getcwd(), ':t')} - ",
+   "%{fnamemodify(expand('%'),':h')==?'.'?'':fnamemodify(expand('%'),':h:t').'/'}%t %m",
+})
 
 vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
 
@@ -54,33 +59,35 @@ vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
 -- ================================================================================================
 
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>")
-vim.keymap.set("n", "<leader>w", ":silent w<cr>", { silent = true })
-vim.keymap.set("n", "<leader>d", "<cmd>bd<cr>")
-vim.keymap.set("n", "<leader><leader>d", "<cmd>bd!<cr>")
-vim.keymap.set("n", "<leader><leader>b", "<cmd>BufOnly<cr>")
+vim.keymap.set("n", "<leader>w", ":silent! w<cr>", { silent = true })
 
-vim.keymap.set("n", "n", "nzz")
-vim.keymap.set("n", "N", "Nzz")
+vim.keymap.set("n", "<leader>d", "<cmd>bd<cr>")
+vim.keymap.set("n", "<leader>D", "<cmd>bd!<cr>")
+vim.keymap.set("n", "<leader>B", "<cmd>BufOnly<cr>")
+
+vim.keymap.set("n", "<c-k>", "<c-6>")
 vim.keymap.set("n", "<c-d>", "<c-d>zz")
 vim.keymap.set("n", "<c-u>", "<c-u>zz")
-
-vim.keymap.set("n", "K", "mzi<cr><Esc>`z")
-vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "<c-k>", "<c-6>")
 
 vim.keymap.set({ "n", "v" }, "<leader>y", '"ay')
 vim.keymap.set({ "n", "v" }, "<leader>p", '"ap')
 vim.keymap.set({ "n", "v" }, "<leader>x", '"_d')
 
-vim.keymap.set("n", "<leader>ti", "<cmd>IBLToggle<cr>")
-vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<cr>")
-vim.keymap.set("n", "<leader>tn", "<cmd>set relativenumber!<cr>")
-vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<cr>")
-
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { silent = true })
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
+
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+
+local copy_keymap = function(mode, cur_lhs, new_lhs)
+   local map_data = vim.fn.maparg(cur_lhs, mode, false, true)
+   map_data.lhs, map_data.lhsraw = new_lhs, vim.keycode(new_lhs)
+   vim.fn.mapset(map_data)
+end
+
+copy_keymap("n", "gc", "<leader>c")
+copy_keymap("x", "gc", "<leader>c")
+copy_keymap("o", "gc", "<leader>c")
+copy_keymap("n", "gcc", "<leader>cc")
 
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
@@ -129,15 +136,14 @@ vim.pack.add({
    { src = "https://github.com/darianmorat/gruvdark.nvim" },
    { src = "https://github.com/stevearc/oil.nvim" },
    { src = "https://github.com/windwp/nvim-autopairs" },
-   { src = "https://github.com/kylechui/nvim-surround" },
-   { src = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring" },
-   { src = "https://github.com/numToStr/Comment.nvim" },
+   { src = "https://github.com/windwp/nvim-ts-autotag" },
+   { src = "https://github.com/nvim-mini/mini.surround" },
    { src = "https://github.com/jake-stewart/multicursor.nvim" },
    { src = "https://github.com/mbbill/undotree" },
    { src = "https://github.com/folke/flash.nvim" },
    { src = "https://github.com/ibhagwan/fzf-lua" },
    { src = "https://github.com/lewis6991/gitsigns.nvim" },
-   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
    { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
    { src = "https://github.com/saghen/blink.lib" },
    { src = "https://github.com/saghen/blink.cmp" },
@@ -170,7 +176,7 @@ vim.pack.add({
 -- ================================================================================================
 
 -- vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/gruvdark.nvim"))
--- vim.keymap.set("n", "<leader>r", "<cmd>ReloadTheme<cr>")
+-- vim.keymap.set("n", "<leader>rt", "<cmd>ReloadTheme<cr>")
 
 -- Is currently showing all the messages, including yank, delete, undo and redo actions
 -- which breaks the silent setup completely, so have this as a reminder to fix later
@@ -239,23 +245,8 @@ vim.api.nvim_create_autocmd("FileType", {
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("nvim-autopairs").setup({})
-require("nvim-surround").setup({})
-
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
-
-require("ts_context_commentstring").setup({ enable_autocmd = false })
-require("Comment").setup({
-   pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-})
-
-vim.keymap.set("n", "<leader>cc", "gcc", { remap = true })
-vim.keymap.set("n", "<leader>cb", "gbc", { remap = true })
-vim.keymap.set("n", "<leader>ca", "gcA", { remap = true })
-vim.keymap.set("n", "<leader>co", "gco", { remap = true })
-vim.keymap.set("n", "<leader>cO", "gcO", { remap = true })
-
-vim.keymap.set("v", "<leader>c", "gc", { remap = true })
-vim.keymap.set("v", "<leader>b", "gb", { remap = true })
+require("nvim-ts-autotag").setup({})
+require("mini.surround").setup({})
 
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
@@ -291,68 +282,22 @@ vim.g.undotree_WindowLayout = 3
 vim.g.undotree_SplitWidth = 38
 vim.g.undotree_SetFocusWhenToggle = 1
 
-vim.keymap.set("n", "<leader>tu", "<cmd>UndotreeToggle<cr>")
-
-vim.api.nvim_create_autocmd("FileType", {
-   pattern = "undotree",
-   callback = function() vim.keymap.set("n", "q", "<cmd>UndotreeHide<cr>", { buffer = true }) end,
-})
+vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>")
 
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("flash").setup({
-   highlight = { backdrop = true },
    prompt = { enabled = false },
-   modes = { char = { enabled = false } },
 })
 
-vim.keymap.set({ "n", "x", "o" }, "s", function() require("flash").jump() end)
-vim.keymap.set({ "n", "x", "o" }, "S", function() require("flash").treesitter() end)
-
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
-
-local nts = require("nvim-treesitter")
-nts.install({
-   "javascript",
-   "typescript",
-   "tsx",
-   "html",
-   "css",
-   "lua",
-   "python",
-   "json",
-   "yaml",
-   "bash",
-   "vim",
-   "vimdoc",
-   "markdown",
-   "markdown_inline",
-   "diff",
-   "sql",
-   "query",
-   "regex",
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-   callback = function(args)
-      local lang = vim.treesitter.language.get_lang(args.match)
-      if lang and vim.treesitter.language.add(lang) then
-         if vim.api.nvim_buf_line_count(args.buf) <= 10000 then
-            vim.treesitter.start()
-         end
-      end
-   end,
-})
+vim.keymap.set({ "n", "x", "o" }, "f", function() require("flash").jump() end)
+vim.keymap.set({ "n", "x", "o" }, "t", function() require("flash").treesitter() end)
 
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("fzf-lua").setup({
    defaults = {
       formatter = "path.filename_first",
-      file_ignore_patterns = {
-         "node_modules",
-         "package%-lock%.json",
-      },
       fzf_opts = {
          ["--no-multi"] = true,
       },
@@ -387,9 +332,7 @@ local function fzf_vertical(command)
    return function()
       require("fzf-lua")[command]({
          winopts = {
-            preview = {
-               layout = "vertical",
-            },
+            preview = { layout = "vertical" },
          },
       })
    end
@@ -414,18 +357,10 @@ require("gitsigns").setup({
    signs = {
       add = { text = "❘" },
       change = { text = "❘" },
-      delete = { text = "_" },
-      topdelete = { text = "‾" },
-      changedelete = { text = "~" },
-      untracked = { text = "┆" },
    },
    signs_staged = {
       add = { text = "❘" },
       change = { text = "❘" },
-      delete = { text = "_" },
-      topdelete = { text = "‾" },
-      changedelete = { text = "~" },
-      untracked = { text = "┆" },
    },
 
    on_attach = function(bufnr)
@@ -438,30 +373,61 @@ require("gitsigns").setup({
          vim.keymap.set(mode, l, r, opts)
       end
 
-      map("n", "<leader>gi", gitsigns.diffthis)
-      map("n", "<leader>gI", function() gitsigns.diffthis("~") end)
-
-      map("n", "q", function()
-         if vim.wo.diff then
-            vim.cmd("wincmd p | q")
-         end
+      map("n", "<leader>gi", function()
+         gitsigns.diffthis()
+         vim.cmd("wincmd h")
       end)
+
+      if vim.wo.diff then
+         map("n", "q", function() vim.cmd("q") end)
+      end
 
       map("n", "<leader>gj", gitsigns.next_hunk)
       map("n", "<leader>gk", gitsigns.prev_hunk)
       map("n", "<leader>go", gitsigns.preview_hunk)
 
       map("n", "<leader>gs", gitsigns.stage_hunk)
+      map("v", "<leader>gs", function() gitsigns.stage_hunk({ line("."), line("v") }) end)
       map("n", "<leader>gr", gitsigns.reset_hunk)
+      map("v", "<leader>gr", function() gitsigns.reset_hunk({ line("."), line("v") }) end)
       map("n", "<leader>gu", gitsigns.undo_stage_hunk)
 
-      map("v", "<leader>gs", function() gitsigns.stage_hunk({ line("."), line("v") }) end)
-      map("v", "<leader>gr", function() gitsigns.reset_hunk({ line("."), line("v") }) end)
+      map("n", "<leader>gb", gitsigns.toggle_current_line_blame)
+      map("n", "<leader>gB", function() gitsigns.blame_line({ full = true }) end)
+      map("n", "<leader>gd", gitsigns.toggle_deleted)
+   end,
+})
 
-      map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-      map("n", "<leader>td", gitsigns.toggle_deleted)
+-- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
-      map("n", "<leader>gb", function() gitsigns.blame_line({ full = true }) end)
+local nts = require("nvim-treesitter")
+nts.install({
+   "javascript",
+   "typescript",
+   "tsx",
+   "html",
+   "css",
+   "lua",
+   "python",
+   "json",
+   "yaml",
+   "bash",
+   "markdown",
+   "markdown_inline",
+   "diff",
+   "sql",
+   "query",
+   "regex",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+   callback = function(args)
+      local lang = vim.treesitter.language.get_lang(args.match)
+      if lang and vim.treesitter.language.add(lang) then
+         if vim.api.nvim_buf_line_count(args.buf) <= 10000 then
+            vim.treesitter.start()
+         end
+      end
    end,
 })
 
@@ -520,6 +486,7 @@ vim.diagnostic.config({
    virtual_text = false,
    underline = true,
    update_in_insert = false,
+   status = { format = function(_) return "" end },
    jump = {
       on_jump = function(diagnostic, bufnr)
          if not diagnostic then
@@ -544,17 +511,11 @@ vim.lsp.enable({
    "pyright",
 })
 
-vim.keymap.set("n", "gh", vim.lsp.buf.hover)
-vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "<leader>xo", vim.lsp.buf.code_action)
-vim.keymap.set("n", "<leader>sr", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>vo", vim.diagnostic.open_float)
-vim.keymap.set("i", "<c-h>", vim.lsp.buf.signature_help)
-
 vim.keymap.set("n", "<leader>vj", function() vim.diagnostic.jump({ count = 1 }) end)
 vim.keymap.set("n", "<leader>vk", function() vim.diagnostic.jump({ count = -1 }) end)
 
-vim.keymap.set("n", "<leader>tv", function()
+vim.keymap.set("n", "<leader>vi", function()
    local new_config = not vim.diagnostic.config().virtual_text
    vim.diagnostic.config({ virtual_text = new_config })
 end)
@@ -647,15 +608,6 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
    callback = function() print("Stopped recording") end,
 })
 
--- vim.api.nvim_create_user_command("ReloadTheme", function()
---    for name, _ in pairs(package.loaded) do
---       if name:match("^gruvdark") then
---          package.loaded[name] = nil
---       end
---    end
---    vim.cmd.colorscheme(colorscheme)
--- end, {})
-
 vim.api.nvim_create_autocmd("BufWinEnter", {
    pattern = "*.txt",
    callback = function()
@@ -664,3 +616,16 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
       end
    end,
 })
+
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+   callback = function() vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true }) end,
+})
+
+-- vim.api.nvim_create_user_command("ReloadTheme", function()
+--    for name, _ in pairs(package.loaded) do
+--       if name:match("^gruvdark") then
+--          package.loaded[name] = nil
+--       end
+--    end
+--    vim.cmd.colorscheme(colorscheme)
+-- end, {})
