@@ -29,6 +29,11 @@ client.urgent           #161616 #801717 #FFFFFF #801717   #801717
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -c 000000
+exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"
+
 # Compositor (vsync for screen tearing)
 exec_always --no-startup-id picom -b
 
@@ -52,12 +57,6 @@ exec --no-startup-id clipmenud
 
 # Start Vivaldi browser at startup
 exec --no-startup-id vivaldi
-
-# Lock screen after 15min, turn off screen 20s after locking
-exec --no-startup-id xset s 600
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh
-
-bindsym $mod+Shift+l exec ~/.config/i3/lock.sh
 
 # Volume controls with notifications
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pamixer -i 5 && if pamixer --get-mute | grep -q 'true'; then dunstify -r 991049 -h int:value:$(pamixer --get-volume) 'Volume (Muted)'; else dunstify -r 991049 -h int:value:$(pamixer --get-volume) 'Volume'; fi"
@@ -95,6 +94,9 @@ bindsym $mod+period exec nemo
 
 # Kill focused window
 bindsym $mod+Shift+d kill
+
+# Lock screen
+bindsym $mod+Shift+l exec i3lock --nofork -c 000000
 
 # App launcher
 bindsym $mod+Shift+Ctrl+u exec --no-startup-id rofi -show drun
