@@ -179,11 +179,6 @@ vim.pack.add({
 -- vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/gruvdark.nvim"))
 -- vim.keymap.set("n", "<leader>r", "<cmd>ReloadTheme<cr>")
 
--- Is currently showing all the messages, including yank, delete, undo and redo actions
--- which breaks the silent setup completely, so have this as a reminder to fix later
--- vim.opt.report = 9999
--- require("vim._core.ui2").enable({ enable = true })
-
 -- ================================================================================================
 -- TITLE: Plugin config
 -- ================================================================================================
@@ -620,10 +615,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
    end,
 })
 
-vim.api.nvim_create_autocmd("CmdwinEnter", {
-   callback = function() vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true }) end,
-})
-
 vim.api.nvim_create_user_command("ReloadTheme", function()
    for name, _ in pairs(package.loaded) do
       if name:match("^gruvdark") then
@@ -633,3 +624,12 @@ vim.api.nvim_create_user_command("ReloadTheme", function()
    vim.cmd("runtime! colors/" .. colorscheme .. ".lua")
    vim.cmd.colorscheme(colorscheme)
 end, {})
+
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+   callback = function() vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true }) end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+   pattern = { "nvim-pack", "help" },
+   callback = function() vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true }) end,
+})
