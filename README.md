@@ -22,6 +22,7 @@
 
 - **neovim** - text editor
 - **lazygit** - git management tui
+- **difftastic** - smarter git diffs
 
 ## Runtime
 
