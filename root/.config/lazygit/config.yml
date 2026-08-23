@@ -15,3 +15,9 @@ customCommands:
     context: "files"
     loadingText: "opening commitizen commit tool"
     output: terminal
+git:
+  diffRenderers:
+    - type: extDiff
+      command: difft --color=always --display=inline --syntax-highlight=off --context={{diffContext}}
+    - name: default
+      type: rawGit
