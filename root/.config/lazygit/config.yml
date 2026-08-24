@@ -10,7 +10,7 @@ gui:
 notARepository: 'quit'
 customCommands:
   - key: "w"
-    command: "git cz"
+    command: "git cz; true"
     description: "commit with commitizen"
     context: "files"
     loadingText: "opening commitizen commit tool"
