@@ -92,23 +92,43 @@ copy_keymap("n", "gcc", "<leader>cc")
 
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
-local function float(cmd)
-   local buf = vim.api.nvim_create_buf(false, true)
-   local win = vim.api.nvim_open_win(buf, true, {
+local terminals = {}
+
+local function float_opts()
+   return {
       relative = "editor",
       row = 0,
       col = 0,
       width = vim.o.columns,
       height = vim.o.lines,
       border = "none",
-   })
+   }
+end
+
+local function float(cmd)
+   local t = terminals[cmd]
+   if t and vim.api.nvim_buf_is_valid(t) then
+      vim.api.nvim_open_win(t, true, float_opts())
+      vim.cmd.startinsert()
+      return
+   end
+
+   local buf = vim.api.nvim_create_buf(false, true)
+   vim.bo[buf].bufhidden = "hide"
+   vim.api.nvim_open_win(buf, true, float_opts())
+
    vim.fn.termopen(cmd, {
       on_exit = function()
-         vim.api.nvim_win_close(win, true)
-         vim.api.nvim_buf_delete(buf, { force = true })
+         if vim.api.nvim_buf_is_valid(buf) then
+            vim.api.nvim_buf_delete(buf, { force = true })
+         end
+         terminals[cmd] = nil
       end,
    })
-   vim.cmd("startinsert")
+
+   terminals[cmd] = buf
+   vim.cmd.startinsert()
+   vim.keymap.set("t", "q", function() vim.api.nvim_win_close(0, true) end, { buffer = buf })
 end
 
 vim.keymap.set("n", "<leader>lg", function() float("lazygit") end)
