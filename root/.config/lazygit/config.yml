@@ -4,6 +4,7 @@ gui:
   border: single
   showBottomLine: false
   showCommandLog: false
+  showPanelJumps: false
   theme:
     selectedLineBgColor:
       - "#303030"
