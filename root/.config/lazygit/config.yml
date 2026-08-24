@@ -3,6 +3,7 @@ gui:
     'Darian Toledo': 'cyan'
   border: single
   showBottomLine: false
+  showCommandLog: false
   theme:
     selectedLineBgColor:
       - "#303030"
