@@ -52,6 +52,9 @@ exec_always --no-startup-id setxkbmap us -option compose:menu
 # Hide cursor after idle
 exec_always --no-startup-id unclutter --timeout 5 --ignore-scrolling --jitter 10 --start-hidden
 
+# Warmer colors at night
+exec --no-startup-id gammastep
+
 # Clipboard manager
 exec --no-startup-id clipmenud
 
