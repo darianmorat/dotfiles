@@ -58,7 +58,7 @@ exec --no-startup-id gammastep
 # Clipboard manager
 exec --no-startup-id clipmenud
 
-# Start Vivaldi browser at startup
+# Start Vivaldi at startup
 exec --no-startup-id vivaldi
 
 # Volume controls with notifications

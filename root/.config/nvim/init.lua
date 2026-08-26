@@ -338,7 +338,7 @@ require("fzf-lua").setup({
             ["png"] = { "chafa" },
             ["jpg"] = { "chafa" },
             ["jpeg"] = { "chafa" },
-            ["gif"] = { "chafa" },
+            ["webp"] = { "chafa" },
          },
       },
    },
