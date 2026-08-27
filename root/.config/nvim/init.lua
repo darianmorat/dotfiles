@@ -128,7 +128,7 @@ local function float(cmd)
 
    terminals[cmd] = buf
    vim.cmd.startinsert()
-   vim.keymap.set("t", "q", function() vim.api.nvim_win_close(0, true) end, { buffer = buf })
+   vim.keymap.set("t", "<c-h>", function() vim.api.nvim_win_close(0, true) end, { buffer = buf })
 end
 
 vim.keymap.set("n", "<leader>lg", function() float("lazygit") end)
