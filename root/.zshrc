@@ -77,6 +77,7 @@ setopt ignoreeof
 # =======================================================================================
 
 z4h bindkey forward-char Ctrl+D
+z4h bindkey backward-kill-word Ctrl+Backspace
 
 z4h bindkey undefined-key Ctrl+S
 z4h bindkey undefined-key Ctrl+F
