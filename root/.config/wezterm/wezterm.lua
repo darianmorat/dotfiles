@@ -20,6 +20,9 @@ config.font_size = 12.0
 config.cell_width = 0.90
 config.unicode_version = 14
 
+config.initial_cols = 159
+config.initial_rows = 35
+
 config.underline_thickness = "2px"
 config.cursor_thickness = "1px"
 config.freetype_load_target = "Light"
