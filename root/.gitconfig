@@ -1,6 +1,6 @@
 [user]
-   email = dariantoledo@duck.com
    name = Darian Toledo
+   email = dariantoledo@duck.com
 [core]
    editor = nvim
 [diff]
