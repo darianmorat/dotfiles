@@ -2,88 +2,95 @@
 
 ## Setup
 
-- **i3-wm** - tiling window manager
-- **polybar** - status bar
-- **rofi** - application launcher
-- **wezterm-nightly-bin** - terminal emulator `AUR`
-- **kanata-bin** - custom keymaps `Manual`
+- **i3-wm** - Tiling window manager
+- **polybar** - Status bar
+- **rofi** - Application launcher
+- **wezterm-nightly-bin** - Terminal emulator `AUR`
+- **kanata-bin** - Advanced keyboard remapper `Manual`
 
 ## Shell
 
-- **zsh4h** - zero-config zsh `Manual`
-- **p10k** - default zsh4h theme `Manual`
-- **fzf** - cli fuzzy finder
-- **ripgrep** - recursive search
-- **zoxide** - better dir navigation
-- **tree** - display indented list of files
-- **chafa** - basic cli image preview
+- **zsh4h** - Zsh config framework `Manual`
+- **p10k** - Zsh prompt theme `Manual`
+- **fzf** - CLI fuzzy finder
+- **ripgrep** - Recursive search tool
+- **zoxide** - Smarter directory navigation
+- **tree** - Directory tree viewer
+- **chafa** - CLI image previewer
 
 ## Code
 
-- **neovim** - text editor
-- **lazygit** - git management tui
-- **difftastic** - smarter git diffs
+- **neovim** - Text editor
+- **lazygit** - Git management TUI
+- **difftastic** - Structural diff tool
 
 ## Runtime
 
-- **nodejs** - javascript runtime environment
-- **npm** - javascript package manager
-- **commitizen** - conventional commits cli `NPM`
-- **cz-conventional-changelog** - commitizen adapter `NPM`
-- **markdown-preview** - preview markdown in browser `NPM`
+- **nodejs** - JavaScript runtime environment
+- **npm** - JavaScript package manager
+- **commitizen** - Interactive commit message tool `NPM`
+- **cz-conventional-changelog** - Conventional commit adapter `NPM`
+- **markdown-preview** - Markdown preview in browser `NPM`
 
 ## Display
 
-- **i3lock** - screen locker
-- **xautolock** - x screen-locker `AUR`
-- **unclutter** - hide cursor on idle
-- **gammastep** - warmer colors at night
+- **i3lock** - Screen locker
+- **xautolock** - X11 automatic screen locker `AUR`
+- **unclutter** - Idle cursor hider
+- **gammastep** - Night color temperature
+- **safeeyes** - Periodic eye-break reminders
 
 ## System
 
-- **impala** - wifi management tui
-- **bluetui** - bluetooth tui
-- **dunst** - daemon notifications
-- **clipmenu** - clipboard manager
-- **trash-cli** - trash utility for security
-- **7zip** - compress and extract files
-- **pacman-contrib** - extra utility scripts
-- **rsync** - fast cli file copying tool
-- **rclone** - rsync for cloud storage
-- **tlp** - power management daemon
+- **impala** - Wi-Fi management TUI
+- **bluetui** - Bluetooth management TUI
+- **dunst** - Notification daemon
+- **clipmenu** - Clipboard manager
+- **trash-cli** - CLI trash utility
+- **7zip** - File compression and extraction
+- **pacman-contrib** - Additional pacman utilities
+- **rsync** - File synchronization tool
+- **rclone** - Cloud synchronization tool
+- **tlp** - Power management daemon
+- **dex** - Desktop entry execution for autostart
 
 ## Drives
 
-- **gvfs-mtp** - mtp support for file managers
-- **exfatprogs** - utilities for exfat filesystems
-- **dosfstools** - utilities for fat12/16/32 filesystems
+- **gvfs-mtp** - MTP support for GVFS
+- **exfatprogs** - exFAT filesystem utilities
+- **dosfstools** - FAT filesystem utilities
 
 ## Apps
 
-- **vivaldi** - power user web browser
-- **libreoffice** - office suite
-- **nemo** - file manager
-- **nemo-fileroller** - file archiver
-- **ffmpegthumbnailer** - video thumbnails
-- **mpv** - media player
-- **qimgv-git** - image viewer `AUR`
-- **flameshot** - screenshot software
-- **gimp** - image manipulation program
+- **vivaldi** - Primary web browser
+- **firefox** - Fallback web browser
+- **torbrowser** - Privacy web browser
+- **libreoffice** - Office suite
+- **nemo** - File manager
+- **nemo-fileroller** - Nemo archive integration
+- **ffmpegthumbnailer** - Video thumbnail generator
+- **mpv** - Media player
+- **qimgv-git** - Image viewer `AUR`
+- **flameshot** - Screenshot tool
+- **gimp** - Image editor
+- **obs-studio** - Screen recording and streaming
+- **seanime-denshi** - Anime library and streaming server `AUR`
+- **stremio-enhanced-bin** - Media streaming client `AUR`
 
 ## Fonts
 
-- **inter-font** - typeface for interfaces
-- **noto-fonts-cjk** - cjk character support
-- **noto-fonts-emoji** - emoji support
-- **noto-fonts-lite** - google ttf font `AUR`
-- **ttf-ms-fonts** - core fonts from microsoft `AUR`
-- **ttf-dejavu** - broad unicode fallback font
-- **ttf-jetbrains-mono-nerd** - typeface for devs
+- **inter-font** - Typeface for interfaces
+- **noto-fonts-cjk** - CJK character support
+- **noto-fonts-emoji** - Emoji support
+- **noto-fonts-lite** - Google font collection `AUR`
+- **ttf-ms-fonts** - Microsoft core fonts `AUR`
+- **ttf-dejavu** - Unicode fallback font
+- **ttf-jetbrains-mono-nerd** - Developer typeface
 
 ## Theme
 
-- **materia-gtk-theme** - gtk theme
-- **papirus-icon-theme** - icon theme
-- **hsetroot** - set background color
-- **xsettingsd** - live gtk theme reloading
-- **picom** - Lightweight compositor for X11
+- **materia-gtk-theme** - GTK theme
+- **papirus-icon-theme** - Icon theme
+- **hsetroot** - X11 background utility
+- **picom** - X11 compositor
+- **xsettingsd** - X11 GTK settings daemon
