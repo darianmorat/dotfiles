@@ -6,6 +6,7 @@
 - **polybar** - Status bar
 - **rofi** - Application launcher
 - **wezterm-nightly-bin** - Terminal emulator `AUR`
+- **ghostty** - Fallback terminal
 - **kanata-bin** - Advanced keyboard remapper `Manual`
 
 ## Shell
