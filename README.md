@@ -39,7 +39,7 @@
 - **xautolock** - X11 automatic screen locker `AUR`
 - **unclutter** - Idle cursor hider
 - **gammastep** - Night color temperature
-- **safeeyes** - Periodic eye-break reminders
+- **safeeyes** - Periodic eye-break reminders `AUR`
 
 ## System
 
