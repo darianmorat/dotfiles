@@ -5,8 +5,8 @@
 - **i3-wm** - Tiling window manager
 - **polybar** - Status bar
 - **rofi** - Application launcher
-- **wezterm-nightly-bin** - Terminal emulator `AUR`
-- **ghostty** - Fallback terminal
+- **wezterm-nightly-bin** - Primary terminal emulator `AUR`
+- **ghostty** - Fallback terminal emulator
 - **kanata-bin** - Advanced keyboard remapper `Manual`
 
 ## Shell
