@@ -103,7 +103,7 @@ theme-manager() {
    # Reload i3 and notify
    if [ "$1" != "init" ]; then
       i3-msg reload
-      notify-send "Theme switched to $theme"
+      dunstify -r 993051 "Theme switched to $theme"
    fi
 }
 
