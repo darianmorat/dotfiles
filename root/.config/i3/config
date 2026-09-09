@@ -86,7 +86,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # Theme toggle
-bindsym $mod+Shift+x exec ~/.scripts/theme-toggle
+bindsym $mod+Shift+s exec ~/.scripts/theme-toggle
 
 # Tray toggle
 bindsym $mod+Shift+v exec --no-startup-id polybar-msg action tray module_toggle
@@ -133,10 +133,16 @@ bindsym $mod+d layout tabbed
 bindsym $mod+f layout toggle split
 
 # Toggle tiling / floating
-bindsym $mod+Shift+c floating toggle
+bindsym $mod+x floating toggle
 
 # Change focus between tiling / floating windows
-bindsym $mod+c focus mode_toggle
+bindsym $mod+Shift+x focus mode_toggle
+
+# Move window to scratchpad / void
+bindsym $mod+Shift+c move scratchpad
+
+# Get window from scratchpad / void
+bindsym $mod+c scratchpad show
 
 # Focus the parent container
 bindsym $mod+Shift+comma focus parent
