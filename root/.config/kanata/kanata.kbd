@@ -24,22 +24,20 @@
 (deflayermap (default)
    w (tap-hold-release $tt $ht w (layer-while-held mdia-layer))
    e (tap-hold-release $tt $ht e (layer-while-held rsym-layer))
-   i (tap-hold-release $tt $ht i (layer-while-held lsym-layer))
    o (tap-hold-release $tt $ht o (layer-while-held func-layer))
+   i (tap-hold-release $tt $ht i (layer-while-held lsym-layer))
 
    s (tap-hold-release $tt $ht s lalt)
    d (tap-hold-release $tt $ht d lsft)
    c (tap-hold-release $tt $ht c lctl)
-
    l (tap-hold-release $tt $ht l ralt)
    k (tap-hold-release $tt $ht k rsft)
    m (tap-hold-release $tt $ht m rctl)
 
-   v (tap-hold-release $tt $ht v lmet)
-
    f (tap-hold-release $tt $ht f (layer-while-held nav-layer))
    j (tap-hold-release $tt $ht j (layer-while-held numb-layer))
 
+   v (tap-hold-release $tt $ht v XX)
    n (tap-hold-release $tt $ht n (layer-while-held term-layer))
 
    lalt (tap-hold-release $tt $ht esc (layer-while-held acct-layer))
