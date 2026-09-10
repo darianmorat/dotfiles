@@ -71,6 +71,7 @@
 - **nemo-fileroller** - Nemo archive integration
 - **ffmpegthumbnailer** - Video thumbnail generator
 - **mpv** - Media player
+- **quodlibet** - Music player and library manager
 - **qimgv-git** - Image viewer `AUR`
 - **flameshot** - Screenshot tool
 - **gimp** - Image editor
