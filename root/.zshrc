@@ -104,9 +104,6 @@ fzf-global() {
 zle -N fzf-global
 bindkey '^O' fzf-global
 
-alias mpv-all='find . -type f \( -iname "*.mp3" -o -iname "*.m4a" \) | shuf | mpv --playlist=-'
-mpv-pick() { find "$@" -type f \( -iname "*.mp3" -o -iname "*.m4a" \) | shuf | mpv --playlist=- ; }
-
 # =======================================================================================
 # =======================================================================================
 
