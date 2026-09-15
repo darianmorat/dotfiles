@@ -11,11 +11,6 @@
    ht $hold-timeout
 )
 
-(defalias
-   lock-nav (layer-switch nav-layer)
-   lock-numb (layer-switch numb-layer)
-)
-
 (defchordsv2
   (d k) caps 50 all-released ()
 )
@@ -41,7 +36,7 @@
    n (tap-hold-release $tt $ht n (layer-while-held term-layer))
 
    lalt (tap-hold-release $tt $ht esc (layer-while-held acct-layer))
-   spc (tap-hold-release $tt $ht spc (layer-while-held mouse-layer))
+   spc (tap-hold-release $tt $ht spc (layer-while-held curs-layer))
 
    q (tap-hold-release $tt $ht q XX)
    r (tap-hold-release $tt $ht r XX)
@@ -84,7 +79,7 @@
    lalt lctl
    spc tab
 
-   a @lock-nav
+   a (layer-switch nav-layer)
    f (layer-switch default)
 
    ___ XX
@@ -112,7 +107,7 @@
    spc rctl
 
 
-   ; @lock-numb
+   ; (layer-switch numb-layer)
    j (layer-switch default)
 
    ___ XX
@@ -136,7 +131,16 @@
    v S-grv
    b \
 
+   spc rctl
+   j (layer-while-held lsym-punc)
+
    ___ XX
+)
+
+(deflayermap (lsym-punc)
+   t (macro menu S-1 S-1)
+
+   ___ _
 )
 
 (deflayermap (rsym-layer)
@@ -158,8 +162,15 @@
    . S-.
 
    lalt lctl
+   f (layer-while-held rsym-punc)
 
    ___ XX
+)
+ 
+(deflayermap (rsym-punc)
+   n (macro menu S-/ S-/)
+
+   ___ _
 )
 
 (deflayermap (func-layer)
@@ -179,6 +190,7 @@
    a f11
    z f12
 
+   lalt lalt
    spc rctl
 
    ___ XX
@@ -214,15 +226,28 @@
 )
 
 (deflayermap (acct-layer)
-   a (fork (macro menu ' a)     (macro menu ' S-a)     (lsft rsft))
-   e (fork (macro menu ' e)     (macro menu ' S-e)     (lsft rsft))
-   i (fork (macro menu ' i)     (macro menu ' S-i)     (lsft rsft))
-   o (fork (macro menu ' o)     (macro menu ' S-o)     (lsft rsft))
-   u (fork (macro menu ' u)     (macro menu ' S-u)     (lsft rsft))
+   a (fork (macro menu ' a) (macro menu (unshift ') S-a) (lsft rsft))
+   e (fork (macro menu ' e) (macro menu (unshift ') S-e) (lsft rsft))
+   i (fork (macro menu ' i) (macro menu (unshift ') S-i) (lsft rsft))
+   o (fork (macro menu ' o) (macro menu (unshift ') S-o) (lsft rsft))
+   u (fork (macro menu ' u) (macro menu (unshift ') S-u) (lsft rsft))
+
    n (fork (macro menu S-grv n) (macro menu S-grv S-n) (lsft rsft))
+
+   d lsft
+   k rsft
+   s (layer-while-held acct-diae)
+
+   ___ XX
 )
 
-(deflayermap (mouse-layer)
+(deflayermap (acct-diae)
+   u (fork (macro menu S-' u) (macro menu S-' S-u) (lsft rsft))
+
+   ___ _
+)
+
+(deflayermap (curs-layer)
    j mlft
    u mmid
    l mrgt
@@ -237,13 +262,13 @@
    e (movemouse-accel-up    3 400 1 10)
    f (movemouse-accel-right 3 400 1 10)
 
-   k (layer-while-held mouse-slow)
    lalt lctl
+   k (layer-while-held curs-slow)
 
    ___ XX
 )
 
-(deflayermap (mouse-slow)
+(deflayermap (curs-slow)
    s (movemouse-left  12 4)
    d (movemouse-down  12 4)
    e (movemouse-up    12 4)

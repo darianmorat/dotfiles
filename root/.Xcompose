@@ -12,3 +12,9 @@ include "%L"
 <Multi_key> <apostrophe> <U> : "Ú"
 <Multi_key> <asciitilde> <n> : "ñ"
 <Multi_key> <asciitilde> <N> : "Ñ"
+
+<Multi_key> <quotedbl> <u> : "ü"
+<Multi_key> <quotedbl> <U> : "Ü"
+
+<Multi_key> <exclam> <exclam> : "¡"
+<Multi_key> <question> <question> : "¿"
