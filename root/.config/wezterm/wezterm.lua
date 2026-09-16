@@ -10,10 +10,14 @@ if wezterm.config_builder then
    config = wezterm.config_builder()
 end
 
-config.font = wezterm.font({
-   family = "JetBrainsMono Nerd Font Mono",
-   weight = "Medium",
-   harfbuzz_features = { "zero", "calt=0", "clig=0", "liga=0" },
+config.font = wezterm.font_with_fallback({
+   {
+      family = "JetBrainsMono Nerd Font Mono",
+      harfbuzz_features = { "zero", "calt=0", "clig=0", "liga=0" },
+   },
+   {
+      family = "Noto Sans CJK SC",
+   },
 })
 
 config.font_size = 12.0
@@ -50,8 +54,8 @@ config.leader = { key = "F12", mods = "CTRL" }
 config.keys = {
    { key = "j", mods = "CTRL", action = act.ActivateLastTab },
 
-   { key = "c", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
-   { key = "d", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
+   { key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+   { key = "d", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
 
    { key = "f", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
    {
