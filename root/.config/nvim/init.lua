@@ -558,7 +558,6 @@ require("conform").setup({
       html = prettier,
       css = prettier,
       json = prettier,
-      astro = prettier,
       markdown = prettier,
       python = { "black" },
       lua = { "stylua" },
