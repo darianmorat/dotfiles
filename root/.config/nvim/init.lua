@@ -177,20 +177,15 @@ vim.pack.add({
 -- ================================================================================================
 
 -- treesitter (parser compiler):
--- sudo pacman -S tree-sitter-cli
+--   pacman -S tree-sitter-cli
 
 -- conform.nvim (formatters):
--- sudo pacman -S prettier stylua python-black
--- sudo npm install -g @fsouza/prettierd
+--   pacman -S prettier stylua python-black
+--   npm i -g @fsouza/prettierd
 
 -- nvim-lspconfig (language servers):
--- sudo npm install -g @vtsls/language-server
--- sudo pacman -S pyright
--- sudo pacman -S \
--- vscode-html-languageserver \
--- vscode-css-languageserver \
--- vscode-json-languageserver \
--- eslint-language-server
+--   pacman -S eslint-language-server vscode-{html,css,json}-languageserver pyright
+--   npm i -g @vtsls/language-server @astrojs/language-server
 
 -- ================================================================================================
 -- TITLE: Local/UI config
@@ -431,15 +426,16 @@ nts.install({
    "tsx",
    "html",
    "css",
-   "lua",
-   "python",
    "json",
-   "yaml",
-   "bash",
+   "astro",
+   "python",
+   "lua",
    "markdown",
    "markdown_inline",
-   "diff",
+   "yaml",
+   "bash",
    "sql",
+   "diff",
    "query",
    "regex",
 })
@@ -532,6 +528,7 @@ vim.lsp.enable({
    "html",
    "cssls",
    "jsonls",
+   "astro",
    "pyright",
 })
 
@@ -554,8 +551,6 @@ local prettier = {
 
 require("conform").setup({
    formatters_by_ft = {
-      lua = { "stylua" },
-      python = { "black" },
       javascript = prettier,
       javascriptreact = prettier,
       typescript = prettier,
@@ -563,7 +558,10 @@ require("conform").setup({
       html = prettier,
       css = prettier,
       json = prettier,
+      astro = prettier,
       markdown = prettier,
+      python = { "black" },
+      lua = { "stylua" },
    },
    format_on_save = {
       lsp_format = "fallback",
