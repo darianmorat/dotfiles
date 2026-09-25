@@ -1,6 +1,4 @@
--- ================================================================================================
--- TITLE: Options
--- ================================================================================================
+-- TITLE: Options ---------------------------------------------------------------------------------
 
 vim.loader.enable()
 
@@ -55,9 +53,7 @@ vim.o.titlestring = table.concat({
 
 vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
 
--- ================================================================================================
--- TITLE: Keymaps
--- ================================================================================================
+-- TITLE: Keymaps ---------------------------------------------------------------------------------
 
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>")
 vim.keymap.set("n", "<leader>w", ":silent! w<cr>", { silent = true })
@@ -133,9 +129,7 @@ end
 
 vim.keymap.set("n", "<leader>lg", function() float("lazygit") end)
 
--- ================================================================================================
--- TITLE: Plugin hooks
--- ================================================================================================
+-- TITLE: Plugin hooks ----------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("PackChanged", {
    callback = function(ev)
@@ -149,9 +143,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
    end,
 })
 
--- ================================================================================================
--- TITLE: Plugin list
--- ================================================================================================
+-- TITLE: Plugin list -----------------------------------------------------------------------------
 
 vim.pack.add({
    { src = "https://github.com/darianmorat/gruvdark.nvim" },
@@ -172,31 +164,12 @@ vim.pack.add({
    { src = "https://github.com/stevearc/conform.nvim" },
 })
 
--- ================================================================================================
--- TITLE: Extra Install
--- ================================================================================================
+-- TITLE: Local/UI config -------------------------------------------------------------------------
 
--- treesitter (parser compiler):
---   pacman -S tree-sitter-cli
+vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/gruvdark.nvim"))
+vim.keymap.set("n", "<leader>r", "<cmd>ReloadTheme<cr>")
 
--- conform.nvim (formatters):
---   pacman -S prettier stylua python-black
---   npm i -g @fsouza/prettierd
-
--- nvim-lspconfig (language servers):
---   pacman -S eslint-language-server vscode-{html,css,json}-languageserver pyright
---   npm i -g @vtsls/language-server @astrojs/language-server
-
--- ================================================================================================
--- TITLE: Local/UI config
--- ================================================================================================
-
--- vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/gruvdark.nvim"))
--- vim.keymap.set("n", "<leader>r", "<cmd>ReloadTheme<cr>")
-
--- ================================================================================================
--- TITLE: Plugin config
--- ================================================================================================
+-- TITLE: Plugin config ---------------------------------------------------------------------------
 
 local theme_file = io.open(os.getenv("HOME") .. "/.config/current_theme", "r")
 local theme_mode = theme_file and theme_file:read("*l") or "dark"
@@ -568,9 +541,7 @@ require("conform").setup({
    },
 })
 
--- ================================================================================================
--- TITLE: Commands & Auto-commands
--- ================================================================================================
+-- TITLE: Commands & Auto-commands ----------------------------------------------------------------
 
 vim.filetype.add({
    extension = { xaml = "xml" },
