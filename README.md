@@ -75,6 +75,7 @@
 - **qimgv-git** - Image viewer `AUR`
 - **flameshot** - Screenshot tool
 - **gimp** - Image editor
+- **xcolor** - X11 color picker
 - **obs-studio** - Screen recording and streaming
 - **seanime-denshi** - Anime library and streaming server `AUR`
 - **stremio-enhanced-bin** - Media streaming client `AUR`
