@@ -146,7 +146,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 -- TITLE: Plugin list -----------------------------------------------------------------------------
 
 vim.pack.add({
-   { src = "https://github.com/darianmorat/gruvdark.nvim" },
+   { src = "https://github.com/darianmorat/shibumi.nvim" },
    { src = "https://github.com/stevearc/oil.nvim" },
    { src = "https://github.com/windwp/nvim-autopairs" },
    { src = "https://github.com/windwp/nvim-ts-autotag" },
@@ -166,7 +166,7 @@ vim.pack.add({
 
 -- TITLE: Local/UI config -------------------------------------------------------------------------
 
-vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/gruvdark.nvim"))
+vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/shibumi.nvim"))
 vim.keymap.set("n", "<leader>r", "<cmd>ReloadTheme<cr>")
 
 -- TITLE: Plugin config ---------------------------------------------------------------------------
@@ -178,7 +178,7 @@ if theme_file then
    theme_file:close()
 end
 
-local colorscheme = theme_mode == "light" and "gruvdark-light" or "gruvdark"
+local colorscheme = theme_mode == "light" and "shibumi-light" or "shibumi"
 
 vim.o.background = theme_mode
 vim.cmd.colorscheme(colorscheme)
@@ -611,7 +611,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 
 vim.api.nvim_create_user_command("ReloadTheme", function()
    for name, _ in pairs(package.loaded) do
-      if name:match("^gruvdark") then
+      if name:match("^shibumi") then
          package.loaded[name] = nil
       end
    end
