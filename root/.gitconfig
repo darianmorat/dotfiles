@@ -13,7 +13,7 @@
    syntax-theme = none
    line-numbers = true
    file-style = "yellow bold"
-   file-decoration-style = "yellow ul ol"
+   file-decoration-style = omit
    minus-style = "red #3A292B"
    minus-emph-style = "red reverse"
    plus-style = "green #2D3A2A"
@@ -23,7 +23,7 @@
    line-numbers-left-style = "black"
    line-numbers-right-style = "black"
    line-numbers-zero-style = "grey"
-   hunk-header-line-number-style = "white bold"
+   hunk-header-line-number-style = "cyan"
    hunk-header-decoration-style = "black ul"
 
 [alias]
