@@ -19,6 +19,7 @@ customCommands:
     output: terminal
 git:
   diffRenderers:
+    - command: delta --paging=never
     - type: extDiff
       command: difft --color=always --display=inline --syntax-highlight=off --context={{diffContext}}
     - name: default

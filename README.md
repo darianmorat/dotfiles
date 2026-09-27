@@ -21,7 +21,7 @@
 
 - **neovim** - Text editor
 - **lazygit** - Git management TUI
-- **difftastic** - Structural diff tool
+- **git-delta** - Diff pager
 
 ## Runtime
 
