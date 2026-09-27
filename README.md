@@ -1,5 +1,3 @@
-<img src="https://capsule-render.vercel.app/api?type=transparent&height=120&text=~/dotfiles&descAlign=58&descAlignY=74&desc=darianmorat&descSize=15&textBg=false&fontSize=60&fontColor=ffffff&fontAlign=50&fontAlignY=50" alt="Dotfiles Banner" align="center"/>
-
 ## Setup
 
 - **i3-wm** - Tiling window manager
