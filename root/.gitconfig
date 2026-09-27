@@ -12,11 +12,11 @@
 [delta]
    syntax-theme = none
    line-numbers = true
-   file-style = "#D19F66 bold"
-   file-decoration-style = "#D19F66 ul ol"
-   minus-style = "red #3a292b"
+   file-style = "yellow bold"
+   file-decoration-style = "yellow ul ol"
+   minus-style = "red #3A292B"
    minus-emph-style = "red reverse"
-   plus-style = "green #2d3a2a"
+   plus-style = "green #2D3A2A"
    plus-emph-style = "green reverse"
    line-numbers-minus-style = "red"
    line-numbers-plus-style = "green"
