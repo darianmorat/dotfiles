@@ -12,7 +12,7 @@
 [delta]
    syntax-theme = none
    line-numbers = true
-   file-style = "yellow bold"
+   file-style = "yellow"
    file-decoration-style = omit
    minus-style = "red #3A292B"
    minus-emph-style = "red reverse"
