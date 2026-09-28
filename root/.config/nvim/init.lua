@@ -51,6 +51,7 @@ vim.o.titlestring = table.concat({
    "%{fnamemodify(expand('%'),':h')==?'.'?'':fnamemodify(expand('%'),':h:t').'/'}%t %m",
 })
 
+vim.opt.fillchars:append({ diff = "/" })
 vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
 
 -- TITLE: Keymaps ---------------------------------------------------------------------------------
