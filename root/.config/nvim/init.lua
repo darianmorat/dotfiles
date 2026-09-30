@@ -402,8 +402,8 @@ nts.install({
    "css",
    "json",
    "astro",
-   "python",
    "lua",
+   "python",
    "markdown",
    "markdown_inline",
    "yaml",
@@ -533,12 +533,12 @@ require("conform").setup({
       css = prettier,
       json = prettier,
       markdown = prettier,
-      python = { "black" },
       lua = { "stylua" },
+      python = { "black" },
    },
    format_on_save = {
+      timeout_ms = 500,
       lsp_format = "fallback",
-      timeout_ms = 1000,
    },
 })
 
