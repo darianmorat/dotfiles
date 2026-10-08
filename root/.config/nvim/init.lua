@@ -396,12 +396,7 @@ local function oil_pick_dir(cwd)
    )
 end
 
-vim.keymap.set(
-   "n",
-   "<leader>fe",
-   function() oil_pick_dir() end,
-   { desc = "Oil: pick dir" }
-)
+vim.keymap.set("n", "<leader>fe", function() oil_pick_dir() end)
 
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
