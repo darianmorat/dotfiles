@@ -35,12 +35,10 @@ theme-manager() {
    fi
 
    # Lazygit
-   if [ "$theme" = "dark" ]; then
-      lg_color="#303030"
-   else
-      lg_color="#C9C9BF"
-   fi
-   sed -i "s/- \"#[^\"]*\"/- \"$lg_color\"/" "$CONFIG_DIR/lazygit/config.yml"
+   sed -i "s/^\(  colorScheme:\) .*/\1 $theme/" "$CONFIG_DIR/lazygit/config.yml"
+
+   # Delta
+   git config --global delta.features "$theme"
 
    # FZF
    if [ "$theme" = "dark" ]; then

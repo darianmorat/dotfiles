@@ -10,21 +10,33 @@
     diffFilter = delta --color-only
 
 [delta]
+	features = dark
    syntax-theme = none
    line-numbers = true
    file-style = "yellow"
    file-decoration-style = omit
-   minus-style = "red #3A292B"
-   minus-emph-style = "red reverse"
-   plus-style = "green #2D3A2A"
    plus-emph-style = "green reverse"
-   line-numbers-minus-style = "red"
+   minus-emph-style = "red reverse"
    line-numbers-plus-style = "green"
-   line-numbers-left-style = "black"
-   line-numbers-right-style = "black"
+   line-numbers-minus-style = "red"
    line-numbers-zero-style = "grey"
    hunk-header-line-number-style = "cyan"
-   hunk-header-decoration-style = "black ul"
+
+[delta "dark"]
+   dark = true
+   plus-style = "green #2D3A2A"
+   minus-style = "red #3A292B"
+   line-numbers-left-style = "#575757"
+   line-numbers-right-style = "#575757"
+   hunk-header-decoration-style = "#575757 ul"
+
+[delta "light"]
+   light = true
+   plus-style = "green #DAF6DC"
+   minus-style = "red #F4D3D6"
+   line-numbers-left-style = "#7F7F7F"
+   line-numbers-right-style = "#7F7F7F"
+   hunk-header-decoration-style = "#7F7F7F ul"
 
 [alias]
    sdiff = -c delta.side-by-side=true diff

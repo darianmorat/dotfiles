@@ -1,14 +1,22 @@
 gui:
-  authorColors:
-    'Darian Toledo': 'cyan'
   border: single
   showBottomLine: false
   showCommandLog: false
   showPanelJumps: false
+  colorScheme: dark
   theme:
+    authorColors:
+      'Darian Toledo': 'cyan'
+  darkTheme:
     selectedLineBgColor:
       - "#303030"
-      - bold
+    inactiveBorderColor:
+      - "#5F5F5F"
+  lightTheme:
+    selectedLineBgColor:
+      - "#C9C9BF"
+    inactiveBorderColor:
+      - "#7F7F7F"
 notARepository: 'quit'
 customCommands:
   - key: "w"
