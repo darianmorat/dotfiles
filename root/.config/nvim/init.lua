@@ -336,6 +336,24 @@ vim.keymap.set("n", "<leader>fr", fzf_vertical("lsp_references"))
 vim.keymap.set("n", "<leader>fw", fzf_vertical("grep_cword"))
 vim.keymap.set("n", "<leader>fW", fzf_vertical("grep_cWORD"))
 
+local function oil_pick_dir(cwd)
+   cwd = cwd or vim.fn.getcwd()
+   require("fzf-lua").fzf_exec("fd --type d --hidden --exclude .git --exclude node_modules", {
+      cwd = cwd,
+      winopts = { title = " Dirs " },
+      preview = "tree -a -L 1 -C --dirsfirst {}",
+      actions = {
+         ["default"] = function(selected)
+            if selected and selected[1] then
+               require("oil").open(vim.fs.joinpath(cwd, selected[1]))
+            end
+         end,
+      },
+   })
+end
+
+vim.keymap.set("n", "<leader>fe", function() oil_pick_dir() end)
+
 -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
 
 require("gitsigns").setup({
@@ -496,6 +514,11 @@ vim.diagnostic.config({
 })
 
 vim.lsp.config("*", {})
+vim.lsp.config("cssls", {
+   settings = {
+      css = { lint = { unknownAtRules = "ignore" } },
+   },
+})
 vim.lsp.enable({
    "vtsls",
    "eslint",
@@ -505,6 +528,8 @@ vim.lsp.enable({
    "astro",
    "pyright",
 })
+
+vim.keymap.set("n", "gD", vim.lsp.buf.definition)
 
 vim.keymap.set("n", "<leader>vo", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>vj", function() vim.diagnostic.jump({ count = 1 }) end)
