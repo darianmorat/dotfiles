@@ -12,6 +12,7 @@
 - **zsh4h** - Zsh config framework `Manual`
 - **p10k** - Zsh prompt theme `Manual`
 - **fzf** - CLI fuzzy finder
+- **fd** - Faster find alternative
 - **ripgrep** - Recursive search tool
 - **zoxide** - Smarter directory navigation
 - **tree** - Directory tree viewer
