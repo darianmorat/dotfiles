@@ -574,6 +574,7 @@ vim.lsp.enable({
 })
 
 vim.keymap.set("n", "gD", vim.lsp.buf.definition)
+vim.keymap.set("n", "<leader>lr", "<cmd>lsp restart<cr>")
 
 vim.keymap.set("n", "<leader>vo", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>vj", function() vim.diagnostic.jump({ count = 1 }) end)
