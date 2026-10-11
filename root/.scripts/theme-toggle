@@ -1,4 +1,4 @@
-#!/usr/local/bin/zsh
+#!/usr/bin/zsh
 
 theme-manager() {
    local CURRENT_THEME_FILE="$HOME/.config/current_theme"
@@ -44,7 +44,7 @@ theme-manager() {
    if [ "$theme" = "dark" ]; then
       fzf_opts="--ansi
       --layout=reverse
-      --border=none
+      --border=sharp
       --preview-window=border-sharp
       --info=inline-right
       --highlight-line
@@ -53,7 +53,7 @@ theme-manager() {
       --color=fg+:#E6E3DE
       --color=bg:#1E1E1E
       --color=bg+:#303030
-      --color=gutter:#1E1E1E
+      --color=gutter:#303030
       --color=prompt:#579DD4
       --color=marker:#B55353
       --color=pointer:#B55353
@@ -61,11 +61,12 @@ theme-manager() {
       --color=info:#575757
       --color=hl:#72BA62
       --color=hl+:#72BA62
-      --color=query:#D6CFC4"
+      --color=query:#D6CFC4
+      --color=border:#5F5F5F"
    else
       fzf_opts="--ansi
       --layout=reverse
-      --border=none
+      --border=sharp
       --preview-window=border-sharp
       --info=inline-right
       --highlight-line
@@ -74,7 +75,7 @@ theme-manager() {
       --color=fg+:#000000
       --color=bg:#F7F5EA
       --color=bg+:#C9C9BF
-      --color=gutter:#F7F5EA
+      --color=gutter:#C9C9BF
       --color=prompt:#0F5289
       --color=marker:#AD4B4B
       --color=pointer:#AD4B4B
@@ -82,7 +83,8 @@ theme-manager() {
       --color=info:#707070
       --color=hl:#006C00
       --color=hl+:#006C00
-      --color=query:#101010"
+      --color=query:#101010
+      --color=border:#7F7F7F"
    fi
    echo "$fzf_opts" > ~/.fzfrc
 
