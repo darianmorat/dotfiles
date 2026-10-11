@@ -5,11 +5,12 @@ SAVEHIST=5000
 setopt share_history hist_ignore_dups
 
 # --- options ---
-setopt ignoreeof glob_dots no_auto_menu no_flow_control autocd
 bindkey -e
+setopt ignoreeof glob_dots no_flow_control autocd
 
 # --- completion ---
 autoload -Uz compinit && compinit
+setopt no_auto_menu
 
 # --- env ---
 path=(~/bin $path)
