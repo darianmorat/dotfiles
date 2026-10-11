@@ -9,8 +9,8 @@
 
 ## Shell
 
-- **zsh4h** - Zsh config framework `Manual`
-- **p10k** - Zsh prompt theme `Manual`
+- **zsh** - Unix shell
+- **zsh-autosuggestions** - Zsh plugin
 - **fzf** - CLI fuzzy finder
 - **fd** - Faster find alternative
 - **ripgrep** - Recursive search tool
