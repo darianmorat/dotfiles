@@ -6,27 +6,28 @@ setopt share_history hist_ignore_dups
 
 # --- options ---
 setopt ignoreeof glob_dots no_auto_menu no_flow_control autocd
-bindkey -e # emacs keys
+bindkey -e
 
 # --- completion ---
 autoload -Uz compinit && compinit
-autoload -Uz zmv
 
 # --- env ---
 path=(~/bin $path)
 export GPG_TTY=$TTY
-export FZF_DEFAULT_OPTS_FILE=~/.fzfrc
+
 THEME_MODE=$([ -f "$HOME/.config/current_theme" ] && cat "$HOME/.config/current_theme" || echo "dark")
 export THEME_MODE
+
 [[ -f ~/.env.zsh ]] && source ~/.env.zsh
 
+export FZF_DEFAULT_OPTS_FILE=~/.fzfrc
 export FZF_CTRL_R_OPTS="--no-multi"
 
 # --- fzf + zoxide ---
 source <(fzf --zsh)
 eval "$(zoxide init zsh)"
 
-# --- keys (after fzf, so these win) ---
+# --- keys ---
 bindkey '^S' undefined-key
 bindkey '^F' undefined-key
 
@@ -38,7 +39,9 @@ bindkey '^[[3~' delete-char
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 
-# --- terminal title hook ---
+WORDCHARS=${WORDCHARS//\/}
+
+# --- terminal title ---
 autoload -Uz add-zsh-hook
 _title_precmd() { print -Pn '\e]0;%~\a' }
 add-zsh-hook precmd _title_precmd
@@ -51,7 +54,7 @@ alias ls='ls --color=auto -A'
 alias grep='grep --color=auto'
 alias tree='tree -a -I ".git|node_modules|dist"'
 
-# --- custom fzf projects jumper ---
+# --- fzf project search ---
 fzf-global() {
    local selected
    selected=$(find ~/projects -mindepth 1 -maxdepth 1 -type d 2>/dev/null | \
@@ -73,7 +76,7 @@ fzf-global() {
 zle -N fzf-global
 bindkey '^O' fzf-global
 
-# --- file clipboard utilities ---
+# --- clipboard utilities ---
 FILE_CLIPBOARD=~/.file_clipboard
 
 yy() {
@@ -120,6 +123,6 @@ ll() {
    tail -n +2 "$FILE_CLIPBOARD"
 }
 
-# --- plugin (keep last) ---
+# --- plugins (keep last) ---
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#575757'
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
