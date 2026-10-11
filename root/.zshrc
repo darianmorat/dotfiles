@@ -1,86 +1,57 @@
-# Personal Zsh configuration file. It is strongly recommended to keep all
-# shell customization and configuration (including exported environment
-# variables such as PATH) in this file or in files sourced from it.
-#
-# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
+# --- history ---
+HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=5000
+setopt share_history hist_ignore_dups
 
-# Periodic auto-update on Zsh startup: 'ask' or 'no'.
-# You can manually run `z4h update` to update everything.
-zstyle ':z4h:' auto-update      'no'
-# Ask whether to auto-update this often; has no effect if auto-update is 'no'.
-zstyle ':z4h:' auto-update-days '28'
+# --- options ---
+setopt ignoreeof glob_dots no_auto_menu no_flow_control autocd
+bindkey -e # emacs keys
 
-# Keyboard type: 'mac' or 'pc'.
-zstyle ':z4h:bindkey' keyboard  'pc'
+# --- completion ---
+autoload -Uz compinit && compinit
+autoload -Uz zmv
 
-# Don't start tmux.
-zstyle ':z4h:' start-tmux       no
-
-# Mark up shell's output with semantic information.
-zstyle ':z4h:' term-shell-integration 'yes'
-
-# Right-arrow key accepts one character ('partial-accept') from
-# command autosuggestions or the whole thing ('accept')?
-zstyle ':z4h:autosuggestions' forward-char 'accept'
-
-# Recursively traverse directories when TAB-completing files.
-zstyle ':z4h:fzf-complete' recurse-dirs 'no'
-
-# Enable direnv to automatically source .envrc files.
-zstyle ':z4h:direnv'         enable 'no'
-# Show "loading" and "unloading" notifications from direnv.
-zstyle ':z4h:direnv:success' notify 'yes'
-
-# Enable ('yes') or disable ('no') automatic teleportation of z4h over
-# SSH when connecting to these hosts.
-zstyle ':z4h:ssh:example-hostname1'   enable 'yes'
-zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
-# The default value if none of the overrides above match the hostname.
-zstyle ':z4h:ssh:*'                   enable 'no'
-
-# Send these files over to the remote host when connecting over SSH to the
-# enabled hosts.
-zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
-
-# Disable syntax highlighting
-zstyle ':z4h:zsh-syntax-highlighting' channel 'none' 
-
-# Use default styles for all fzf cmds
-zstyle ':z4h:*' fzf-command fzf
-
-# Clone additional Git repositories from GitHub.
-#
-# This doesn't do anything apart from cloning the repository and keeping it
-# up-to-date. Cloned files can be used after `z4h init`. This is just an
-# example. If you don't plan to use Oh My Zsh, delete this line.
-z4h install ohmyzsh/ohmyzsh || return
-
-# Install or update core components (fzf, zsh-autosuggestions, etc.) and
-# initialize Zsh. After this point console I/O is unavailable until Zsh
-# is fully initialized. Everything that requires user interaction or can
-# perform network I/O must be done above. Everything else is best done below.
-z4h init || return
-
-# Extend PATH.
+# --- env ---
 path=(~/bin $path)
-
-# Export environment variables.
 export GPG_TTY=$TTY
+export FZF_DEFAULT_OPTS_FILE=~/.fzfrc
+THEME_MODE=$([ -f "$HOME/.config/current_theme" ] && cat "$HOME/.config/current_theme" || echo "dark")
+export THEME_MODE
+[[ -f ~/.env.zsh ]] && source ~/.env.zsh
 
-# Source additional local files if they exist.
-z4h source ~/.env.zsh
+export FZF_CTRL_R_OPTS="--no-multi"
 
-# Ignore exit on C-d shell
-setopt ignoreeof
+# --- fzf + zoxide ---
+source <(fzf --zsh)
+eval "$(zoxide init zsh)"
 
-# - --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -
+# --- keys (after fzf, so these win) ---
+bindkey '^S' undefined-key
+bindkey '^F' undefined-key
 
-z4h bindkey forward-char Ctrl+D
-z4h bindkey backward-kill-word Ctrl+Backspace
+bindkey '^D' forward-char
+bindkey '^H' backward-kill-word
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[3~' delete-char
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
 
-z4h bindkey undefined-key Ctrl+S
-z4h bindkey undefined-key Ctrl+F
+# --- terminal title hook ---
+autoload -Uz add-zsh-hook
+_title_precmd() { print -Pn '\e]0;%~\a' }
+add-zsh-hook precmd _title_precmd
 
+# --- prompt ---
+PROMPT='%F{green}kaizen@root%f:%F{blue}%~%f$ '
+
+# --- aliases ---
+alias ls='ls --color=auto -A'
+alias grep='grep --color=auto'
+alias tree='tree -a -I ".git|node_modules|dist"'
+
+# --- custom fzf projects jumper ---
 fzf-global() {
    local selected
    selected=$(find ~/projects -mindepth 1 -maxdepth 1 -type d 2>/dev/null | \
@@ -88,7 +59,7 @@ fzf-global() {
       fzf \
       --ansi \
       --border=sharp \
-      --prompt="Projects > ")
+      --prompt="> ")
 
    if [[ -n "$selected" ]]; then
       print -s "cd $HOME/$selected"
@@ -99,12 +70,10 @@ fzf-global() {
       zle reset-prompt
    fi
 }
-
 zle -N fzf-global
 bindkey '^O' fzf-global
 
-# - --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -
-
+# --- file clipboard utilities ---
 FILE_CLIPBOARD=~/.file_clipboard
 
 yy() {
@@ -151,33 +120,6 @@ ll() {
    tail -n +2 "$FILE_CLIPBOARD"
 }
 
-# - --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -
-
-# Autoload functions.
-autoload -Uz zmv
-
-# Define functions and completions.
-function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
-compdef _directories md
-
-# Define named directories: ~w <=> Windows home directory on WSL.
-[[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
-
-# Define aliases.
-alias tree='tree -a -I .git'
-
-# Add flags to existing aliases.
-alias ls="${aliases[ls]:-ls} -A"
-
-eval "$(zoxide init zsh)"
-
-# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
-setopt glob_dots     # no special treatment for file names with a leading dot
-setopt no_auto_menu  # require an extra TAB press to open the completion menu
-
-# - --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -
-
-THEME_MODE=$([ -f "$HOME/.config/current_theme" ] && cat "$HOME/.config/current_theme" || echo "dark")
-
-export THEME_MODE
-export FZF_DEFAULT_OPTS_FILE=~/.fzfrc
+# --- plugin (keep last) ---
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#575757'
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
