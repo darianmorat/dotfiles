@@ -53,7 +53,11 @@ config.keys = {
    { key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
    { key = "d", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
 
-   { key = "f", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
+   {
+      key = "f",
+      mods = "LEADER",
+      action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }),
+   },
    {
       key = "r",
       mods = "LEADER",
@@ -67,7 +71,11 @@ config.keys = {
       }),
    },
 
-   { key = "s", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+   {
+      key = "s",
+      mods = "LEADER",
+      action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+   },
    {
       key = "w",
       mods = "LEADER",
