@@ -290,6 +290,7 @@ require("fzf-lua").setup({
       formatter = "path.filename_first",
       fzf_opts = {
          ["--no-multi"] = true,
+         ["--padding"] = "0,0,0,1",
       },
    },
    winopts = {
@@ -305,6 +306,9 @@ require("fzf-lua").setup({
          title = false,
          scrollbar = false,
       },
+   },
+   files = {
+      cwd_prompt = false,
    },
    previewers = {
       builtin = {
