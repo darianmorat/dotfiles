@@ -1,4 +1,4 @@
--- TITLE: Options ---------------------------------------------------------------------------------
+-- TITLE: Options ------------------------------------------------------------------------
 
 vim.loader.enable()
 
@@ -54,7 +54,7 @@ vim.o.titlestring = table.concat({
 vim.opt.fillchars:append({ diff = "/" })
 vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
 
--- TITLE: Keymaps ---------------------------------------------------------------------------------
+-- TITLE: Keymaps ------------------------------------------------------------------------
 
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>")
 vim.keymap.set("n", "<leader>w", ":silent! w<cr>", { silent = true })
@@ -74,7 +74,7 @@ vim.keymap.set({ "n", "v" }, "<leader>x", '"_d')
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { silent = true })
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 local copy_keymap = function(mode, cur_lhs, new_lhs)
    local map_data = vim.fn.maparg(cur_lhs, mode, false, true)
@@ -87,7 +87,7 @@ copy_keymap("x", "gc", "<leader>c")
 copy_keymap("o", "gc", "<leader>c")
 copy_keymap("n", "gcc", "<leader>cc")
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 local terminals = {}
 
@@ -135,7 +135,7 @@ end
 
 vim.keymap.set("n", "<leader>lg", function() float("lazygit") end)
 
--- TITLE: Plugin hooks ----------------------------------------------------------------------------
+-- TITLE: Plugin hooks -------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("PackChanged", {
    callback = function(ev)
@@ -149,7 +149,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
    end,
 })
 
--- TITLE: Plugin list -----------------------------------------------------------------------------
+-- TITLE: Plugin list --------------------------------------------------------------------
 
 vim.pack.add({
    { src = "https://github.com/darianmorat/shibumi.nvim" },
@@ -170,12 +170,12 @@ vim.pack.add({
    { src = "https://github.com/stevearc/conform.nvim" },
 })
 
--- TITLE: Local/UI config -------------------------------------------------------------------------
+-- TITLE: Local/UI config ----------------------------------------------------------------
 
 vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/shibumi.nvim"))
 vim.keymap.set("n", "<leader>r", "<cmd>ReloadTheme<cr>")
 
--- TITLE: Plugin config ---------------------------------------------------------------------------
+-- TITLE: Plugin config ------------------------------------------------------------------
 
 local theme_file = io.open(os.getenv("HOME") .. "/.config/current_theme", "r")
 local theme_mode = theme_file and theme_file:read("*l") or "dark"
@@ -189,7 +189,7 @@ local colorscheme = theme_mode == "light" and "shibumi-light" or "shibumi"
 vim.o.background = theme_mode
 vim.cmd.colorscheme(colorscheme)
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 require("oil").setup({
    default_file_explorer = true,
@@ -232,13 +232,13 @@ vim.api.nvim_create_autocmd("FileType", {
    end,
 })
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 require("nvim-autopairs").setup({})
 require("nvim-ts-autotag").setup({})
 require("mini.surround").setup({})
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 local mc = require("multicursor-nvim")
 mc.setup({})
@@ -266,7 +266,7 @@ vim.keymap.set("n", "<esc>", function()
    end
 end)
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 vim.g.undotree_WindowLayout = 3
 vim.g.undotree_SplitWidth = 38
@@ -274,7 +274,7 @@ vim.g.undotree_SetFocusWhenToggle = 1
 
 vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>")
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 require("flash").setup({
    prompt = { enabled = false },
@@ -283,7 +283,7 @@ require("flash").setup({
 vim.keymap.set({ "n", "x", "o" }, "f", function() require("flash").jump() end)
 vim.keymap.set({ "n", "x", "o" }, "t", function() require("flash").treesitter() end)
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 require("fzf-lua").setup({
    defaults = {
@@ -345,7 +345,7 @@ vim.keymap.set("n", "<leader>fr", fzf_vertical("lsp_references"))
 vim.keymap.set("n", "<leader>fw", fzf_vertical("grep_cword"))
 vim.keymap.set("n", "<leader>fW", fzf_vertical("grep_cWORD"))
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 local ns = vim.api.nvim_create_namespace("dir_previewer")
 local DirPreviewer = require("fzf-lua.previewer.builtin").base:extend()
@@ -402,7 +402,7 @@ end
 
 vim.keymap.set("n", "<leader>fe", function() oil_pick_dir() end)
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 require("gitsigns").setup({
    signs = {
@@ -457,7 +457,7 @@ require("gitsigns").setup({
    end,
 })
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 local nts = require("nvim-treesitter")
 nts.install({
@@ -491,7 +491,7 @@ vim.api.nvim_create_autocmd("FileType", {
    end,
 })
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 require("ibl").setup({
    indent = {
@@ -505,7 +505,7 @@ require("ibl").setup({
    },
 })
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 require("blink.cmp").setup({
    fuzzy = {
@@ -540,7 +540,7 @@ require("blink.cmp").setup({
    },
 })
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 vim.diagnostic.config({
    virtual_text = false,
@@ -589,7 +589,7 @@ vim.keymap.set("n", "<leader>vi", function()
    vim.diagnostic.config({ virtual_text = new_config })
 end)
 
--- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- --
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 local prettier = {
    "prettierd",
@@ -616,7 +616,7 @@ require("conform").setup({
    },
 })
 
--- TITLE: Commands & Auto-commands ----------------------------------------------------------------
+-- TITLE: Commands & Auto-commands -------------------------------------------------------
 
 vim.filetype.add({
    extension = { xaml = "xml" },
