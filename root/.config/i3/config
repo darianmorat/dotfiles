@@ -21,7 +21,7 @@ for_window [class="wezterm-bluetui"] floating enable, $popup
 # Window options
 title_align center
 smart_borders on
-workspace_layout default
+workspace_layout tabbed
 
 default_border normal 1
 default_floating_border normal 1
