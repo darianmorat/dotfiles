@@ -79,9 +79,6 @@
    lalt lctl
    spc tab
 
-   a (layer-switch nav-layer)
-   f (layer-switch default)
-
    ___ XX
 )
 
@@ -105,10 +102,6 @@
    k rsft
    l ralt
    spc rctl
-
-
-   ; (layer-switch numb-layer)
-   j (layer-switch default)
 
    ___ XX
 )

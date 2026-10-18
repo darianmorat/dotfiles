@@ -74,6 +74,8 @@ vim.keymap.set({ "n", "v" }, "<leader>x", '"_d')
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { silent = true })
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
 
+vim.keymap.set("v", "<leader>w", ":!fmt -w 90<cr>", { silent = true })
+
 -- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 local copy_keymap = function(mode, cur_lhs, new_lhs)

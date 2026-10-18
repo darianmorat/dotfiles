@@ -24,6 +24,12 @@ export THEME_MODE
 export FZF_DEFAULT_OPTS_FILE=~/.fzfrc
 export FZF_CTRL_R_OPTS="--no-multi"
 
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+
 # --- fzf + zoxide ---
 source <(fzf --zsh)
 eval "$(zoxide init zsh)"

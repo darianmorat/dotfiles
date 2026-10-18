@@ -41,9 +41,6 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -c 000000
 exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"
 
-# Compositor (vsync for screen tearing)
-exec_always --no-startup-id picom -b
-
 # Restore theme on startup
 exec_always --no-startup-id ~/.scripts/theme-toggle init
 
@@ -65,8 +62,8 @@ exec --no-startup-id gammastep
 # Clipboard manager
 exec --no-startup-id clipmenud
 
-# Start Vivaldi at startup
-exec --no-startup-id vivaldi
+# Start Helium at startup
+exec --no-startup-id helium-browser
 
 # Volume controls with notifications
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pamixer -i 5 && if pamixer --get-mute | grep -q 'true'; then dunstify -r 991049 -h int:value:$(pamixer --get-volume) 'Volume (Muted)'; else dunstify -r 991049 -h int:value:$(pamixer --get-volume) 'Volume'; fi"
@@ -177,7 +174,7 @@ bindsym $mod+Shift+t move container to workspace number $ws4
 bindsym $mod+m workspace back_and_forth
 
 # resize window
-mode "resize" {
+mode "RS" {
    bindsym i resize grow width 10 px or 10 ppt
    bindsym o resize shrink width 10 px or 10 ppt
    bindsym j resize shrink height 10 px or 10 ppt
@@ -185,15 +182,8 @@ mode "resize" {
 
    bindsym c move position center
 
-   bindsym Return mode "default"
+   bindsym q mode "default"
    bindsym Escape mode "default"
-   bindsym $mod+Shift+m mode "default"
 }
 
-bindsym $mod+Shift+m mode "resize"
-
-# Start i3bar to display a workspace bar 
-# bar {
-#     status_command i3status
-#     position bottom
-# }
+bindsym $mod+Shift+m mode "RS"

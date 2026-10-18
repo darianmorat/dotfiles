@@ -18,19 +18,17 @@
 - **tree** - Directory tree viewer
 - **chafa** - CLI image previewer
 
+## Runtime
+
+- **nodejs** - JavaScript runtime
+- **pnpm** - Primary package manager
+- **npm** - Fallback package manager
+
 ## Code
 
 - **neovim** - Text editor
 - **lazygit** - Git management TUI
 - **git-delta** - Diff pager
-
-## Runtime
-
-- **nodejs** - JavaScript runtime environment
-- **npm** - JavaScript package manager
-- **commitizen** - Interactive commit message tool `NPM`
-- **cz-conventional-changelog** - Conventional commit adapter `NPM`
-- **markdown-preview** - Markdown preview in browser `NPM`
 
 ## Display
 
@@ -62,7 +60,7 @@
 
 ## Apps
 
-- **vivaldi** - Primary web browser
+- **helium-browser-bin** - Primary web browser `AUR`
 - **firefox** - Fallback web browser
 - **torbrowser** - Privacy web browser
 - **libreoffice** - Office suite
@@ -94,5 +92,4 @@
 - **materia-gtk-theme** - GTK theme
 - **papirus-icon-theme** - Icon theme
 - **hsetroot** - X11 background utility
-- **picom** - X11 compositor
 - **xsettingsd** - X11 GTK settings daemon
