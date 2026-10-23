@@ -497,8 +497,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 require("ibl").setup({
    indent = {
-      char = "╎",
-      tab_char = "╎",
+      char = "¦",
+      tab_char = "¦",
    },
    scope = {
       enabled = false,
@@ -618,7 +618,7 @@ require("conform").setup({
    },
 })
 
--- TITLE: Commands & Auto-commands -------------------------------------------------------
+-- TITLE: User-commands ------------------------------------------------------------------
 
 vim.filetype.add({
    extension = { xaml = "xml" },
@@ -646,9 +646,17 @@ vim.api.nvim_create_user_command("BufOnly", function()
    vim.notify(closed_count .. " buffers closed")
 end, {})
 
-vim.api.nvim_create_autocmd("FileType", {
-   callback = function() vim.opt_local.formatoptions:remove("o") end,
-})
+vim.api.nvim_create_user_command("ReloadTheme", function()
+   for name, _ in pairs(package.loaded) do
+      if name:match("^shibumi") then
+         package.loaded[name] = nil
+      end
+   end
+   vim.cmd("runtime! colors/" .. colorscheme .. ".lua")
+   vim.cmd.colorscheme(colorscheme)
+end, {})
+
+-- TITLE: Auto-commands ------------------------------------------------------------------
 
 local hl_op = vim.hl.hl_op or vim.hl.on_yank
 vim.api.nvim_create_augroup("YankHighlight", { clear = true })
@@ -669,6 +677,10 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
    end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+   callback = function() vim.opt_local.formatoptions:remove("o") end,
+})
+
 vim.api.nvim_create_autocmd("RecordingEnter", {
    callback = function() print("Recording @" .. vim.fn.reg_recording()) end,
 })
@@ -685,16 +697,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
       end
    end,
 })
-
-vim.api.nvim_create_user_command("ReloadTheme", function()
-   for name, _ in pairs(package.loaded) do
-      if name:match("^shibumi") then
-         package.loaded[name] = nil
-      end
-   end
-   vim.cmd("runtime! colors/" .. colorscheme .. ".lua")
-   vim.cmd.colorscheme(colorscheme)
-end, {})
 
 vim.api.nvim_create_autocmd("CmdwinEnter", {
    callback = function() vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true }) end,
