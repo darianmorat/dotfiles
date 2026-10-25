@@ -24,19 +24,19 @@
 
 [delta "dark"]
    dark = true
-   plus-style = "green #2D3A2A"
-   minus-style = "red #3A292B"
+   plus-style = "green #2d3a2a"
+   minus-style = "red #3a292b"
    line-numbers-left-style = "#575757"
    line-numbers-right-style = "#575757"
    hunk-header-decoration-style = "#575757 ul"
 
 [delta "light"]
    light = true
-   plus-style = "green #DAF6DC"
-   minus-style = "red #F4D3D6"
-   line-numbers-left-style = "#7F7F7F"
-   line-numbers-right-style = "#7F7F7F"
-   hunk-header-decoration-style = "#7F7F7F ul"
+   plus-style = "green #c3e2c5"
+   minus-style = "red #edc2c6"
+   line-numbers-left-style = "#7f7f7f"
+   line-numbers-right-style = "#7f7f7f"
+   hunk-header-decoration-style = "#7f7f7f ul"
 
 [alias]
    sdiff = -c delta.side-by-side=true diff
