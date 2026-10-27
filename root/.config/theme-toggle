@@ -1,0 +1,110 @@
+#!/usr/bin/zsh
+
+# Toggle
+current=$([ -f "$HOME/.config/current_theme" ] && cat "$HOME/.config/current_theme" || echo "dark")
+if [ "$1" = "init" ]; then
+   theme="$current"
+else
+   theme=$([ "$current" = "dark" ] && echo "light" || echo "dark")
+   echo "$theme" > "$HOME/.config/current_theme"
+fi
+
+# Background
+old=$(pgrep -x swaybg)
+swaybg -o '*' -i "$HOME/.config/wallpapers/$theme.jpg" -m fill &!
+sleep 0.2
+[ -n "$old" ] && kill ${(f)old}
+
+# Rofi
+ln -sf "$HOME/.config/rofi/styles-$theme.rasi" "$HOME/.config/rofi/styles.rasi"
+
+# Mako
+ln -sf "$HOME/.config/mako/$theme.conf" "$HOME/.config/mako/config"
+
+# Init
+[ "$1" = "init" ] && exit 0
+
+# GTK Theme
+if [ "$theme" = "dark" ]; then
+   gtk_theme="Adwaita-dark"
+   icon_theme="Papirus-Dark"
+else
+   gtk_theme="Adwaita"
+   icon_theme="Papirus-Light"
+fi
+
+gsettings set org.gnome.desktop.interface color-scheme "prefer-$theme"
+gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme"
+gsettings set org.gnome.desktop.interface icon-theme "$icon_theme"
+
+# Lazygit
+sed -i "s/^\(  colorScheme:\) .*/\1 $theme/" "$HOME/.config/lazygit/config.yml"
+
+# Delta
+git config --global delta.features "$theme"
+
+# FZF
+if [ "$theme" = "dark" ]; then
+   fzf_opts="--ansi
+   --layout=reverse
+   --border=sharp
+   --preview-window=border-sharp
+   --info=inline-right
+   --highlight-line
+   --color=scrollbar:#1d1d1d
+   --color=fg:#d6cfc4
+   --color=fg+:#e6e3de
+   --color=bg:#1d1d1d
+   --color=bg+:#303030
+   --color=gutter:#303030
+   --color=prompt:#579dd4
+   --color=marker:#b55353
+   --color=pointer:#b55353
+   --color=header:#d19f66
+   --color=info:#575757
+   --color=hl:#72ba62
+   --color=hl+:#72ba62
+   --color=query:#d6cfc4
+   --color=border:#5f5f5f"
+else
+   fzf_opts="--ansi
+   --layout=reverse
+   --border=sharp
+   --preview-window=border-sharp
+   --info=inline-right
+   --highlight-line
+   --color=scrollbar:#f4f3f2
+   --color=fg:#070707
+   --color=fg+:#000000
+   --color=bg:#f4f3f2
+   --color=bg+:#c9c9c7
+   --color=gutter:#c9c9c7
+   --color=prompt:#0f5289
+   --color=marker:#ad4b4b
+   --color=pointer:#ad4b4b
+   --color=header:#ae5f05
+   --color=info:#707070
+   --color=hl:#006c00
+   --color=hl+:#006c00
+   --color=query:#101010
+   --color=border:#7f7f7f"
+fi
+echo "$fzf_opts" > "$HOME/.fzfrc"
+
+# Neovim
+pkill -USR1 -x nvim
+
+# Foot
+sed -i "s/^initial-color-theme=.*/initial-color-theme=$theme/" "$HOME/.config/foot/foot.ini"
+if [ "$theme" = "dark" ]; then
+   pkill -USR1 -x foot
+else
+   pkill -USR2 -x foot
+fi
+
+# Mako
+if pgrep -x mako > /dev/null; then
+   pkill -x mako
+   mako &!
+fi
+

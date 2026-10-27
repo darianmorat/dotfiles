@@ -1,0 +1,31 @@
+* {
+  font-family: "Inter Display";
+  font-size: 17px;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0;
+}
+
+#waybar {
+  background: #131313;
+  color: #ffffff;
+  border: 1px solid #181818;
+  padding: 0;
+}
+
+#tray,
+#custom-sep,
+#custom-label {
+  padding: 0;
+  margin: 0;
+}
+
+#custom-sep {
+  color: #888888;
+  padding: 0 14px;
+}
+#custom-label {
+  color: #888888;
+}

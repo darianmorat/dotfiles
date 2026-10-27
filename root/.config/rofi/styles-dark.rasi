@@ -1,0 +1,85 @@
+* {
+   font:             "Inter 10";
+   background:       #181818;
+   background-alt:   #1a1a1a;
+   foreground:       #f4f2ef;
+   selected:         #1a293d;
+   accent:           #357ec7;
+   border-color:     #424242;
+   border-color-2:   #323232;
+}
+
+window {
+   transparency:     "real";
+   location:         north;
+   anchor:           north;
+   width:            800px;
+   y-offset:         271;
+   border:           1px;
+   border-color:     @border-color;
+   border-radius:    0px;
+   background-color: @background;
+}
+
+mainbox {
+   spacing:          0px;
+   background-color: transparent;
+   children:         [ "inputbar", "listbox" ];
+}
+
+listbox {
+   padding:          0px 20px 20px 20px;
+   background-color: transparent;
+   children:         [ "message", "listview" ];
+}
+
+inputbar {
+   spacing:          10px;
+   padding:          15px 20px;
+   margin:           20px;
+   border:           0px 0px 1px 0px;
+   border-color:     @border-color-2;
+   background-color: @background-alt;
+   text-color:       @foreground;
+   children:         [ "entry", "prompt" ];
+}
+
+entry {
+   background-color: inherit;
+   text-color:       inherit;
+   placeholder:      "";
+}
+
+prompt {
+   background-color: inherit;
+   text-color:       #808080;
+}
+
+listview {
+   columns:          1;
+   lines:            5;
+   dynamic:          true;
+   scrollbar:        false;
+   spacing:          0px;
+   background-color: transparent;
+}
+
+element {
+   spacing:          10px;
+   padding:          12px 20px;
+   background-color: transparent;
+   text-color:       @foreground;
+}
+
+element selected.normal {
+   background-color: @selected;
+   text-color:       @foreground;
+   border:           0px 0px 0px 4px;
+   border-color:     @accent;
+}
+
+element-text {
+   background-color: transparent;
+   text-color:       inherit;
+   vertical-align:   0.5;
+}

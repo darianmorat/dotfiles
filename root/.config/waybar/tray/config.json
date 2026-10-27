@@ -1,0 +1,23 @@
+{
+  "layer": "overlay",
+  "position": "bottom",
+  "exclusive": false,
+  "height": 30,
+  "margin-bottom": -30,
+  "start_hidden": true,
+  "modules-left": ["custom/sep", "custom/label"],
+  "modules-center": [],
+  "modules-right": ["tray", "custom/sep"],
+
+  "tray": {
+    "spacing": 8
+  },
+  "custom/sep": {
+    "format": "〃",
+    "tooltip": false
+  },
+  "custom/label": {
+    "format": "TRAY-BAR",
+    "tooltip": false
+  }
+}

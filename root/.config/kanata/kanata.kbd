@@ -1,4 +1,4 @@
-(defcfg 
+(defcfg
    process-unmapped-keys yes
    concurrent-tap-hold yes
 )
@@ -6,9 +6,11 @@
 (defvar
    tap-timeout 150
    hold-timeout 150
+   prefix-delay 10
 
    tt $tap-timeout
    ht $hold-timeout
+   pd $prefix-delay
 )
 
 (defchordsv2
@@ -32,7 +34,7 @@
    f (tap-hold-release $tt $ht f (layer-while-held nav-layer))
    j (tap-hold-release $tt $ht j (layer-while-held numb-layer))
 
-   v (tap-hold-release $tt $ht v XX)
+   v (tap-hold-release $tt $ht v (layer-while-held term-layer))
    n (tap-hold-release $tt $ht n (layer-while-held term-layer))
 
    lalt (tap-hold-release $tt $ht esc (layer-while-held acct-layer))
@@ -60,7 +62,7 @@
 
 (deflayermap (nav-layer)
    y del
-   u A-S-C-u 
+   u A-S-C-u
    i left
    o right
 
@@ -159,7 +161,7 @@
 
    ___ XX
 )
- 
+
 (deflayermap (rsym-punc)
    n (macro menu S-/ S-/)
 
@@ -206,16 +208,22 @@
 )
 
 (deflayermap (term-layer)
-   c (macro C-f12 50 c)
-   d (macro C-f12 50 d)
+  j (macro C-f12)
 
-   f (macro C-f12 50 f)
-   r (macro C-f12 50 r)
+  c (macro C-f12 $pd c)
+  d (macro C-f12 $pd x)
+  f (macro C-f12 $pd w)
+  r (macro C-f12 $pd ,)
+  s (macro C-f12 $pd s)
+  w (macro C-f12 $pd S-4)
+  x (macro C-f12 $pd [)
 
-   s (macro C-f12 50 s)
-   w (macro C-f12 50 w)
+  o (macro C-f12 $pd tab)
+  ; (macro C-f12 $pd S-;)
+  , (macro C-f12 $pd p)
+  . (macro C-f12 $pd n)
 
-   ___ XX
+  ___ XX
 )
 
 (deflayermap (acct-layer)

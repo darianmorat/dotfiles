@@ -179,17 +179,24 @@ vim.keymap.set("n", "<leader>r", "<cmd>ReloadTheme<cr>")
 
 -- TITLE: Plugin config ------------------------------------------------------------------
 
-local theme_file = io.open(os.getenv("HOME") .. "/.config/current_theme", "r")
-local theme_mode = theme_file and theme_file:read("*l") or "dark"
+local function apply_theme()
+   local f = io.open(os.getenv("HOME") .. "/.config/current_theme", "r")
+   local mode = f and f:read("*l") or "dark"
+   if f then
+      f:close()
+   end
 
-if theme_file then
-   theme_file:close()
+   vim.o.background = mode
+   vim.cmd.colorscheme(mode == "light" and "shibumi-light" or "shibumi")
+   vim.cmd("doautocmd ColorScheme")
 end
 
-local colorscheme = theme_mode == "light" and "shibumi-light" or "shibumi"
+apply_theme()
 
-vim.o.background = theme_mode
-vim.cmd.colorscheme(colorscheme)
+vim.api.nvim_create_autocmd("Signal", {
+   pattern = "SIGUSR1",
+   callback = apply_theme,
+})
 
 -- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
@@ -652,8 +659,7 @@ vim.api.nvim_create_user_command("ReloadTheme", function()
          package.loaded[name] = nil
       end
    end
-   vim.cmd("runtime! colors/" .. colorscheme .. ".lua")
-   vim.cmd.colorscheme(colorscheme)
+   apply_theme()
 end, {})
 
 -- TITLE: Auto-commands ------------------------------------------------------------------

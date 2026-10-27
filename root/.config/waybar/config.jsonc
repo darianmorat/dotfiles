@@ -1,0 +1,74 @@
+{
+   "layer": "top",
+   "position": "bottom",
+   "height": 30,
+   "modules-left": [
+      "sway/workspaces",
+      "custom/sep",
+      "cpu",
+      "memory"
+   ],
+   "modules-center": [],
+   "modules-right": [
+      "sway/mode",
+      "clock",
+      "custom/sep2",
+      "network",
+      "battery"
+   ],
+   "sway/workspaces": {
+      "disable-scroll": true,
+      "all-outputs": true,
+      "format": "{icon}",
+      "format-icons": {
+         "1": "い",
+         "2": "ろ",
+         "3": "は",
+         "4": "と"
+      },
+      "persistent-workspaces": {
+         "1": [],
+         "2": [],
+         "3": [],
+         "4": []
+      }
+   },
+   "custom/sep": {
+      "format": "〃",
+      "tooltip": false
+   },
+   "custom/sep2": {
+      "format": "〃",
+      "tooltip": false
+   },
+   "cpu": {
+      "interval": 10,
+      "format": "CPU: {usage:02d}%"
+   },
+   "memory": {
+      "interval": 10,
+      "format": "RAM: {percentage:02d}%"
+   },
+   "sway/mode": {
+      "format": "{}   -   "
+   },
+   "clock": {
+      "interval": 5,
+      "format": "{:%a %b %d   %I:%M %p}"
+   },
+   "network": {
+      "interval": 10,
+      "format-wifi": "DT  へ",
+      "format-disconnected": "NC  べ"
+   },
+   "battery": {
+      "interval": 5,
+      "states": {
+         "low": 10
+      },
+      "format": "Σ {capacity}%",
+      "format-charging": "Σ {capacity} ˊ˗",
+      "format-full": "Σ {capacity}%",
+      "format-low": "Σ {capacity}%"
+   }
+}
