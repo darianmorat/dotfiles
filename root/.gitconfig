@@ -26,9 +26,9 @@
    dark = true
    plus-style = "green #2d3a2a"
    minus-style = "red #3a292b"
-   line-numbers-left-style = "#575757"
-   line-numbers-right-style = "#575757"
-   hunk-header-decoration-style = "#575757 ul"
+   line-numbers-left-style = "#5f5f5f"
+   line-numbers-right-style = "#5f5f5f"
+   hunk-header-decoration-style = "#5f5f5f ul"
 
 [delta "light"]
    light = true
