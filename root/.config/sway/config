@@ -32,13 +32,14 @@ client.focused_inactive #181818 #131313 #FFFFFF #181818 #181818
 client.unfocused #181818 #131313 #686868 #181818 #181818
 client.urgent #161616 #801717 #FFFFFF #801717 #801717
 
-# Autolock after 15 minutes.
+# Lock after 10 min and screen off 5 min after
 exec swayidle -w \
-    timeout 900 'swaylock -f' \
-    before-sleep 'swaylock -f'
+   timeout 600 'swaylock -f' \
+   timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+   before-sleep 'swaylock -f'
 
 # Theming
-exec ~/.scripts/theme-toggle init
+exec ~/.config/theme-toggle init
 
 # Start applications
 exec gammastep
@@ -62,7 +63,7 @@ bindsym XF86AudioPlay exec "playerctl play-pause"
 bindsym Print exec "QT_SCALE_FACTOR=1.20 flameshot gui"
 
 # Theme toggle
-bindsym $mod+Shift+period exec ~/.scripts/theme-toggle
+bindsym $mod+Shift+period exec ~/.config/theme-toggle
 
 # Toggle tray
 exec waybar -c ~/.config/waybar/tray/config.json -s ~/.config/waybar/tray/style.css
@@ -140,33 +141,33 @@ bindsym $mod+m workspace back_and_forth
 
 # Resize mode
 mode "RS" {
-    bindsym i resize grow width 10 px or 10 ppt
-    bindsym o resize shrink width 10 px or 10 ppt
-    bindsym j resize shrink height 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
+   bindsym i resize grow width 10 px or 10 ppt
+   bindsym o resize shrink width 10 px or 10 ppt
+   bindsym j resize shrink height 10 px or 10 ppt
+   bindsym k resize grow height 10 px or 10 ppt
 
-    bindsym c move position center
+   bindsym c move position center
 
-    bindsym q mode "default"
-    bindsym Escape mode "default"
+   bindsym q mode "default"
+   bindsym Escape mode "default"
 }
 
 bindsym $mod+Shift+m mode "RS"
 
 # Input Keyboard
 input * {
-    xkb_layout "us"
-    xkb_options "compose:menu"
+   xkb_layout "us"
+   xkb_options "compose:menu"
 }
 
 # Input Mouse 
 input "10182:480:GXTP7863:00_27C6:01E0_Touchpad" {
-    dwt disabled
-    tap enabled
-    natural_scroll enabled
-    middle_emulation enabled
+   dwt disabled
+   tap enabled
+   natural_scroll enabled
+   middle_emulation enabled
 }
 input "10182:480:GXTP7863:00_27C6:01E0_Mouse" {
-    natural_scroll enabled
-    scroll_factor 1.0
+   natural_scroll enabled
+   scroll_factor 1.0
 }
