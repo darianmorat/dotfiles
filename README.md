@@ -85,7 +85,6 @@
 - **noto-fonts-emoji** - Emoji support
 - **noto-fonts-extra** - Additional variants
 - **inter-font** - Typeface for interfaces
-- **ttf-dejavu** - Unicode fallback font
 - **ttf-jetbrains-mono-nerd** - Developer typeface
 
 ## Theme
