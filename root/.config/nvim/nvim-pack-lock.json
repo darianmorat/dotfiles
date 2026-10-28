@@ -1,7 +1,7 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "6b4b40a785a9f61885e1f550423b2559138f3ef3",
+      "rev": "74ebcf9a2daffd3d2eaaf13fa384c5caf337056e",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -17,11 +17,11 @@
       "src": "https://github.com/folke/flash.nvim"
     },
     "fzf-lua": {
-      "rev": "c67fadd9a24230417267e4f9068227e093c0be2b",
+      "rev": "5b88d6f0af7fcb41d4a8bb340bf70d7e3824ee9d",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
-      "rev": "fd780920613e541cbdfac41bf711583ed49f9249",
+      "rev": "d4854fa9a94b5c8b37dd209fb4a19e98e764186f",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "indent-blankline.nvim": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
     "mini.surround": {
-      "rev": "59ce0acf79e1d930756ef3a7cb4c2369560cf548",
+      "rev": "5357f00aca51a3b43e7775901b1ad9699f8c2678",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "multicursor.nvim": {
@@ -41,11 +41,11 @@
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-lspconfig": {
-      "rev": "45a3a444b710511c39abca3b60bb6e23a21e3de5",
+      "rev": "3bccb6fa49a3a75bfb6d92fed63b13a71a85cfaf",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "d4a9b23a383266bdb0bfb42d565f31e83f27be5e",
+      "rev": "a2f694478be07f89c2d03cc17858a8745a400c4b",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-ts-autotag": {
@@ -57,7 +57,7 @@
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "shibumi.nvim": {
-      "rev": "236fd68c965d0bc7cb469d7f2d91338d0e60abe5",
+      "rev": "71c047efaa678ce9f0e293f20731379b5832846a",
       "src": "https://github.com/darianmorat/shibumi.nvim"
     },
     "undotree": {
