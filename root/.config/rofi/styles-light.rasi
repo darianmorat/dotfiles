@@ -45,6 +45,7 @@ inputbar {
 }
 
 entry {
+   font:             "Inter Display 11.5";
    background-color: inherit;
    text-color:       inherit;
    placeholder:      "";
