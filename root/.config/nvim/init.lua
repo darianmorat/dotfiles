@@ -414,23 +414,6 @@ vim.keymap.set("n", "<leader>fe", function() oil_pick_dir() end)
 -- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
 require("gitsigns").setup({
-   signs = {
-      add = { text = "│" },
-      change = { text = "│" },
-      delete = { text = "_" },
-      topdelete = { text = "‾" },
-      changedelete = { text = "~" },
-      untracked = { text = "┆" },
-   },
-   signs_staged = {
-      add = { text = "│" },
-      change = { text = "│" },
-      delete = { text = "_" },
-      topdelete = { text = "‾" },
-      changedelete = { text = "~" },
-      untracked = { text = "┆" },
-   },
-
    on_attach = function(bufnr)
       local gitsigns = require("gitsigns")
       local line = vim.fn.line
