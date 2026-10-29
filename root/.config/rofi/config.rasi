@@ -4,8 +4,13 @@ configuration {
    modi:                "drun,run";
    terminal:            "foot";
    case-sensitive:      false;
-   show-icons:          false;
+   show-icons:          true;
+   icon-theme:          "Papirus";
    dpi:                 1;
+
+   run, drun {
+      fallback-icon:    "Terminal";
+   }
 
    display-drun:        "Apps";
    display-run:         "Run";

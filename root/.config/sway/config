@@ -86,7 +86,7 @@ bindsym $mod+Shift+Ctrl+u exec rofi -show drun
 
 # Clipboard history
 exec wl-paste --watch cliphist store
-bindsym $mod+Shift+Ctrl+m exec cliphist list | rofi -dmenu -p Clipboard | cliphist decode | wl-copy
+bindsym $mod+Shift+Ctrl+m exec cliphist list | rofi -dmenu -p Clipboard -no-show-icons | cliphist decode | wl-copy
 
 # Change focus
 bindsym $mod+i focus left

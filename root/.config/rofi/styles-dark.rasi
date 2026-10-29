@@ -84,3 +84,9 @@ element-text {
    text-color:       inherit;
    vertical-align:   0.5;
 }
+
+element-icon {
+   size: 40px;
+   padding: 0 5px 0 0;
+   background-color: transparent;
+}
