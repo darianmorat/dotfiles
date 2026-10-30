@@ -61,7 +61,7 @@ if [ "$theme" = "dark" ]; then
    --color=marker:#b55353
    --color=pointer:#b55353
    --color=header:#d19f66
-   --color=info:#575757
+   --color=info:#565656
    --color=hl:#72ba62
    --color=hl+:#72ba62
    --color=query:#d6cfc4
@@ -86,7 +86,7 @@ else
    --color=info:#707070
    --color=hl:#006c00
    --color=hl+:#006c00
-   --color=query:#101010
+   --color=query:#070707
    --color=border:#7f7f7f"
 fi
 echo "$fzf_opts" > "$HOME/.fzfrc"
