@@ -52,7 +52,7 @@ bindsym XF86MonBrightnessDown exec "brightnessctl set 10%- && notify-send -a 'OS
 
 # Media + screenshot
 bindsym XF86AudioPlay exec "playerctl play-pause"
-bindsym Print exec "QT_SCALE_FACTOR=1.20 flameshot gui"
+bindsym Print exec "QT_SCALE_FACTOR=1.23 flameshot gui"
 
 # Theme toggle
 bindsym $mod+Shift+period exec ~/.config/theme-toggle
