@@ -1,13 +1,9 @@
-# Sync env to D-Bus/systemd (portals, popups)
+# Sync env to D-Bus/systemd + start XDG autostart apps
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-
-# Start XDG autostart .desktop applications
 exec dex --autostart --environment sway
 
-# Set modifier key
+# Set modifier keys
 set $mod Mod1
-
-# Drag floating windows
 floating_modifier $mod
 
 # Font and scaling
@@ -16,9 +12,7 @@ output eDP-1 scale 1
 
 # Window options
 title_align center
-smart_borders on
 workspace_layout tabbed
-
 default_border normal 1
 default_floating_border normal 1
 
@@ -27,10 +21,10 @@ seat * hide_cursor 5000
 seat * hide_cursor when-typing enable
 
 # Title bar style
-client.focused #181818 #131313 #FFFFFF #FFFFFF #181818
-client.focused_inactive #181818 #131313 #FFFFFF #181818 #181818
-client.unfocused #181818 #131313 #686868 #181818 #181818
-client.urgent #161616 #801717 #FFFFFF #801717 #801717
+client.focused #131313 #131313 #FFFFFF #FFFFFF #131313
+client.focused_inactive #131313 #131313 #686868 #686868 #131313
+client.unfocused #131313 #131313 #686868 #686868 #131313
+client.urgent #131313 #801717 #FFFFFF #686868 #131313
 
 # Lock after 10 min and screen off 5 min after
 exec swayidle -w \
@@ -41,25 +35,23 @@ exec swayidle -w \
 # Theming
 exec ~/.config/theme-toggle init
 
-# Start applications
+# Startup
 exec gammastep
 exec mako
 exec helium-browser
 exec waybar
 
-# Volume controls
+# Volume
 bindsym XF86AudioRaiseVolume exec "pamixer -i 5 && notify-send -a 'OSD' -h string:x-canonical-private-synchronous:osd -h int:value:$(pamixer --get-volume) 'Volume'"
 bindsym XF86AudioLowerVolume exec "pamixer -d 5 && notify-send -a 'OSD' -h string:x-canonical-private-synchronous:osd -h int:value:$(pamixer --get-volume) 'Volume'"
 bindsym XF86AudioMute exec "pamixer -t && if pamixer --get-mute | grep -q 'true'; then notify-send -a 'OSD' -h string:x-canonical-private-synchronous:osd 'Muted'; else notify-send -a 'OSD' -h string:x-canonical-private-synchronous:osd -h int:value:$(pamixer --get-volume) 'Volume'; fi"
 
-# Brightness controls
+# Brightness
 bindsym XF86MonBrightnessUp exec "brightnessctl set +10% && notify-send -a 'OSD' -h string:x-canonical-private-synchronous:osd -h int:value:$(brightnessctl -m | cut -d, -f4 | tr -d '%') 'Brightness'"
 bindsym XF86MonBrightnessDown exec "brightnessctl set 10%- && notify-send -a 'OSD' -h string:x-canonical-private-synchronous:osd -h int:value:$(brightnessctl -m | cut -d, -f4 | tr -d '%') 'Brightness'"
 
-# Media controls
+# Media + screenshot
 bindsym XF86AudioPlay exec "playerctl play-pause"
-
-# Print assignation
 bindsym Print exec "QT_SCALE_FACTOR=1.20 flameshot gui"
 
 # Theme toggle
