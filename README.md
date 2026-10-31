@@ -1,3 +1,8 @@
+<picture>
+  <source srcset="./assets/banner-dark.jpg" media="(prefers-color-scheme: dark)">
+  <img src="./assets/banner-light.jpg" alt="...">
+</picture>
+
 ## Setup
 
 - **sway** - Tiling window manager
