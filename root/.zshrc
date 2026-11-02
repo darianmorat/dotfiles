@@ -16,7 +16,8 @@ setopt no_auto_menu
 path=(~/bin $path)
 export GPG_TTY=$TTY
 
-THEME_MODE=$([ -f "$HOME/.config/current_theme" ] && cat "$HOME/.config/current_theme" || echo "dark")
+THEME_MODE=dark
+[[ -r ~/.config/current_theme ]] && THEME_MODE=$(<~/.config/current_theme)
 export THEME_MODE
 
 [[ -f ~/.env.zsh ]] && source ~/.env.zsh
@@ -31,8 +32,13 @@ case ":$PATH:" in
 esac
 
 # --- fzf + zoxide ---
-source <(fzf --zsh)
-eval "$(zoxide init zsh)"
+_c=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
+[[ -d $_c ]] || mkdir -p $_c
+[[ -s $_c/fzf.zsh && $_c/fzf.zsh -nt =fzf ]] || fzf --zsh > $_c/fzf.zsh
+source $_c/fzf.zsh
+[[ -s $_c/zoxide.zsh && $_c/zoxide.zsh -nt =zoxide ]] || zoxide init zsh > $_c/zoxide.zsh
+source $_c/zoxide.zsh
+unset _c
 
 # --- keys ---
 bindkey '^S' undefined-key
