@@ -156,6 +156,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add({
    { src = "https://github.com/darianmorat/shibumi.nvim" },
    { src = "https://github.com/stevearc/oil.nvim" },
+   { src = "https://github.com/3rd/image.nvim" },
    { src = "https://github.com/windwp/nvim-autopairs" },
    { src = "https://github.com/windwp/nvim-ts-autotag" },
    { src = "https://github.com/nvim-mini/mini.surround" },
@@ -239,6 +240,19 @@ vim.api.nvim_create_autocmd("FileType", {
          nowait = true,
       })
    end,
+})
+
+-- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
+
+require("image").setup({
+   backend = "sixel",
+   processor = "magick_cli",
+   integrations = {
+      markdown = {
+         only_render_image_at_cursor = true,
+         only_render_image_at_cursor_mode = "inline",
+      },
+   },
 })
 
 -- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
