@@ -16,7 +16,7 @@ gui:
       - "#5f5f5f"
   lightTheme:
     selectedLineBgColor:
-      - "#c9c9c7"
+      - "#cbcbc8"
     inactiveViewSelectedLineBgColor:
       - "#e0e0de"
     inactiveBorderColor:
