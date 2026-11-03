@@ -1,6 +1,6 @@
 <picture>
   <source srcset="./assets/banner-dark.jpg" media="(prefers-color-scheme: dark)">
-  <img src="./assets/banner-light.jpg" alt="...">
+  <img src="./assets/banner-light.jpg" alt="Banner">
 </picture>
 
 ## Setup
@@ -8,7 +8,7 @@
 - **sway** - Tiling window manager
 - **waybar** - Status bar
 - **rofi** - Application launcher
-- **foot** - Primary terminal emulator
+- **foot** - Terminal emulator
 - **foot-terminfo** - Terminfo entries for foot
 - **kanata-bin** - Advanced keyboard remapper `Manual`
 
@@ -27,7 +27,7 @@
 ## Runtime
 
 - **nodejs** - JavaScript runtime
-- **pnpm** - Primary package manager
+- **pnpm** - Package manager
 
 ## Code
 
@@ -68,7 +68,7 @@
 
 ## Apps
 
-- **helium-browser-bin** - Primary web browser `AUR`
+- **helium-browser-bin** - Web browser `AUR`
 - **libreoffice** - Office suite
 - **nemo** - File manager
 - **nemo-fileroller** - Nemo archive integration
