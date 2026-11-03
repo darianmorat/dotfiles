@@ -64,8 +64,7 @@ vim.keymap.set("n", "<leader>D", "<cmd>bd!<cr>")
 vim.keymap.set("n", "<leader>B", "<cmd>BufOnly<cr>")
 
 vim.keymap.set("n", "<c-k>", "<c-6>")
-vim.keymap.set("n", "<c-d>", "<c-d>zz")
-vim.keymap.set("n", "<c-u>", "<c-u>zz")
+vim.keymap.set("n", "<leader>a", "gg<S-v>G")
 
 vim.keymap.set({ "n", "v" }, "<leader>y", '"ay')
 vim.keymap.set({ "n", "v" }, "<leader>p", '"ap')
