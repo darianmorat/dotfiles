@@ -72,8 +72,10 @@
 - **libreoffice** - Office suite
 - **nemo** - File manager
 - **nemo-fileroller** - Nemo archive integration
+- **ffmpeg** - Audio and video converter
 - **ffmpegthumbnailer** - Video thumbnail generator
 - **mpv** - Media player
+- **yt-dlp** - Audio and video downloader
 - **quodlibet** - Music player and library manager
 - **imv** - Image viewer
 - **flameshot** - Screenshot capture utility

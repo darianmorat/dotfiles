@@ -67,6 +67,9 @@ alias ls='ls --color=auto -A'
 alias grep='grep --color=auto'
 alias tree='tree -a -I ".git|node_modules|dist"'
 
+alias ytm='yt-dlp --ignore-config --config-locations ~/.config/yt-dlp/music.conf'
+alias ytv='yt-dlp --ignore-config --config-locations ~/.config/yt-dlp/video.conf'
+
 # --- fzf project search ---
 fzf-global() {
    local selected
