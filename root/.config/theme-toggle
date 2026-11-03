@@ -107,4 +107,3 @@ if pgrep -x mako > /dev/null; then
    pkill -x mako
    mako &!
 fi
-
