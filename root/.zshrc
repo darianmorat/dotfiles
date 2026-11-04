@@ -140,5 +140,4 @@ ll() {
 }
 
 # --- plugins (keep last) ---
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#575757'
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
