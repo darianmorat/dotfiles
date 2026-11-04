@@ -56,24 +56,26 @@ vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
 
 -- TITLE: Keymaps ------------------------------------------------------------------------
 
-vim.keymap.set("n", "<leader>q", "<cmd>q<cr>")
-vim.keymap.set("n", "<leader>w", ":silent! w<cr>", { silent = true })
+vim.keymap.set("n", "<leader>q", "<Cmd>q<CR>")
+vim.keymap.set("n", "<leader>w", ":silent! w<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>d", "<cmd>bd<cr>")
-vim.keymap.set("n", "<leader>D", "<cmd>bd!<cr>")
-vim.keymap.set("n", "<leader>B", "<cmd>BufOnly<cr>")
+vim.keymap.set("n", "<leader>d", "<Cmd>bd<CR>")
+vim.keymap.set("n", "<leader>D", "<Cmd>bd!<CR>")
+vim.keymap.set("n", "<leader>B", "<Cmd>BufOnly<CR>")
 
-vim.keymap.set("n", "<c-k>", "<c-6>")
-vim.keymap.set("n", "<leader>a", "gg<S-v>G")
+vim.keymap.set("n", "<C-k>", "<C-6>")
+vim.keymap.set("n", "<C-a>", "gg<s-v>G")
 
-vim.keymap.set({ "n", "v" }, "<leader>y", '"ay')
-vim.keymap.set({ "n", "v" }, "<leader>p", '"ap')
-vim.keymap.set({ "n", "v" }, "<leader>x", '"_d')
+vim.keymap.set("x", "g+", "g<C-a>")
+vim.keymap.set("x", "g-", "g<C-x>")
 
-vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { silent = true })
-vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
+vim.keymap.set({ "n", "x" }, "+", "<C-a>")
+vim.keymap.set({ "n", "x" }, "-", "<C-x>")
 
-vim.keymap.set("v", "<leader>w", ":!fmt -w 90<cr>", { silent = true })
+vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv", { silent = true })
+
+vim.keymap.set("x", "<leader>w", ":!fmt -w 90<CR>", { silent = true })
 
 -- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
@@ -128,13 +130,13 @@ local function float(cmd)
    vim.cmd.startinsert()
    vim.keymap.set(
       "t",
-      "<c-h>",
+      "<C-h>",
       function() vim.api.nvim_win_close(0, true) end,
       { buffer = buf }
    )
 end
 
-vim.keymap.set("n", "<leader>lg", function() float("lazygit") end)
+vim.keymap.set("n", "<C-l>", function() float("lazygit") end)
 
 -- TITLE: Plugin hooks -------------------------------------------------------------------
 
@@ -175,7 +177,7 @@ vim.pack.add({
 -- TITLE: Local/UI config ----------------------------------------------------------------
 
 vim.opt.runtimepath:prepend(vim.fn.expand("~/projects/shibumi.nvim"))
-vim.keymap.set("n", "<leader>r", "<cmd>ReloadTheme<cr>")
+vim.keymap.set("n", "<leader>r", "<Cmd>ReloadTheme<CR>")
 
 -- TITLE: Plugin config ------------------------------------------------------------------
 
@@ -205,9 +207,9 @@ require("oil").setup({
    delete_to_trash = true,
    use_default_keymaps = false,
    keymaps = {
-      ["<bs>"] = { "actions.parent", mode = "n" },
-      ["<cr>"] = "actions.select",
-      ["<c-p>"] = "actions.preview",
+      ["<BS>"] = { "actions.parent", mode = "n" },
+      ["<CR>"] = "actions.select",
+      ["<C-p>"] = "actions.preview",
       ["_"] = { "actions.open_cwd", mode = "n" },
       ["`"] = { "actions.cd", mode = "n" },
       ["q"] = { "actions.close", mode = "n" },
@@ -221,7 +223,7 @@ require("oil").setup({
    },
 })
 
-vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>")
+vim.keymap.set("n", "<leader>e", "<Cmd>Oil<CR>")
 
 local function set_oil_hl_links()
    vim.api.nvim_set_hl(0, "OilDirHidden", { link = "OilDir" })
@@ -233,7 +235,7 @@ vim.api.nvim_create_autocmd("ColorScheme", { callback = set_oil_hl_links })
 vim.api.nvim_create_autocmd("FileType", {
    pattern = "oil_preview",
    callback = function(params)
-      vim.keymap.set("n", "<cr>", "o", {
+      vim.keymap.set("n", "<CR>", "o", {
          buffer = params.buf,
          remap = true,
          nowait = true,
@@ -265,27 +267,37 @@ require("mini.surround").setup({})
 local mc = require("multicursor-nvim")
 mc.setup({})
 
-vim.keymap.set({ "n", "v" }, "<c-up>", function() mc.lineAddCursor(-1) end)
-vim.keymap.set({ "n", "v" }, "<c-down>", function() mc.lineAddCursor(1) end)
+vim.keymap.set("n", "<leader>mr", mc.restoreCursors)
 
-vim.keymap.set({ "n", "v" }, "<leader><up>", function() mc.lineSkipCursor(-1) end)
-vim.keymap.set({ "n", "v" }, "<leader><down>", function() mc.lineSkipCursor(1) end)
+vim.keymap.set({ "n", "x" }, "<Up>", function() mc.lineAddCursor(-1) end)
+vim.keymap.set({ "n", "x" }, "<Down>", function() mc.lineAddCursor(1) end)
+vim.keymap.set({ "n", "x" }, "<leader><Up>", function() mc.lineSkipCursor(-1) end)
+vim.keymap.set({ "n", "x" }, "<leader><Down>", function() mc.lineSkipCursor(1) end)
 
-vim.keymap.set({ "v" }, "n", function() mc.matchAddCursor(1) end)
-vim.keymap.set({ "v" }, "<leader>n", function() mc.matchSkipCursor(1) end)
+vim.keymap.set({ "n", "x" }, "<leader>n", function() mc.matchAddCursor(1) end)
+vim.keymap.set({ "n", "x" }, "<leader>s", function() mc.matchSkipCursor(1) end)
+vim.keymap.set({ "n", "x" }, "<leader>N", function() mc.matchAddCursor(-1) end)
+vim.keymap.set({ "n", "x" }, "<leader>S", function() mc.matchSkipCursor(-1) end)
 
-vim.keymap.set({ "v" }, "N", function() mc.matchAddCursor(-1) end)
-vim.keymap.set({ "v" }, "<leader>N", function() mc.matchSkipCursor(-1) end)
+vim.keymap.set({ "n", "x" }, "<C-q>", mc.toggleCursor)
+vim.keymap.set({ "n", "x" }, "<leader>a", mc.matchAllAddCursors)
 
-vim.keymap.set({ "v" }, "u", mc.deleteCursor)
-vim.keymap.set({ "n", "v" }, "<c-l>", mc.matchAllAddCursors)
+mc.addKeymapLayer(function(layerSet)
+   layerSet({ "n", "x" }, "p", '"+p')
+   layerSet({ "n", "x" }, "P", '"+P')
 
-vim.keymap.set("n", "<esc>", function()
-   if not mc.cursorsEnabled() then
-      mc.enableCursors()
-   else
-      mc.clearCursors()
-   end
+   layerSet({ "n", "x" }, "<Left>", mc.prevCursor)
+   layerSet({ "n", "x" }, "<Right>", mc.nextCursor)
+
+   layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
+
+   layerSet("n", "<Esc>", function()
+      if not mc.cursorsEnabled() then
+         mc.enableCursors()
+      else
+         mc.clearCursors()
+      end
+   end)
 end)
 
 -- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
@@ -294,7 +306,7 @@ vim.g.undotree_WindowLayout = 3
 vim.g.undotree_SplitWidth = 38
 vim.g.undotree_SetFocusWhenToggle = 1
 
-vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>")
+vim.keymap.set("n", "<leader>u", "<Cmd>UndotreeToggle<CR>")
 
 -- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- --
 
@@ -354,12 +366,12 @@ local function fzf_vertical(command)
    end
 end
 
-vim.keymap.set("n", "<leader>fi", "<cmd>FzfLua files<cr>")
-vim.keymap.set("n", "<leader>fj", "<cmd>FzfLua buffers<cr>")
-vim.keymap.set("n", "<leader>fd", "<cmd>FzfLua diagnostics_document<cr>")
-vim.keymap.set("n", "<leader>fD", "<cmd>FzfLua diagnostics_workspace<cr>")
-vim.keymap.set("n", "<leader>fs", "<cmd>FzfLua spell_suggest<cr>")
-vim.keymap.set("n", "<leader>fo", "<cmd>FzfLua resume<cr>")
+vim.keymap.set("n", "<leader>fi", "<Cmd>FzfLua files<CR>")
+vim.keymap.set("n", "<leader>fj", "<Cmd>FzfLua buffers<CR>")
+vim.keymap.set("n", "<leader>fd", "<Cmd>FzfLua diagnostics_document<CR>")
+vim.keymap.set("n", "<leader>fD", "<Cmd>FzfLua diagnostics_workspace<CR>")
+vim.keymap.set("n", "<leader>fs", "<Cmd>FzfLua spell_suggest<CR>")
+vim.keymap.set("n", "<leader>fo", "<Cmd>FzfLua resume<CR>")
 
 vim.keymap.set("n", "<leader>fg", fzf_vertical("live_grep"))
 vim.keymap.set("n", "<leader>fc", fzf_vertical("grep_curbuf"))
@@ -583,7 +595,7 @@ vim.lsp.enable({
 })
 
 vim.keymap.set("n", "gD", vim.lsp.buf.definition)
-vim.keymap.set("n", "<leader>lr", "<cmd>lsp restart<cr>")
+vim.keymap.set("n", "<leader>lr", "<Cmd>lsp restart<CR>")
 
 vim.keymap.set("n", "<leader>vo", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>vj", function() vim.diagnostic.jump({ count = 1 }) end)
@@ -701,10 +713,10 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 })
 
 vim.api.nvim_create_autocmd("CmdwinEnter", {
-   callback = function() vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true }) end,
+   callback = function() vim.keymap.set("n", "q", "<Cmd>q<CR>", { buffer = true }) end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
    pattern = { "nvim-pack", "help" },
-   callback = function() vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true }) end,
+   callback = function() vim.keymap.set("n", "q", "<Cmd>q<CR>", { buffer = true }) end,
 })
