@@ -269,8 +269,8 @@ mc.setup({})
 
 vim.keymap.set("n", "<leader>mr", mc.restoreCursors)
 
-vim.keymap.set({ "n", "x" }, "<Up>", function() mc.lineAddCursor(-1) end)
-vim.keymap.set({ "n", "x" }, "<Down>", function() mc.lineAddCursor(1) end)
+vim.keymap.set({ "n", "x" }, "<C-Up>", function() mc.lineAddCursor(-1) end)
+vim.keymap.set({ "n", "x" }, "<C-Down>", function() mc.lineAddCursor(1) end)
 vim.keymap.set({ "n", "x" }, "<leader><Up>", function() mc.lineSkipCursor(-1) end)
 vim.keymap.set({ "n", "x" }, "<leader><Down>", function() mc.lineSkipCursor(1) end)
 
