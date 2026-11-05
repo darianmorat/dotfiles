@@ -75,7 +75,7 @@ else
    --highlight-line
    --color=scrollbar:#f4f4f4
    --color=fg:#0f0e0e
-   --color=fg+:#000000
+   --color=fg+:#020202
    --color=bg:#f4f4f4
    --color=bg+:#cccccc
    --color=gutter:#cccccc
