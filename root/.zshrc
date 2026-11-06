@@ -1,18 +1,18 @@
-# --- history ---
+#- TITLE: General ------------------------------------------------------------------------
+
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=5000
 setopt share_history hist_ignore_dups
 
-# --- options ---
 bindkey -e
 setopt ignoreeof glob_dots no_flow_control autocd
 
-# --- completion ---
 autoload -Uz compinit && compinit
 setopt no_auto_menu
 
-# --- env ---
+#- TITLE: Env ----------------------------------------------------------------------------
+
 path=(~/bin $path)
 export GPG_TTY=$TTY
 
@@ -31,7 +31,8 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 
-# --- fzf + zoxide ---
+#- TITLE: Navigation ---------------------------------------------------------------------
+
 _c=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
 [[ -d $_c ]] || mkdir -p $_c
 [[ -s $_c/fzf.zsh && $_c/fzf.zsh -nt =fzf ]] || fzf --zsh > $_c/fzf.zsh
@@ -40,7 +41,8 @@ source $_c/fzf.zsh
 source $_c/zoxide.zsh
 unset _c
 
-# --- keys ---
+#- TITLE: Keys ---------------------------------------------------------------------------
+
 bindkey '^S' undefined-key
 bindkey '^F' undefined-key
 
@@ -54,15 +56,18 @@ bindkey '^[[1;5D' backward-word
 
 WORDCHARS=${WORDCHARS//\/}
 
-# --- terminal title ---
+#- TITLE: Term Title ---------------------------------------------------------------------
+
 autoload -Uz add-zsh-hook
 _title_precmd() { print -Pn '\e]0;%~\a' }
 add-zsh-hook precmd _title_precmd
 
-# --- prompt ---
+#- TITLE: Prompt -------------------------------------------------------------------------
+
 PROMPT='%F{green}kaizen@root%f:%F{blue}%~%f$ '
 
-# --- aliases ---
+#- TITLE: Aliases ------------------------------------------------------------------------
+
 alias ls='ls --color=auto -A'
 alias grep='grep --color=auto'
 alias tree='tree -a -I ".git|node_modules|dist"'
@@ -70,7 +75,8 @@ alias tree='tree -a -I ".git|node_modules|dist"'
 alias ytm='yt-dlp --ignore-config --config-locations ~/.config/yt-dlp/music.conf'
 alias ytv='yt-dlp --ignore-config --config-locations ~/.config/yt-dlp/video.conf'
 
-# --- fzf project search ---
+#- TITLE: Project Search -----------------------------------------------------------------
+
 fzf-global() {
    local selected
    selected=$(find ~/projects -mindepth 1 -maxdepth 1 -type d 2>/dev/null | \
@@ -92,7 +98,8 @@ fzf-global() {
 zle -N fzf-global
 bindkey '^O' fzf-global
 
-# --- clipboard utilities ---
+#- TITLE: Clipboard ----------------------------------------------------------------------
+
 FILE_CLIPBOARD=~/.file_clipboard
 
 yy() {
@@ -139,5 +146,6 @@ ll() {
    tail -n +2 "$FILE_CLIPBOARD"
 }
 
-# --- plugins (keep last) ---
+#- TITLE: Plugins ------------------------------------------------------------------------
+
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
