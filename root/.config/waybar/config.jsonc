@@ -58,17 +58,22 @@
    },
    "network": {
       "interval": 10,
-      "format-wifi": "DT  へ",
-      "format-disconnected": "NC  べ"
+      "format-wifi": "DT  ヰ",
+      "format-disconnected": "NC  ヰ"
    },
    "battery": {
       "interval": 5,
+      "full-at": 90,
       "states": {
          "low": 10
       },
-      "format": "Σ {capacity}%",
-      "format-charging": "Σ {capacity} ˊ˗",
-      "format-full": "Σ {capacity}%",
-      "format-low": "Σ {capacity}%"
+      "events": {
+         "on-charging-90": "notify-send -u normal 'Optimal Charge' 'Charge limit reached. You can disconnect now.'",
+         "on-discharging-low": "notify-send -u critical 'Battery Critical' 'Critical limit reached. Please plug in your charger.'"
+      },
+      "format": "↓ {capacity}%",
+      "format-charging": "↑ {capacity}%",
+      "format-full": "↑ {capacity} ˊ˗",
+      "format-low": "↓ {capacity} ˊ˗"
    }
 }
