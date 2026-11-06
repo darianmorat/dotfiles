@@ -14,7 +14,6 @@ configuration {
 
    display-drun:        "Apps";
    display-run:         "Run";
-   drun-display-format: "{name}\n<span color='#909090' size='small'>{comment}</span>";
    eh:                  2;
    drun-show-actions:   false;
 

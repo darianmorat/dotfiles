@@ -1,8 +1,12 @@
+configuration {
+   drun-display-format: "{name}\n<span alpha='50%' size='small'>{comment}</span>";
+}
+
 * {
    font:             "Inter Display 10.5";
    background:       #181818;
    background-alt:   #1a1a1a;
-   foreground:       #f4f2ef;
+   foreground:       #f3f3f3;
    selected:         #1a293d;
    accent:           #357ec7;
    border-color:     #424242;
