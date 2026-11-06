@@ -11,14 +11,14 @@ gui:
     selectedLineBgColor:
       - "#303030"
     inactiveViewSelectedLineBgColor:
-      - "#262626"
+      - "#272727"
     inactiveBorderColor:
       - "#5f5f5f"
   lightTheme:
     selectedLineBgColor:
-      - "#cbcbc8"
+      - "#cccccc"
     inactiveViewSelectedLineBgColor:
-      - "#e0e0de"
+      - "#e0e0e0"
     inactiveBorderColor:
       - "#7f7f7f"
 notARepository: 'quit'
