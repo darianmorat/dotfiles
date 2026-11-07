@@ -63,7 +63,6 @@
    },
    "battery": {
       "interval": 5,
-      "full-at": 90,
       "states": {
          "low": 10
       },
