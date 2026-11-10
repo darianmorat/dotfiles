@@ -130,7 +130,7 @@ local function float(cmd)
    vim.cmd.startinsert()
    vim.keymap.set(
       "t",
-      "<C-h>",
+      "<C-l>",
       function() vim.api.nvim_win_close(0, true) end,
       { buffer = buf }
    )
