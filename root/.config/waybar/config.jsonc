@@ -11,8 +11,9 @@
    "modules-center": [],
    "modules-right": [
       "sway/mode",
+      "pulseaudio",
       "clock",
-      "custom/sep2",
+      "custom/sep",
       "network",
       "battery"
    ],
@@ -37,29 +38,35 @@
       "format": "〃",
       "tooltip": false
    },
-   "custom/sep2": {
-      "format": "〃",
-      "tooltip": false
-   },
    "cpu": {
       "interval": 10,
-      "format": "CPU: {usage:02d}%"
+      "format": "CPU: {usage:02d}%",
+      "tooltip": false
    },
    "memory": {
       "interval": 10,
-      "format": "RAM: {percentage:02d}%"
+      "format": "RAM: {percentage:02d}%",
+      "tooltip-format": "{used:0.1f}G / {total:0.1f}G"
    },
    "sway/mode": {
-      "format": "{}   -   "
+      "format": "{}   -"
+   },
+   "pulseaudio": {
+      "format": "{icon}",
+      "format-muted": " ",
+      "tooltip-format": "{desc} - {volume}%"
    },
    "clock": {
       "interval": 5,
-      "format": "{:%a %b %d   %I:%M %p}"
+      "format": "{:%a %b %d   %I:%M %p}",
+      "tooltip-format": "{:%A, %d %B %Y}"
    },
    "network": {
       "interval": 10,
       "format-wifi": "DT  ヰ",
-      "format-disconnected": "NC  ヰ"
+      "format-disconnected": "NC  ヰ",
+      "tooltip-format-wifi": "{essid}",
+      "tooltip-format-disconnected": "Disconnected"
    },
    "battery": {
       "interval": 5,

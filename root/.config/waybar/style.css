@@ -22,8 +22,7 @@
 #memory,
 #network,
 #battery,
-#custom-sep,
-#custom-sep2 {
+#custom-sep {
   padding: 0;
   margin: 0;
 }
@@ -55,6 +54,12 @@
     transparent 5px
   );
 }
+#workspaces button:hover,
+#workspaces button.empty:hover {
+  text-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+}
 #workspaces button.empty {
   background-image: radial-gradient(
     circle,
@@ -77,21 +82,26 @@
   background-image: none;
 }
 
-#mode {
-  color: #888888;
-}
-
 #custom-sep {
   color: #888888;
   padding-right: 14px;
 }
-#custom-sep2 {
-  color: #888888;
-  padding: 0 14px;
-}
 
 #memory {
   padding-left: 14px;
+}
+
+#mode,
+#pulseaudio {
+  color: #888888;
+}
+
+#pulseaudio {
+  padding-left: 14px;
+}
+
+#clock {
+  padding: 0 14px;
 }
 
 #network {
